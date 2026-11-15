@@ -1,0 +1,32 @@
+name: youtube
+on:
+  push:
+    paths: ["queue/upload/*.json", "queue/publish/*.json"]
+  schedule:
+    - cron: "17 * * * *"   # 取りこぼし用。未処理の依頼がなければ何もしない
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: youtube
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q google-api-python-client google-auth
+      - name: Upload / publish
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$YT_REFRESH_TOKEN" ]; then echo "YouTube の Secrets がまだありません"; exit 0; fi
+          python3 scripts/youtube.py
+      - name: Save logs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add logs/youtube
+          git diff --cached --quiet || { git commit -m "YouTube: record results"; git pull --rebase -q; git push; }
