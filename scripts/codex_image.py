@@ -21,7 +21,7 @@ def run_codex(r, out):
         f"ファイルを {out} に保存してください。ほかのファイルは変更しないでください。\n"
         f"依頼: {json.dumps(r, ensure_ascii=False)}"
     )
-    cmd = ["codex", "exec", "--full-auto", "--skip-git-repo-check", task]
+    cmd = ["codex", "exec", "--sandbox", "workspace-write", "--skip-git-repo-check", task]
     p = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, timeout=1800)
     (out / "codex.log").write_text(p.stdout[-20000:] + "\n--- stderr ---\n" + p.stderr[-20000:], encoding="utf-8")
     return p.returncode
