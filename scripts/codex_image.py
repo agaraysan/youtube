@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""未処理の依頼書を、Codex CLI に1件ずつ渡す。Codex で出力が得られない場合は、OpenAI Images API に切り替える（image の場合のみ）。"""
-import base64, json, os, pathlib, subprocess, sys, datetime, urllib.request
+"""未処理の依頼書を、Codex CLI に1件ずつ渡す。画像はCodexだけで作る（OpenAIのAPIキーは音声専用）。"""
+import json, pathlib, subprocess, sys, datetime
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 REQ = ROOT / "requests" / "images"
@@ -27,20 +27,6 @@ def run_codex(r, out):
     return p.returncode
 
 
-def images_api(r, out):
-    size = r.get("size", "1536x1024")
-    if size not in ("1024x1024", "1536x1024", "1024x1536"):
-        size = "1536x1024"
-    body = json.dumps({"model": os.environ.get("IMAGE_MODEL", "gpt-image-1"), "prompt": r["prompt"],
-                       "size": size, "n": int(r.get("count", 1))}).encode()
-    req = urllib.request.Request("https://api.openai.com/v1/images/generations", body,
-                                 {"Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}",
-                                  "Content-Type": "application/json"})
-    data = json.load(urllib.request.urlopen(req, timeout=600))
-    for i, d in enumerate(data["data"]):
-        (out / f"image_{i + 1:02d}.png").write_bytes(base64.b64decode(d["b64_json"]))
-
-
 def main():
     done = 0
     for r in pending():
@@ -49,10 +35,6 @@ def main():
         rc = run_codex(r, out)
         files = [f.name for f in out.iterdir() if f.suffix.lower() in MEDIA]
         via = "codex"
-        if not files and r.get("kind", "image") == "image":
-            images_api(r, out)
-            files = [f.name for f in out.iterdir() if f.suffix.lower() in MEDIA]
-            via = "images_api"
         status = "ok" if files else "failed"
         (out / "result.json").write_text(json.dumps({
             "id": r["id"], "status": status, "via": via, "codex_returncode": rc, "files": sorted(files),

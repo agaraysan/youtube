@@ -16,11 +16,11 @@ jobs:
         with: { node-version: 22 }
       - name: Install Codex CLI
         run: npm install -g @openai/codex
-      - name: Sign in to Codex
-        env: { OPENAI_API_KEY: "${{ secrets.OPENAI_API_KEY }}" }
-        run: printenv OPENAI_API_KEY | codex login --with-api-key
+      # Codex は ChatGPT のログイン（PCの ~/.codex/auth.json）で動かす。APIキーは音声専用なので使わない。
+      - name: Sign in to Codex (ChatGPT login)
+        env: { CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}" }
+        run: mkdir -p ~/.codex && printenv CODEX_AUTH_JSON > ~/.codex/auth.json && chmod 600 ~/.codex/auth.json
       - name: Generate
-        env: { OPENAI_API_KEY: "${{ secrets.OPENAI_API_KEY }}" }
         run: python3 scripts/codex_image.py
       - name: Save results
         run: |

@@ -38,7 +38,7 @@
 - **判断役（Claude）**：毎朝の定期タスクで動く。分析を読み、その日の企画を決め、台帳を更新し、Actions を起動する。
 - **画像（Codex）**：GitHub Actions 上で Codex CLI（`codex exec`）に画像作成を直接指示する。
 - **音声（OpenAI Speech API）**：旧運営と同じ設定にする（gpt-4o-mini-tts、nova、音量0.5を1回だけ、1.05倍速で音程はそのまま）。
-- 画像と音声のどちらも、OpenAI の認証（APIキーかChatGPTログイン）が GitHub Secrets に必要。
+- 認証は2つ。音声には OpenAI の APIキー（Secret名 `OPENAI_API_KEY`、音声専用）を使う。画像には Codex の ChatGPT ログインを使う（案A：chatgpt.com の Codex を GitHub につなぎ、Issue で `@codex` に依頼する。案B：Actions で Codex CLI を動かし、PCの `~/.codex/auth.json` を Secret `CODEX_AUTH_JSON` に入れる）。
 - **投稿**：YouTube Data API を使う。Google Cloud の OAuth を一度だけ許可してもらい、その更新トークンを GitHub Secrets に置く。
 
 ## 大事な注意点
