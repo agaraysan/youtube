@@ -1,0 +1,24 @@
+name: tts
+on:
+  workflow_dispatch:
+    inputs:
+      text:
+        description: 読み上げる文章
+        default: "こんにちは。今日もマッチ棒クイズに挑戦してみましょう。一本だけ動かして、正しい式にしてください。"
+jobs:
+  speak:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: Narrate with nova
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          TEXT: ${{ inputs.text }}
+        run: |
+          mkdir -p out
+          python3 scripts/tts.py out/narration.wav "$TEXT"
+          ffprobe -v error -show_entries format=duration -of csv=p=0 out/narration.wav
+      - uses: actions/upload-artifact@v4
+        with: { name: narration, path: out/narration.wav }
