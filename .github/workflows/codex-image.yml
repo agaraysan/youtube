@@ -1,6 +1,7 @@
 name: codex-image
 on:
-  # 案A（Issue で @codex）を使う間は、手動起動だけにしておく
+  push:
+    paths: ["requests/images/*.json"]
   workflow_dispatch:
 permissions:
   contents: write
@@ -18,13 +19,17 @@ jobs:
       # Codex は ChatGPT のログイン（PCの ~/.codex/auth.json）で動かす。APIキーは音声専用なので使わない。
       - name: Sign in to Codex (ChatGPT login)
         env: { CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}" }
-        run: mkdir -p ~/.codex && printenv CODEX_AUTH_JSON > ~/.codex/auth.json && chmod 600 ~/.codex/auth.json
+        run: |
+          if [ -z "$CODEX_AUTH_JSON" ]; then echo "CODEX_AUTH_JSON がまだありません"; echo "SKIP=1" >> $GITHUB_ENV; exit 0; fi
+          mkdir -p ~/.codex && printenv CODEX_AUTH_JSON > ~/.codex/auth.json && chmod 600 ~/.codex/auth.json
       - name: Generate
+        if: env.SKIP != '1'
         run: python3 scripts/codex_image.py
       - name: Save results
+        if: env.SKIP != '1'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets/generated
           git diff --cached --quiet || git commit -m "Add generated images from Codex"
-          git push
+          git pull --rebase -q && git push
