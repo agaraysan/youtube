@@ -1,5 +1,7 @@
 name: tts
 on:
+  push:
+    paths: ["requests/tts/*.txt"]
   workflow_dispatch:
     inputs:
       text:
@@ -18,7 +20,11 @@ jobs:
           TEXT: ${{ inputs.text }}
         run: |
           mkdir -p out
-          python3 scripts/tts.py out/narration.wav "$TEXT"
-          ffprobe -v error -show_entries format=duration -of csv=p=0 out/narration.wav
+          if [ "${{ github.event_name }}" = push ]; then
+            for f in requests/tts/*.txt; do n=$(basename "$f" .txt); python3 scripts/tts.py "out/$n.wav" "$(cat "$f")"; done
+          else
+            python3 scripts/tts.py out/narration.wav "$TEXT"
+          fi
+          for f in out/*.wav; do echo "$f $(ffprobe -v error -show_entries format=duration -of csv=p=0 "$f")"; done
       - uses: actions/upload-artifact@v4
-        with: { name: narration, path: out/narration.wav }
+        with: { name: narration, path: out/*.wav }
