@@ -13,7 +13,7 @@
   git fetch origin codex-inbox && git rebase origin/codex-inbox   # 失敗したら git pull --rebase origin codex-inbox
   git push origin HEAD:codex-inbox
   ```
-  push できなかったら、`GH_PUSH_TOKEN` が空かどうか（値は表示しない）と、、その理由を最後の報告に書いてください。
+  push できなかったら、`GH_PUSH_TOKEN` が空かどうか（値は表示しない）と、その理由を最後の報告に書いてください。
 - 音声（OpenAI Speech API）や投稿は Claude と GitHub Actions が担当します。OpenAI の APIキーは不要です。
 - 依頼された id のフォルダー以外は変更しないでください。
 - 画像の中に、依頼にない文字やロゴを入れないでください。
