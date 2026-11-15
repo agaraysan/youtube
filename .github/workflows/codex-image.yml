@@ -1,0 +1,31 @@
+name: codex-image
+on:
+  push:
+    paths: ["requests/images/*.json"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: codex-image
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Install Codex CLI
+        run: npm install -g @openai/codex
+      - name: Sign in to Codex
+        env: { OPENAI_API_KEY: "${{ secrets.OPENAI_API_KEY }}" }
+        run: printenv OPENAI_API_KEY | codex login --with-api-key
+      - name: Generate
+        env: { OPENAI_API_KEY: "${{ secrets.OPENAI_API_KEY }}" }
+        run: python3 scripts/codex_image.py
+      - name: Save results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/generated
+          git diff --cached --quiet || git commit -m "Add generated images from Codex"
+          git push

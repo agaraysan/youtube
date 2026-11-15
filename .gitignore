@@ -1,0 +1,4 @@
+*.mp4
+*.wav
+/work/
+__pycache__/
