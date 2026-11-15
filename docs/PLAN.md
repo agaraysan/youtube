@@ -28,15 +28,17 @@
 [Claude 定期実行（毎日）] ── 判断・企画・台帳更新・コード修正 ──▶ GitHub: agaraysan/youtube
                                                           │
                                    GitHub Actions（cron／手動）
-                                   ├─ 画像：OpenAI（Codex CLI か Images API）
+                                   ├─ 画像：Codex（`codex exec` に画像生成を指示）
+                                   ├─ 音声：OpenAI Speech API（gpt-4o-mini-tts・声 nova・音量0.5を1回・1.05倍速）
                                    ├─ 描画：Python＋FFmpeg（既存のマッチ棒・なぞなぞの仕組みを移す）
-                                   ├─ 音声：クラウドで使えるTTS（Google Cloud TTS など。要選定）
                                    └─ 投稿：YouTube Data API（予約公開、サムネイル、説明文）
                                    動画ファイル：GitHub Releases に置く（Gitには入れない）
 ```
 
 - **判断役（Claude）**：毎朝の定期タスクで動く。分析を読み、その日の企画を決め、台帳を更新し、Actions を起動する。
-- **画像（GPT）**：「Codexに直接お願いする」形にするなら、GitHub Actions 上で `codex exec` に画像作成を指示する方法がある。もっと単純に OpenAI Images API を直接呼ぶ方法もある。どちらも OpenAI の APIキーが必要で、課金が発生する。
+- **画像（Codex）**：GitHub Actions 上で Codex CLI（`codex exec`）に画像作成を直接指示する。
+- **音声（OpenAI Speech API）**：旧運営と同じ設定にする（gpt-4o-mini-tts、nova、音量0.5を1回だけ、1.05倍速で音程はそのまま）。
+- 画像と音声のどちらも、OpenAI の認証（APIキーかChatGPTログイン）が GitHub Secrets に必要。
 - **投稿**：YouTube Data API を使う。Google Cloud の OAuth を一度だけ許可してもらい、その更新トークンを GitHub Secrets に置く。
 
 ## 大事な注意点
@@ -51,5 +53,5 @@
 2. リポジトリの土台を作る。台帳を簡単な形に作り直し、マッチ棒の描画コードを移す。
 3. YouTube API の接続。まず非公開で1本投稿して確かめる。並行して API 監査を申請する。
 4. 毎日の定期実行を始める。最初は未投稿の在庫を1日1本ずつ出す。
-5. 新作の制作をクラウドに移す。GPTの画像とTTSを使う。
+5. 新作の制作をクラウドに移す。画像はCodex、音声はOpenAI Speech API（nova）を使う。
 6. 週に1回の分析で、題材・タイトル・尺を1つずつ変えて比べる。
