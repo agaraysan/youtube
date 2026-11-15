@@ -1,7 +1,6 @@
 name: codex-image
 on:
-  push:
-    paths: ["requests/images/*.json"]
+  # 案A（Issue で @codex）を使う間は、手動起動だけにしておく
   workflow_dispatch:
 permissions:
   contents: write
