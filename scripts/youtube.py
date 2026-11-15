@@ -30,7 +30,7 @@ def fetch(url_or_path, suffix):
         return None
     if url_or_path.startswith("http"):
         t = tempfile.NamedTemporaryFile(suffix=suffix, delete=False)
-        req = urllib.request.Request(url_or_path, headers={"Accept": "application/octet-stream"})
+        req = urllib.request.Request(url_or_path, headers={"Accept": "application/vnd.github.raw"})
         tok = os.environ.get("GH_TOKEN")
         if tok and "api.github.com" in url_or_path:
             req.add_header("Authorization", f"Bearer {tok}")
