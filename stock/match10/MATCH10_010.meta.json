@@ -1,0 +1,460 @@
+{
+  "assignment": {
+    "assignment_id": "MATCH10_010_RELEASE_METADATA",
+    "revision": 1,
+    "material_assignment_id": "MATCH10_010_AUDIO_ASSEMBLY",
+    "material_revision": 4,
+    "episode": "MATCH10_010",
+    "version": "v03_audio",
+    "owner": "/root/match009_meta",
+    "created_at_utc": "2026-11-13T20:50:39.456035+00:00",
+    "budget": {
+      "drafts": 1,
+      "API": 0,
+      "TTS": 0,
+      "encode": 0,
+      "decode": 0,
+      "hash": 0,
+      "UI": 0
+    },
+    "status": "COMPLETE_LOCAL_METADATA_ONLY"
+  },
+  "updated_at_utc": "2026-11-13T20:51:27.526014+00:00",
+  "title": "【マッチ棒クイズ10問】数字の棒を1本動かそう｜2桁の計算・解説付き 第10集",
+  "description": "数字のマッチ棒を1本だけ動かして、正しい式にするクイズ10問です。\n式の読み上げが終わってから、各問45秒考えられます。解説では動かす棒と移動先を示し、その後に正しい式を12秒表示します。\n\n【ルール】\n・動かせるのは数字の棒1本だけです。\n・＋、－、＝の記号は動かせません。\n・十の位を0にはできません。\n・棒を足したり捨てたりせず、向きを変えて移動できます。\n\n【チャプター】\n00:00 第1問\n01:39 第2問\n03:18 第3問\n04:55 第4問\n06:35 第5問\n08:13 第6問\n09:55 第7問\n11:31 第8問\n13:03 第9問\n14:42 第10問\n\nAI音声：Nova\n問題・図版：当チャンネル制作\n\n最後まで一緒に考えてくださって、ありがとうございました。また次のクイズでお会いしましょう。\n\n#マッチ棒クイズ #脳トレ #計算クイズ",
+  "video": "D:\\Codex\\youtube\\production\\matchstick10_010_2026-11-14\\v03_audio\\MATCH10_010_AUDIO_v03.mp4",
+  "duration_seconds": 993.85,
+  "captions": "D:\\Codex\\youtube\\production\\matchstick10_010_2026-11-14\\v03_audio\\MATCH10_010_JA_v03.srt",
+  "chapters": [
+    {
+      "question": 1,
+      "start_seconds_exact": 0,
+      "timestamp": "00:00",
+      "title": "第1問"
+    },
+    {
+      "question": 2,
+      "start_seconds_exact": 99.6,
+      "timestamp": "01:39",
+      "title": "第2問"
+    },
+    {
+      "question": 3,
+      "start_seconds_exact": 198.7,
+      "timestamp": "03:18",
+      "title": "第3問"
+    },
+    {
+      "question": 4,
+      "start_seconds_exact": 295.3,
+      "timestamp": "04:55",
+      "title": "第4問"
+    },
+    {
+      "question": 5,
+      "start_seconds_exact": 395.4,
+      "timestamp": "06:35",
+      "title": "第5問"
+    },
+    {
+      "question": 6,
+      "start_seconds_exact": 493.45,
+      "timestamp": "08:13",
+      "title": "第6問"
+    },
+    {
+      "question": 7,
+      "start_seconds_exact": 595.7,
+      "timestamp": "09:55",
+      "title": "第7問"
+    },
+    {
+      "question": 8,
+      "start_seconds_exact": 691.35,
+      "timestamp": "11:31",
+      "title": "第8問"
+    },
+    {
+      "question": 9,
+      "start_seconds_exact": 783.85,
+      "timestamp": "13:03",
+      "title": "第9問"
+    },
+    {
+      "question": 10,
+      "start_seconds_exact": 882.75,
+      "timestamp": "14:42",
+      "title": "第10問"
+    }
+  ],
+  "chapter_rounding": "Floor exact start to whole seconds; retain exact JSON starts.",
+  "answer_explanations": [
+    {
+      "question": 1,
+      "initial": "26+77=45",
+      "answer": "28+17=45",
+      "explanation": "左から3番目の数字「7」の上を、左から2番目の数字「6」の右上へ動かす。 正しい式は 28+17=45。",
+      "spoken_explanation": "答え合わせです。左から3番目の数字、ななの上の棒を取ります。左から2番目の数字、ろくの右上へ動かします。左から2番目のろくが、はちに変わります。左から3番目のななが、いちに変わります。正しい式は、にじゅうはち、たす、じゅうなな、イコール、よんじゅうごです。",
+      "source_and_destination": {
+        "equation": "28+17=45",
+        "from_i": 3,
+        "from_s": "a",
+        "to_i": 1,
+        "to_s": "b"
+      },
+      "explanation_segments": [
+        {
+          "role": "source",
+          "text": "左から3番目の数字、ななの上の棒を取ります。"
+        },
+        {
+          "role": "destination",
+          "text": "左から2番目の数字、ろくの右上へ動かします。"
+        },
+        {
+          "role": "changed_digits",
+          "text": "左から2番目のろくが、はちに変わります。左から3番目のななが、いちに変わります。"
+        },
+        {
+          "role": "verification",
+          "text": "正しい式は、にじゅうはち、たす、じゅうなな、イコール、よんじゅうごです。"
+        }
+      ]
+    },
+    {
+      "question": 2,
+      "initial": "99-46=92",
+      "answer": "98-46=52",
+      "explanation": "左から5番目の数字「9」の右上を、左から2番目の数字「9」の左下へ動かす。 正しい式は 98-46=52。",
+      "spoken_explanation": "答え合わせです。左から5番目の数字、きゅうの右上の棒を取ります。左から2番目の数字、きゅうの左下へ動かします。左から2番目のきゅうが、はちに変わります。左から5番目のきゅうが、ごに変わります。正しい式は、きゅうじゅうはち、ひく、よんじゅうろく、イコール、ごじゅうにです。",
+      "source_and_destination": {
+        "equation": "98-46=52",
+        "from_i": 6,
+        "from_s": "b",
+        "to_i": 1,
+        "to_s": "e"
+      },
+      "explanation_segments": [
+        {
+          "role": "source",
+          "text": "左から5番目の数字、きゅうの右上の棒を取ります。"
+        },
+        {
+          "role": "destination",
+          "text": "左から2番目の数字、きゅうの左下へ動かします。"
+        },
+        {
+          "role": "changed_digits",
+          "text": "左から2番目のきゅうが、はちに変わります。左から5番目のきゅうが、ごに変わります。"
+        },
+        {
+          "role": "verification",
+          "text": "正しい式は、きゅうじゅうはち、ひく、よんじゅうろく、イコール、ごじゅうにです。"
+        }
+      ]
+    },
+    {
+      "question": 3,
+      "initial": "55-19=78",
+      "answer": "95-19=76",
+      "explanation": "左から6番目の数字「8」の右上を、左から1番目の数字「5」の右上へ動かす。 正しい式は 95-19=76。",
+      "spoken_explanation": "答え合わせです。左から6番目の数字、はちの右上の棒を取ります。左から1番目の数字、ごの右上へ動かします。左から1番目のごが、きゅうに変わります。左から6番目のはちが、ろくに変わります。正しい式は、きゅうじゅうご、ひく、じゅうきゅう、イコール、ななじゅうろくです。",
+      "source_and_destination": {
+        "equation": "95-19=76",
+        "from_i": 7,
+        "from_s": "b",
+        "to_i": 0,
+        "to_s": "b"
+      },
+      "explanation_segments": [
+        {
+          "role": "source",
+          "text": "左から6番目の数字、はちの右上の棒を取ります。"
+        },
+        {
+          "role": "destination",
+          "text": "左から1番目の数字、ごの右上へ動かします。"
+        },
+        {
+          "role": "changed_digits",
+          "text": "左から1番目のごが、きゅうに変わります。左から6番目のはちが、ろくに変わります。"
+        },
+        {
+          "role": "verification",
+          "text": "正しい式は、きゅうじゅうご、ひく、じゅうきゅう、イコール、ななじゅうろくです。"
+        }
+      ]
+    },
+    {
+      "question": 4,
+      "initial": "31+30=57",
+      "answer": "31+30=61",
+      "explanation": "左から6番目の数字「7」の上を、左から5番目の数字「5」の左下へ動かす。 正しい式は 31+30=61。",
+      "spoken_explanation": "答え合わせです。左から6番目の数字、ななの上の棒を取ります。左から5番目の数字、ごの左下へ動かします。左から5番目のごが、ろくに変わります。左から6番目のななが、いちに変わります。正しい式は、さんじゅういち、たす、さんじゅう、イコール、ろくじゅういちです。",
+      "source_and_destination": {
+        "equation": "31+30=61",
+        "from_i": 7,
+        "from_s": "a",
+        "to_i": 6,
+        "to_s": "e"
+      },
+      "explanation_segments": [
+        {
+          "role": "source",
+          "text": "左から6番目の数字、ななの上の棒を取ります。"
+        },
+        {
+          "role": "destination",
+          "text": "左から5番目の数字、ごの左下へ動かします。"
+        },
+        {
+          "role": "changed_digits",
+          "text": "左から5番目のごが、ろくに変わります。左から6番目のななが、いちに変わります。"
+        },
+        {
+          "role": "verification",
+          "text": "正しい式は、さんじゅういち、たす、さんじゅう、イコール、ろくじゅういちです。"
+        }
+      ]
+    },
+    {
+      "question": 5,
+      "initial": "13+96=89",
+      "answer": "13+86=99",
+      "explanation": "左から5番目の数字「8」の左下を、左から3番目の数字「9」の左下へ動かす。 正しい式は 13+86=99。",
+      "spoken_explanation": "答え合わせです。左から5番目の数字、はちの左下の棒を取ります。左から3番目の数字、きゅうの左下へ動かします。左から3番目のきゅうが、はちに変わります。左から5番目のはちが、きゅうに変わります。正しい式は、じゅうさん、たす、はちじゅうろく、イコール、きゅうじゅうきゅうです。",
+      "source_and_destination": {
+        "equation": "13+86=99",
+        "from_i": 6,
+        "from_s": "e",
+        "to_i": 3,
+        "to_s": "e"
+      },
+      "explanation_segments": [
+        {
+          "role": "source",
+          "text": "左から5番目の数字、はちの左下の棒を取ります。"
+        },
+        {
+          "role": "destination",
+          "text": "左から3番目の数字、きゅうの左下へ動かします。"
+        },
+        {
+          "role": "changed_digits",
+          "text": "左から3番目のきゅうが、はちに変わります。左から5番目のはちが、きゅうに変わります。"
+        },
+        {
+          "role": "verification",
+          "text": "正しい式は、じゅうさん、たす、はちじゅうろく、イコール、きゅうじゅうきゅうです。"
+        }
+      ]
+    },
+    {
+      "question": 6,
+      "initial": "71-17=66",
+      "answer": "77-11=66",
+      "explanation": "左から4番目の数字「7」の上を、左から2番目の数字「1」の上へ動かす。 正しい式は 77-11=66。",
+      "spoken_explanation": "答え合わせです。左から4番目の数字、ななの上の棒を取ります。左から2番目の数字、いちの上へ動かします。左から2番目のいちが、ななに変わります。左から4番目のななが、いちに変わります。正しい式は、ななじゅうなな、ひく、じゅういち、イコール、ろくじゅうろくです。",
+      "source_and_destination": {
+        "equation": "77-11=66",
+        "from_i": 4,
+        "from_s": "a",
+        "to_i": 1,
+        "to_s": "a"
+      },
+      "explanation_segments": [
+        {
+          "role": "source",
+          "text": "左から4番目の数字、ななの上の棒を取ります。"
+        },
+        {
+          "role": "destination",
+          "text": "左から2番目の数字、いちの上へ動かします。"
+        },
+        {
+          "role": "changed_digits",
+          "text": "左から2番目のいちが、ななに変わります。左から4番目のななが、いちに変わります。"
+        },
+        {
+          "role": "verification",
+          "text": "正しい式は、ななじゅうなな、ひく、じゅういち、イコール、ろくじゅうろくです。"
+        }
+      ]
+    },
+    {
+      "question": 7,
+      "initial": "36-26=30",
+      "answer": "56-26=30",
+      "explanation": "左から1番目の数字「3」の右上を、左から1番目の数字「3」の左上へ動かす。 正しい式は 56-26=30。",
+      "spoken_explanation": "答え合わせです。左から1番目の数字、さんの右上の棒を取ります。左から1番目の数字、さんの左上へ動かします。左から1番目のさんが、ごに変わります。正しい式は、ごじゅうろく、ひく、にじゅうろく、イコール、さんじゅうです。",
+      "source_and_destination": {
+        "equation": "56-26=30",
+        "from_i": 0,
+        "from_s": "b",
+        "to_i": 0,
+        "to_s": "f"
+      },
+      "explanation_segments": [
+        {
+          "role": "source",
+          "text": "左から1番目の数字、さんの右上の棒を取ります。"
+        },
+        {
+          "role": "destination",
+          "text": "左から1番目の数字、さんの左上へ動かします。"
+        },
+        {
+          "role": "changed_digits",
+          "text": "左から1番目のさんが、ごに変わります。"
+        },
+        {
+          "role": "verification",
+          "text": "正しい式は、ごじゅうろく、ひく、にじゅうろく、イコール、さんじゅうです。"
+        }
+      ]
+    },
+    {
+      "question": 8,
+      "initial": "23+42=95",
+      "answer": "23+42=65",
+      "explanation": "左から5番目の数字「9」の右上を、左から5番目の数字「9」の左下へ動かす。 正しい式は 23+42=65。",
+      "spoken_explanation": "答え合わせです。左から5番目の数字、きゅうの右上の棒を取ります。左から5番目の数字、きゅうの左下へ動かします。左から5番目のきゅうが、ろくに変わります。正しい式は、にじゅうさん、たす、よんじゅうに、イコール、ろくじゅうごです。",
+      "source_and_destination": {
+        "equation": "23+42=65",
+        "from_i": 6,
+        "from_s": "b",
+        "to_i": 6,
+        "to_s": "e"
+      },
+      "explanation_segments": [
+        {
+          "role": "source",
+          "text": "左から5番目の数字、きゅうの右上の棒を取ります。"
+        },
+        {
+          "role": "destination",
+          "text": "左から5番目の数字、きゅうの左下へ動かします。"
+        },
+        {
+          "role": "changed_digits",
+          "text": "左から5番目のきゅうが、ろくに変わります。"
+        },
+        {
+          "role": "verification",
+          "text": "正しい式は、にじゅうさん、たす、よんじゅうに、イコール、ろくじゅうごです。"
+        }
+      ]
+    },
+    {
+      "question": 9,
+      "initial": "15+76=37",
+      "answer": "15+76=91",
+      "explanation": "左から6番目の数字「7」の上を、左から5番目の数字「3」の左上へ動かす。 正しい式は 15+76=91。",
+      "spoken_explanation": "答え合わせです。左から6番目の数字、ななの上の棒を取ります。左から5番目の数字、さんの左上へ動かします。左から5番目のさんが、きゅうに変わります。左から6番目のななが、いちに変わります。正しい式は、じゅうご、たす、ななじゅうろく、イコール、きゅうじゅういちです。",
+      "source_and_destination": {
+        "equation": "15+76=91",
+        "from_i": 7,
+        "from_s": "a",
+        "to_i": 6,
+        "to_s": "f"
+      },
+      "explanation_segments": [
+        {
+          "role": "source",
+          "text": "左から6番目の数字、ななの上の棒を取ります。"
+        },
+        {
+          "role": "destination",
+          "text": "左から5番目の数字、さんの左上へ動かします。"
+        },
+        {
+          "role": "changed_digits",
+          "text": "左から5番目のさんが、きゅうに変わります。左から6番目のななが、いちに変わります。"
+        },
+        {
+          "role": "verification",
+          "text": "正しい式は、じゅうご、たす、ななじゅうろく、イコール、きゅうじゅういちです。"
+        }
+      ]
+    },
+    {
+      "question": 10,
+      "initial": "66-43=53",
+      "answer": "96-43=53",
+      "explanation": "左から1番目の数字「6」の左下を、左から1番目の数字「6」の右上へ動かす。 正しい式は 96-43=53。",
+      "spoken_explanation": "答え合わせです。左から1番目の数字、ろくの左下の棒を取ります。左から1番目の数字、ろくの右上へ動かします。左から1番目のろくが、きゅうに変わります。正しい式は、きゅうじゅうろく、ひく、よんじゅうさん、イコール、ごじゅうさんです。",
+      "source_and_destination": {
+        "equation": "96-43=53",
+        "from_i": 0,
+        "from_s": "e",
+        "to_i": 0,
+        "to_s": "b"
+      },
+      "explanation_segments": [
+        {
+          "role": "source",
+          "text": "左から1番目の数字、ろくの左下の棒を取ります。"
+        },
+        {
+          "role": "destination",
+          "text": "左から1番目の数字、ろくの右上へ動かします。"
+        },
+        {
+          "role": "changed_digits",
+          "text": "左から1番目のろくが、きゅうに変わります。"
+        },
+        {
+          "role": "verification",
+          "text": "正しい式は、きゅうじゅうろく、ひく、よんじゅうさん、イコール、ごじゅうさんです。"
+        }
+      ]
+    }
+  ],
+  "watchflow_plan": {
+    "status": "PLANNED",
+    "type": "end_screen_video",
+    "start_seconds": 985.85,
+    "end_seconds": 993.85,
+    "duration_seconds": 8,
+    "target_video_id": "CrGEriXdmYI",
+    "target_url": "https://www.youtube.com/watch?v=CrGEriXdmYI",
+    "target_reason": "Same matchstick genre candidate; historically verified public on 2026-11-10. Reverify current Public and eligibility before save.",
+    "current_public_verified": null,
+    "current_eligibility_verified": null,
+    "saved": false,
+    "saved_readback": null,
+    "placement": "Clear lower/right endcard space; verify actual Studio placement before saving.",
+    "target_asset_id": "MATCH5_003",
+    "last_known_public_date": "2026-11-10"
+  },
+  "release_state": {
+    "publication": "UNPUBLISHED",
+    "public_id": null,
+    "actual_listening": null,
+    "prosody": null,
+    "word_level_sync": null,
+    "hold": "ACTUAL_LISTENING_UNVERIFIED",
+    "human_exception_for_this_episode": false,
+    "publish_ready": false,
+    "actual_pronunciation": null
+  },
+  "evidence": [
+    "../v01/PUZZLES.json",
+    "../v02_explanation/NARRATION_PREP.json",
+    "CHAPTERS.json",
+    "AUDIO_TIMELINE.json",
+    "FINAL_AUDIO_INDEPENDENT_QA.json"
+  ],
+  "checks": {
+    "questions": 10,
+    "chapters": 10,
+    "first_chapter_zero": true,
+    "chapter_ordered": true,
+    "metadata_only": true
+  },
+  "next_step": "Maintain listening HOLD; verify current eligible same-channel target before authorized publication and save/reopen endscreen.",
+  "central_records_modified": false,
+  "label": "制作途中・未公開",
+  "purpose": "MATCH10_010通常動画の公開用メタデータ案。公開許可・品質完了判定ではない。",
+  "fixed500_delta": 0
+}
