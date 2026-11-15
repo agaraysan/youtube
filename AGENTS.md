@@ -1,0 +1,11 @@
+# Codex へのお願い（このリポジトリでの役割）
+
+このリポジトリの運営は Claude が行います。Codex の担当は **画像と動くGIFの作成だけ** です。
+
+- 依頼は `requests/images/<id>.json` にあります。Issue やタスクで id を指定されたら、その依頼書を読んでください。
+- **画像は Codex 自身の画像生成機能で作ってください。** `scripts/codex_image.py` は GitHub Actions 用なので、実行しないでください（Codex の中から Codex CLI を呼ぶ必要はありません）。
+- 出来上がったファイルは `assets/generated/<id>/` に保存してください。画像は PNG、動くGIFは GIF で保存します。
+  - あわせて `result.json` を書いてください（`{"id","status":"ok","via":"codex-cloud","files":[...]}`）。
+- 音声（OpenAI Speech API）や投稿は Claude と GitHub Actions が担当します。APIキーの登録は不要です。
+- 依頼された id のフォルダー以外は変更しないでください。
+- 画像の中に、依頼にない文字やロゴを入れないでください。
