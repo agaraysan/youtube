@@ -64,7 +64,7 @@ def make(seconds, mood="dream", seed=1):
     f = int(min(1.5, seconds / 5) * SR)
     out[: int(0.8 * SR)] *= np.linspace(0, 1, int(0.8 * SR))[:, None]
     out[-f:] *= np.linspace(1, 0, f)[:, None]
-    return out / (np.abs(out).max() + 1e-9) * 0.7
+    return out / (np.abs(out).max() + 1e-9) * 0.3  # 小さめ（ショートは音が大きいと飛ばされる）。約 -22 LUFS
 
 
 def make_loop(seconds, mood="dream", seed=1, xf=3.0):
@@ -75,7 +75,7 @@ def make_loop(seconds, mood="dream", seed=1, xf=3.0):
     tail = a[n:n + k]
     ramp = np.linspace(0, 1, k)[:, None]
     body[:k] = body[:k] * ramp + tail * (1 - ramp)
-    return body / (np.abs(body).max() + 1e-9) * 0.7
+    return body / (np.abs(body).max() + 1e-9) * 0.3  # 小さめ（ショートは音が大きいと飛ばされる）。約 -22 LUFS
 
 
 def save(path, data):

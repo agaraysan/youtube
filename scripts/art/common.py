@@ -116,14 +116,45 @@ def over(frame, layer, alpha=1.0):
     return frame * (1 - a) + layer[..., :3] * a
 
 
+class Grade:
+    """プロの映像らしい仕上げ。色を少し抑えてそろえ、明るすぎる所をなだらかにし、
+    四隅をわずかに暗くし、細かいフィルムの粒子を足す（AIっぽいギラつきを抑える）。"""
+
+    def __init__(self, sat=0.86, warm=0.03, vignette=0.22, grain=3.2, seed=0):
+        yy, xx = np.mgrid[0:OH, 0:OW].astype(np.float32)
+        r = np.sqrt(((xx - OW / 2) / (OW / 2)) ** 2 * 0.8 + ((yy - OH / 2) / (OH / 2)) ** 2 * 0.6)
+        self.vig = (1 - vignette * np.clip(r - 0.35, 0, None) ** 1.6)[..., None].astype(np.float32)
+        self.sat, self.warm, self.grain = sat, warm, grain
+        self.rng = np.random.default_rng(seed)
+        self.noise = [np.repeat(np.repeat(self.rng.standard_normal((OH // 2, OW // 2, 1)).astype(np.float32), 2, 0), 2, 1)
+                      for _ in range(8)]
+
+    def __call__(self, frame, i=0):
+        x = frame / 255.0
+        lum = x @ np.array([0.299, 0.587, 0.114], np.float32)
+        x = lum[..., None] + (x - lum[..., None]) * self.sat
+        x = x / (1 + 0.35 * np.clip(x - 0.7, 0, None))  # 明るい所をなだらかに（光りすぎを抑える）
+        x = x * 0.97 + 0.015  # 黒を少しだけ持ち上げる（フィルムらしいやわらかさ）
+        x[..., 0] *= 1 + self.warm
+        x[..., 2] *= 1 - self.warm
+        x = x * self.vig
+        x = x * 255 + self.noise[i % len(self.noise)] * self.grain
+        return x
+
+
 class Writer:
-    def __init__(self, out_mp4, audio_wav):
+    def __init__(self, out_mp4, audio_wav, grade=True):
+        self.grade = Grade() if grade else None
+        self.i = 0
         self.p = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{OW}x{OH}",
                                    "-r", str(FPS), "-i", "-", "-i", str(audio_wav), "-c:v", "libx264", "-preset", "medium",
                                    "-crf", "19", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-shortest",
                                    "-movflags", "+faststart", str(out_mp4)], stdin=subprocess.PIPE)
 
     def write(self, frame):
+        if self.grade is not None:
+            frame = self.grade(frame, self.i)
+        self.i += 1
         self.p.stdin.write(np.clip(frame, 0, 255).astype(np.uint8).tobytes())
 
     def close(self):
