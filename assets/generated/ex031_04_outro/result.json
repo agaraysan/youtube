@@ -1,8 +1,10 @@
 {
-  "id": "ex031_04_outro",
-  "status": "ok",
-  "via": "codex-cloud",
-  "files": [
-    "image.png"
-  ]
+ "id": "ex031_04_outro",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "image.png"
+ ],
+ "at_utc": "2026-11-16T23:52:16.375298Z"
 }
