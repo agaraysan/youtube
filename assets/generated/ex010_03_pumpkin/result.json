@@ -1,8 +1,10 @@
 {
-  "id": "ex010_03_pumpkin",
-  "status": "ok",
-  "via": "codex-cloud",
-  "files": [
-    "assets/generated/ex010_03_pumpkin/pumpkin.png"
-  ]
+ "id": "ex010_03_pumpkin",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "pumpkin.png"
+ ],
+ "at_utc": "2026-11-16T05:31:59.779021Z"
 }
