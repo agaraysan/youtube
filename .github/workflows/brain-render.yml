@@ -1,6 +1,7 @@
 name: brain-render
-# 頭の体操・雑学シリーズの試作。brain/episodes/*.json を push すると声つきで描画し、
-# brain-previews 枝に最新分だけ置く（履歴は持たない。投稿はしない）。
+# 頭の体操・雑学シリーズの試作。brain/episodes/*.json（横長の本編）と brain/shorts/*.json（縦のショート）を
+# push すると声つきで描画し、brain-previews 枝に最新分だけ置く（履歴は持たない。投稿はしない）。
+# 6台に分けて同時に作る。1台が止まっても、ほかの台の分は残る。
 on:
   push:
     paths: ["brain/episodes/*.json", "brain/shorts/*.json", "scripts/brain/**", ".github/workflows/brain-render.yml"]
@@ -11,22 +12,50 @@ concurrency: { group: brain-render, cancel-in-progress: false }
 jobs:
   render:
     runs-on: ubuntu-latest
-    timeout-minutes: 240
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      matrix: { shard: [0, 1, 2, 3, 4, 5] }
     steps:
       - uses: actions/checkout@v4
       - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji && pip install -q pillow numpy
       - name: Fetch brain-previews
         run: |
-          mkdir -p pv/out
+          mkdir -p pv/out/shorts
           if git fetch -q origin brain-previews; then git --work-tree=pv checkout FETCH_HEAD -- out 2>/dev/null || true; fi
-      - name: Render new or changed episodes
+      - name: Render this shard
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          # 3本ずつ並べて作る
-          ls brain/episodes/*.json brain/shorts/*.json | xargs -P 3 -n 1 bash scripts/brain/render_one.sh
+          ls brain/episodes/*.json brain/shorts/*.json | awk -v s=${{ matrix.shard }} 'NR % 6 == s' > mine.txt
+          xargs -P 2 -n 1 bash scripts/brain/render_one.sh < mine.txt
+          # この台の分だけを残す
+          mkdir -p part/out/shorts
+          while read f; do id=$(basename "$f" .json); case "$f" in brain/shorts/*) d=shorts/;; *) d=;; esac
+            cp pv/out/$d$id.* pv/out/$d${id}_sheet.jpg part/out/$d 2>/dev/null || true; done < mine.txt
+          cp pv/log_*.txt part/ 2>/dev/null || true
+          ls -la part/out part/out/shorts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: "part-${{ matrix.shard }}", path: part, retention-days: 1 }
+  publish:
+    needs: render
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch brain-previews
+        run: |
+          mkdir -p pv/out/shorts
+          if git fetch -q origin brain-previews; then git --work-tree=pv checkout FETCH_HEAD -- out 2>/dev/null || true; fi
+      - uses: actions/download-artifact@v4
+        with: { path: parts, pattern: "part-*", merge-multiple: true }
+      - name: Merge
+        run: |
+          cp -r parts/out/. pv/out/ 2>/dev/null || true
+          cp parts/log_*.txt pv/ 2>/dev/null || true
           # もう台本がない動画は消す
-          for m in pv/out/*.mp4; do id=$(basename "$m" .mp4); [ -f "brain/episodes/$id.json" ] || rm -f pv/out/$id.*  pv/out/${id}_sheet.jpg; done
+          for m in pv/out/*.mp4; do [ -e "$m" ] || continue; id=$(basename "$m" .mp4); [ -f "brain/episodes/$id.json" ] || rm -f pv/out/$id.* pv/out/${id}_sheet.jpg; done
           for m in pv/out/shorts/*.mp4; do [ -e "$m" ] || continue; id=$(basename "$m" .mp4); [ -f "brain/shorts/$id.json" ] || rm -f pv/out/shorts/$id.* pv/out/shorts/${id}_sheet.jpg; done
           ls -la pv/out pv/out/shorts
       - name: Push brain-previews (latest only)
@@ -34,5 +63,5 @@ jobs:
           cd pv
           git init -q && git checkout -q -b brain-previews
           git config user.name "render-bot"; git config user.email "render-bot@users.noreply.github.com"
-          git add -A out && git commit -qm "brain previews (latest only)"
+          git add -A . && git commit -qm "brain previews (latest only)"
           git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:brain-previews
