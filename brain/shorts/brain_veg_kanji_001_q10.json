@@ -1,0 +1,18 @@
+{
+ "id": "brain_veg_kanji_001_q10",
+ "series": "頭の体操",
+ "style": "veg",
+ "think": 6,
+ "kind": "choice",
+ "options": [
+  "ざくろ",
+  "いちじく",
+  "すもも"
+ ],
+ "correct": 1,
+ "big": "無花果",
+ "q": "この漢字、読める？",
+ "voice_q": "この漢字、読めるかな？",
+ "voice_a": "正解は、いちじく！",
+ "answer_note": "正解は「いちじく」"
+}

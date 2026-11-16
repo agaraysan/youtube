@@ -1,0 +1,19 @@
+{
+ "id": "brain_kanji_odd_001_q07",
+ "series": "頭の体操",
+ "style": "kanji",
+ "think": 7,
+ "kind": "grid",
+ "base": "末",
+ "odd": "未",
+ "rows": 8,
+ "cols": 6,
+ "pos": [
+  2,
+  3
+ ],
+ "q": "1つだけちがう漢字は？",
+ "voice_q": "1つだけちがう漢字、見つけられる？",
+ "voice_a": "正解は、ここ！",
+ "answer_note": "「末」は上の線が長く、「未」は下の線が長い"
+}

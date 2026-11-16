@@ -1,0 +1,19 @@
+{
+ "id": "brain_yoji_001_q12",
+ "series": "頭の体操",
+ "style": "yoji",
+ "think": 6,
+ "kind": "choice",
+ "options": [
+  "発",
+  "鉢",
+  "髪"
+ ],
+ "correct": 2,
+ "big": "危機一□",
+ "big_answer": "危機一髪",
+ "q": "□に入る漢字は？",
+ "voice_q": "四角に入る漢字は、どれ？",
+ "voice_a": "正解は、ききいっぱつ！",
+ "answer_note": "正解：危機一髪"
+}

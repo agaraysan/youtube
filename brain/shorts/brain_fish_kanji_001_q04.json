@@ -1,0 +1,18 @@
+{
+ "id": "brain_fish_kanji_001_q04",
+ "series": "頭の体操",
+ "style": "fish",
+ "think": 6,
+ "kind": "choice",
+ "options": [
+  "にしん",
+  "いわし",
+  "さより"
+ ],
+ "correct": 1,
+ "big": "鰯",
+ "q": "この漢字、読める？",
+ "voice_q": "この漢字、読めるかな？",
+ "voice_a": "正解は、いわし！",
+ "answer_note": "正解は「いわし」"
+}

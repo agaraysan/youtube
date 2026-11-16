@@ -1,0 +1,18 @@
+{
+ "id": "brain_silhouette_002_q05",
+ "series": "頭の体操",
+ "style": "shadow",
+ "think": 5,
+ "kind": "choice",
+ "options": [
+  "たぬき",
+  "はりねずみ",
+  "ねずみ"
+ ],
+ "correct": 1,
+ "emoji": "🦔",
+ "q": "このかげ、なんだ？",
+ "voice_q": "このかげ、なんだかわかる？",
+ "voice_a": "正解は、はりねずみ！",
+ "answer_note": "正解は「はりねずみ」"
+}

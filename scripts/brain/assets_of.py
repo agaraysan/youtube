@@ -4,7 +4,7 @@ import json, pathlib, sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 ep = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
-paths = {ep.get("bg")} | {sc.get(k) for sc in ep["scenes"] for k in ("image", "bg")}
+paths = {ep.get("bg")} | {sc.get(k) for sc in ep.get("scenes", [ep]) for k in ("image", "bg")}
 for p in sorted(x for x in paths if x):
     q = ROOT / p
     files = sorted(q.iterdir()) if q.is_dir() else [q]

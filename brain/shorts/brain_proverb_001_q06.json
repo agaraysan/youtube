@@ -1,0 +1,19 @@
+{
+ "id": "brain_proverb_001_q06",
+ "series": "頭の体操",
+ "style": "proverb",
+ "think": 6,
+ "kind": "choice",
+ "options": [
+  "水",
+  "手紙",
+  "目薬"
+ ],
+ "correct": 2,
+ "big": "二階から□□",
+ "big_answer": "二階から目薬",
+ "q": "□に入る言葉は？",
+ "voice_q": "四角に入る言葉は、どれ？",
+ "voice_a": "正解は、にかいからめぐすり！",
+ "answer_note": "正解：二階から目薬"
+}

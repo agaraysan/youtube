@@ -1,0 +1,19 @@
+{
+ "id": "brain_kanji_odd_002_q04",
+ "series": "頭の体操",
+ "style": "kanji",
+ "think": 7,
+ "kind": "grid",
+ "base": "矢",
+ "odd": "失",
+ "rows": 8,
+ "cols": 6,
+ "pos": [
+  1,
+  2
+ ],
+ "q": "1つだけちがう漢字は？",
+ "voice_q": "1つだけちがう漢字、見つけられる？",
+ "voice_a": "正解は、ここ！",
+ "answer_note": "「失」は、縦の線が上につきぬけます"
+}

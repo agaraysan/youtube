@@ -3,7 +3,7 @@ name: brain-render
 # brain-previews 枝に最新分だけ置く（履歴は持たない。投稿はしない）。
 on:
   push:
-    paths: ["brain/episodes/*.json", "scripts/brain/**", ".github/workflows/brain-render.yml"]
+    paths: ["brain/episodes/*.json", "brain/shorts/*.json", "scripts/brain/**", ".github/workflows/brain-render.yml"]
   workflow_dispatch:
 permissions:
   contents: write
@@ -24,10 +24,11 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           # 3本ずつ並べて作る
-          ls brain/episodes/*.json | xargs -P 3 -n 1 bash scripts/brain/render_one.sh
+          ls brain/episodes/*.json brain/shorts/*.json | xargs -P 3 -n 1 bash scripts/brain/render_one.sh
           # もう台本がない動画は消す
           for m in pv/out/*.mp4; do id=$(basename "$m" .mp4); [ -f "brain/episodes/$id.json" ] || rm -f pv/out/$id.*  pv/out/${id}_sheet.jpg; done
-          ls -la pv/out
+          for m in pv/out/shorts/*.mp4; do [ -e "$m" ] || continue; id=$(basename "$m" .mp4); [ -f "brain/shorts/$id.json" ] || rm -f pv/out/shorts/$id.* pv/out/shorts/${id}_sheet.jpg; done
+          ls -la pv/out pv/out/shorts
       - name: Push brain-previews (latest only)
         run: |
           cd pv

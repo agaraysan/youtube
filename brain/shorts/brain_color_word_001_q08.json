@@ -1,0 +1,23 @@
+{
+ "id": "brain_color_word_001_q08",
+ "series": "頭の体操",
+ "style": "color",
+ "think": 4,
+ "kind": "choice",
+ "options": [
+  "あか",
+  "むらさき",
+  "あお"
+ ],
+ "correct": 2,
+ "big": "むらさき",
+ "big_color": [
+  30,
+  90,
+  215
+ ],
+ "q": "文字の「色」を答えて！",
+ "voice_q": "文字の色は？読んじゃだめ！",
+ "voice_a": "正解は、あお！",
+ "answer_note": "正解は「あお」"
+}
