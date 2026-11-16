@@ -1,0 +1,30 @@
+{
+  "id": "spot001_market_b",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "differences": [
+    {
+      "description": "右上の棒に止まっていた左側のスズメが消え、2羽から1羽になっている。",
+      "x": 1655,
+      "y": 20,
+      "width": 75,
+      "height": 74
+    },
+    {
+      "description": "三毛猫の左へ伸びる長いしっぽが短くなっている。",
+      "x": 545,
+      "y": 1008,
+      "width": 120,
+      "height": 60
+    },
+    {
+      "description": "男の子が持つ赤いリンゴが赤い洋梨に変わっている。",
+      "x": 1195,
+      "y": 650,
+      "width": 63,
+      "height": 68
+    }
+  ]
+}

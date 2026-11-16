@@ -1,0 +1,374 @@
+指定フォルダーに保存しました。
+
+- [image.png](assets/generated/spot001_market_b/image.png)：1920×1080、違いは3か所
+- [differences.json](assets/generated/spot001_market_b/differences.json)：日本語の説明と座標
+- [result.json](assets/generated/spot001_market_b/result.json)
+
+内蔵画像生成で、スズメの削除・猫のしっぽ短縮・リンゴから洋梨への変更を作成しました。3領域以外は元画像を保持しています。ほかのファイルは変更していません。
+
+GitHub送信は失敗しました。`.git` が読み取り専用でコミットできず、GitHubへの名前解決も失敗しました。`GH_PUSH_TOKEN` は空です。
+
+--- stderr ---
+r a genuinely transparent background and preserve its alpha.
+
+## Prompt augmentation
+
+Reformat user prompts into a structured, production-oriented spec. Make the user's goal clearer and more actionable, but do not blindly add detail.
+
+Treat this as prompt-shaping guidance, not a closed schema. Use only the lines that help, and add a short extra labeled line when it materially improves clarity.
+
+### Specificity policy
+
+Use the user's prompt specificity to decide how much augmentation is appropriate:
+
+- If the prompt is already specific and detailed, preserve that specificity and only normalize/structure it.
+- If the prompt is generic, you may add tasteful augmentation when it will materially improve the result.
+
+Allowed augmentations:
+- composition or framing hints
+- polish level or intended-use hints
+- practical layout guidance
+- reasonable scene concreteness that supports the stated request
+
+Not allowed augmentations:
+- extra characters or objects that are not implied by the request
+- brand names, slogans, palettes, or narrative beats that are not implied
+- arbitrary side-specific placement unless the surrounding layout supports it
+
+## Use-case taxonomy (exact slugs)
+
+Classify each request into one of these buckets and keep the slug consistent across prompts and references.
+
+Generate:
+- photorealistic-natural — candid/editorial lifestyle scenes with real texture and natural lighting.
+- product-mockup — product/packaging shots, catalog imagery, merch concepts.
+- ui-mockup — app/web interface mockups and wireframes; specify the desired fidelity.
+- infographic-diagram — diagrams/infographics with structured layout and text.
+- scientific-educational — classroom explainers, scientific diagrams, and learning visuals with required labels and accuracy constraints.
+- ads-marketing — campaign concepts and ad creatives with audience, brand position, scene, and exact tagline/copy.
+- productivity-visual — slide, chart, workflow, and data-heavy business visuals.
+- logo-brand — logo/mark exploration, vector-friendly.
+- illustration-story — comics, children’s book art, narrative scenes.
+- stylized-concept — style-driven concept art, 3D/stylized renders.
+- historical-scene — period-accurate/world-knowledge scenes.
+
+Edit:
+- text-localization — translate/replace in-image text, preserve layout.
+- identity-preserve — try-on, person-in-scene; lock face/body/pose.
+- precise-object-edit — remove/replace a specific element (including interior swaps).
+- lighting-weather — time-of-day/season/atmosphere changes only.
+- background-extraction — transparent background / clean cutout. Ask built-in `image_gen` for actual transparency.
+- style-transfer — apply reference style while changing subject/scene.
+- compositing — multi-image insert/merge with matched lighting/perspective.
+- sketch-to-render — drawing/line art to photoreal render.
+
+## Shared prompt schema
+
+Use the following labeled spec as shared prompt scaffolding for both top-level modes:
+
+```text
+Use case: <taxonomy slug>
+Asset type: <where the asset will be used>
+Primary request: <user's main prompt>
+Input images: <Image 1: role; Image 2: role> (optional)
+Scene/backdrop: <environment>
+Subject: <main subject>
+Style/medium: <photo/illustration/3D/etc>
+Composition/framing: <wide/close/top-down; placement>
+Lighting/mood: <lighting + mood>
+Color palette: <palette notes>
+Materials/textures: <surface details>
+Text (verbatim): "<exact text>"
+Constraints: <must keep/must avoid>
+Avoid: <negative constraints>
+```
+
+Notes:
+- `Asset type` and `Input images` are prompt scaffolding, not dedicated CLI flags.
+- `Scene/backdrop` refers to the visual setting. It is not the same as the fallback CLI `background` parameter, which controls output transparency behavior.
+- Fallback-only execution notes such as `Quality:`, `Input fidelity:`, masks, output format, and output paths belong in the CLI path only. Do not treat them as built-in `image_gen` tool arguments.
+
+Augmentation rules:
+- Keep it short.
+- Add only the details needed to improve the prompt materially.
+- For edits, explicitly list invariants (`change only X; keep Y unchanged`).
+- If any critical detail is missing and blocks success, ask a question; otherwise proceed.
+
+## Examples
+
+### Generation example (hero image)
+```text
+Use case: product-mockup
+Asset type: landing page hero
+Primary request: a minimal hero image of a ceramic coffee mug
+Style/medium: clean product photography
+Composition/framing: wide composition with usable negative space for page copy if needed
+Lighting/mood: soft studio lighting
+Constraints: no logos, no text, no watermark
+```
+
+### Edit example (invariants)
+```text
+Use case: precise-object-edit
+Asset type: product photo background replacement
+Primary request: replace only the background with a warm sunset gradient
+Constraints: change only the background; keep the product and its edges unchanged; no text; no watermark
+```
+
+## Prompting best practices
+- Structure prompt as scene/backdrop -> subject -> details -> constraints.
+- Include intended use (ad, UI mock, infographic) to set the mode and polish level.
+- Use camera/composition language for photorealism.
+- Only use SVG/vector stand-ins when the user explicitly asked for vector output or a non-image placeholder.
+- Quote exact text and specify typography + placement.
+- For tricky words, spell them letter-by-letter and require verbatim rendering.
+- For multi-image inputs, reference images by index and describe how they should be used.
+- For edits, repeat invariants every iteration to reduce drift.
+- Iterate with single-change follow-ups.
+- If the prompt is generic, add only the extra detail that will materially help.
+- If the prompt is already detailed, normalize it instead of expanding it.
+- For CLI fallback only, see `references/cli.md` and `references/image-api.md` for model, `quality`, `input_fidelity`, masks, output format, and output-path guidance.
+- For transparent images, ask built-in `image_gen` for actual transparency and preserve its alpha.
+
+More principles shared by both modes: `references/prompting.md`.
+Copy/paste specs shared by both modes: `references/sample-prompts.md`.
+
+## Guidance by asset type
+Asset-type templates (website assets, game assets, wireframes, logo) are consolidated in `references/sample-prompts.md`.
+
+## gpt-image-2 guidance for CLI fallback
+
+The fallback CLI defaults to `gpt-image-2`.
+
+- Use `gpt-image-2` for new CLI/API workflows unless the user confirms a different model.
+- CLI `gpt-image-2` does not support `background=transparent`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- `gpt-image-2` always uses high fidelity for image inputs; do not set `input_fidelity` with this model.
+- `gpt-image-2` supports `quality` values `low`, `medium`, `high`, and `auto`.
+- Use `quality low` for fast drafts, thumbnails, and quick iterations. Use `medium`, `high`, or `auto` for final assets, dense text, diagrams, identity-sensitive edits, or high-resolution outputs.
+- Square images are typically fastest to generate. Use `1024x1024` for fast square drafts.
+- If the user asks for 4K-style output, use `3840x2160` for landscape or `2160x3840` for portrait.
+- `gpt-image-2` size may be `auto` or `WIDTHxHEIGHT` if all constraints hold: max edge `<= 3840px`, both edges multiples of `16px`, long-to-short ratio `<= 3:1`, total pixels between `655,360` and `8,294,400`.
+
+Popular `gpt-image-2` sizes:
+- `1024x1024` square
+- `1536x1024` landscape
+- `1024x1536` portrait
+- `2048x2048` 2K square
+- `2048x1152` 2K landscape
+- `3840x2160` 4K landscape
+- `2160x3840` 4K portrait
+- `auto`
+
+## Fallback CLI mode only
+
+### Temp and output conventions
+These conventions apply only to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc "pwd && git status --short && ls -l assets/generated/t009_scene_spot_market/market.png && rg --files -g AGENTS.md -g '*spot001_market_b*'" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+/home/runner/work/youtube/youtube
+-rw-r--r-- 1 runner runner 6041859 Nov 16 02:59 assets/generated/t009_scene_spot_market/market.png
+requests/images/spot001_market_b.json
+AGENTS.md
+
+exec
+/bin/bash -lc 'cat AGENTS.md requests/images/spot001_market_b.json' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+# Codex へのお願い（このリポジトリでの役割）
+
+このリポジトリの運営は Claude が行います。Codex の担当は **画像と動くGIFの作成だけ** です。
+
+- 依頼は `requests/images/<id>.json` にあります。Issue やタスクで id を指定されたら、その依頼書を読んでください。
+- **画像は Codex 自身の画像生成機能で作ってください。** `scripts/codex_image.py` は GitHub Actions 用なので、実行しないでください（Codex の中から Codex CLI を呼ぶ必要はありません）。
+- 出来上がったファイルは `assets/generated/<id>/` に保存してください。画像は PNG、動くGIFは GIF で保存します。
+  - あわせて `result.json` を書いてください（`{"id","status":"ok","via":"codex-cloud","files":[...]}`）。
+- **保存が終わったら、必ず GitHub に送ってください。** 送り先は `codex-inbox` 枝です。
+  ```bash
+  # origin がなければ、環境変数 GH_PUSH_TOKEN を使って自分で追加する
+  git remote get-url origin >/dev/null 2>&1 || git remote add origin "https://x-access-token:${GH_PUSH_TOKEN}@github.com/agaraysan/youtube.git"
+  git fetch origin codex-inbox && git rebase origin/codex-inbox   # 失敗したら git pull --rebase origin codex-inbox
+  git push origin HEAD:codex-inbox
+  ```
+  push できなかったら、`GH_PUSH_TOKEN` が空かどうか（値は表示しない）と、その理由を最後の報告に書いてください。
+- 音声（OpenAI Speech API）や投稿は Claude と GitHub Actions が担当します。OpenAI の APIキーは不要です。
+- 依頼された id のフォルダー以外は変更しないでください。
+- 画像の中に、依頼にない文字やロゴを入れないでください。
+{
+ "id": "spot001_market_b",
+ "kind": "image",
+ "base_image": "assets/generated/t009_scene_spot_market/market.png",
+ "prompt": "assets/generated/t009_scene_spot_market/market.png をそのまま元にして、間違い探し用の「違いが3か所だけある」画像を作ってください。違い以外は元の絵と完全に同じにします（構図・色・人物・位置を変えない）。違いの例：①ある物が消えている ②ある物の形や数が変わっている ③別の物に置き換わっている。色だけを変える違いは使わない。スマホで見て気づける大きさにする。",
+ "size": "1920x1080",
+ "count": 1,
+ "notes": "出力は image.png。あわせて differences.json に、3か所それぞれの説明（日本語）と、およその位置（x, y, 幅, 高さ。1920x1080の座標）を書いてください。"
+}
+
+exec
+/bin/bash -lc "git remote -v | sed -E 's#https://["'^@]+@#https://***@#g'"'; if [ -n \""'$GH_PUSH_TOKEN" ]; then echo GH_PUSH_TOKEN=nonempty; else echo GH_PUSH_TOKEN=empty; fi' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+origin	https://github.com/agaraysan/youtube (fetch)
+origin	https://github.com/agaraysan/youtube (push)
+GH_PUSH_TOKEN=empty
+
+codex
+3か所の変更案（右上のスズメを1羽削除、猫のしっぽを短く変更、男の子のリンゴを洋梨に変更）が生成できました。元画像のほかの部分を保つため、生成結果から変更部分だけを元画像へ合成し、1920×1080で保存します。
+exec
+/bin/bash -lc 'command -v magick || command -v convert' in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image, ImageDraw, ImageFilter
+import json
+from pathlib import Path
+p=Path('assets/generated/spot001_market_b'); p.mkdir(parents=True,exist_ok=True)
+base=Image.open('assets/generated/t009_scene_spot_market/market.png').convert('RGB')
+gen=Image.open('/home/runner/.codex/generated_images/01a1e24c-2cd3-7561-98bc-7120434440b1/exec-768b5ba9-4650-4548-b35e-5663a40d260d.png').convert('RGB').resize(base.size,Image.Resampling.LANCZOS)
+regions=[(1655,20,1730,94),(545,1008,665,1068),(1195,650,1258,718)]
+mask=Image.new('L',base.size,0); d=ImageDraw.Draw(mask)
+for box in regions:d.rectangle(box,fill=255)
+mask=mask.filter(ImageFilter.GaussianBlur(2))
+out=Image.composite(gen,base,mask);out.save(p/'image.png')
+descriptions=['右上の木の棒に止まっていた左側のスズメが消え、2羽から1羽になっている。','画面下の三毛猫の左へ伸びる長いしっぽが、短いしっぽになっている。','男の子が持つ赤いリンゴが、上が細く下がふくらんだ赤い洋梨に変わっている。']
+items=[dict(description=t,x=b[0]-6,y=b[1]-6,width=b[2]-b[0]+12,height=b[3]-b[1]+12) for t,b in zip(descriptions,regions)]
+(p/'differences.json').write_text(json.dumps(dict(id='spot001_market_b',image_size=dict(width=1920,height=1080),differences=items),ensure_ascii=False,indent=2)+'\\n')
+(p/'result.json').write_text(json.dumps(dict(id='spot001_market_b',status='ok',via='codex-cloud',files=['image.png','differences.json']),indent=2)+'\\n')
+print(out.size)
+PY" in /home/runner/work/youtube/youtube
+ exited 1 in 4ms:
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'PIL'
+
+2026-11-16T03:01:27.359423Z ERROR codex_core::tools::router: error=unable to locate image at `/home/runner/work/youtube/youtube/assets/generated/spot001_market_b/image.png`: No such file or directory (os error 2)
+exec
+/bin/bash -lc 'which -a python python3; ls /usr/bin/*convert* /opt/venv/bin/python* 2>/dev/null; python -m pip install --target /tmp/spot001_pillow Pillow' in /home/runner/work/youtube/youtube
+ exited 1 in 8754ms:
+/usr/bin/python
+/bin/python
+/usr/bin/python3
+/bin/python3
+/usr/bin/btrfs-convert
+/usr/bin/kubectl-convert
+WARNING: The directory '/home/runner/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x719351d9e7b0>: Failed to establish a new connection: [Errno -2] Name or service not known')': /simple/pillow/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x719351f2ac10>: Failed to establish a new connection: [Errno -2] Name or service not known')': /simple/pillow/
+WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x719351f2ad50>: Failed to establish a new connection: [Errno -2] Name or service not known')': /simple/pillow/
+WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x719351f2ae90>: Failed to establish a new connection: [Errno -2] Name or service not known')': /simple/pillow/
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x719351f2afd0>: Failed to establish a new connection: [Errno -2] Name or service not known')': /simple/pillow/
+ERROR: Could not find a version that satisfies the requirement Pillow (from versions: none)
+ERROR: No matching distribution found for Pillow
+
+exec
+/bin/bash -lc "cat > /tmp/spot001_compose.py <<'PY'
+import struct,zlib,json
+from pathlib import Path
+def read(path):
+ b=Path(path).read_bytes();pos=8;data=b''
+ while pos<len(b):
+  n=struct.unpack('>I',b[pos:pos+4])[0];k=b[pos+4:pos+8];v=b[pos+8:pos+8+n];pos+=n+12
+  if k==b'IHDR':w,h,depth,col,_,_,inter=struct.unpack('>IIBBBBB',v)
+  if k==b'IDAT':data+=v
+ assert depth==8 and col in (2,6) and inter==0,(depth,col,inter)
+ c=3 if col==2 else 4;s=w*c;raw=zlib.decompress(data);rows=[];prev=bytearray(s)
+ for y in range(h):
+  f=raw[y*(s+1)];r=bytearray(raw[y*(s+1)+1:(y+1)*(s+1)])
+  for x in range(s):
+   a=r[x-c] if x>=c else 0;b=prev[x];cc=prev[x-c] if x>=c else 0
+   if f==1:v=a
+   elif f==2:v=b
+   elif f==3:v=(a+b)//2
+   elif f==4:
+    p=a+b-cc;ds=[abs(p-a),abs(p-b),abs(p-cc)];v=[a,b,cc][ds.index(min(ds))]
+   else:v=0
+   r[x]=(r[x]+v)&255
+  rows.append(bytearray(v for x in range(w) for v in r[x*c:x*c+3]));prev=r
+ return w,h,rows
+w,h,base=read('assets/generated/t009_scene_spot_market/market.png')
+gw,gh,gen=read('/home/runner/.codex/generated_images/01a1e24c-2cd3-7561-98bc-7120434440b1/exec-768b5ba9-4650-4548-b35e-5663a40d260d.png')
+regions=[(1655,20,1730,94),(545,1008,665,1068),(1195,650,1258,718)]
+for x0,y0,x1,y1 in regions:
+ for y in range(y0,y1):
+  sy=(y+.5)*gh/h-.5;iy=int(sy);fy=sy-iy
+  for x in range(x0,x1):
+   sx=(x+.5)*gw/w-.5;ix=int(sx);fx=sx-ix
+   alpha=min(1,(x-x0)/4,(x1-1-x)/4,(y-y0)/4,(y1-1-y)/4)
+   for c in range(3):
+    v=sum(gen[iy+dy][(ix+dx)*3+c]*wx*wy for dx,wx in [(0,1-fx),(1,fx)] for dy,wy in [(0,1-fy),(1,fy)])
+    base[y][x*3+c]=round(base[y][x*3+c]*(1-alpha)+v*alpha)
+def chunk(k,d):return struct.pack('>I',len(d))+k+d+struct.pack('>I',zlib.crc32(k+d))
+out=b'\\x89PNG\\r\\n\\x1a\\n'+chunk(b'IHDR',struct.pack('>IIBBBBB',w,h,8,2,0,0,0))+chunk(b'IDAT',zlib.compress(b''.join(b'\\0'+r for r in base)))+chunk(b'IEND',b'')
+p=Path('assets/generated/spot001_market_b');p.mkdir(parents=True,exist_ok=True);(p/'image.png').write_bytes(out)
+texts=['右上の棒に止まっていた左側のスズメが消え、2羽から1羽になっている。','三毛猫の左へ伸びる長いしっぽが短くなっている。','男の子が持つ赤いリンゴが赤い洋梨に変わっている。']
+(p/'differences.json').write_text(json.dumps({'id':'spot001_market_b','image_size':{'width':w,'height':h},'differences':[dict(description=t,x=b[0],y=b[1],width=b[2]-b[0],height=b[3]-b[1]) for t,b in zip(texts,regions)]},ensure_ascii=False,indent=2)+'\\n')
+(p/'result.json').write_text(json.dumps(dict(id='spot001_market_b',status='ok',via='codex-cloud',files=['image.png','differences.json']),indent=2)+'\\n')
+print(w,h,gw,gh)
+PY
+python /tmp/spot001_compose.py" in /home/runner/work/youtube/youtube
+ succeeded in 2579ms:
+1920 1080 1672 941
+
+exec
+/bin/bash -lc 'git push origin HEAD:codex-inbox; git status --short; if [ -n "$GH_PUSH_TOKEN" ]; then echo GH_PUSH_TOKEN=nonempty; else echo GH_PUSH_TOKEN=empty; fi' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+?? assets/generated/spot001_market_b/
+GH_PUSH_TOKEN=empty
+
+codex
+指定フォルダーに保存しました。
+
+- [image.png](assets/generated/spot001_market_b/image.png)：1920×1080、違いは3か所
+- [differences.json](assets/generated/spot001_market_b/differences.json)：日本語の説明と座標
+- [result.json](assets/generated/spot001_market_b/result.json)
+
+内蔵画像生成で、スズメの削除・猫のしっぽ短縮・リンゴから洋梨への変更を作成しました。3領域以外は元画像を保持しています。ほかのファイルは変更していません。
+
+GitHub送信は失敗しました。`.git` が読み取り専用でコミットできず、GitHubへの名前解決も失敗しました。`GH_PUSH_TOKEN` は空です。
+tokens used
+41,526
