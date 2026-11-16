@@ -1,8 +1,10 @@
 {
-  "id": "ex002_03_motsu",
-  "status": "ok",
-  "via": "codex-cloud",
-  "files": [
-    "assets/generated/ex002_03_motsu/motsu.png"
-  ]
+ "id": "ex002_03_motsu",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "motsu.png"
+ ],
+ "at_utc": "2026-11-16T05:07:18.549813Z"
 }
