@@ -15,30 +15,30 @@
  "chapter_label": "雑学",
  "scenes": [
   {
-   "image": "assets/generated/ex003_00_hook",
+   "image": "assets/generated/ex003p_00_hook",
    "telop": "誰かに話したくなる\n動物の雑学",
    "voice": "知ると誰かに話したくなる、動物の雑学を、3つ紹介します。"
   },
   {
-   "image": "assets/generated/ex003_01_octopus",
+   "image": "assets/generated/ex003p_01_octopus",
    "chapter": "1",
    "telop": "タコの心臓は\n3つある",
    "voice": "タコには、心臓が3つあります。1つは全身に、残りの2つは、エラに血を送っています。"
   },
   {
-   "image": "assets/generated/ex003_02_otter",
+   "image": "assets/generated/ex003p_02_otter",
    "chapter": "2",
    "telop": "ラッコは海藻を\n巻いて眠る",
    "voice": "ラッコは、眠っている間に流されないよう、海藻を体に巻きつけて眠ることがあります。"
   },
   {
-   "image": "assets/generated/ex003_03_giraffe",
+   "image": "assets/generated/ex003p_03_giraffe",
    "chapter": "3",
    "telop": "キリンの首の骨は\n人間と同じ7個",
    "voice": "キリンの長い首の骨は、実は人間と同じ7個。1つ1つの骨が、とても長いんです。"
   },
   {
-   "image": "assets/generated/ex003_04_outro",
+   "image": "assets/generated/ex003p_04_outro",
    "telop": "どれが一番\n驚いた？",
    "voice": "どれが一番、驚きましたか？ ほかの雑学も、チェックしてみてね。"
   }

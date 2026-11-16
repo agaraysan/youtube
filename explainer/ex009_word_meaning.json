@@ -15,12 +15,12 @@
  "chapter_label": "",
  "scenes": [
   {
-   "image": "assets/generated/ex009_00_books",
+   "image": "assets/generated/ex009p_00_books",
    "telop": "意味を間違えやすい\n言葉3選",
    "voice": "実は、意味を間違えて使われやすい言葉を、3つ紹介します。"
   },
   {
-   "image": "assets/generated/ex009_01_kindness",
+   "image": "assets/generated/ex009p_01_kindness",
    "chapter": "1",
    "telop": "情けは\n人のためならず",
    "choices": [
@@ -31,7 +31,7 @@
    "voice": "情けは人のためならず。人に親切にすると、めぐりめぐって自分に返ってくる、という意味です。"
   },
   {
-   "image": "assets/generated/ex009_02_role",
+   "image": "assets/generated/ex009p_02_role",
    "chapter": "2",
    "telop": "役不足",
    "choices": [
@@ -42,7 +42,7 @@
    "voice": "役不足。力が足りないことではなく、その人の力に対して、役目が軽すぎることを言います。"
   },
   {
-   "image": "assets/generated/ex009_03_friends",
+   "image": "assets/generated/ex009p_03_friends",
    "chapter": "3",
    "telop": "気が置けない",
    "choices": [
@@ -53,7 +53,7 @@
    "voice": "気が置けない。油断できない、ではなく、遠慮しなくていい、気楽につき合える、という意味です。"
   },
   {
-   "image": "assets/generated/ex009_00_books",
+   "image": "assets/generated/ex009p_00_books",
    "telop": "いくつ\n知ってた？",
    "move": "out",
    "voice": "いくつ、知っていましたか？ 誰かに話したくなったら、シェアしてね。"

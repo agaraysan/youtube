@@ -15,30 +15,30 @@
  "chapter_label": "STEP",
  "scenes": [
   {
-   "image": "assets/generated/ex006_00_hook",
+   "image": "assets/generated/ex006p_00_hook",
    "telop": "スマホの写真\nごちゃごちゃ問題",
    "voice": "スマホの写真、いつの間にか何千枚も、たまっていませんか？ 3ステップで、すっきり整理しましょう。"
   },
   {
-   "image": "assets/generated/ex006_01_delete",
+   "image": "assets/generated/ex006p_01_delete",
    "chapter": "1",
    "telop": "いらない写真を消す",
    "voice": "ステップ1。まずは、スクリーンショットや、似たような連写の写真を消します。これだけで、かなり減ります。"
   },
   {
-   "image": "assets/generated/ex006_02_albums",
+   "image": "assets/generated/ex006p_02_albums",
    "chapter": "2",
    "telop": "アルバムに分ける",
    "voice": "ステップ2。旅行、家族、ペットなど、テーマごとにアルバムを作って分けます。見返すのが、ぐっと楽になります。"
   },
   {
-   "image": "assets/generated/ex006_03_backup",
+   "image": "assets/generated/ex006p_03_backup",
    "chapter": "3",
    "telop": "バックアップする",
    "voice": "ステップ3。大事な写真は、クラウドやパソコンにバックアップ。スマホが壊れても安心です。"
   },
   {
-   "image": "assets/generated/ex006_04_outro",
+   "image": "assets/generated/ex006p_04_outro",
    "telop": "月に1回の\n見直しがおすすめ",
    "voice": "月に1回、5分だけ見直す習慣をつけると、すっきりが、ずっと続きます。"
   }

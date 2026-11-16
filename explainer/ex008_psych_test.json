@@ -10,12 +10,12 @@
  "bgm_volume": 0.12,
  "scenes": [
   {
-   "image": "assets/generated/ex008_00_forest",
+   "image": "assets/generated/ex008p_00_forest",
    "telop": "心理テスト",
    "voice": "ちょっとした心理テストです。直感で答えてください。"
   },
   {
-   "image": "assets/generated/ex008_00_forest",
+   "image": "assets/generated/ex008p_00_forest",
    "telop": "森で最初に\n見つけたのは？",
    "choices": [
     "A 小さな泉",
@@ -27,22 +27,22 @@
    "voice": "あなたは、ひとりで森を歩いています。最初に見つけたのは、どれ？"
   },
   {
-   "image": "assets/generated/ex008_01_spring",
+   "image": "assets/generated/ex008p_01_spring",
    "telop": "A 小さな泉",
    "voice": "Aの泉を選んだあなたは、いやしを求めているタイプ。少し休んで、好きなことをする時間を作りましょう。"
   },
   {
-   "image": "assets/generated/ex008_02_cabin",
+   "image": "assets/generated/ex008p_02_cabin",
    "telop": "B 古い小屋",
    "voice": "Bの小屋を選んだあなたは、安心できる居場所を大切にするタイプ。身近な人との時間が、元気のもとです。"
   },
   {
-   "image": "assets/generated/ex008_03_mushroom",
+   "image": "assets/generated/ex008p_03_mushroom",
    "telop": "C 光るきのこ",
    "voice": "Cのきのこを選んだあなたは、好奇心いっぱいのタイプ。新しいことに挑戦すると、運が開けそう。"
   },
   {
-   "image": "assets/generated/ex008_00_forest",
+   "image": "assets/generated/ex008p_00_forest",
    "telop": "あなたは\nどれだった？",
    "move": "out",
    "voice": "あなたは、どれでしたか？ あくまで、お遊びとして楽しんでくださいね。"

@@ -15,12 +15,12 @@
  "chapter_label": "Q",
  "scenes": [
   {
-   "image": "assets/generated/ex007_00_title",
+   "image": "assets/generated/ex007p_00_title",
    "telop": "日本の地理\n3択クイズ",
    "voice": "日本の地理、3択クイズ。全部わかるかな？"
   },
   {
-   "image": "assets/generated/ex007_01_q",
+   "image": "assets/generated/ex007p_01_q",
    "chapter": "1",
    "telop": "面積が2番目に大きい県は？",
    "choices": [
@@ -32,7 +32,7 @@
    "voice": "第1問。北海道の次に、面積が大きい都道府県は、どれでしょう？"
   },
   {
-   "image": "assets/generated/ex007_01_a",
+   "image": "assets/generated/ex007p_01_a",
    "chapter": "1",
    "telop": "正解は 岩手県",
    "choices": [
@@ -44,7 +44,7 @@
    "voice": "正解は、A、岩手県。本州の都道府県の中では、いちばん広いんです。"
   },
   {
-   "image": "assets/generated/ex007_02_q",
+   "image": "assets/generated/ex007p_02_q",
    "chapter": "2",
    "telop": "2番目に高い山は？",
    "choices": [
@@ -56,7 +56,7 @@
    "voice": "第2問。日本でいちばん高い山は、富士山。では、2番目に高い山は、どれでしょう？"
   },
   {
-   "image": "assets/generated/ex007_02_a",
+   "image": "assets/generated/ex007p_02_a",
    "chapter": "2",
    "telop": "正解は 北岳",
    "choices": [
@@ -68,7 +68,7 @@
    "voice": "正解は、A、北岳。山梨県にある、南アルプスの山です。"
   },
   {
-   "image": "assets/generated/ex007_03_q",
+   "image": "assets/generated/ex007p_03_q",
    "chapter": "3",
    "telop": "日本一長い川は？",
    "choices": [
@@ -80,7 +80,7 @@
    "voice": "第3問。日本でいちばん長い川は、どれでしょう？"
   },
   {
-   "image": "assets/generated/ex007_03_a",
+   "image": "assets/generated/ex007p_03_a",
    "chapter": "3",
    "telop": "正解は 信濃川",
    "choices": [
@@ -92,7 +92,7 @@
    "voice": "正解は、B、信濃川。長野県から新潟県へ流れ、日本海にそそぎます。"
   },
   {
-   "image": "assets/generated/ex007_00_title",
+   "image": "assets/generated/ex007p_00_title",
    "telop": "何問 正解できた？",
    "voice": "あなたは、何問正解できましたか？ コメントで教えてね。"
   }

@@ -39,7 +39,7 @@
  },
  "scenes": [
   {
-   "image": "assets/generated/ex004_00_room",
+   "image": "assets/generated/ex004p_00_room",
    "telop": "AIへの頼み方\n3つのコツ",
    "lines": [
     {
@@ -53,7 +53,7 @@
    ]
   },
   {
-   "image": "assets/generated/ex004_01_target",
+   "image": "assets/generated/ex004p_01_target",
    "chapter": "1",
    "telop": "目的を伝える",
    "lines": [
@@ -72,7 +72,7 @@
    ]
   },
   {
-   "image": "assets/generated/ex004_02_checklist",
+   "image": "assets/generated/ex004p_02_checklist",
    "chapter": "2",
    "telop": "条件を具体的に",
    "lines": [
@@ -87,7 +87,7 @@
    ]
   },
   {
-   "image": "assets/generated/ex004_03_example",
+   "image": "assets/generated/ex004p_03_example",
    "chapter": "3",
    "telop": "お手本を見せる",
    "lines": [
@@ -102,7 +102,7 @@
    ]
   },
   {
-   "image": "assets/generated/ex004_04_sunset",
+   "image": "assets/generated/ex004p_04_sunset",
    "telop": "目的・条件・お手本",
    "lines": [
     {
