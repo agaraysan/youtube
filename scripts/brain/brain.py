@@ -513,9 +513,6 @@ def ensure_bg(ep):
 
 def main(spec, out_dir, no_voice=False):
     import json
-    if json.loads(pathlib.Path(spec).read_text(encoding="utf-8")).get("kind") == "zoom":
-        import zoom
-        return zoom.main(spec, out_dir, no_voice)
     ep = ensure_bg(json.loads(pathlib.Path(spec).read_text(encoding="utf-8")))
     for sc in ep["scenes"]:  # 絵がまだ届いていない場面は背景で代用
         if sc.get("image"):
