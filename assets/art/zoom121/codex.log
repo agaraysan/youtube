@@ -824,3 +824,70 @@ tokens used
 41,841
 
 =====
+内蔵の画像生成機能で灰色の帯を描き足し、[loop_raw_0.png]( /home/runner/work/youtube/youtube/tmp_art/zoom121/loop_raw_0.png) に1024×1536のPNGで保存しました。中央と帯の外側は元の画素を保持しています。
+
+--- stderr ---
+s the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc 'ls -l /home/runner/work/youtube/youtube/tmp_art/zoom121/loop_raw_0.png' in /home/runner/work/youtube/youtube
+ exited 2 in 0ms:
+ls: cannot access '/home/runner/work/youtube/youtube/tmp_art/zoom121/loop_raw_0.png': No such file or directory
+
+exec
+/bin/bash -lc 'command -v magick || command -v convert' in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+codex
+描き足した画像を確認しました。中央の朝の場面を囲む、正面向きの入口ができています。保存時に元画像の中央と帯の外側を戻し、変更範囲を灰色の帯だけに限定します。
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+import numpy as np
+src=Image.open('/home/runner/work/youtube/youtube/tmp_art/zoom121/loop_canvas.png').convert('RGB')
+gen=Image.open('/home/runner/.codex/generated_images/01a1e54e-6c24-7aa0-b382-d184f861084b/exec-b3bdc247-ca58-4b41-b5ea-5dacc53d1c18.png').convert('RGB')
+a=np.array(src); b=np.array(gen)
+assert src.size==gen.size==(1024,1536)
+mask=np.all(a==[128,128,128],axis=2)
+assert mask.sum()>100000
+out=a.copy(); out[mask]=b[mask]
+p='/home/runner/work/youtube/youtube/tmp_art/zoom121/loop_raw_0.png'
+Image.fromarray(out).save(p)
+assert np.array_equal(out[~mask],a[~mask])
+print(p)
+print('1024x1536 PNG; preserved all pixels outside gray band')
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 659ms:
+/home/runner/work/youtube/youtube/tmp_art/zoom121/loop_raw_0.png
+1024x1536 PNG; preserved all pixels outside gray band
+
+codex
+内蔵の画像生成機能で灰色の帯を描き足し、[loop_raw_0.png]( /home/runner/work/youtube/youtube/tmp_art/zoom121/loop_raw_0.png) に1024×1536のPNGで保存しました。中央と帯の外側は元の画素を保持しています。
+tokens used
+28,727
+
+=====
