@@ -523,7 +523,7 @@ def main(spec, out_dir, fast=False):
                     "-map", "[o]", "-ar", str(SR), str(audio)], check=True)
     out = out_dir / f"{ep['id']}.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(video), "-i", str(audio), "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
-                    "-af", "loudnorm=I=-16:TP=-1.5:LRA=11", "-movflags", "+faststart", "-shortest", str(out)], check=True)
+                    "-af", f"loudnorm=I={ep.get('loudness', -18 if L.vertical else -16)}:TP=-2:LRA=11", "-movflags", "+faststart", "-shortest", str(out)], check=True)
 
     # 5) 確認用の一覧画像
     tw = 270 if L.vertical else 480
