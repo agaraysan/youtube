@@ -5,7 +5,7 @@
   {
    "type": "title",
    "text": "間違い探し",
-   "sub": "違いは3つ 見つけられるかな？",
+   "sub": "左右の絵の違いは3つ",
    "voice": "間違い探しです。左と右の絵で、違うところが3つあります。"
   },
   {
@@ -24,7 +24,7 @@
     "assets/generated/spot002_market_sq/b.png"
    ],
    "upto": 1,
-   "text": "1つめ：鳥がいない",
+   "text": "1つめ  鳥がいない",
    "voice": "1つめ。左上の空を飛んでいた鳥が、いなくなっています。",
    "chime": true
   },
@@ -35,7 +35,7 @@
     "assets/generated/spot002_market_sq/b.png"
    ],
    "index": 0,
-   "text": "1つめ：鳥がいない",
+   "text": "1つめ  鳥がいない",
    "seconds": 3.5
   },
   {
@@ -45,7 +45,7 @@
     "assets/generated/spot002_market_sq/b.png"
    ],
    "upto": 2,
-   "text": "2つめ：みかんが2個",
+   "text": "2つめ  みかんが2個",
    "voice": "2つめ。かごのみかんが、3個から2個に減っています。",
    "chime": true
   },
@@ -56,7 +56,7 @@
     "assets/generated/spot002_market_sq/b.png"
    ],
    "index": 1,
-   "text": "2つめ：みかんが2個",
+   "text": "2つめ  みかんが2個",
    "seconds": 3.5
   },
   {
@@ -66,7 +66,7 @@
     "assets/generated/spot002_market_sq/b.png"
    ],
    "upto": 3,
-   "text": "3つめ：猫がうさぎに",
+   "text": "3つめ  猫がうさぎに",
    "voice": "3つめ。右下の猫が、うさぎに変わっています。",
    "chime": true
   },
@@ -77,13 +77,13 @@
     "assets/generated/spot002_market_sq/b.png"
    ],
    "index": 2,
-   "text": "3つめ：猫がうさぎに",
+   "text": "3つめ  猫がうさぎに",
    "seconds": 3.5
   },
   {
    "type": "title",
    "text": "全部見つけられた？",
-   "sub": "コメントで教えてね",
+   "sub": "コメントで教えてください",
    "voice": "全部見つけられましたか？コメントで教えてください。チャンネル登録もよろしくお願いします。"
   }
  ],
@@ -91,5 +91,7 @@
   "a": "assets/generated/spot002_market_sq/a.png",
   "b": "assets/generated/spot002_market_sq/b.png",
   "list": "assets/generated/spot002_market_sq/differences.json"
- }
+ },
+ "series": "間違い探し",
+ "style": "spot"
 }
