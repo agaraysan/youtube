@@ -14,9 +14,16 @@ jobs:
       ids: ${{ steps.l.outputs.ids }}
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
       - id: l
+        env: { BEFORE: "${{ github.event.before }}" }
         run: |
-          ids=$(for f in art/*.json; do
+          # 仕組み（scripts/art）が変わったときは全部、仕様だけ変わったときはその仕様だけ作る（実行中のものと重ならないように）
+          files=art/*.json
+          if [ -n "$BEFORE" ] && git cat-file -e "$BEFORE" 2>/dev/null && ! git diff --name-only "$BEFORE" HEAD | grep -q '^scripts/art/'; then
+            files=$(git diff --name-only --diff-filter=AM "$BEFORE" HEAD | grep '^art/.*\.json$' || true)
+          fi
+          ids=$(for f in $files; do
             id=$(basename "$f" .json)
             h=$(cat "$f" scripts/art/*.py | sha1sum | cut -c1-12)
             got=$(git ls-remote origin "refs/heads/art-preview/$id" | cut -c1-40)
