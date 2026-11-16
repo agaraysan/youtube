@@ -34,5 +34,8 @@ jobs:
         run: |
           cd pv
           git config user.name "render-bot"; git config user.email "render-bot@users.noreply.github.com"
+          # 容量をためないよう、previews 枝は履歴を持たず、いつも最新の1回分だけにする
+          git checkout -q --orphan latest
           git add -A out
-          git diff --cached --quiet || { git commit -qm "render previews"; git push -q origin HEAD:previews; }
+          git commit -qm "render previews (latest only)"
+          git push -q -f origin HEAD:previews
