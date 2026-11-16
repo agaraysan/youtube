@@ -1,0 +1,621 @@
+{
+ "id": "brain_fish_kanji_001",
+ "series": "頭の体操",
+ "style": "fish",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "魚へんの漢字 読めますか？",
+   "size": 100,
+   "sub": "3つの中から読み方を選ぼう",
+   "voice": "頭の体操、魚へんの漢字クイズです。お寿司屋さんの湯のみでおなじみの漢字。読み方を3つの中から選んでください。全部で12問です。"
+  },
+  {
+   "type": "choice",
+   "big": "鮭",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "さけ",
+    "あじ",
+    "さば"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第1問",
+   "voice": "第1問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鮭",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "さけ",
+    "あじ",
+    "さば"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第1問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "鮭",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "さけ",
+    "あじ",
+    "さば"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第1問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "鮭（さけ）　「圭」の字。秋に川をのぼる魚",
+   "voice": "答えは、さけ。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "鯛",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "ふな",
+    "たい",
+    "こい"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第2問",
+   "voice": "第2問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鯛",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "ふな",
+    "たい",
+    "こい"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第2問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "鯛",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "ふな",
+    "たい",
+    "こい"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第2問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "鯛（たい）　「周」の字。お祝いの席の魚",
+   "voice": "答えは、たい。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "鯖",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "いわし",
+    "さんま",
+    "さば"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第3問",
+   "voice": "第3問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鯖",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "いわし",
+    "さんま",
+    "さば"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第3問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "鯖",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "いわし",
+    "さんま",
+    "さば"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第3問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "鯖（さば）　「青」の字。背中が青い魚",
+   "voice": "答えは、さば。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "鰯",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "にしん",
+    "いわし",
+    "さより"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第4問",
+   "voice": "第4問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鰯",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "にしん",
+    "いわし",
+    "さより"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第4問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "鰯",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "にしん",
+    "いわし",
+    "さより"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第4問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "鰯（いわし）　「弱」の字。水から出るとすぐ弱るから、という説",
+   "voice": "答えは、いわし。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "鰻",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "どじょう",
+    "あなご",
+    "うなぎ"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第5問",
+   "voice": "第5問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鰻",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "どじょう",
+    "あなご",
+    "うなぎ"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第5問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "鰻",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "どじょう",
+    "あなご",
+    "うなぎ"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第5問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "鰻（うなぎ）　夏の土用の丑の日でおなじみ",
+   "voice": "答えは、うなぎ。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "鮪",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "ぶり",
+    "まぐろ",
+    "かつお"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第6問",
+   "voice": "第6問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鮪",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "ぶり",
+    "まぐろ",
+    "かつお"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第6問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "鮪",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "ぶり",
+    "まぐろ",
+    "かつお"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第6問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "鮪（まぐろ）　お寿司の人気者",
+   "voice": "答えは、まぐろ。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "鰹",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "まぐろ",
+    "さわら",
+    "かつお"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第7問",
+   "voice": "第7問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鰹",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "まぐろ",
+    "さわら",
+    "かつお"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第7問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "鰹",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "まぐろ",
+    "さわら",
+    "かつお"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第7問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "鰹（かつお）　「堅」の字。干すと堅くなる、かつお節",
+   "voice": "答えは、かつお。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "鰤",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "ぶり",
+    "たら",
+    "ひらめ"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第8問",
+   "voice": "第8問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鰤",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "ぶり",
+    "たら",
+    "ひらめ"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第8問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "鰤",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "ぶり",
+    "たら",
+    "ひらめ"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第8問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "鰤（ぶり）　「師」の字。冬の寒ぶりがおいしい",
+   "voice": "答えは、ぶり。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "鱈",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "かれい",
+    "たら",
+    "たい"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第9問",
+   "voice": "第9問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鱈",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "かれい",
+    "たら",
+    "たい"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第9問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "鱈",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "かれい",
+    "たら",
+    "たい"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第9問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "鱈（たら）　「雪」の字。雪の降るころにとれる魚",
+   "voice": "答えは、たら。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "鯵",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "さば",
+    "あじ",
+    "いか"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第10問",
+   "voice": "第10問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鯵",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "さば",
+    "あじ",
+    "いか"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第10問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "鯵",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "さば",
+    "あじ",
+    "いか"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第10問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "鯵（あじ）　「参」の字。旧暦の三月ごろがおいしいから、という説",
+   "voice": "答えは、あじ。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "鰆",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "ひらめ",
+    "さわら",
+    "ほっけ"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第11問",
+   "voice": "第11問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鰆",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "ひらめ",
+    "さわら",
+    "ほっけ"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第11問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "鰆",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "ひらめ",
+    "さわら",
+    "ほっけ"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第11問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "鰆（さわら）　「春」の字。春によくとれる魚",
+   "voice": "答えは、さわら。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "鰈",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "ひらめ",
+    "こち",
+    "かれい"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第12問",
+   "voice": "第12問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鰈",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "ひらめ",
+    "こち",
+    "かれい"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第12問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "鰈",
+   "size": 260,
+   "ruby": "",
+   "options": [
+    "ひらめ",
+    "こち",
+    "かれい"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第12問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "鰈（かれい）　平たい魚。目が右側についている",
+   "voice": "答えは、かれい。",
+   "pad": 1.4
+  },
+  {
+   "type": "title",
+   "text": "何問わかりましたか？",
+   "size": 100,
+   "sub": "コメントで教えてください",
+   "voice": "何問読めましたか？コメントで教えてください。チャンネル登録もよろしくお願いします。"
+  }
+ ]
+}

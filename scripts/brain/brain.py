@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""頭の体操シリーズ（漢字の仲間はずれ探し・漢字穴埋め・雑学クイズ）の動画を作る。
+"""頭の体操シリーズ（漢字・ことわざ・雑学・記憶力・計算など）の動画を作る。1本につき1ジャンル。
 
 scripts/render/render.py の仕組み（声・BGM・効果音・書き出し）をそのまま使い、場面の種類だけ足す。
 render.py は変更しない。
@@ -8,6 +8,9 @@ render.py は変更しない。
   grid    : 同じ漢字の中に1つだけ違う漢字（base, odd, rows, cols）。think: true で考える時間（seconds）、reveal: true で答えに丸
   cross   : 漢字穴埋め。真ん中の□に入る漢字（top, left, right, bottom, answer）。think / reveal は grid と同じ
   fact    : 雑学クイズ。左に絵（image）、右に問題（q）。think で考える時間、answer で答え（caption に解説）
+  choice  : 3択クイズ。big（大きな文字。□は色つき）か image（絵）と q（問題文）、options, correct（0から）。reveal で正解に色
+            big_answer（答えで差し替える文字）, hl（答えで色をつける文字）, ruby（答えで上に出す読み）
+  memo    : 記憶力。items（絵文字）を並べる。hide で1つを「？」に。options/correct で下に3択
 共通: text（左上の見出し）, caption, voice, chime, seconds, pad（render.py と同じ）
 使い方: brain.py brain/episodes/<id>.json out_dir [--no-voice]
 """
@@ -19,7 +22,12 @@ sys.path.insert(0, str(ROOT / "scripts" / "render"))
 import render as R  # noqa: E402
 
 # シリーズの色とBGM（render.py の表に、この実行の間だけ足す）
-R.ACCENT.update({"kanji": (196, 52, 52), "trivia": (44, 120, 200)})
+R.ACCENT.update({"kanji": (196, 52, 52), "trivia": (44, 120, 200), "proverb": (120, 84, 170), "showa": (176, 104, 40),
+                 "memory": (0, 150, 136), "calc": (230, 110, 30), "fish": (30, 110, 170)})
+for _k in ("proverb", "showa", "fish"):
+    R.BGM.STYLES.setdefault(_k, R.BGM.STYLES["riddle"])
+for _k in ("memory", "calc"):
+    R.BGM.STYLES.setdefault(_k, R.BGM.STYLES["spot"])
 R.BGM.STYLES.setdefault("kanji", R.BGM.STYLES["riddle"])
 R.BGM.STYLES.setdefault("trivia", (96, 60, [(0, "maj7"), (5, "maj7"), (2, "m7"), (7, "dom7")]))
 
@@ -28,7 +36,7 @@ PAPER2 = (238, 230, 212)
 INK = (28, 28, 34)
 SERIF = R._first(["/usr/share/fonts/opentype/noto/NotoSerifCJK-Bold.ttc", "/usr/share/fonts/opentype/noto/NotoSerifCJK-Black.ttc",
                   R.FONT_BOLD])
-MINE = {"grid", "cross", "fact"}
+MINE = {"grid", "cross", "fact", "choice", "memo"}
 
 
 def serif(size):
@@ -250,6 +258,150 @@ def scene_fact(sc, ep, size):
     return think_frames(im, ep, sc, H) if sc.get("think") else im.convert("RGB")
 
 
+EMOJI_FONT = R._first(["/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf"])
+_emoji_cache = {}
+
+
+def emoji(ch, size):
+    """絵文字を指定の大きさの画像で返す（カラー絵文字は109pxで描いてから縮める）。"""
+    key = (ch, int(size))
+    if key not in _emoji_cache:
+        f = R.ImageFont.truetype(EMOJI_FONT, 109)
+        im = Image.new("RGBA", (160, 160), (0, 0, 0, 0))
+        ImageDraw.Draw(im).text((80, 80), ch, font=f, embedded_color=True, anchor="mm")
+        im = im.crop(im.getbbox() or (0, 0, 160, 160))
+        k = size / max(im.size)
+        _emoji_cache[key] = im.resize((max(1, int(im.width * k)), max(1, int(im.height * k))), Image.LANCZOS)
+    return _emoji_cache[key]
+
+
+def paste_center(im, small, cx, cy):
+    im.alpha_composite(small, (int(cx - small.width / 2), int(cy - small.height / 2)))
+
+
+def is_emoji(t):
+    return bool(t) and all(ord(c) > 0x2000 for c in t) and not any("　" <= c <= "鿿" for c in t)
+
+
+def options_row(im, ep, sc, x0, x1, y0, h):
+    """3択（または4択）のボタン。reveal で正解を色付き、ほかを薄く。"""
+    u = im.height / 1080
+    opts = sc["options"]
+    n = len(opts)
+    gap = 36 * u
+    w = (x1 - x0 - gap * (n - 1)) / n
+    acc = R.accent(ep)
+    for i, o in enumerate(opts):
+        bx = x0 + i * (w + gap)
+        ok = sc.get("reveal") and i == sc["correct"]
+        dim = sc.get("reveal") and i != sc["correct"]
+        fill = acc + (255,) if ok else ((255, 255, 255, 150) if dim else (255, 255, 255, 250))
+        R.shadow_box(im, (bx, y0, bx + w, y0 + h), int(20 * u), fill, blur=12, offset=6)
+        d = ImageDraw.Draw(im)
+        lab = "ABCD"[i]
+        r = h * 0.26
+        d.ellipse([bx + 26 * u, y0 + h / 2 - r, bx + 26 * u + 2 * r, y0 + h / 2 + r], fill=(255, 255, 255) if ok else acc)
+        d.text((bx + 26 * u + r, y0 + h / 2), lab, font=R.font(r * 1.2, "heavy"), fill=acc if ok else (255, 255, 255), anchor="mm")
+        cx = bx + 26 * u + 2 * r + (w - 26 * u - 2 * r) / 2
+        col = (255, 255, 255) if ok else ((150, 150, 160) if dim else INK)
+        if is_emoji(o):
+            e = emoji(o, h * 0.66)
+            if dim:
+                e = e.copy(); e.putalpha(e.getchannel("A").point(lambda a: a * 0.35))
+            paste_center(im, e, cx, y0 + h / 2)
+        else:
+            fs = min(h * 0.42, (w - 2 * r - 70 * u) / max(1, len(o)) * 1.0)
+            ImageDraw.Draw(im).text((cx, y0 + h / 2), o, font=R.font(fs, "heavy"), fill=col, anchor="mm")
+
+
+def scene_choice(sc, ep, size):
+    """3択クイズ。big（大きな文字）か image（絵）で問題を見せ、下に選択肢。"""
+    W, H = size
+    u = H / 1080
+    acc = R.accent(ep)
+    if sc.get("image"):
+        im = R.bg(sc["image"], size, dim=0.55, blur=18)
+        src = Image.open(ROOT / sc["image"]).convert("RGB")
+        ih = 560 * u
+        iw = ih * src.width / src.height
+        R.framed(im, src, ((W - iw) / 2 if not sc.get("q") else 60 * u, 120 * u, iw, ih), int(20 * u))
+        if sc.get("q"):
+            px0 = 60 * u + iw + 40 * u
+            R.shadow_box(im, (px0, 120 * u, W - 60 * u, 120 * u + ih), int(24 * u), (255, 255, 255, 246))
+            d = ImageDraw.Draw(im)
+            f = R.font(62 * u, "bold")
+            lines = wrap(d, sc["q"], f, W - 60 * u - px0 - 80 * u)
+            lh = 62 * u * 1.5
+            y = 120 * u + ih / 2 - lh * len(lines) / 2
+            for i, ln in enumerate(lines):
+                d.text(((px0 + W - 60 * u) / 2, y + lh * (i + 0.5)), ln, font=f, fill=INK, anchor="mm")
+        oy = 120 * u + ih + 50 * u
+    else:
+        im = paper(size)
+        d = ImageDraw.Draw(im)
+        if sc.get("reveal") and sc.get("ruby"):  # 答えでは問題文の代わりに読みを出す
+            d.text((W / 2, 175 * u), sc["ruby"], font=R.font(60 * u, "bold"), fill=R.accent(ep), anchor="mm")
+        elif sc.get("q"):
+            d.text((W / 2, 175 * u), sc["q"], font=R.font(60 * u, "bold"), fill=INK, anchor="mm")
+        big = sc.get("big", "")
+        if sc.get("reveal") and sc.get("big_answer"):
+            big = sc["big_answer"]
+        fs = sc.get("size", 190) * u
+        f = serif(fs)
+        tw = d.textlength(big, font=f)
+        while tw > W * 0.82:
+            fs *= 0.9; f = serif(fs); tw = d.textlength(big, font=f)
+        cw, ch = max(tw + 200 * u, 700 * u), fs + 150 * u
+        cx0, cy0 = (W - cw) / 2, 240 * u
+        R.shadow_box(im, (cx0, cy0, cx0 + cw, cy0 + ch), int(28 * u), (255, 255, 255, 250))
+        d = ImageDraw.Draw(im)
+        # □ は色をつけて目立たせる
+        x = W / 2 - tw / 2
+        for c in big:
+            cwid = d.textlength(c, font=f)
+            d.text((x, cy0 + ch / 2), c, font=f, fill=acc if c == "□" or (sc.get("reveal") and c in sc.get("hl", "")) else INK, anchor="lm")
+            x += cwid
+        oy = cy0 + ch + 70 * u
+    oh = 170 * u
+    options_row(im, ep, sc, 90 * u, W - 90 * u, oy, oh)
+    R.header(im, ep, sc, H)
+    if sc.get("caption"):
+        caption(im, ep, sc["caption"], H)
+    return think_frames(im, ep, sc, H) if sc.get("think") else im.convert("RGB")
+
+
+def scene_memo(sc, ep, size):
+    """記憶力：絵文字を並べて見せる。hide にした場所は「？」のマス。"""
+    W, H = size
+    u = H / 1080
+    im = paper(size)
+    items = sc["items"]
+    n = len(items)
+    cols = sc.get("cols", 3 if n <= 6 else 4)
+    rows = -(-n // cols)
+    top, bottom = 150 * u, (290 * u if sc.get("options") else 60 * u)
+    cell = min((W - 300 * u) / cols, (H - top - bottom) / rows)
+    x0 = (W - cell * cols) / 2
+    y0 = top + (H - top - bottom - cell * rows) / 2
+    acc = R.accent(ep)
+    for i, it in enumerate(items):
+        r, c = divmod(i, cols)
+        bx, by = x0 + c * cell + 14 * u, y0 + r * cell + 14 * u
+        bw = cell - 28 * u
+        hidden = i == sc.get("hide")
+        R.shadow_box(im, (bx, by, bx + bw, by + bw), int(22 * u), (255, 246, 220, 255) if hidden else (255, 255, 255, 252), blur=10, offset=5)
+        if hidden:
+            ImageDraw.Draw(im).text((bx + bw / 2, by + bw / 2), "？", font=R.font(bw * 0.55, "heavy"), fill=acc, anchor="mm")
+        else:
+            paste_center(im, emoji(it, bw * 0.66), bx + bw / 2, by + bw / 2)
+    if sc.get("options"):
+        options_row(im, ep, sc, 300 * u, W - 300 * u, H - 250 * u, 190 * u)
+    R.header(im, ep, sc, H)
+    if sc.get("caption"):
+        caption(im, ep, sc["caption"], H)
+    return think_frames(im, ep, sc, H) if sc.get("think") else im.convert("RGB")
+
+
 _orig = R.render_scene
 
 
@@ -261,6 +413,10 @@ def render_scene(sc, ep, size):
         return scene_cross(sc, ep, size)
     if t == "fact":
         return scene_fact(sc, ep, size)
+    if t == "choice":
+        return scene_choice(sc, ep, size)
+    if t == "memo":
+        return scene_memo(sc, ep, size)
     return _orig(sc, ep, size)
 
 
@@ -291,6 +447,9 @@ def ensure_bg(ep):
 
 def main(spec, out_dir, no_voice=False):
     import json
+    if json.loads(pathlib.Path(spec).read_text(encoding="utf-8")).get("kind") == "zoom":
+        import zoom
+        return zoom.main(spec, out_dir, no_voice)
     ep = ensure_bg(json.loads(pathlib.Path(spec).read_text(encoding="utf-8")))
     for sc in ep["scenes"]:  # 絵がまだ届いていない場面は背景で代用
         if sc.get("image"):
