@@ -17,7 +17,7 @@ render.py は変更しない。
 共通: text（左上の見出し）, caption, voice, chime, seconds, pad（render.py と同じ）
 使い方: brain.py brain/episodes/<id>.json out_dir [--no-voice]
 """
-import math, os, pathlib, random, sys
+import math, os, pathlib, random, subprocess, sys
 from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -37,6 +37,60 @@ for _k in ("antonym",):
     R.BGM.STYLES.setdefault(_k, R.BGM.STYLES["riddle"])
 R.BGM.STYLES.setdefault("kanji", R.BGM.STYLES["riddle"])
 R.BGM.STYLES.setdefault("trivia", (96, 60, [(0, "maj7"), (5, "maj7"), (2, "m7"), (7, "dom7")]))
+
+# ---- BGM：YouTube オーディオライブラリの曲（assets/bgm/）。シリーズごとに最初の曲を決め、同じ組の曲を順につなぐ ----
+BGM_DIR = ROOT / "assets" / "bgm"
+CALM = ["valley_drive", "you_are_the_only", "cruise"]
+LIVELY = ["little_fish", "estela", "wager_with_angels"]
+BGM_FIRST = {"kanji": "valley_drive", "proverb": "you_are_the_only", "yoji": "cruise", "fish": "valley_drive",
+             "veg": "you_are_the_only", "antonym": "cruise", "pref": "cruise", "showa": "valley_drive", "trivia": "you_are_the_only",
+             "calc": "little_fish", "mushikui": "estela", "count": "little_fish", "memory": "estela", "shadow": "wager_with_angels",
+             "color": "wager_with_angels", "number": "estela"}
+BGM_VOLUME = 0.22  # 曲は -20 LUFS にそろえてから、この倍率で小さめに入れる（声の間はさらに下がる）
+_make, _save = R.BGM.make, R.BGM.save
+
+
+def bgm_playlist(style, seconds):
+    first = BGM_FIRST.get(style)
+    if not first or not (BGM_DIR / f"{first}.mp3").exists():
+        return None
+    group = CALM if first in CALM else LIVELY
+    k = group.index(first)
+    order = [g for g in group[k:] + group[:k] if (BGM_DIR / f"{g}.mp3").exists()]
+    lst, total = [], 0.0
+    while total < seconds + 6:
+        for g in order:
+            p = BGM_DIR / f"{g}.mp3"
+            lst.append(p)
+            total += R.dur(str(p)) - 3
+            if total >= seconds + 6:
+                break
+    return lst
+
+
+def _bgm_make(seconds, style="match", seed=1):
+    lst = bgm_playlist(style, seconds)
+    return ("files", lst, seconds) if lst else _make(seconds, style, seed)
+
+
+def _bgm_save(out, data):
+    if not (isinstance(data, tuple) and data and data[0] == "files"):
+        return _save(out, data)
+    _, lst, seconds = data
+    ins, filt = [], []
+    for i, p in enumerate(lst):
+        ins += ["-i", str(p)]
+        filt.append(f"[{i}:a]aresample={R.SR},aformat=channel_layouts=stereo[a{i}]")
+    cur = "[a0]"
+    for i in range(1, len(lst)):
+        filt.append(f"{cur}[a{i}]acrossfade=d=3[x{i}]")
+        cur = f"[x{i}]"
+    filt.append(f"{cur}loudnorm=I=-20:TP=-2,atrim=0:{seconds:.3f},afade=t=in:d=1.5,afade=t=out:st={max(0, seconds - 3):.3f}:d=3,aresample={R.SR}[o]")
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", *ins, "-filter_complex", ";".join(filt), "-map", "[o]", "-ar", str(R.SR), "-ac", "2", out],
+                   check=True)
+
+
+R.BGM.make, R.BGM.save = _bgm_make, _bgm_save
 
 PAPER = (248, 243, 232)
 PAPER2 = (238, 230, 212)
@@ -520,6 +574,8 @@ def main(spec, out_dir, no_voice=False):
             if not got:
                 raise SystemExit(f"絵がまだ届いていないので、今回は作りません: {sc['image']}")
             sc["image"] = got
+    if bgm_playlist(ep.get("style"), 60) and "bgm_volume" not in ep:
+        ep["bgm_volume"] = BGM_VOLUME
     tmp = pathlib.Path(os.environ.get("TMPDIR", "/tmp")) / f"{ep['id']}.resolved.json"
     tmp.write_text(json.dumps(ep, ensure_ascii=False), encoding="utf-8")
     R.main(str(tmp), out_dir, no_voice)
