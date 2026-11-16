@@ -77,11 +77,18 @@ def seg_coords(s, x, y, W, H):
 
 def draw_expr(img, expr, cx, cy, H=300, hide=None, ghost=None, highlight=None):
     """式を中央 (cx,cy) に描く。hide=(位置,棒) は描かない棒、ghost=(位置,棒) は薄く描く棒。"""
-    W = H * 0.55
+    def layout(H):
+        W = H * 0.55
+        gap = H * 0.28
+        widths = [W if c.isdigit() else W * 0.8 for c in expr]
+        gaps = [gap * (0.55 if expr[k].isdigit() and expr[k + 1].isdigit() else 1) for k in range(len(expr) - 1)]
+        return W, gap, widths, gaps, sum(widths) + sum(gaps)
+    W, gap, widths, gaps, total = layout(H)
+    max_total = img.width * 0.86
+    if total > max_total:  # 長い式は画面に収まるよう小さくする
+        H = H * max_total / total
+        W, gap, widths, gaps, total = layout(H)
     w = max(6, int(H * 0.05))
-    gap = H * 0.28
-    widths = [W if c.isdigit() else W * 0.8 for c in expr]
-    total = sum(widths) + gap * (len(expr) - 1)
     x = cx - total / 2
     y = cy - H / 2
     for i, c in enumerate(expr):
@@ -112,7 +119,7 @@ def draw_expr(img, expr, cx, cy, H=300, hide=None, ghost=None, highlight=None):
             elif c == "=":
                 _stick(img, (x + cw / 2 - L / 2, m - H * 0.12), (x + cw / 2 + L / 2, m - H * 0.12), w)
                 _stick(img, (x + cw / 2 - L / 2, m + H * 0.12), (x + cw / 2 + L / 2, m + H * 0.12), w)
-        x += cw + gap
+        x += cw + (gaps[i] if i < len(gaps) else 0)
 
 
 if __name__ == "__main__":

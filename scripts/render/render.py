@@ -260,9 +260,10 @@ def render_scene(sc, ep, size):
         if sc.get("sub"):
             d.text((W / 2, H * 0.44 + 210 * u), sc["sub"], font=font(54 * u, "bold"), fill=MUTED, anchor="mm")
 
-    if kind == "match" or (kind == "think" and not pair and "puzzle" in ep):
+    has_puzzle = "puzzle" in sc or "puzzle" in ep
+    if kind == "match" or (kind == "think" and not pair and has_puzzle):
         st = sc.get("state", "question")
-        p = ep["puzzle"]
+        p = sc.get("puzzle") or ep["puzzle"]
         expr = p["answer"] if st == "answer" else p["question"]
         _, i, s, j, t = p["move"]
         kw = {}
@@ -273,7 +274,7 @@ def render_scene(sc, ep, size):
             kw = dict(highlight=(j, t))
         M.draw_expr(im, expr, W / 2, H * 0.47, H=int(H * 0.36), **kw)
 
-    if kind == "riddle" or (kind == "think" and not pair and "puzzle" not in ep):
+    if kind == "riddle" or (kind == "think" and not pair and not has_puzzle):
         d = ImageDraw.Draw(im)
         if sc.get("answer"):
             f = font(150 * u, "heavy")
