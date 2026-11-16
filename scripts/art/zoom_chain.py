@@ -66,6 +66,46 @@ def main(spec_path):
             img.paste(small, (x0, y0), feather_mask(iw, ih, max(8, iw // 14)))  # 中央は内側の絵の画素で貼り戻す
         img.save(dst, quality=93)
         print(spec["id"], "layer", j, "ok", flush=True)
+    if spec.get("loop"):
+        return close_loop(spec, out, work, log, W, H, iw, ih, x0, y0)
+    return 0
+
+
+def close_loop(spec, out, work, log, W, H, iw, ih, x0, y0):
+    """いちばん内側の絵の中央に、いちばん外側の絵を埋め込む。こうすると最後のズームが最初の場面にぴったり戻る。
+    中央のまわりの細い帯だけを Codex に描き直してもらい、帯の外側は元の画素のまま残す。"""
+    n = len(spec["layers"])
+    dst = out / "loop_inner.jpg"
+    if dst.exists():
+        return 0
+    inner = Image.open(out / f"layer_{n - 1:02d}.jpg").convert("RGB")
+    first = Image.open(out / "layer_00.jpg").convert("RGB").resize((iw, ih), Image.LANCZOS)
+    bw, bh = int(iw * 1.5), int(ih * 1.5)  # 描き直す帯の外枠
+    bx, by = (W - bw) // 2, (H - bh) // 2
+    canvas = inner.copy()
+    canvas.paste((128, 128, 128), (bx, by, bx + bw, by + bh))
+    canvas.paste(first, (x0, y0))
+    cpath = work / "loop_canvas.png"
+    canvas.save(cpath)
+    raw = work / "loop_raw"
+    task = (f"画像 {cpath} を開いて見てください。中央の長方形（x {x0}〜{x0 + iw}、y {y0}〜{y0 + ih}）の絵と、"
+            f"いちばん外側の絵は、どちらもそのまま残します。そのあいだの灰色の帯だけを、内蔵の画像生成機能で描き足してください。"
+            f"全体は次の1枚の絵になります: {spec['layers'][-1]}\n中央の絵（{spec['layers'][0]}）が、その入口の向こうに見えるように、"
+            f"帯の部分で自然につなげてください。境目や枠の線が見えないようにします。画風: {spec.get('style', '')}\n"
+            f"画像の中に文字・ロゴ・透かしは入れないでください。縦長 {W}x{H} で {raw}.png に保存してください。ほかのファイルは変更しないでください。")
+    for _ in range(2):
+        codex(task, log)
+        if find(raw):
+            break
+    if not find(raw):
+        print("loop closure failed"); return 1
+    got = Image.open(find(raw)).convert("RGB").resize((W, H), Image.LANCZOS)
+    res = inner.copy()
+    band = got.crop((bx, by, bx + bw, by + bh))
+    res.paste(band, (bx, by), feather_mask(bw, bh, max(10, bw // 16)))
+    res.paste(first, (x0, y0), feather_mask(iw, ih, max(8, iw // 14)))
+    res.save(dst, quality=93)
+    print(spec["id"], "loop closed", flush=True)
     return 0
 
 

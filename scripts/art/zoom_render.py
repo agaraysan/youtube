@@ -46,6 +46,8 @@ def main(spec_path, out_mp4, layer_dir=None):
     r = spec.get("ratio", 3)
     d = pathlib.Path(layer_dir) if layer_dir else ROOT / "assets" / "art" / spec["id"]
     layers = [Image.open(p).convert("RGB") for p in sorted(d.glob("layer_*.jpg"))]
+    if spec.get("loop"):
+        return render_loop(spec, out_mp4, layers, d, r)
     n = len(layers)
     W, H = layers[0].size
     base_k = max(OW / W, OH / H)
@@ -75,6 +77,31 @@ def main(spec_path, out_mp4, layer_dir=None):
     w.close()
     wav.unlink(missing_ok=True)
     print("wrote", out_mp4, f"{total:.1f}s")
+
+
+def render_loop(spec, out_mp4, layers, d, r):
+    """切れ目なく何周もできる版。最後の絵の中心が最初の絵なので、L = n で L = 0 と同じ画面になる。"""
+    layers = layers[:-1] + [Image.open(d / "loop_inner.jpg").convert("RGB"), layers[0]]
+    n = len(layers) - 1  # 進む段数
+    W, H = layers[0].size
+    base_k = max(OW / W, OH / H)
+    mask = feather_mask(W, H, max(8, (W // r) // 14))
+    step = spec.get("seconds_per_step", 2.8)
+    total = step * n
+    cap = caption_layer(spec["caption"], spec.get("caption_sub")) if spec.get("caption") else None
+    wav = pathlib.Path(out_mp4).with_suffix(".wav")
+    ambient.save(str(wav), ambient.make_loop(total, spec.get("mood", "dream"), seed=7))
+    w = Writer(out_mp4, wav)
+    nf = int(round(total * FPS))
+    for i in range(nf):  # 最後の1コマは最初のコマと同じなので出さない
+        t = i / FPS
+        frame = render_at(layers, mask, n * i / nf, base_k, r)
+        if cap is not None and t < 3.0:
+            frame = over(frame, cap, min(1.0, (3.0 - t) / 0.5))
+        w.write(frame)
+    w.close()
+    wav.unlink(missing_ok=True)
+    print("wrote", out_mp4, f"{total:.1f}s loop")
 
 
 if __name__ == "__main__":

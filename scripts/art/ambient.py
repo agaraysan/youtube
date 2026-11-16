@@ -67,6 +67,17 @@ def make(seconds, mood="dream", seed=1):
     return out / (np.abs(out).max() + 1e-9) * 0.7
 
 
+def make_loop(seconds, mood="dream", seed=1, xf=3.0):
+    """最後と最初がつながるBGM。少し長めに作り、はみ出した終わりを頭に重ねる。"""
+    a = make(seconds + xf + 1.0, mood, seed)
+    n, k = int(seconds * SR), int(xf * SR)
+    body = a[:n].copy()
+    tail = a[n:n + k]
+    ramp = np.linspace(0, 1, k)[:, None]
+    body[:k] = body[:k] * ramp + tail * (1 - ramp)
+    return body / (np.abs(body).max() + 1e-9) * 0.7
+
+
 def save(path, data):
     with wave.open(path, "wb") as w:
         w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
