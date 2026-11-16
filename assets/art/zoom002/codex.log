@@ -1,0 +1,291 @@
+内蔵の画像生成機能で、中央を維持する指示のもと、豪華な金色の額縁と幻想的な暗い壁を描き足しました。
+
+[保存画像（1024×1536 PNG）]( /home/runner/work/youtube/youtube/tmp_art/zoom002/raw_03.png)
+
+--- stderr ---
+and output conventions
+These conventions apply only to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc 'ls /home/runner/.codex/generated_images' in /home/runner/work/youtube/youtube
+ exited 2 in 0ms:
+ls: cannot access '/home/runner/.codex/generated_images': No such file or directory
+
+exec
+/bin/bash -lc "cp /home/runner/.codex/generated_images/01a1e287-4a9c-73d2-a31c-69a2bee2b8d9/exec-5d68d2ae-01fe-4d2f-9f54-04d28259f52a.png /home/runner/work/youtube/youtube/tmp_art/zoom002/raw_03.png
+python - <<'PY'
+from PIL import Image
+im=Image.open('tmp_art/zoom002/raw_03.png')
+print(im.size)
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+(1024, 1536)
+
+codex
+内蔵の画像生成機能で、中央を維持する指示のもと、豪華な金色の額縁と幻想的な暗い壁を描き足しました。
+
+[保存画像（1024×1536 PNG）]( /home/runner/work/youtube/youtube/tmp_art/zoom002/raw_03.png)
+tokens used
+24,566
+
+=====
+[raw_02.png](tmp_art/zoom002/raw_02.png) に保存しました（1024×1536）。
+
+内蔵画像生成で周囲を描き足し、中央の指定範囲は元画像と画素単位で一致しています。他のファイルは変更していません。
+
+--- stderr ---
+ systematic-debugging are Superpowers' most common process skills, but the rule holds for any of them.
+
+- "Let's build X" → superpowers:brainstorming first, then implementation skills.
+- "Fix this bug" → superpowers:systematic-debugging first, then domain skills.
+
+## Red Flags
+
+These thoughts mean STOP—you're rationalizing:
+
+| Thought | Reality |
+|---------|---------|
+| "This is just a simple question" | Questions are tasks. Check for skills. |
+| "I need more context first" | Skill check comes BEFORE clarifying questions. |
+| "Let me explore the codebase first" | Skills tell you HOW to explore. Check first. |
+| "I can check git/files quickly" | Files lack conversation context. Check for skills. |
+| "Let me gather information first" | Skills tell you HOW to gather information. |
+| "This doesn't need a formal skill" | If a skill exists, use it. |
+| "I remember this skill" | Skills evolve. Read current version. |
+| "This doesn't count as a task" | Action = task. Check for skills. |
+| "The skill is overkill" | Simple things become complex. Use it. |
+| "I'll just do this one thing first" | Check BEFORE doing anything. |
+| "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
+| "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
+
+## Platform Adaptation
+
+If your harness appears here, read its reference file for special instructions:
+
+- Claude Code: `references/claude-code-tools.md`
+- Codex: `references/codex-tools.md`
+- Pi: `references/pi-tools.md`
+- Antigravity: `references/antigravity-tools.md`
+- Hermes Agent: `references/hermes-tools.md`
+- Muse: `references/muse-tools.md`
+
+## User Instructions
+
+User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+
+codex
+周囲のアトリエが生成できました。保存時に元画像の中央部分を重ね、指定範囲の画素が完全に一致することと、画像サイズを確認します。
+
+exec
+/bin/bash -lc 'command -v magick || command -v convert' in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+src=Image.open('/home/runner/work/youtube/youtube/tmp_art/zoom002/canvas_02.png').convert('RGB')
+out=Image.open('/home/runner/.codex/generated_images/01a1e288-087b-73f0-8614-3d006ed9f503/exec-ab485b0e-74ad-429d-a802-60feca5e727e.png').convert('RGB')
+assert out.size == (1024,1536), out.size
+box=(341,512,682,1024)
+out.paste(src.crop(box),box)
+p='/home/runner/work/youtube/youtube/tmp_art/zoom002/raw_02.png'
+out.save(p)
+check=Image.open(p)
+assert check.crop(box).tobytes()==src.crop(box).tobytes()
+print('Saved PNG: 1024x1536; central rectangle matches source exactly.')
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 348ms:
+Saved PNG: 1024x1536; central rectangle matches source exactly.
+
+codex
+[raw_02.png](tmp_art/zoom002/raw_02.png) に保存しました（1024×1536）。
+
+内蔵画像生成で周囲を描き足し、中央の指定範囲は元画像と画素単位で一致しています。他のファイルは変更していません。
+tokens used
+40,938
+
+=====
+内蔵画像生成で編集し、1024×1536 PNGを [raw_01.png](/home/runner/work/youtube/youtube/tmp_art/zoom002/raw_01.png) に保存しました。他のファイルは変更していません。
+
+ただし、中央部分にも生成による変化があり、完全な原状保持はできていません。
+
+--- stderr ---
+ost common process skills, but the rule holds for any of them.
+
+- "Let's build X" → superpowers:brainstorming first, then implementation skills.
+- "Fix this bug" → superpowers:systematic-debugging first, then domain skills.
+
+## Red Flags
+
+These thoughts mean STOP—you're rationalizing:
+
+| Thought | Reality |
+|---------|---------|
+| "This is just a simple question" | Questions are tasks. Check for skills. |
+| "I need more context first" | Skill check comes BEFORE clarifying questions. |
+| "Let me explore the codebase first" | Skills tell you HOW to explore. Check first. |
+| "I can check git/files quickly" | Files lack conversation context. Check for skills. |
+| "Let me gather information first" | Skills tell you HOW to gather information. |
+| "This doesn't need a formal skill" | If a skill exists, use it. |
+| "I remember this skill" | Skills evolve. Read current version. |
+| "This doesn't count as a task" | Action = task. Check for skills. |
+| "The skill is overkill" | Simple things become complex. Use it. |
+| "I'll just do this one thing first" | Check BEFORE doing anything. |
+| "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
+| "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
+
+## Platform Adaptation
+
+If your harness appears here, read its reference file for special instructions:
+
+- Claude Code: `references/claude-code-tools.md`
+- Codex: `references/codex-tools.md`
+- Pi: `references/pi-tools.md`
+- Antigravity: `references/antigravity-tools.md`
+- Hermes Agent: `references/hermes-tools.md`
+- Muse: `references/muse-tools.md`
+
+## User Instructions
+
+User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+
+exec
+/bin/bash -lc 'ls -lt /home/runner/.codex/generated_images' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+total 8
+drwxr-xr-x 2 runner runner 4096 Nov 16 04:06 01a1e288-087b-73f0-8614-3d006ed9f503
+drwxr-xr-x 2 runner runner 4096 Nov 16 04:05 01a1e287-4a9c-73d2-a31c-69a2bee2b8d9
+
+codex
+中央のアトリエを金の額縁で囲み、石造りの塔の壁に掛かった絵としてつながる構図で生成しています。完成後にサイズを確認し、指定先へ保存します。
+exec
+/bin/bash -lc 'command -v magick || command -v convert' in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+exec
+/bin/bash -lc 'cp /home/runner/.codex/generated_images/01a1e289-24cc-7112-8b1b-2b38aa7834da/exec-a1994ffd-2c56-4151-a164-c26ebbaaf961.png /home/runner/work/youtube/youtube/tmp_art/zoom002/raw_01.png
+file /home/runner/work/youtube/youtube/tmp_art/zoom002/raw_01.png' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+/home/runner/work/youtube/youtube/tmp_art/zoom002/raw_01.png: PNG image data, 1024 x 1536, 8-bit/color RGB, non-interlaced
+
+codex
+内蔵画像生成で編集し、1024×1536 PNGを [raw_01.png](/home/runner/work/youtube/youtube/tmp_art/zoom002/raw_01.png) に保存しました。他のファイルは変更していません。
+
+ただし、中央部分にも生成による変化があり、完全な原状保持はできていません。
+tokens used
+28,689
+
+=====
+内蔵の画像生成機能で描き足し、[raw_00.png](tmp_art/zoom002/raw_00.png) に保存しました。
+
+1024×1536で、中央の長方形は元画像とピクセル単位で一致しています。ほかのファイルは変更していません。
+
+--- stderr ---
+es lack conversation context. Check for skills. |
+| "Let me gather information first" | Skills tell you HOW to gather information. |
+| "This doesn't need a formal skill" | If a skill exists, use it. |
+| "I remember this skill" | Skills evolve. Read current version. |
+| "This doesn't count as a task" | Action = task. Check for skills. |
+| "The skill is overkill" | Simple things become complex. Use it. |
+| "I'll just do this one thing first" | Check BEFORE doing anything. |
+| "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
+| "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
+
+## Platform Adaptation
+
+If your harness appears here, read its reference file for special instructions:
+
+- Claude Code: `references/claude-code-tools.md`
+- Codex: `references/codex-tools.md`
+- Pi: `references/pi-tools.md`
+- Antigravity: `references/antigravity-tools.md`
+- Hermes Agent: `references/hermes-tools.md`
+- Muse: `references/muse-tools.md`
+
+## User Instructions
+
+User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+
+exec
+/bin/bash -lc 'which magick || which convert' in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+exec
+/bin/bash -lc "cp /home/runner/.codex/generated_images/01a1e28a-b3de-78d3-91fe-7d63aa210e03/exec-64219fa9-285b-48ab-adf7-31df66bf499b.png /home/runner/work/youtube/youtube/tmp_art/zoom002/raw_00.png
+python - <<'PY'
+from PIL import Image, ImageChops
+p='/home/runner/work/youtube/youtube/tmp_art/zoom002/'
+a=Image.open(p+'canvas_00.png').convert('RGB'); b=Image.open(p+'raw_00.png').convert('RGB')
+print('size:', b.size)
+print('central rectangle identical:', ImageChops.difference(a.crop((341,512,682,1024)),b.crop((341,512,682,1024))).getbbox() is None)
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+size: (1024, 1536)
+central rectangle identical: False
+
+exec
+/bin/bash -lc 'command -v ffmpeg' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+/usr/bin/ffmpeg
+
+exec
+/bin/bash -lc "ffmpeg -v error -i /home/runner/.codex/generated_images/01a1e28a-b3de-78d3-91fe-7d63aa210e03/exec-64219fa9-285b-48ab-adf7-31df66bf499b.png -i tmp_art/zoom002/canvas_00.png -filter_complex '[0:v]format=rgb24[bg];[1:v]format=rgb24,crop=341:512:341:512[center];[bg][center]overlay=341:512:format=rgb' -frames:v 1 -y tmp_art/zoom002/raw_00.png
+python - <<'PY'
+from PIL import Image, ImageChops
+p='tmp_art/zoom002/'
+a=Image.open(p+'canvas_00.png').convert('RGB'); b=Image.open(p+'raw_00.png').convert('RGB')
+print(b.size, ImageChops.difference(a.crop((341,512,682,1024)),b.crop((341,512,682,1024))).getbbox())
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 403ms:
+(1024, 1536) None
+
+codex
+内蔵の画像生成機能で描き足し、[raw_00.png](tmp_art/zoom002/raw_00.png) に保存しました。
+
+1024×1536で、中央の長方形は元画像とピクセル単位で一致しています。ほかのファイルは変更していません。
+tokens used
+13,097
+
+=====
