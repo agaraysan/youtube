@@ -62,8 +62,13 @@ def label_layer(text):
     return np.asarray(im, dtype=np.float32)
 
 
+FIT = False  # True: 横長の絵を、ぼかした背景の上に全体が見えるように置く
+
+
 def view(img, k, ox=0.0):
     """画面いっぱい × k 倍に寄った絵（中心から ox だけ横にずらす）。"""
+    if FIT:
+        return view_fit(img, k)
     W, H = img.size
     s = max(OW / W, OH / H) * k
     cw, ch = OW / s, OH / s
@@ -72,10 +77,38 @@ def view(img, k, ox=0.0):
     return np.asarray(img.resize((OW, OH), Image.BICUBIC, box=box), dtype=np.float32)
 
 
+_bg = {}
+
+
+def view_fit(img, k):
+    """絵の全体を画面の幅に合わせて中央に置き、上下はその絵をぼかして埋める。"""
+    from PIL import ImageFilter, ImageEnhance
+    key = id(img)
+    if key not in _bg:
+        s = max(OW / img.width, OH / img.height)
+        bg = img.resize((round(img.width * s), round(img.height * s)), Image.BILINEAR)
+        x, y = (bg.width - OW) // 2, (bg.height - OH) // 2
+        bg = bg.crop((x, y, x + OW, y + OH)).filter(ImageFilter.GaussianBlur(40))
+        _bg[key] = np.asarray(ImageEnhance.Brightness(bg).enhance(0.55), dtype=np.float32)
+    frame = _bg[key].copy()
+    w = OW * 0.96 * k
+    h = w * img.height / img.width
+    left, top = (OW - w) / 2, OH * 0.47 - h / 2
+    ax0, ax1 = max(0, left), min(OW, left + w)
+    box = ((ax0 - left) * img.width / w, 0, (ax1 - left) * img.width / w, img.height)
+    dx0, dx1, dy0 = int(round(ax0)), int(round(ax1)), int(round(top))
+    part = np.asarray(img.resize((dx1 - dx0, int(round(h))), Image.BICUBIC, box=box), dtype=np.float32)
+    frame[dy0:dy0 + part.shape[0], dx0:dx1] = part
+    return frame
+
+
 def render(spec, out_mp4):
+    global FIT
+    FIT = bool(spec.get("fit"))
     d = ROOT / "assets" / "art" / spec["id"]
     imgs = [Image.open(p).convert("RGB") for p in sorted(d.glob("img_*.jpg"))]
     labels = [spec.get("base_label", "")] + [v.get("label", "") for v in spec["variants"]]
+    imgs = imgs[:len(labels)]
     labs = [label_layer(t) if t else None for t in labels]
     each, tr = spec.get("seconds_each", 3.2), 1.1
     n = len(imgs)

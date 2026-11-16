@@ -33,5 +33,6 @@
    "label": "月夜"
   }
  ],
- "seconds_each": 3.2
+ "seconds_each": 3.2,
+ "fit": true
 }

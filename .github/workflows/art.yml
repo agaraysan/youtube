@@ -25,14 +25,16 @@ jobs:
           fi
           ids=$(for f in $files; do
             id=$(basename "$f" .json)
-            h=$(cat "$f" scripts/art/*.py | sha1sum | cut -c1-12)
+            h=$(bash scripts/art/hash.sh "$f")
             got=$(git ls-remote origin "refs/heads/art-preview/$id" | cut -c1-40)
             if [ -n "$got" ]; then
               git fetch -q origin "art-preview/$id" && old=$(git show FETCH_HEAD:hash.txt 2>/dev/null || true)
               [ "$old" = "$h" ] && continue
+              echo "1 $id"
+            else
+              echo "0 $id"   # まだ動画がないものを先に作る
             fi
-            echo "$id"
-          done | jq -R . | jq -cs .)
+          done | sort | cut -d' ' -f2 | jq -R . | jq -cs .)
           echo "ids=$ids" >> $GITHUB_OUTPUT; echo "$ids"
   make:
     needs: list
@@ -73,7 +75,7 @@ jobs:
       - name: Publish preview
         run: |
           id=${{ matrix.id }}
-          h=$(cat art/$id.json scripts/art/*.py | sha1sum | cut -c1-12)
+          h=$(bash scripts/art/hash.sh art/$id.json)
           mkdir -p /tmp/pv && cd /tmp/pv && git init -q && git checkout -q -b p
           cp "$GITHUB_WORKSPACE/out/$id.mp4" . && echo "$h" > hash.txt
           git config user.name "art-bot"; git config user.email "art-bot@users.noreply.github.com"
