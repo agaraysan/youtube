@@ -67,6 +67,48 @@ def center_diff(img, small, x0, y0):
     return float(np.abs(a - b).mean())
 
 
+def align_outer(img, ref, box):
+    """img（Codex の絵）を、ref（元の絵）の帯 box より外側の部分にぴったり重なるよう動かす。
+    帯の外側がずれたまま貼ると、帯のふちで2枚の絵が二重に透けて、ぼやけた帯のような跡が出るため。"""
+    if cv2 is None:
+        return img, "no-cv2"
+    W, H = img.size
+    bx0, by0, bx1, by1 = box
+    m = np.full((H, W), 255, np.uint8)
+    m[by0 + 40:by1 - 40, bx0 + 40:bx1 - 40] = 0  # 帯の内側は描き直されているので使わない（ふち付近は使う）
+    g_img = cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2GRAY)
+    g_ref = cv2.cvtColor(np.asarray(ref), cv2.COLOR_RGB2GRAY)
+    sift = cv2.SIFT_create(5000)
+    k1, d1 = sift.detectAndCompute(g_img, m)
+    k2, d2 = sift.detectAndCompute(g_ref, m)
+    if d1 is None or d2 is None or len(k1) < 8 or len(k2) < 8:
+        return img, "few-features"
+    pairs = cv2.BFMatcher().knnMatch(d1, d2, k=2)
+    good = [a for a, b in (p for p in pairs if len(p) == 2) if a.distance < 0.75 * b.distance]
+    if len(good) < 12:
+        return img, f"few-matches {len(good)}"
+    src = np.float32([k1[g.queryIdx].pt for g in good])
+    dst = np.float32([k2[g.trainIdx].pt for g in good])
+    M, inl = cv2.estimateAffinePartial2D(src, dst, method=cv2.RANSAC, ransacReprojThreshold=3.0, maxIters=5000)
+    if M is None or inl is None or inl.sum() < 10:
+        return img, "no-transform"
+    s = float(np.hypot(M[0, 0], M[1, 0]))
+    if not (0.85 < s < 1.18):
+        return img, f"odd-scale {s:.2f}"
+    out = cv2.warpAffine(np.asarray(img), M, (W, H), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REFLECT)
+    return Image.fromarray(out), f"outer shift=({M[0, 2]:.1f},{M[1, 2]:.1f}) s={s:.3f} inliers={int(inl.sum())}"
+
+
+def ring_diff(a, b, box, w=40):
+    """帯のふち（貼り合わせる幅）での2枚の色の差。大きいとふちに二重の跡が出る。"""
+    bx0, by0, bx1, by1 = box
+    A, B = np.asarray(a, np.float32), np.asarray(b, np.float32)
+    m = np.zeros(A.shape[:2], bool)
+    m[by0:by1, bx0:bx1] = True
+    m[by0 + w:by1 - w, bx0 + w:bx1 - w] = False
+    return float(np.abs(A[m] - B[m]).mean())
+
+
 def leftover_gray(img, box, x0, y0, iw, ih):
     """描き足すはずだった灰色が残っている割合（中央の長方形は除く）。残っていると帯のような跡になる。"""
     a = np.asarray(img, np.int16)
@@ -189,22 +231,26 @@ def close_loop(spec, out, work, log, W, H, iw, ih, x0, y0):
         if not got:
             continue
         img = Image.open(got).convert("RGB").resize((W, H), Image.LANCZOS)
-        fixed, diff, info = align(img, first, x0, y0)
-        gray = leftover_gray(img, (bx, by, bx + bw, by + bh), x0, y0, iw, ih)
+        box = (bx, by, bx + bw, by + bh)
+        fixed, info = align_outer(img, inner, box)  # 帯のふちで外側とぴったり重なるように
+        cdiff = center_diff(fixed, first, x0, y0)
+        rdiff = ring_diff(fixed, inner, box)
+        diff = cdiff + rdiff
+        gray = leftover_gray(img, box, x0, y0, iw, ih)
         if gray > 0.01:
             diff += 100
             info += f" gray={gray:.3f}"
-        print(spec["id"], "loop try", attempt, "diff", round(diff, 1), info, flush=True)
+        print(spec["id"], "loop try", attempt, "center", round(cdiff, 1), "ring", round(rdiff, 1), info, flush=True)
         if best is None or diff < best[1]:
             best = (fixed, diff)
-        if diff < 16:
+        if cdiff < 16 and rdiff < 12:
             break
     if not best:
         print("loop closure failed"); return 1
     got = best[0]
     res = inner.copy()
     band = got.crop((bx, by, bx + bw, by + bh))
-    res.paste(band, (bx, by), feather_mask(bw, bh, max(10, bw // 16)))
+    res.paste(band, (bx, by), feather_mask(bw, bh, 40))  # ふち40画素で外側へ溶かす（align_outer で重ねてあるので二重にならない）
     res.paste(first, (x0, y0), feather_mask(iw, ih, max(6, iw // 24)))
     res.save(dst, quality=93)
     print(spec["id"], "loop closed", flush=True)
