@@ -1,0 +1,75 @@
+name: art
+# AI映像の試作。art/*.json を push すると、素材を作り（Codex・名画の取得・奥行き推定）、
+# 動画を art-preview/<id> 枝に1コミットだけ置く（履歴をためない）。投稿はしない。
+on:
+  push:
+    paths: ["art/*.json", "scripts/art/**", ".github/workflows/art.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    outputs:
+      ids: ${{ steps.l.outputs.ids }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: l
+        run: |
+          ids=$(for f in art/*.json; do
+            id=$(basename "$f" .json)
+            h=$(cat "$f" scripts/art/*.py | sha1sum | cut -c1-12)
+            got=$(git ls-remote origin "refs/heads/art-preview/$id" | cut -c1-40)
+            if [ -n "$got" ]; then
+              git fetch -q origin "art-preview/$id" && old=$(git show FETCH_HEAD:hash.txt 2>/dev/null || true)
+              [ "$old" = "$h" ] && continue
+            fi
+            echo "$id"
+          done | jq -R . | jq -cs .)
+          echo "ids=$ids" >> $GITHUB_OUTPUT; echo "$ids"
+  make:
+    needs: list
+    if: needs.list.outputs.ids != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        id: ${{ fromJson(needs.list.outputs.ids) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Install
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk
+          pip install -q pillow numpy opencv-python-headless
+          npm install -g @openai/codex
+          if [ "$(jq -r .type art/${{ matrix.id }}.json)" = parallax ]; then
+            pip install -q torch --index-url https://download.pytorch.org/whl/cpu && pip install -q transformers
+          fi
+      - name: Sign in to Codex (ChatGPT login)
+        env: { CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}" }
+        run: mkdir -p ~/.codex && printenv CODEX_AUTH_JSON > ~/.codex/auth.json && chmod 600 ~/.codex/auth.json
+      - name: Make
+        run: python3 scripts/art/run.py art/${{ matrix.id }}.json out
+      - name: Save materials
+        if: always()
+        run: |
+          git config user.name "art-bot"; git config user.email "art-bot@users.noreply.github.com"
+          git add assets/art/${{ matrix.id }} 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -qm "art: ${{ matrix.id }} の素材"
+            for i in 1 2 3 4 5; do git pull -q --rebase && git push -q && break; sleep $((i*7)); done
+          fi
+      - name: Publish preview
+        run: |
+          id=${{ matrix.id }}
+          h=$(cat art/$id.json scripts/art/*.py | sha1sum | cut -c1-12)
+          mkdir -p /tmp/pv && cd /tmp/pv && git init -q && git checkout -q -b p
+          cp "$GITHUB_WORKSPACE/out/$id.mp4" . && echo "$h" > hash.txt
+          git config user.name "art-bot"; git config user.email "art-bot@users.noreply.github.com"
+          git add -A && git commit -qm "preview $id"
+          git -c http.extraheader="$(git -C $GITHUB_WORKSPACE config --get http.https://github.com/.extraheader)" \
+            push -q -f "https://github.com/${{ github.repository }}.git" "p:refs/heads/art-preview/$id"

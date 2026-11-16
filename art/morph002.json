@@ -1,0 +1,37 @@
+{
+ "id": "morph002",
+ "type": "morph",
+ "title": "名画の四季：北斎の赤富士",
+ "caption": "北斎の赤富士の\n四季を描いてみた",
+ "caption_sub": "葛飾北斎『凱風快晴』より",
+ "mood": "calm",
+ "size": [
+  1536,
+  1024
+ ],
+ "crop": false,
+ "seed": {
+  "commons": "Red Fuji southern wind clear morning.jpg"
+ },
+ "style": "葛飾北斎の浮世絵（木版画）の画風と色使いを保つ。",
+ "base_label": "夏の朝（原画）",
+ "variants": [
+  {
+   "edit": "春にする。ふもとに満開の桜を加え、空はやわらかい霞。",
+   "label": "春"
+  },
+  {
+   "edit": "秋にする。ふもとの森を赤や黄色の紅葉にし、空に雁の列。",
+   "label": "秋"
+  },
+  {
+   "edit": "冬にする。山もふもとも雪で白く、空から雪が降る。",
+   "label": "冬"
+  },
+  {
+   "edit": "夜にする。満月と星空、山は月明かりで青く光る。",
+   "label": "月夜"
+  }
+ ],
+ "seconds_each": 3.2
+}

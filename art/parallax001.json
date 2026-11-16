@@ -1,0 +1,35 @@
+{
+ "id": "parallax001",
+ "type": "parallax",
+ "title": "名画の中に入ってみた",
+ "caption": "名画の中に\n入ってみた",
+ "mood": "epic",
+ "items": [
+  {
+   "commons": "Van Gogh - Starry Night - Google Art Project.jpg",
+   "title": "星月夜",
+   "sub": "フィンセント・ファン・ゴッホ（1889）"
+  },
+  {
+   "commons": "Tsunami by hokusai 19th century.jpg",
+   "title": "神奈川沖浪裏",
+   "sub": "葛飾北斎（1831ごろ）"
+  },
+  {
+   "commons": "Caspar David Friedrich - Wanderer above the sea of fog.jpg",
+   "title": "雲海の上の旅人",
+   "sub": "カスパー・ダーヴィト・フリードリヒ（1818）"
+  },
+  {
+   "commons": "Claude Monet, Impression, soleil levant.jpg",
+   "title": "印象・日の出",
+   "sub": "クロード・モネ（1872）"
+  },
+  {
+   "commons": "Sandro Botticelli - La nascita di Venere - Google Art Project - edited.jpg",
+   "title": "ヴィーナスの誕生",
+   "sub": "サンドロ・ボッティチェッリ（1485ごろ）"
+  }
+ ],
+ "seconds_each": 5.5
+}

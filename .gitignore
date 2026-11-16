@@ -2,3 +2,4 @@
 *.wav
 /work/
 __pycache__/
+tmp_art/
