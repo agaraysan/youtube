@@ -1,8 +1,10 @@
 {
-  "id": "ex004p_00_room",
-  "status": "ok",
-  "via": "codex-cloud",
-  "files": [
-    "assets/generated/ex004p_00_room/room.png"
-  ]
+ "id": "ex004p_00_room",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "room.png"
+ ],
+ "at_utc": "2026-11-16T14:49:56.557609Z"
 }
