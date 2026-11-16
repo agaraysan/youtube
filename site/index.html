@@ -13,11 +13,13 @@
   p, li { color:var(--fg); }
   .sub { color:var(--muted); margin:0 0 24px; }
   a { color:var(--accent); }
+  nav { display:flex; justify-content:flex-end; gap:16px; font-size:15px; margin-bottom:24px; }
   footer { margin-top:40px; color:var(--muted); font-size:14px; border-top:1px solid var(--line); padding-top:16px; }
 </style>
 </head>
 <body>
 <main>
+  <nav><a href="index.html">Home</a><a href="privacy.html">Privacy Policy</a></nav>
   <h1>quiz-uploader</h1>
   <p class="sub">A private upload tool for one creator's own quiz channel</p>
 
@@ -28,6 +30,7 @@
     <li>Uploads finished videos to the owner's own channel (YouTube Data API: videos.insert).</li>
     <li>Sets the title, description, tags, thumbnail and scheduled publish time (videos.insert, thumbnails.set).</li>
     <li>Changes the privacy status of the owner's own videos (videos.list, videos.update).</li>
+    <li>Records which channel the owner's token belongs to (channels.list, mine=true).</li>
   </ul>
 
   <h2>Who can use it</h2>
