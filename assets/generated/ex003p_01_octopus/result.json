@@ -1,8 +1,10 @@
 {
-  "id": "ex003p_01_octopus",
-  "status": "ok",
-  "via": "codex-cloud",
-  "files": [
-    "assets/generated/ex003p_01_octopus/octopus.png"
-  ]
+ "id": "ex003p_01_octopus",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "octopus.png"
+ ],
+ "at_utc": "2026-11-16T14:45:45.955669Z"
 }
