@@ -1,0 +1,9 @@
+{
+ "id": "spot001_market_b",
+ "kind": "image",
+ "base_image": "assets/generated/t009_scene_spot_market/market.png",
+ "prompt": "assets/generated/t009_scene_spot_market/market.png をそのまま元にして、間違い探し用の「違いが3か所だけある」画像を作ってください。違い以外は元の絵と完全に同じにします（構図・色・人物・位置を変えない）。違いの例：①ある物が消えている ②ある物の形や数が変わっている ③別の物に置き換わっている。色だけを変える違いは使わない。スマホで見て気づける大きさにする。",
+ "size": "1920x1080",
+ "count": 1,
+ "notes": "出力は image.png。あわせて differences.json に、3か所それぞれの説明（日本語）と、およその位置（x, y, 幅, 高さ。1920x1080の座標）を書いてください。"
+}
