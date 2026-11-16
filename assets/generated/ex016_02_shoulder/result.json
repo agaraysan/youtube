@@ -1,8 +1,10 @@
 {
-  "id": "ex016_02_shoulder",
-  "status": "ok",
-  "via": "codex-cloud",
-  "files": [
-    "assets/generated/ex016_02_shoulder/image.png"
-  ]
+ "id": "ex016_02_shoulder",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "image.png"
+ ],
+ "at_utc": "2026-11-16T15:36:00.784097Z"
 }
