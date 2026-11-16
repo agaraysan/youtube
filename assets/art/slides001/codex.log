@@ -1,0 +1,420 @@
+内蔵の画像生成機能で作成し、[指定のPNGファイル](/home/runner/work/youtube/youtube/tmp_art/slides001/img_00.png)に保存しました（1024×1536）。
+
+ねじり鉢巻きの柴犬が湯切りをする、湯気とカウンターのあるあたたかい3DCG調です。文字・ロゴ・透かしはありません。ほかのファイルは変更していません。
+
+--- stderr ---
+ and output conventions
+These conventions apply only to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc 'mkdir -p /home/runner/work/youtube/youtube/tmp_art/slides001 && cp /home/runner/.codex/generated_images/01a1e281-6bd5-7062-805e-fd71e53dcd49/exec-0167ebab-ed17-4b62-a92b-5066a86a7c65.png /home/runner/work/youtube/youtube/tmp_art/slides001/img_00.png && file /home/runner/work/youtube/youtube/tmp_art/slides001/img_00.png' in /home/runner/work/youtube/youtube
+ succeeded in 95ms:
+/home/runner/work/youtube/youtube/tmp_art/slides001/img_00.png: PNG image data, 1024 x 1536, 8-bit/color RGB, non-interlaced
+
+codex
+内蔵の画像生成機能で作成し、[指定のPNGファイル](/home/runner/work/youtube/youtube/tmp_art/slides001/img_00.png)に保存しました（1024×1536）。
+
+ねじり鉢巻きの柴犬が湯切りをする、湯気とカウンターのあるあたたかい3DCG調です。文字・ロゴ・透かしはありません。ほかのファイルは変更していません。
+tokens used
+18,677
+
+=====
+内蔵の画像生成機能で作成し、`tmp_art/slides001/img_01.png` に保存しました（PNG・1024×1536）。
+
+内容：制帽をかぶり、運転席で真剣に前を見るペンギン。あたたかい3DCG風。文字・ロゴ・透かしなし。ほかのファイルは変更していません。
+
+--- stderr ---
+"Using [skill] to [purpose]" and follow the skill exactly. If it has a checklist, create a todo per item.
+
+## Skill Priority
+
+When multiple skills apply, process skills come first — they set the approach, then implementation skills (frontend-design, etc.) carry it out. Brainstorming and systematic-debugging are Superpowers' most common process skills, but the rule holds for any of them.
+
+- "Let's build X" → superpowers:brainstorming first, then implementation skills.
+- "Fix this bug" → superpowers:systematic-debugging first, then domain skills.
+
+## Red Flags
+
+These thoughts mean STOP—you're rationalizing:
+
+| Thought | Reality |
+|---------|---------|
+| "This is just a simple question" | Questions are tasks. Check for skills. |
+| "I need more context first" | Skill check comes BEFORE clarifying questions. |
+| "Let me explore the codebase first" | Skills tell you HOW to explore. Check first. |
+| "I can check git/files quickly" | Files lack conversation context. Check for skills. |
+| "Let me gather information first" | Skills tell you HOW to gather information. |
+| "This doesn't need a formal skill" | If a skill exists, use it. |
+| "I remember this skill" | Skills evolve. Read current version. |
+| "This doesn't count as a task" | Action = task. Check for skills. |
+| "The skill is overkill" | Simple things become complex. Use it. |
+| "I'll just do this one thing first" | Check BEFORE doing anything. |
+| "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
+| "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
+
+## Platform Adaptation
+
+If your harness appears here, read its reference file for special instructions:
+
+- Claude Code: `references/claude-code-tools.md`
+- Codex: `references/codex-tools.md`
+- Pi: `references/pi-tools.md`
+- Antigravity: `references/antigravity-tools.md`
+- Hermes Agent: `references/hermes-tools.md`
+- Muse: `references/muse-tools.md`
+
+## User Instructions
+
+User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+
+exec
+/bin/bash -lc 'ls -ld tmp_art/slides001; test ! -f tmp_art/slides001/img_01.png' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+drwxr-xr-x 2 runner runner 4096 Nov 16 03:58 tmp_art/slides001
+
+exec
+/bin/bash -lc "cp /home/runner/.codex/generated_images/01a1e282-14f8-7ca2-9a17-f23486756589/exec-98db1baf-8f3a-42bb-8475-dcfa46ea043c.png /home/runner/work/youtube/youtube/tmp_art/slides001/img_01.png
+python - <<'PY'
+from PIL import Image
+p='/home/runner/work/youtube/youtube/tmp_art/slides001/img_01.png'
+im=Image.open(p)
+print(im.format, im.size)
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+PNG (1024, 1536)
+
+codex
+内蔵の画像生成機能で作成し、`tmp_art/slides001/img_01.png` に保存しました（PNG・1024×1536）。
+
+内容：制帽をかぶり、運転席で真剣に前を見るペンギン。あたたかい3DCG風。文字・ロゴ・透かしなし。ほかのファイルは変更していません。
+tokens used
+32,494
+
+=====
+内蔵の画像生成機能で作成し、[指定先に保存しました](/home/runner/work/youtube/youtube/tmp_art/slides001/img_02.png)（PNG、1024×1536）。
+
+生成内容：美容室の鏡の前で、はさみと櫛を持って客の髪を切るカワウソ。あたたかく表情豊かな3DCG調。文字・ロゴ・透かしなし。ほかのファイルは変更していません。
+
+--- stderr ---
+e_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc pwd in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+/home/runner/work/youtube/youtube
+
+exec
+/bin/bash -lc 'mkdir -p /home/runner/work/youtube/youtube/tmp_art/slides001
+cp /home/runner/.codex/generated_images/01a1e282-cb71-77a0-bb7f-4041a8888442/exec-17c15d7b-e034-484e-918c-a2230d93c886.png /home/runner/work/youtube/youtube/tmp_art/slides001/img_02.png
+file /home/runner/work/youtube/youtube/tmp_art/slides001/img_02.png' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+/home/runner/work/youtube/youtube/tmp_art/slides001/img_02.png: PNG image data, 1024 x 1536, 8-bit/color RGB, non-interlaced
+
+codex
+内蔵の画像生成機能で作成し、[指定先に保存しました](/home/runner/work/youtube/youtube/tmp_art/slides001/img_02.png)（PNG、1024×1536）。
+
+生成内容：美容室の鏡の前で、はさみと櫛を持って客の髪を切るカワウソ。あたたかく表情豊かな3DCG調。文字・ロゴ・透かしなし。ほかのファイルは変更していません。
+tokens used
+12,156
+
+=====
+内蔵の画像生成機能で作成し、[img_03.png](/home/runner/work/youtube/youtube/tmp_art/slides001/img_03.png) に保存しました（1024×1536）。ほかのファイルは変更していません。
+
+--- stderr ---
+tner approves the design doc:
+the short one for a small change, the full one for a project.
+Building includes writing product code, scaffolding, installing
+dependencies, creating projects, and invoking an implementation skill.
+Reading and exploring are fine.
+
+Two exceptions. If they opted out of the questions, the skill is done
+and the gate goes with it. A spike they said yes to may be built; it
+stays labeled throwaway, and keeping what it produced is a new request
+that comes back through this gate.
+
+After the design doc is approved, the next step is the plan: invoke
+superpowers:writing-plans and no other skill.
+</HARD-GATE>
+
+## Red Flags
+
+| Thought | Reality |
+|---------|---------|
+| "I'll offer a menu of what they might want" | Options steer. Ask them to describe it first. |
+| "I'll fill in sensible defaults" | Good. Say them out loud. A default they never heard is one they couldn't reject. |
+| "I've answered their questions, so I'll write the doc" | Lay out the approaches first, in a message of their own. |
+| "I should explain the process first" | Ask your question. The process shows itself. |
+| "They said 'sounds good' to the idea" | Approval covers what you showed them. A design doc you haven't written isn't approved. |
+| "The spike works, I'll keep building on it" | Keeping it is a new request. Back through the gate. |
+
+## Visual Companion
+
+A browser tab for showing mockups, diagrams, and prototypes. It's a
+tool, not a mode: accepting it doesn't send every question to the
+browser.
+
+**Offer it just-in-time.** Offer it the first time one of the moments
+above comes up, never upfront. The offer is its own message with nothing
+else in it:
+
+> "This might be easier if I show you. Want me to open a browser tab with some mockups?"
+
+If they decline, stay in text and don't offer again unless they raise it.
+
+**Per question, ask: would they understand this better by seeing it?**
+Mockups, layouts, diagrams, and side-by-side designs go in the browser.
+Requirements, scope, tradeoffs, and conceptual choices stay in text. A
+question about a UI topic isn't automatically a visual question.
+
+If they accept, read `visual-companion.md` in this directory before
+starting the server.
+
+exec
+/bin/bash -lc 'ls -ld tmp_art/slides001; printenv CODEX_HOME' in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+drwxr-xr-x 2 runner runner 4096 Nov 16 04:00 tmp_art/slides001
+
+exec
+/bin/bash -lc 'cp /home/runner/.codex/generated_images/01a1e283-7f2d-7a52-8a08-f364abaf4821/exec-5789b0b5-6e2c-4060-89c8-746c5993221e.png /home/runner/work/youtube/youtube/tmp_art/slides001/img_03.png
+file /home/runner/work/youtube/youtube/tmp_art/slides001/img_03.png' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+/home/runner/work/youtube/youtube/tmp_art/slides001/img_03.png: PNG image data, 1024 x 1536, 8-bit/color RGB, non-interlaced
+
+codex
+内蔵の画像生成機能で作成し、[img_03.png](/home/runner/work/youtube/youtube/tmp_art/slides001/img_03.png) に保存しました（1024×1536）。ほかのファイルは変更していません。
+tokens used
+20,050
+
+=====
+内蔵の画像生成機能で作成し、1024×1536のPNGを[指定先](/home/runner/work/youtube/youtube/tmp_art/slides001/img_04.png)に保存しました。ほかのファイルは変更していません。
+
+--- stderr ---
+your human partner approves the design doc:
+the short one for a small change, the full one for a project.
+Building includes writing product code, scaffolding, installing
+dependencies, creating projects, and invoking an implementation skill.
+Reading and exploring are fine.
+
+Two exceptions. If they opted out of the questions, the skill is done
+and the gate goes with it. A spike they said yes to may be built; it
+stays labeled throwaway, and keeping what it produced is a new request
+that comes back through this gate.
+
+After the design doc is approved, the next step is the plan: invoke
+superpowers:writing-plans and no other skill.
+</HARD-GATE>
+
+## Red Flags
+
+| Thought | Reality |
+|---------|---------|
+| "I'll offer a menu of what they might want" | Options steer. Ask them to describe it first. |
+| "I'll fill in sensible defaults" | Good. Say them out loud. A default they never heard is one they couldn't reject. |
+| "I've answered their questions, so I'll write the doc" | Lay out the approaches first, in a message of their own. |
+| "I should explain the process first" | Ask your question. The process shows itself. |
+| "They said 'sounds good' to the idea" | Approval covers what you showed them. A design doc you haven't written isn't approved. |
+| "The spike works, I'll keep building on it" | Keeping it is a new request. Back through the gate. |
+
+## Visual Companion
+
+A browser tab for showing mockups, diagrams, and prototypes. It's a
+tool, not a mode: accepting it doesn't send every question to the
+browser.
+
+**Offer it just-in-time.** Offer it the first time one of the moments
+above comes up, never upfront. The offer is its own message with nothing
+else in it:
+
+> "This might be easier if I show you. Want me to open a browser tab with some mockups?"
+
+If they decline, stay in text and don't offer again unless they raise it.
+
+**Per question, ask: would they understand this better by seeing it?**
+Mockups, layouts, diagrams, and side-by-side designs go in the browser.
+Requirements, scope, tradeoffs, and conceptual choices stay in text. A
+question about a UI topic isn't automatically a visual question.
+
+If they accept, read `visual-companion.md` in this directory before
+starting the server.
+
+exec
+/bin/bash -lc 'git status --short; ls -ld tmp_art/slides001' in /home/runner/work/youtube/youtube
+ succeeded in 29ms:
+?? assets/art/
+drwxr-xr-x 2 runner runner 4096 Nov 16 04:01 tmp_art/slides001
+
+exec
+/bin/bash -lc "cp /home/runner/.codex/generated_images/01a1e284-3e70-7943-bcd4-9afe9ea18964/exec-cc9a0be4-c6c3-4e92-86dc-af0d82801669.png /home/runner/work/youtube/youtube/tmp_art/slides001/img_04.png
+python - <<'PY'
+from PIL import Image
+p='/home/runner/work/youtube/youtube/tmp_art/slides001/img_04.png'
+im=Image.open(p)
+print(im.size, im.format)
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+(1024, 1536) PNG
+
+codex
+内蔵の画像生成機能で作成し、1024×1536のPNGを[指定先](/home/runner/work/youtube/youtube/tmp_art/slides001/img_04.png)に保存しました。ほかのファイルは変更していません。
+tokens used
+37,941
+
+=====
+内蔵の画像生成機能で作成し、[img_05.png](tmp_art/slides001/img_05.png) に保存しました（1024×1536 PNG）。
+
+指定内容：ヘルメットと安全ベストを着けて重機を操縦するクマ、温かい3DCG風。文字・ロゴ・透かしなし。ほかのファイルは変更していません。
+
+--- stderr ---
+ brainstorming skill first.
+
+Then announce "Using [skill] to [purpose]" and follow the skill exactly. If it has a checklist, create a todo per item.
+
+## Skill Priority
+
+When multiple skills apply, process skills come first — they set the approach, then implementation skills (frontend-design, etc.) carry it out. Brainstorming and systematic-debugging are Superpowers' most common process skills, but the rule holds for any of them.
+
+- "Let's build X" → superpowers:brainstorming first, then implementation skills.
+- "Fix this bug" → superpowers:systematic-debugging first, then domain skills.
+
+## Red Flags
+
+These thoughts mean STOP—you're rationalizing:
+
+| Thought | Reality |
+|---------|---------|
+| "This is just a simple question" | Questions are tasks. Check for skills. |
+| "I need more context first" | Skill check comes BEFORE clarifying questions. |
+| "Let me explore the codebase first" | Skills tell you HOW to explore. Check first. |
+| "I can check git/files quickly" | Files lack conversation context. Check for skills. |
+| "Let me gather information first" | Skills tell you HOW to gather information. |
+| "This doesn't need a formal skill" | If a skill exists, use it. |
+| "I remember this skill" | Skills evolve. Read current version. |
+| "This doesn't count as a task" | Action = task. Check for skills. |
+| "The skill is overkill" | Simple things become complex. Use it. |
+| "I'll just do this one thing first" | Check BEFORE doing anything. |
+| "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
+| "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
+
+## Platform Adaptation
+
+If your harness appears here, read its reference file for special instructions:
+
+- Claude Code: `references/claude-code-tools.md`
+- Codex: `references/codex-tools.md`
+- Pi: `references/pi-tools.md`
+- Antigravity: `references/antigravity-tools.md`
+- Hermes Agent: `references/hermes-tools.md`
+- Muse: `references/muse-tools.md`
+
+## User Instructions
+
+User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+
+codex
+imagegen スキルを使い、指定の縦長画像を内蔵機能で生成して、指定されたPNGファイルだけを保存します。
+
+exec
+/bin/bash -lc 'mkdir -p /home/runner/work/youtube/youtube/tmp_art/slides001
+cp /home/runner/.codex/generated_images/01a1e284-f6d2-7a41-9b28-3396aa913e3b/exec-e5e60b70-4500-45f5-9fa2-f64a1c508a81.png /home/runner/work/youtube/youtube/tmp_art/slides001/img_05.png
+file /home/runner/work/youtube/youtube/tmp_art/slides001/img_05.png' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+/home/runner/work/youtube/youtube/tmp_art/slides001/img_05.png: PNG image data, 1024 x 1536, 8-bit/color RGB, non-interlaced
+
+codex
+内蔵の画像生成機能で作成し、[img_05.png](tmp_art/slides001/img_05.png) に保存しました（1024×1536 PNG）。
+
+指定内容：ヘルメットと安全ベストを着けて重機を操縦するクマ、温かい3DCG風。文字・ロゴ・透かしなし。ほかのファイルは変更していません。
+tokens used
+14,332
+
+=====
