@@ -1,0 +1,585 @@
+{
+ "id": "brain_pref_meibutsu_002",
+ "series": "頭の体操",
+ "style": "pref",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "ご当地名物クイズ",
+   "size": 120,
+   "sub": "この名物、どこの都道府県？　その2",
+   "voice": "頭の体操、ご当地名物クイズ、その2です。どこの都道府県の名物か、3つの中から選んでください。全部で12問です。"
+  },
+  {
+   "type": "choice",
+   "big": "牛たん焼き",
+   "size": 170,
+   "options": [
+    "宮城県",
+    "山形県",
+    "岩手県"
+   ],
+   "correct": 0,
+   "q": "どこの名物？",
+   "text": "第1問",
+   "voice": "第1問。ぎゅうたんやきは、どこの名物でしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "牛たん焼き",
+   "size": 170,
+   "options": [
+    "宮城県",
+    "山形県",
+    "岩手県"
+   ],
+   "correct": 0,
+   "q": "どこの名物？",
+   "text": "第1問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "big": "牛たん焼き",
+   "size": 170,
+   "options": [
+    "宮城県",
+    "山形県",
+    "岩手県"
+   ],
+   "correct": 0,
+   "q": "どこの名物？",
+   "text": "第1問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、みやぎけんです。",
+   "pad": 1.4,
+   "caption": "牛たん焼き（ぎゅうたんやき）は 宮城県 の名物"
+  },
+  {
+   "type": "choice",
+   "big": "いぶりがっこ",
+   "size": 170,
+   "options": [
+    "秋田県",
+    "青森県",
+    "新潟県"
+   ],
+   "correct": 0,
+   "q": "どこの名物？",
+   "text": "第2問",
+   "voice": "第2問。いぶりがっこは、どこの名物でしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "いぶりがっこ",
+   "size": 170,
+   "options": [
+    "秋田県",
+    "青森県",
+    "新潟県"
+   ],
+   "correct": 0,
+   "q": "どこの名物？",
+   "text": "第2問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "big": "いぶりがっこ",
+   "size": 170,
+   "options": [
+    "秋田県",
+    "青森県",
+    "新潟県"
+   ],
+   "correct": 0,
+   "q": "どこの名物？",
+   "text": "第2問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、あきたけんです。",
+   "pad": 1.4,
+   "caption": "いぶりがっこ（いぶりがっこ）は 秋田県 の名物"
+  },
+  {
+   "type": "choice",
+   "big": "信州そば",
+   "size": 170,
+   "options": [
+    "岐阜県",
+    "山梨県",
+    "長野県"
+   ],
+   "correct": 2,
+   "q": "どこの名物？",
+   "text": "第3問",
+   "voice": "第3問。しんしゅうそばは、どこの名物でしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "信州そば",
+   "size": 170,
+   "options": [
+    "岐阜県",
+    "山梨県",
+    "長野県"
+   ],
+   "correct": 2,
+   "q": "どこの名物？",
+   "text": "第3問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "big": "信州そば",
+   "size": 170,
+   "options": [
+    "岐阜県",
+    "山梨県",
+    "長野県"
+   ],
+   "correct": 2,
+   "q": "どこの名物？",
+   "text": "第3問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、ながのけんです。",
+   "pad": 1.4,
+   "caption": "信州そば（しんしゅうそば）は 長野県 の名物"
+  },
+  {
+   "type": "choice",
+   "big": "落花生",
+   "size": 170,
+   "options": [
+    "千葉県",
+    "茨城県",
+    "埼玉県"
+   ],
+   "correct": 0,
+   "q": "どこの名物？",
+   "text": "第4問",
+   "voice": "第4問。らっかせいは、どこの名物でしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "落花生",
+   "size": 170,
+   "options": [
+    "千葉県",
+    "茨城県",
+    "埼玉県"
+   ],
+   "correct": 0,
+   "q": "どこの名物？",
+   "text": "第4問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "big": "落花生",
+   "size": 170,
+   "options": [
+    "千葉県",
+    "茨城県",
+    "埼玉県"
+   ],
+   "correct": 0,
+   "q": "どこの名物？",
+   "text": "第4問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、ちばけんです。",
+   "pad": 1.4,
+   "caption": "落花生（らっかせい）は 千葉県 の名物"
+  },
+  {
+   "type": "choice",
+   "big": "白えび",
+   "size": 170,
+   "options": [
+    "福井県",
+    "石川県",
+    "富山県"
+   ],
+   "correct": 2,
+   "q": "どこの名物？",
+   "text": "第5問",
+   "voice": "第5問。しろえびは、どこの名物でしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "白えび",
+   "size": 170,
+   "options": [
+    "福井県",
+    "石川県",
+    "富山県"
+   ],
+   "correct": 2,
+   "q": "どこの名物？",
+   "text": "第5問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "big": "白えび",
+   "size": 170,
+   "options": [
+    "福井県",
+    "石川県",
+    "富山県"
+   ],
+   "correct": 2,
+   "q": "どこの名物？",
+   "text": "第5問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、とやまけんです。",
+   "pad": 1.4,
+   "caption": "白えび（しろえび）は 富山県 の名物"
+  },
+  {
+   "type": "choice",
+   "big": "ひつまぶし",
+   "size": 170,
+   "options": [
+    "三重県",
+    "岐阜県",
+    "愛知県"
+   ],
+   "correct": 2,
+   "q": "どこの名物？",
+   "text": "第6問",
+   "voice": "第6問。ひつまぶしは、どこの名物でしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "ひつまぶし",
+   "size": 170,
+   "options": [
+    "三重県",
+    "岐阜県",
+    "愛知県"
+   ],
+   "correct": 2,
+   "q": "どこの名物？",
+   "text": "第6問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "big": "ひつまぶし",
+   "size": 170,
+   "options": [
+    "三重県",
+    "岐阜県",
+    "愛知県"
+   ],
+   "correct": 2,
+   "q": "どこの名物？",
+   "text": "第6問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、あいちけんです。",
+   "pad": 1.4,
+   "caption": "ひつまぶし（ひつまぶし）は 愛知県 の名物"
+  },
+  {
+   "type": "choice",
+   "big": "たこ焼き",
+   "size": 170,
+   "options": [
+    "兵庫県",
+    "大阪府",
+    "京都府"
+   ],
+   "correct": 1,
+   "q": "どこの名物？",
+   "text": "第7問",
+   "voice": "第7問。たこやきは、どこの名物でしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "たこ焼き",
+   "size": 170,
+   "options": [
+    "兵庫県",
+    "大阪府",
+    "京都府"
+   ],
+   "correct": 1,
+   "q": "どこの名物？",
+   "text": "第7問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "big": "たこ焼き",
+   "size": 170,
+   "options": [
+    "兵庫県",
+    "大阪府",
+    "京都府"
+   ],
+   "correct": 1,
+   "q": "どこの名物？",
+   "text": "第7問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、おおさかふです。",
+   "pad": 1.4,
+   "caption": "たこ焼き（たこやき）は 大阪府 の名物"
+  },
+  {
+   "type": "choice",
+   "big": "明石焼き",
+   "size": 170,
+   "options": [
+    "大阪府",
+    "兵庫県",
+    "岡山県"
+   ],
+   "correct": 1,
+   "q": "どこの名物？",
+   "text": "第8問",
+   "voice": "第8問。あかしやきは、どこの名物でしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "明石焼き",
+   "size": 170,
+   "options": [
+    "大阪府",
+    "兵庫県",
+    "岡山県"
+   ],
+   "correct": 1,
+   "q": "どこの名物？",
+   "text": "第8問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "big": "明石焼き",
+   "size": 170,
+   "options": [
+    "大阪府",
+    "兵庫県",
+    "岡山県"
+   ],
+   "correct": 1,
+   "q": "どこの名物？",
+   "text": "第8問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、ひょうごけんです。",
+   "pad": 1.4,
+   "caption": "明石焼き（あかしやき）は 兵庫県 の名物"
+  },
+  {
+   "type": "choice",
+   "big": "柿の葉寿司",
+   "size": 170,
+   "options": [
+    "三重県",
+    "奈良県",
+    "和歌山県"
+   ],
+   "correct": 1,
+   "q": "どこの名物？",
+   "text": "第9問",
+   "voice": "第9問。かきのはずしは、どこの名物でしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "柿の葉寿司",
+   "size": 170,
+   "options": [
+    "三重県",
+    "奈良県",
+    "和歌山県"
+   ],
+   "correct": 1,
+   "q": "どこの名物？",
+   "text": "第9問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "big": "柿の葉寿司",
+   "size": 170,
+   "options": [
+    "三重県",
+    "奈良県",
+    "和歌山県"
+   ],
+   "correct": 1,
+   "q": "どこの名物？",
+   "text": "第9問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、ならけんです。",
+   "pad": 1.4,
+   "caption": "柿の葉寿司（かきのはずし）は 奈良県 の名物"
+  },
+  {
+   "type": "choice",
+   "big": "皿うどん",
+   "size": 170,
+   "options": [
+    "長崎県",
+    "熊本県",
+    "佐賀県"
+   ],
+   "correct": 0,
+   "q": "どこの名物？",
+   "text": "第10問",
+   "voice": "第10問。さらうどんは、どこの名物でしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "皿うどん",
+   "size": 170,
+   "options": [
+    "長崎県",
+    "熊本県",
+    "佐賀県"
+   ],
+   "correct": 0,
+   "q": "どこの名物？",
+   "text": "第10問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "big": "皿うどん",
+   "size": 170,
+   "options": [
+    "長崎県",
+    "熊本県",
+    "佐賀県"
+   ],
+   "correct": 0,
+   "q": "どこの名物？",
+   "text": "第10問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、ながさきけんです。",
+   "pad": 1.4,
+   "caption": "皿うどん（さらうどん）は 長崎県 の名物"
+  },
+  {
+   "type": "choice",
+   "big": "冷や汁",
+   "size": 170,
+   "options": [
+    "大分県",
+    "鹿児島県",
+    "宮崎県"
+   ],
+   "correct": 2,
+   "q": "どこの名物？",
+   "text": "第11問",
+   "voice": "第11問。ひやじるは、どこの名物でしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "冷や汁",
+   "size": 170,
+   "options": [
+    "大分県",
+    "鹿児島県",
+    "宮崎県"
+   ],
+   "correct": 2,
+   "q": "どこの名物？",
+   "text": "第11問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "big": "冷や汁",
+   "size": 170,
+   "options": [
+    "大分県",
+    "鹿児島県",
+    "宮崎県"
+   ],
+   "correct": 2,
+   "q": "どこの名物？",
+   "text": "第11問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、みやざきけんです。",
+   "pad": 1.4,
+   "caption": "冷や汁（ひやじる）は 宮崎県 の名物"
+  },
+  {
+   "type": "choice",
+   "big": "鶏飯",
+   "size": 170,
+   "options": [
+    "宮崎県",
+    "沖縄県",
+    "鹿児島県"
+   ],
+   "correct": 2,
+   "q": "どこの名物？",
+   "text": "第12問",
+   "voice": "第12問。けいはんは、どこの名物でしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鶏飯",
+   "size": 170,
+   "options": [
+    "宮崎県",
+    "沖縄県",
+    "鹿児島県"
+   ],
+   "correct": 2,
+   "q": "どこの名物？",
+   "text": "第12問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "big": "鶏飯",
+   "size": 170,
+   "options": [
+    "宮崎県",
+    "沖縄県",
+    "鹿児島県"
+   ],
+   "correct": 2,
+   "q": "どこの名物？",
+   "text": "第12問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、かごしまけんです。",
+   "pad": 1.4,
+   "caption": "鶏飯（けいはん）は 鹿児島県 の名物"
+  },
+  {
+   "type": "title",
+   "text": "何問わかりましたか？",
+   "size": 100,
+   "sub": "コメントで教えてください",
+   "voice": "何問わかりましたか？あなたの地元の名物も、ぜひコメントで教えてください。"
+  }
+ ]
+}

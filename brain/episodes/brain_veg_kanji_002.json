@@ -1,0 +1,621 @@
+{
+ "id": "brain_veg_kanji_002",
+ "series": "頭の体操",
+ "style": "veg",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "野菜とくだものの漢字",
+   "size": 110,
+   "sub": "読めたらすごい！　その2",
+   "voice": "頭の体操、野菜とくだものの漢字クイズ、その2です。読み方を、3つの中から選んでください。全部で12問です。"
+  },
+  {
+   "type": "choice",
+   "big": "林檎",
+   "size": 230,
+   "ruby": "りんご",
+   "options": [
+    "みかん",
+    "りんご",
+    "かき"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第1問",
+   "voice": "第1問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "林檎",
+   "size": 230,
+   "ruby": "りんご",
+   "options": [
+    "みかん",
+    "りんご",
+    "かき"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第1問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "林檎",
+   "size": 230,
+   "ruby": "りんご",
+   "options": [
+    "みかん",
+    "りんご",
+    "かき"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第1問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、りんご。",
+   "pad": 1.4,
+   "caption": "林檎（りんご）　青森県がいちばんの産地"
+  },
+  {
+   "type": "choice",
+   "big": "蜜柑",
+   "size": 230,
+   "ruby": "みかん",
+   "options": [
+    "すだち",
+    "みかん",
+    "ゆず"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第2問",
+   "voice": "第2問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "蜜柑",
+   "size": 230,
+   "ruby": "みかん",
+   "options": [
+    "すだち",
+    "みかん",
+    "ゆず"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第2問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "蜜柑",
+   "size": 230,
+   "ruby": "みかん",
+   "options": [
+    "すだち",
+    "みかん",
+    "ゆず"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第2問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、みかん。",
+   "pad": 1.4,
+   "caption": "蜜柑（みかん）　冬のこたつのおとも"
+  },
+  {
+   "type": "choice",
+   "big": "苺",
+   "size": 230,
+   "ruby": "いちご",
+   "options": [
+    "もも",
+    "うめ",
+    "いちご"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第3問",
+   "voice": "第3問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "苺",
+   "size": 230,
+   "ruby": "いちご",
+   "options": [
+    "もも",
+    "うめ",
+    "いちご"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第3問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "苺",
+   "size": 230,
+   "ruby": "いちご",
+   "options": [
+    "もも",
+    "うめ",
+    "いちご"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第3問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、いちご。",
+   "pad": 1.4,
+   "caption": "苺（いちご）　春が旬の赤いくだもの"
+  },
+  {
+   "type": "choice",
+   "big": "生姜",
+   "size": 230,
+   "ruby": "しょうが",
+   "options": [
+    "しょうが",
+    "にんにく",
+    "わさび"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第4問",
+   "voice": "第4問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "生姜",
+   "size": 230,
+   "ruby": "しょうが",
+   "options": [
+    "しょうが",
+    "にんにく",
+    "わさび"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第4問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "生姜",
+   "size": 230,
+   "ruby": "しょうが",
+   "options": [
+    "しょうが",
+    "にんにく",
+    "わさび"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第4問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、しょうが。",
+   "pad": 1.4,
+   "caption": "生姜（しょうが）　体を温める薬味"
+  },
+  {
+   "type": "choice",
+   "big": "大蒜",
+   "size": 230,
+   "ruby": "にんにく",
+   "options": [
+    "にんにく",
+    "ねぎ",
+    "らっきょう"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第5問",
+   "voice": "第5問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "大蒜",
+   "size": 230,
+   "ruby": "にんにく",
+   "options": [
+    "にんにく",
+    "ねぎ",
+    "らっきょう"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第5問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "大蒜",
+   "size": 230,
+   "ruby": "にんにく",
+   "options": [
+    "にんにく",
+    "ねぎ",
+    "らっきょう"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第5問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、にんにく。",
+   "pad": 1.4,
+   "caption": "大蒜（にんにく）　においの強い薬味"
+  },
+  {
+   "type": "choice",
+   "big": "山葵",
+   "size": 230,
+   "ruby": "わさび",
+   "options": [
+    "しょうが",
+    "わさび",
+    "からし"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第6問",
+   "voice": "第6問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "山葵",
+   "size": 230,
+   "ruby": "わさび",
+   "options": [
+    "しょうが",
+    "わさび",
+    "からし"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第6問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "山葵",
+   "size": 230,
+   "ruby": "わさび",
+   "options": [
+    "しょうが",
+    "わさび",
+    "からし"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第6問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、わさび。",
+   "pad": 1.4,
+   "caption": "山葵（わさび）　おすしでおなじみの薬味"
+  },
+  {
+   "type": "choice",
+   "big": "蓮根",
+   "size": 230,
+   "ruby": "れんこん",
+   "options": [
+    "ごぼう",
+    "れんこん",
+    "やまいも"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第7問",
+   "voice": "第7問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "蓮根",
+   "size": 230,
+   "ruby": "れんこん",
+   "options": [
+    "ごぼう",
+    "れんこん",
+    "やまいも"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第7問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "蓮根",
+   "size": 230,
+   "ruby": "れんこん",
+   "options": [
+    "ごぼう",
+    "れんこん",
+    "やまいも"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第7問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、れんこん。",
+   "pad": 1.4,
+   "caption": "蓮根（れんこん）　穴があいていて「先が見通せる」縁起物"
+  },
+  {
+   "type": "choice",
+   "big": "椎茸",
+   "size": 230,
+   "ruby": "しいたけ",
+   "options": [
+    "しめじ",
+    "まつたけ",
+    "しいたけ"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第8問",
+   "voice": "第8問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "椎茸",
+   "size": 230,
+   "ruby": "しいたけ",
+   "options": [
+    "しめじ",
+    "まつたけ",
+    "しいたけ"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第8問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "椎茸",
+   "size": 230,
+   "ruby": "しいたけ",
+   "options": [
+    "しめじ",
+    "まつたけ",
+    "しいたけ"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第8問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、しいたけ。",
+   "pad": 1.4,
+   "caption": "椎茸（しいたけ）　だしにも使うきのこ"
+  },
+  {
+   "type": "choice",
+   "big": "茗荷",
+   "size": 230,
+   "ruby": "みょうが",
+   "options": [
+    "しそ",
+    "みょうが",
+    "せり"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第9問",
+   "voice": "第9問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "茗荷",
+   "size": 230,
+   "ruby": "みょうが",
+   "options": [
+    "しそ",
+    "みょうが",
+    "せり"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第9問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "茗荷",
+   "size": 230,
+   "ruby": "みょうが",
+   "options": [
+    "しそ",
+    "みょうが",
+    "せり"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第9問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、みょうが。",
+   "pad": 1.4,
+   "caption": "茗荷（みょうが）　夏のそうめんの薬味"
+  },
+  {
+   "type": "choice",
+   "big": "胡桃",
+   "size": 230,
+   "ruby": "くるみ",
+   "options": [
+    "くるみ",
+    "くり",
+    "ぎんなん"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第10問",
+   "voice": "第10問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "胡桃",
+   "size": 230,
+   "ruby": "くるみ",
+   "options": [
+    "くるみ",
+    "くり",
+    "ぎんなん"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第10問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "胡桃",
+   "size": 230,
+   "ruby": "くるみ",
+   "options": [
+    "くるみ",
+    "くり",
+    "ぎんなん"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第10問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、くるみ。",
+   "pad": 1.4,
+   "caption": "胡桃（くるみ）　かたいからの木の実"
+  },
+  {
+   "type": "choice",
+   "big": "枇杷",
+   "size": 230,
+   "ruby": "びわ",
+   "options": [
+    "すもも",
+    "あんず",
+    "びわ"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第11問",
+   "voice": "第11問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "枇杷",
+   "size": 230,
+   "ruby": "びわ",
+   "options": [
+    "すもも",
+    "あんず",
+    "びわ"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第11問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "枇杷",
+   "size": 230,
+   "ruby": "びわ",
+   "options": [
+    "すもも",
+    "あんず",
+    "びわ"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第11問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、びわ。",
+   "pad": 1.4,
+   "caption": "枇杷（びわ）　初夏のオレンジ色のくだもの"
+  },
+  {
+   "type": "choice",
+   "big": "石榴",
+   "size": 230,
+   "ruby": "ざくろ",
+   "options": [
+    "いちじく",
+    "ざくろ",
+    "かりん"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第12問",
+   "voice": "第12問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "石榴",
+   "size": 230,
+   "ruby": "ざくろ",
+   "options": [
+    "いちじく",
+    "ざくろ",
+    "かりん"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第12問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "石榴",
+   "size": 230,
+   "ruby": "ざくろ",
+   "options": [
+    "いちじく",
+    "ざくろ",
+    "かりん"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第12問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、ざくろ。",
+   "pad": 1.4,
+   "caption": "石榴（ざくろ）　赤い粒がつまったくだもの"
+  },
+  {
+   "type": "title",
+   "text": "何問読めましたか？",
+   "size": 100,
+   "sub": "コメントで教えてください",
+   "voice": "何問読めましたか？コメントで教えてください。チャンネル登録もよろしくお願いします。"
+  }
+ ]
+}

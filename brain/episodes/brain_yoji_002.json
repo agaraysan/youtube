@@ -1,0 +1,897 @@
+{
+ "id": "brain_yoji_002",
+ "series": "頭の体操",
+ "style": "yoji",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "四字熟語 穴埋めクイズ",
+   "size": 110,
+   "sub": "□に入る漢字を3つから選ぼう　その2",
+   "voice": "頭の体操、四字熟語の穴埋めクイズ、その2です。四角に入る正しい漢字を、3つの中から選んでください。全部で12問です。"
+  },
+  {
+   "type": "choice",
+   "big": "□肉強食",
+   "big_answer": "弱肉強食",
+   "hl": "弱",
+   "ruby": "じゃくにくきょうしょく",
+   "options": [
+    "若",
+    "焼",
+    "弱"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第1問",
+   "voice": "第1問。四角に入る漢字は、どれでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "□肉強食",
+   "big_answer": "弱肉強食",
+   "hl": "弱",
+   "ruby": "じゃくにくきょうしょく",
+   "options": [
+    "若",
+    "焼",
+    "弱"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第1問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "□肉強食",
+   "big_answer": "弱肉強食",
+   "hl": "弱",
+   "ruby": "じゃくにくきょうしょく",
+   "options": [
+    "若",
+    "焼",
+    "弱"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第1問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、C。じゃくにくきょうしょく。弱いものが、強いものに負けることです。",
+   "pad": 1.4,
+   "caption": "弱いものが、強いものに負けること"
+  },
+  {
+   "type": "choice",
+   "big": "□肉強食",
+   "big_answer": "弱肉強食",
+   "hl": "弱",
+   "ruby": "じゃくにくきょうしょく",
+   "options": [
+    "若",
+    "焼",
+    "弱"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第1問 由来",
+   "reveal": true,
+   "caption": "由来：弱いものの肉が、強いものの食べものになることから",
+   "voice": "弱いものの肉が、強いものの食べものになることから。",
+   "pad": 0.8,
+   "origin_added": true
+  },
+  {
+   "type": "choice",
+   "big": "半信半□",
+   "big_answer": "半信半疑",
+   "hl": "疑",
+   "ruby": "はんしんはんぎ",
+   "options": [
+    "疑",
+    "議",
+    "義"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第2問",
+   "voice": "第2問。四角に入る漢字は、どれでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "半信半□",
+   "big_answer": "半信半疑",
+   "hl": "疑",
+   "ruby": "はんしんはんぎ",
+   "options": [
+    "疑",
+    "議",
+    "義"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第2問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "半信半□",
+   "big_answer": "半信半疑",
+   "hl": "疑",
+   "ruby": "はんしんはんぎ",
+   "options": [
+    "疑",
+    "議",
+    "義"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第2問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、A。はんしんはんぎ。半分信じて、半分うたがうことです。",
+   "pad": 1.4,
+   "caption": "半分信じて、半分うたがうこと"
+  },
+  {
+   "type": "choice",
+   "big": "半信半□",
+   "big_answer": "半信半疑",
+   "hl": "疑",
+   "ruby": "はんしんはんぎ",
+   "options": [
+    "疑",
+    "議",
+    "義"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第2問 由来",
+   "reveal": true,
+   "caption": "由来：半分は信じて、半分はうたがうことから",
+   "voice": "半分は信じて、半分はうたがうことから。",
+   "pad": 0.8,
+   "origin_added": true
+  },
+  {
+   "type": "choice",
+   "big": "□機応変",
+   "big_answer": "臨機応変",
+   "hl": "臨",
+   "ruby": "りんきおうへん",
+   "options": [
+    "隣",
+    "臨",
+    "林"
+   ],
+   "correct": 1,
+   "q": "□に入る漢字は？",
+   "text": "第3問",
+   "voice": "第3問。四角に入る漢字は、どれでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "□機応変",
+   "big_answer": "臨機応変",
+   "hl": "臨",
+   "ruby": "りんきおうへん",
+   "options": [
+    "隣",
+    "臨",
+    "林"
+   ],
+   "correct": 1,
+   "q": "□に入る漢字は？",
+   "text": "第3問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "□機応変",
+   "big_answer": "臨機応変",
+   "hl": "臨",
+   "ruby": "りんきおうへん",
+   "options": [
+    "隣",
+    "臨",
+    "林"
+   ],
+   "correct": 1,
+   "q": "□に入る漢字は？",
+   "text": "第3問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、B。りんきおうへん。その場に合わせて、うまく対応することです。",
+   "pad": 1.4,
+   "caption": "その場に合わせて、うまく対応すること"
+  },
+  {
+   "type": "choice",
+   "big": "□機応変",
+   "big_answer": "臨機応変",
+   "hl": "臨",
+   "ruby": "りんきおうへん",
+   "options": [
+    "隣",
+    "臨",
+    "林"
+   ],
+   "correct": 1,
+   "q": "□に入る漢字は？",
+   "text": "第3問 由来",
+   "reveal": true,
+   "caption": "由来：「機」はその時の状況。それにのぞんで対応を変えることから",
+   "voice": "機、はそのときの状況。それにのぞんで、対応を変えることから。",
+   "pad": 0.8,
+   "origin_added": true
+  },
+  {
+   "type": "choice",
+   "big": "油断大□",
+   "big_answer": "油断大敵",
+   "hl": "敵",
+   "ruby": "ゆだんたいてき",
+   "options": [
+    "的",
+    "適",
+    "敵"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第4問",
+   "voice": "第4問。四角に入る漢字は、どれでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "油断大□",
+   "big_answer": "油断大敵",
+   "hl": "敵",
+   "ruby": "ゆだんたいてき",
+   "options": [
+    "的",
+    "適",
+    "敵"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第4問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "油断大□",
+   "big_answer": "油断大敵",
+   "hl": "敵",
+   "ruby": "ゆだんたいてき",
+   "options": [
+    "的",
+    "適",
+    "敵"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第4問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、C。ゆだんたいてき。油断は、失敗のもとです。",
+   "pad": 1.4,
+   "caption": "油断は、失敗のもと"
+  },
+  {
+   "type": "choice",
+   "big": "油断大□",
+   "big_answer": "油断大敵",
+   "hl": "敵",
+   "ruby": "ゆだんたいてき",
+   "options": [
+    "的",
+    "適",
+    "敵"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第4問 由来",
+   "reveal": true,
+   "caption": "由来：油断は、どんな敵よりもこわい、という意味です",
+   "voice": "油断は、どんな敵よりもこわい、という意味です。",
+   "pad": 0.8,
+   "origin_added": true
+  },
+  {
+   "type": "choice",
+   "big": "異口同□",
+   "big_answer": "異口同音",
+   "hl": "音",
+   "ruby": "いくどうおん",
+   "options": [
+    "音",
+    "言",
+    "声"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第5問",
+   "voice": "第5問。四角に入る漢字は、どれでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "異口同□",
+   "big_answer": "異口同音",
+   "hl": "音",
+   "ruby": "いくどうおん",
+   "options": [
+    "音",
+    "言",
+    "声"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第5問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "異口同□",
+   "big_answer": "異口同音",
+   "hl": "音",
+   "ruby": "いくどうおん",
+   "options": [
+    "音",
+    "言",
+    "声"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第5問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、A。いくどうおん。みんなが、同じことを言うことです。",
+   "pad": 1.4,
+   "caption": "みんなが、同じことを言うこと"
+  },
+  {
+   "type": "choice",
+   "big": "異口同□",
+   "big_answer": "異口同音",
+   "hl": "音",
+   "ruby": "いくどうおん",
+   "options": [
+    "音",
+    "言",
+    "声"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第5問 由来",
+   "reveal": true,
+   "caption": "由来：ちがう口から、同じ音（言葉）が出ることから",
+   "voice": "ちがう口から、同じ音、つまり同じ言葉が出ることから。",
+   "pad": 0.8,
+   "origin_added": true
+  },
+  {
+   "type": "choice",
+   "big": "絶体絶□",
+   "big_answer": "絶体絶命",
+   "hl": "命",
+   "ruby": "ぜったいぜつめい",
+   "options": [
+    "命",
+    "明",
+    "名"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第6問",
+   "voice": "第6問。四角に入る漢字は、どれでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "絶体絶□",
+   "big_answer": "絶体絶命",
+   "hl": "命",
+   "ruby": "ぜったいぜつめい",
+   "options": [
+    "命",
+    "明",
+    "名"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第6問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "絶体絶□",
+   "big_answer": "絶体絶命",
+   "hl": "命",
+   "ruby": "ぜったいぜつめい",
+   "options": [
+    "命",
+    "明",
+    "名"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第6問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、A。ぜったいぜつめい。追いつめられて、のがれようがないことです。",
+   "pad": 1.4,
+   "caption": "追いつめられて、のがれようがないこと"
+  },
+  {
+   "type": "choice",
+   "big": "絶体絶□",
+   "big_answer": "絶体絶命",
+   "hl": "命",
+   "ruby": "ぜったいぜつめい",
+   "options": [
+    "命",
+    "明",
+    "名"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第6問 由来",
+   "reveal": true,
+   "caption": "由来：占いで悪い運勢をあらわす星の名前から。「絶対」はまちがい",
+   "voice": "占いで、悪い運勢をあらわす星の名前から。絶対、と書くのはまちがいです。",
+   "pad": 0.8,
+   "origin_added": true
+  },
+  {
+   "type": "choice",
+   "big": "□面楚歌",
+   "big_answer": "四面楚歌",
+   "hl": "四",
+   "ruby": "しめんそか",
+   "options": [
+    "四",
+    "八",
+    "三"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第7問",
+   "voice": "第7問。四角に入る漢字は、どれでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "□面楚歌",
+   "big_answer": "四面楚歌",
+   "hl": "四",
+   "ruby": "しめんそか",
+   "options": [
+    "四",
+    "八",
+    "三"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第7問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "choice",
+   "big": "□面楚歌",
+   "big_answer": "四面楚歌",
+   "hl": "四",
+   "ruby": "しめんそか",
+   "options": [
+    "四",
+    "八",
+    "三"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第7問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、A。しめんそか。まわりが、敵ばかりであることです。",
+   "pad": 1.4,
+   "caption": "まわりが、敵ばかりであること"
+  },
+  {
+   "type": "choice",
+   "big": "□面楚歌",
+   "big_answer": "四面楚歌",
+   "hl": "四",
+   "ruby": "しめんそか",
+   "options": [
+    "四",
+    "八",
+    "三"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第7問 由来",
+   "reveal": true,
+   "caption": "由来：中国の故事。敵に囲まれた項羽が、四方から故郷・楚の歌を聞いたことから",
+   "voice": "中国の昔話から。敵に囲まれた項羽が、四方から故郷、楚の歌を聞き、味方が降参したと思ったことから。",
+   "pad": 0.8,
+   "origin_added": true
+  },
+  {
+   "type": "choice",
+   "big": "公明正□",
+   "big_answer": "公明正大",
+   "hl": "大",
+   "ruby": "こうめいせいだい",
+   "options": [
+    "代",
+    "台",
+    "大"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第8問",
+   "voice": "第8問。四角に入る漢字は、どれでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "公明正□",
+   "big_answer": "公明正大",
+   "hl": "大",
+   "ruby": "こうめいせいだい",
+   "options": [
+    "代",
+    "台",
+    "大"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第8問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "choice",
+   "big": "公明正□",
+   "big_answer": "公明正大",
+   "hl": "大",
+   "ruby": "こうめいせいだい",
+   "options": [
+    "代",
+    "台",
+    "大"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第8問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、C。こうめいせいだい。公平で、やましいところがないことです。",
+   "pad": 1.4,
+   "caption": "公平で、やましいところがないこと"
+  },
+  {
+   "type": "choice",
+   "big": "公明正□",
+   "big_answer": "公明正大",
+   "hl": "大",
+   "ruby": "こうめいせいだい",
+   "options": [
+    "代",
+    "台",
+    "大"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第8問 由来",
+   "reveal": true,
+   "caption": "由来：公平で、明らかで、正しく堂々としていることから",
+   "voice": "公平で、明らかで、正しく堂々としていることから。",
+   "pad": 0.8,
+   "origin_added": true
+  },
+  {
+   "type": "choice",
+   "big": "□寒四温",
+   "big_answer": "三寒四温",
+   "hl": "三",
+   "ruby": "さんかんしおん",
+   "options": [
+    "二",
+    "五",
+    "三"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第9問",
+   "voice": "第9問。四角に入る漢字は、どれでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "□寒四温",
+   "big_answer": "三寒四温",
+   "hl": "三",
+   "ruby": "さんかんしおん",
+   "options": [
+    "二",
+    "五",
+    "三"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第9問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "choice",
+   "big": "□寒四温",
+   "big_answer": "三寒四温",
+   "hl": "三",
+   "ruby": "さんかんしおん",
+   "options": [
+    "二",
+    "五",
+    "三"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第9問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、C。さんかんしおん。寒い日と暖かい日が、くり返すことです。",
+   "pad": 1.4,
+   "caption": "寒い日と暖かい日が、くり返すこと"
+  },
+  {
+   "type": "choice",
+   "big": "□寒四温",
+   "big_answer": "三寒四温",
+   "hl": "三",
+   "ruby": "さんかんしおん",
+   "options": [
+    "二",
+    "五",
+    "三"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第9問 由来",
+   "reveal": true,
+   "caption": "由来：冬に、寒い日が3日、暖かい日が4日くり返すことから",
+   "voice": "冬に、寒い日が3日、暖かい日が4日くり返すことから。",
+   "pad": 0.8,
+   "origin_added": true
+  },
+  {
+   "type": "choice",
+   "big": "大器晩□",
+   "big_answer": "大器晩成",
+   "hl": "成",
+   "ruby": "たいきばんせい",
+   "options": [
+    "成",
+    "製",
+    "生"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第10問",
+   "voice": "第10問。四角に入る漢字は、どれでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "大器晩□",
+   "big_answer": "大器晩成",
+   "hl": "成",
+   "ruby": "たいきばんせい",
+   "options": [
+    "成",
+    "製",
+    "生"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第10問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "choice",
+   "big": "大器晩□",
+   "big_answer": "大器晩成",
+   "hl": "成",
+   "ruby": "たいきばんせい",
+   "options": [
+    "成",
+    "製",
+    "生"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第10問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、A。たいきばんせい。大人物は、おそくなってから大成するです。",
+   "pad": 1.4,
+   "caption": "大人物は、おそくなってから大成する"
+  },
+  {
+   "type": "choice",
+   "big": "大器晩□",
+   "big_answer": "大器晩成",
+   "hl": "成",
+   "ruby": "たいきばんせい",
+   "options": [
+    "成",
+    "製",
+    "生"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第10問 由来",
+   "reveal": true,
+   "caption": "由来：『老子』の言葉。大きなうつわは、できるまでに時間がかかる",
+   "voice": "老子の言葉。大きなうつわは、できあがるまでに時間がかかることから。",
+   "pad": 0.8,
+   "origin_added": true
+  },
+  {
+   "type": "choice",
+   "big": "一□一夕",
+   "big_answer": "一朝一夕",
+   "hl": "朝",
+   "ruby": "いっちょういっせき",
+   "options": [
+    "朝",
+    "晩",
+    "昼"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第11問",
+   "voice": "第11問。四角に入る漢字は、どれでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "一□一夕",
+   "big_answer": "一朝一夕",
+   "hl": "朝",
+   "ruby": "いっちょういっせき",
+   "options": [
+    "朝",
+    "晩",
+    "昼"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第11問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "choice",
+   "big": "一□一夕",
+   "big_answer": "一朝一夕",
+   "hl": "朝",
+   "ruby": "いっちょういっせき",
+   "options": [
+    "朝",
+    "晩",
+    "昼"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第11問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、A。いっちょういっせき。ほんのわずかな時間のことです。",
+   "pad": 1.4,
+   "caption": "ほんのわずかな時間のこと"
+  },
+  {
+   "type": "choice",
+   "big": "一□一夕",
+   "big_answer": "一朝一夕",
+   "hl": "朝",
+   "ruby": "いっちょういっせき",
+   "options": [
+    "朝",
+    "晩",
+    "昼"
+   ],
+   "correct": 0,
+   "q": "□に入る漢字は？",
+   "text": "第11問 由来",
+   "reveal": true,
+   "caption": "由来：ひと朝と、ひと晩、ということから",
+   "voice": "ひと朝と、ひと晩、ということから。",
+   "pad": 0.8,
+   "origin_added": true
+  },
+  {
+   "type": "choice",
+   "big": "前代未□",
+   "big_answer": "前代未聞",
+   "hl": "聞",
+   "ruby": "ぜんだいみもん",
+   "options": [
+    "問",
+    "門",
+    "聞"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第12問",
+   "voice": "第12問。四角に入る漢字は、どれでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "前代未□",
+   "big_answer": "前代未聞",
+   "hl": "聞",
+   "ruby": "ぜんだいみもん",
+   "options": [
+    "問",
+    "門",
+    "聞"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第12問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "choice",
+   "big": "前代未□",
+   "big_answer": "前代未聞",
+   "hl": "聞",
+   "ruby": "ぜんだいみもん",
+   "options": [
+    "問",
+    "門",
+    "聞"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第12問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、C。ぜんだいみもん。今までに聞いたことがないほど、めずらしいことです。",
+   "pad": 1.4,
+   "caption": "今までに聞いたことがないほど、めずらしいこと"
+  },
+  {
+   "type": "choice",
+   "big": "前代未□",
+   "big_answer": "前代未聞",
+   "hl": "聞",
+   "ruby": "ぜんだいみもん",
+   "options": [
+    "問",
+    "門",
+    "聞"
+   ],
+   "correct": 2,
+   "q": "□に入る漢字は？",
+   "text": "第12問 由来",
+   "reveal": true,
+   "caption": "由来：前の時代にも、まだ聞いたことがない、ということから",
+   "voice": "前の時代にも、まだ聞いたことがない、ということから。",
+   "pad": 0.8,
+   "origin_added": true
+  },
+  {
+   "type": "title",
+   "text": "何問わかりましたか？",
+   "size": 100,
+   "sub": "コメントで教えてください",
+   "voice": "何問わかりましたか？コメントで教えてください。毎日の頭の体操に、チャンネル登録もよろしくお願いします。"
+  }
+ ]
+}

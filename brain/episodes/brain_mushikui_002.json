@@ -1,0 +1,521 @@
+{
+ "id": "brain_mushikui_002",
+ "series": "頭の体操",
+ "style": "mushikui",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "虫食い算",
+   "size": 140,
+   "sub": "□に入る数はいくつ？　その2",
+   "voice": "頭の体操、虫食い算、その2です。式の中の四角に入る数を、3つの中から選んでください。全部で10問です。"
+  },
+  {
+   "type": "choice",
+   "big": "9 ＋ □ ＝ 15",
+   "big_answer": "9 ＋ 6 ＝ 15",
+   "size": 150,
+   "options": [
+    "7",
+    "6",
+    "8"
+   ],
+   "correct": 1,
+   "q": "□に入る数は？",
+   "text": "第1問",
+   "voice": "第1問。四角に入る数は、いくつでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "9 ＋ □ ＝ 15",
+   "big_answer": "9 ＋ 6 ＝ 15",
+   "size": 150,
+   "options": [
+    "7",
+    "6",
+    "8"
+   ],
+   "correct": 1,
+   "q": "□に入る数は？",
+   "text": "第1問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "9 ＋ □ ＝ 15",
+   "big_answer": "9 ＋ 6 ＝ 15",
+   "size": 150,
+   "options": [
+    "7",
+    "6",
+    "8"
+   ],
+   "correct": 1,
+   "q": "□に入る数は？",
+   "text": "第1問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、6です。",
+   "pad": 1.4,
+   "caption": "9 ＋ 6 ＝ 15"
+  },
+  {
+   "type": "choice",
+   "big": "14 − □ ＝ 6",
+   "big_answer": "14 − 8 ＝ 6",
+   "size": 150,
+   "options": [
+    "9",
+    "10",
+    "8"
+   ],
+   "correct": 2,
+   "q": "□に入る数は？",
+   "text": "第2問",
+   "voice": "第2問。四角に入る数は、いくつでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "14 − □ ＝ 6",
+   "big_answer": "14 − 8 ＝ 6",
+   "size": 150,
+   "options": [
+    "9",
+    "10",
+    "8"
+   ],
+   "correct": 2,
+   "q": "□に入る数は？",
+   "text": "第2問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "14 − □ ＝ 6",
+   "big_answer": "14 − 8 ＝ 6",
+   "size": 150,
+   "options": [
+    "9",
+    "10",
+    "8"
+   ],
+   "correct": 2,
+   "q": "□に入る数は？",
+   "text": "第2問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、8です。",
+   "pad": 1.4,
+   "caption": "14 − 8 ＝ 6"
+  },
+  {
+   "type": "choice",
+   "big": "8 × □ ＝ 48",
+   "big_answer": "8 × 6 ＝ 48",
+   "size": 150,
+   "options": [
+    "4",
+    "6",
+    "8"
+   ],
+   "correct": 1,
+   "q": "□に入る数は？",
+   "text": "第3問",
+   "voice": "第3問。四角に入る数は、いくつでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "8 × □ ＝ 48",
+   "big_answer": "8 × 6 ＝ 48",
+   "size": 150,
+   "options": [
+    "4",
+    "6",
+    "8"
+   ],
+   "correct": 1,
+   "q": "□に入る数は？",
+   "text": "第3問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "8 × □ ＝ 48",
+   "big_answer": "8 × 6 ＝ 48",
+   "size": 150,
+   "options": [
+    "4",
+    "6",
+    "8"
+   ],
+   "correct": 1,
+   "q": "□に入る数は？",
+   "text": "第3問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、6です。",
+   "pad": 1.4,
+   "caption": "8 × 6 ＝ 48"
+  },
+  {
+   "type": "choice",
+   "big": "56 ÷ □ ＝ 8",
+   "big_answer": "56 ÷ 7 ＝ 8",
+   "size": 150,
+   "options": [
+    "7",
+    "5",
+    "9"
+   ],
+   "correct": 0,
+   "q": "□に入る数は？",
+   "text": "第4問",
+   "voice": "第4問。四角に入る数は、いくつでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "56 ÷ □ ＝ 8",
+   "big_answer": "56 ÷ 7 ＝ 8",
+   "size": 150,
+   "options": [
+    "7",
+    "5",
+    "9"
+   ],
+   "correct": 0,
+   "q": "□に入る数は？",
+   "text": "第4問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "56 ÷ □ ＝ 8",
+   "big_answer": "56 ÷ 7 ＝ 8",
+   "size": 150,
+   "options": [
+    "7",
+    "5",
+    "9"
+   ],
+   "correct": 0,
+   "q": "□に入る数は？",
+   "text": "第4問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、7です。",
+   "pad": 1.4,
+   "caption": "56 ÷ 7 ＝ 8"
+  },
+  {
+   "type": "choice",
+   "big": "□ ＋ 28 ＝ 65",
+   "big_answer": "37 ＋ 28 ＝ 65",
+   "size": 150,
+   "options": [
+    "39",
+    "47",
+    "37"
+   ],
+   "correct": 2,
+   "q": "□に入る数は？",
+   "text": "第5問",
+   "voice": "第5問。四角に入る数は、いくつでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "□ ＋ 28 ＝ 65",
+   "big_answer": "37 ＋ 28 ＝ 65",
+   "size": 150,
+   "options": [
+    "39",
+    "47",
+    "37"
+   ],
+   "correct": 2,
+   "q": "□に入る数は？",
+   "text": "第5問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "□ ＋ 28 ＝ 65",
+   "big_answer": "37 ＋ 28 ＝ 65",
+   "size": 150,
+   "options": [
+    "39",
+    "47",
+    "37"
+   ],
+   "correct": 2,
+   "q": "□に入る数は？",
+   "text": "第5問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、37です。",
+   "pad": 1.4,
+   "caption": "37 ＋ 28 ＝ 65"
+  },
+  {
+   "type": "choice",
+   "big": "83 − □ ＝ 36",
+   "big_answer": "83 − 47 ＝ 36",
+   "size": 150,
+   "options": [
+    "46",
+    "47",
+    "45"
+   ],
+   "correct": 1,
+   "q": "□に入る数は？",
+   "text": "第6問",
+   "voice": "第6問。四角に入る数は、いくつでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "83 − □ ＝ 36",
+   "big_answer": "83 − 47 ＝ 36",
+   "size": 150,
+   "options": [
+    "46",
+    "47",
+    "45"
+   ],
+   "correct": 1,
+   "q": "□に入る数は？",
+   "text": "第6問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "choice",
+   "big": "83 − □ ＝ 36",
+   "big_answer": "83 − 47 ＝ 36",
+   "size": 150,
+   "options": [
+    "46",
+    "47",
+    "45"
+   ],
+   "correct": 1,
+   "q": "□に入る数は？",
+   "text": "第6問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、47です。",
+   "pad": 1.4,
+   "caption": "83 − 47 ＝ 36"
+  },
+  {
+   "type": "choice",
+   "big": "□ × 6 ＝ 90",
+   "big_answer": "15 × 6 ＝ 90",
+   "size": 150,
+   "options": [
+    "15",
+    "14",
+    "25"
+   ],
+   "correct": 0,
+   "q": "□に入る数は？",
+   "text": "第7問",
+   "voice": "第7問。四角に入る数は、いくつでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "□ × 6 ＝ 90",
+   "big_answer": "15 × 6 ＝ 90",
+   "size": 150,
+   "options": [
+    "15",
+    "14",
+    "25"
+   ],
+   "correct": 0,
+   "q": "□に入る数は？",
+   "text": "第7問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "choice",
+   "big": "□ × 6 ＝ 90",
+   "big_answer": "15 × 6 ＝ 90",
+   "size": 150,
+   "options": [
+    "15",
+    "14",
+    "25"
+   ],
+   "correct": 0,
+   "q": "□に入る数は？",
+   "text": "第7問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、15です。",
+   "pad": 1.4,
+   "caption": "15 × 6 ＝ 90"
+  },
+  {
+   "type": "choice",
+   "big": "□ ÷ 8 ＝ 12",
+   "big_answer": "96 ÷ 8 ＝ 12",
+   "size": 150,
+   "options": [
+    "96",
+    "98",
+    "95"
+   ],
+   "correct": 0,
+   "q": "□に入る数は？",
+   "text": "第8問",
+   "voice": "第8問。四角に入る数は、いくつでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "□ ÷ 8 ＝ 12",
+   "big_answer": "96 ÷ 8 ＝ 12",
+   "size": 150,
+   "options": [
+    "96",
+    "98",
+    "95"
+   ],
+   "correct": 0,
+   "q": "□に入る数は？",
+   "text": "第8問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "choice",
+   "big": "□ ÷ 8 ＝ 12",
+   "big_answer": "96 ÷ 8 ＝ 12",
+   "size": 150,
+   "options": [
+    "96",
+    "98",
+    "95"
+   ],
+   "correct": 0,
+   "q": "□に入る数は？",
+   "text": "第8問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、96です。",
+   "pad": 1.4,
+   "caption": "96 ÷ 8 ＝ 12"
+  },
+  {
+   "type": "choice",
+   "big": "□ ＋ 165 ＝ 413",
+   "big_answer": "248 ＋ 165 ＝ 413",
+   "size": 150,
+   "options": [
+    "248",
+    "258",
+    "246"
+   ],
+   "correct": 0,
+   "q": "□に入る数は？",
+   "text": "第9問",
+   "voice": "第9問。四角に入る数は、いくつでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "□ ＋ 165 ＝ 413",
+   "big_answer": "248 ＋ 165 ＝ 413",
+   "size": 150,
+   "options": [
+    "248",
+    "258",
+    "246"
+   ],
+   "correct": 0,
+   "q": "□に入る数は？",
+   "text": "第9問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "choice",
+   "big": "□ ＋ 165 ＝ 413",
+   "big_answer": "248 ＋ 165 ＝ 413",
+   "size": 150,
+   "options": [
+    "248",
+    "258",
+    "246"
+   ],
+   "correct": 0,
+   "q": "□に入る数は？",
+   "text": "第9問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、248です。",
+   "pad": 1.4,
+   "caption": "248 ＋ 165 ＝ 413"
+  },
+  {
+   "type": "choice",
+   "big": "□ × 12 ＝ 156",
+   "big_answer": "13 × 12 ＝ 156",
+   "size": 150,
+   "options": [
+    "15",
+    "13",
+    "14"
+   ],
+   "correct": 1,
+   "q": "□に入る数は？",
+   "text": "第10問",
+   "voice": "第10問。四角に入る数は、いくつでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "□ × 12 ＝ 156",
+   "big_answer": "13 × 12 ＝ 156",
+   "size": 150,
+   "options": [
+    "15",
+    "13",
+    "14"
+   ],
+   "correct": 1,
+   "q": "□に入る数は？",
+   "text": "第10問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "choice",
+   "big": "□ × 12 ＝ 156",
+   "big_answer": "13 × 12 ＝ 156",
+   "size": 150,
+   "options": [
+    "15",
+    "13",
+    "14"
+   ],
+   "correct": 1,
+   "q": "□に入る数は？",
+   "text": "第10問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、13です。",
+   "pad": 1.4,
+   "caption": "13 × 12 ＝ 156"
+  },
+  {
+   "type": "title",
+   "text": "何問正解しましたか？",
+   "size": 100,
+   "sub": "コメントで教えてください",
+   "voice": "何問正解しましたか？コメントで教えてください。毎日の計算で、頭すっきり。"
+  }
+ ]
+}

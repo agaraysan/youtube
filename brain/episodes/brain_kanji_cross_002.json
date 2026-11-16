@@ -1,0 +1,542 @@
+{
+ "id": "brain_kanji_cross_002",
+ "series": "頭の体操",
+ "style": "kanji",
+ "bg": "assets/generated/br_bg_washi",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "漢字穴埋めクイズ",
+   "size": 120,
+   "sub": "□に入る漢字はなに？　その2",
+   "voice": "頭の体操、漢字の穴埋めクイズ、その2です。矢印の向きに読むと、4つの熟語ができます。真ん中の四角に入る漢字を当ててください。全部で10問です。"
+  },
+  {
+   "type": "cross",
+   "answer": "木",
+   "top": "大",
+   "left": "草",
+   "right": "曜",
+   "bottom": "材",
+   "readings": [
+    "たいぼく",
+    "くさき",
+    "もくよう",
+    "もくざい"
+   ],
+   "text": "第1問",
+   "voice": "第1問。どの漢字が入るでしょう。"
+  },
+  {
+   "type": "cross",
+   "answer": "木",
+   "top": "大",
+   "left": "草",
+   "right": "曜",
+   "bottom": "材",
+   "readings": [
+    "たいぼく",
+    "くさき",
+    "もくよう",
+    "もくざい"
+   ],
+   "text": "第1問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "cross",
+   "answer": "木",
+   "top": "大",
+   "left": "草",
+   "right": "曜",
+   "bottom": "材",
+   "readings": [
+    "たいぼく",
+    "くさき",
+    "もくよう",
+    "もくざい"
+   ],
+   "text": "第1問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、き。たいぼく、くさき、もくよう、もくざい、です。",
+   "pad": 1.4
+  },
+  {
+   "type": "cross",
+   "answer": "火",
+   "top": "花",
+   "left": "放",
+   "right": "山",
+   "bottom": "事",
+   "readings": [
+    "はなび",
+    "ほうか",
+    "かざん",
+    "かじ"
+   ],
+   "text": "第2問",
+   "voice": "第2問。さあ、わかるかな。"
+  },
+  {
+   "type": "cross",
+   "answer": "火",
+   "top": "花",
+   "left": "放",
+   "right": "山",
+   "bottom": "事",
+   "readings": [
+    "はなび",
+    "ほうか",
+    "かざん",
+    "かじ"
+   ],
+   "text": "第2問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "cross",
+   "answer": "火",
+   "top": "花",
+   "left": "放",
+   "right": "山",
+   "bottom": "事",
+   "readings": [
+    "はなび",
+    "ほうか",
+    "かざん",
+    "かじ"
+   ],
+   "text": "第2問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、ひ。はなび、ほうか、かざん、かじ、です。",
+   "pad": 1.4
+  },
+  {
+   "type": "cross",
+   "answer": "学",
+   "top": "入",
+   "left": "大",
+   "right": "校",
+   "bottom": "生",
+   "readings": [
+    "にゅうがく",
+    "だいがく",
+    "がっこう",
+    "がくせい"
+   ],
+   "text": "第3問",
+   "voice": "第3問。真ん中に入る漢字は？"
+  },
+  {
+   "type": "cross",
+   "answer": "学",
+   "top": "入",
+   "left": "大",
+   "right": "校",
+   "bottom": "生",
+   "readings": [
+    "にゅうがく",
+    "だいがく",
+    "がっこう",
+    "がくせい"
+   ],
+   "text": "第3問",
+   "think": true,
+   "seconds": 18
+  },
+  {
+   "type": "cross",
+   "answer": "学",
+   "top": "入",
+   "left": "大",
+   "right": "校",
+   "bottom": "生",
+   "readings": [
+    "にゅうがく",
+    "だいがく",
+    "がっこう",
+    "がくせい"
+   ],
+   "text": "第3問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、がく。にゅうがく、だいがく、がっこう、がくせい、です。",
+   "pad": 1.4
+  },
+  {
+   "type": "cross",
+   "answer": "雪",
+   "top": "大",
+   "left": "新",
+   "right": "国",
+   "bottom": "山",
+   "readings": [
+    "おおゆき",
+    "しんせつ",
+    "ゆきぐに",
+    "ゆきやま"
+   ],
+   "text": "第4問",
+   "voice": "第4問。どの漢字が入るでしょう。"
+  },
+  {
+   "type": "cross",
+   "answer": "雪",
+   "top": "大",
+   "left": "新",
+   "right": "国",
+   "bottom": "山",
+   "readings": [
+    "おおゆき",
+    "しんせつ",
+    "ゆきぐに",
+    "ゆきやま"
+   ],
+   "text": "第4問",
+   "think": true,
+   "seconds": 18
+  },
+  {
+   "type": "cross",
+   "answer": "雪",
+   "top": "大",
+   "left": "新",
+   "right": "国",
+   "bottom": "山",
+   "readings": [
+    "おおゆき",
+    "しんせつ",
+    "ゆきぐに",
+    "ゆきやま"
+   ],
+   "text": "第4問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、ゆき。おおゆき、しんせつ、ゆきぐに、ゆきやま、です。",
+   "pad": 1.4
+  },
+  {
+   "type": "cross",
+   "answer": "体",
+   "top": "身",
+   "left": "全",
+   "right": "力",
+   "bottom": "重",
+   "readings": [
+    "しんたい",
+    "ぜんたい",
+    "たいりょく",
+    "たいじゅう"
+   ],
+   "text": "第5問",
+   "voice": "第5問。さあ、わかるかな。"
+  },
+  {
+   "type": "cross",
+   "answer": "体",
+   "top": "身",
+   "left": "全",
+   "right": "力",
+   "bottom": "重",
+   "readings": [
+    "しんたい",
+    "ぜんたい",
+    "たいりょく",
+    "たいじゅう"
+   ],
+   "text": "第5問",
+   "think": true,
+   "seconds": 20
+  },
+  {
+   "type": "cross",
+   "answer": "体",
+   "top": "身",
+   "left": "全",
+   "right": "力",
+   "bottom": "重",
+   "readings": [
+    "しんたい",
+    "ぜんたい",
+    "たいりょく",
+    "たいじゅう"
+   ],
+   "text": "第5問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、からだ。しんたい、ぜんたい、たいりょく、たいじゅう、です。",
+   "pad": 1.4
+  },
+  {
+   "type": "cross",
+   "answer": "道",
+   "top": "水",
+   "left": "歩",
+   "right": "路",
+   "bottom": "具",
+   "readings": [
+    "すいどう",
+    "ほどう",
+    "どうろ",
+    "どうぐ"
+   ],
+   "text": "第6問",
+   "voice": "第6問。真ん中に入る漢字は？"
+  },
+  {
+   "type": "cross",
+   "answer": "道",
+   "top": "水",
+   "left": "歩",
+   "right": "路",
+   "bottom": "具",
+   "readings": [
+    "すいどう",
+    "ほどう",
+    "どうろ",
+    "どうぐ"
+   ],
+   "text": "第6問",
+   "think": true,
+   "seconds": 20
+  },
+  {
+   "type": "cross",
+   "answer": "道",
+   "top": "水",
+   "left": "歩",
+   "right": "路",
+   "bottom": "具",
+   "readings": [
+    "すいどう",
+    "ほどう",
+    "どうろ",
+    "どうぐ"
+   ],
+   "text": "第6問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、みち。すいどう、ほどう、どうろ、どうぐ、です。",
+   "pad": 1.4
+  },
+  {
+   "type": "cross",
+   "answer": "電",
+   "top": "停",
+   "left": "発",
+   "right": "車",
+   "bottom": "話",
+   "readings": [
+    "ていでん",
+    "はつでん",
+    "でんしゃ",
+    "でんわ"
+   ],
+   "text": "第7問",
+   "voice": "第7問。どの漢字が入るでしょう。"
+  },
+  {
+   "type": "cross",
+   "answer": "電",
+   "top": "停",
+   "left": "発",
+   "right": "車",
+   "bottom": "話",
+   "readings": [
+    "ていでん",
+    "はつでん",
+    "でんしゃ",
+    "でんわ"
+   ],
+   "text": "第7問",
+   "think": true,
+   "seconds": 22
+  },
+  {
+   "type": "cross",
+   "answer": "電",
+   "top": "停",
+   "left": "発",
+   "right": "車",
+   "bottom": "話",
+   "readings": [
+    "ていでん",
+    "はつでん",
+    "でんしゃ",
+    "でんわ"
+   ],
+   "text": "第7問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、でん。ていでん、はつでん、でんしゃ、でんわ、です。",
+   "pad": 1.4
+  },
+  {
+   "type": "cross",
+   "answer": "家",
+   "top": "実",
+   "left": "農",
+   "right": "族",
+   "bottom": "庭",
+   "readings": [
+    "じっか",
+    "のうか",
+    "かぞく",
+    "かてい"
+   ],
+   "text": "第8問",
+   "voice": "第8問。さあ、わかるかな。"
+  },
+  {
+   "type": "cross",
+   "answer": "家",
+   "top": "実",
+   "left": "農",
+   "right": "族",
+   "bottom": "庭",
+   "readings": [
+    "じっか",
+    "のうか",
+    "かぞく",
+    "かてい"
+   ],
+   "text": "第8問",
+   "think": true,
+   "seconds": 22
+  },
+  {
+   "type": "cross",
+   "answer": "家",
+   "top": "実",
+   "left": "農",
+   "right": "族",
+   "bottom": "庭",
+   "readings": [
+    "じっか",
+    "のうか",
+    "かぞく",
+    "かてい"
+   ],
+   "text": "第8問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、いえ。じっか、のうか、かぞく、かてい、です。",
+   "pad": 1.4
+  },
+  {
+   "type": "cross",
+   "answer": "時",
+   "top": "当",
+   "left": "同",
+   "right": "間",
+   "bottom": "計",
+   "readings": [
+    "とうじ",
+    "どうじ",
+    "じかん",
+    "とけい"
+   ],
+   "text": "第9問",
+   "voice": "第9問。真ん中に入る漢字は？"
+  },
+  {
+   "type": "cross",
+   "answer": "時",
+   "top": "当",
+   "left": "同",
+   "right": "間",
+   "bottom": "計",
+   "readings": [
+    "とうじ",
+    "どうじ",
+    "じかん",
+    "とけい"
+   ],
+   "text": "第9問",
+   "think": true,
+   "seconds": 25
+  },
+  {
+   "type": "cross",
+   "answer": "時",
+   "top": "当",
+   "left": "同",
+   "right": "間",
+   "bottom": "計",
+   "readings": [
+    "とうじ",
+    "どうじ",
+    "じかん",
+    "とけい"
+   ],
+   "text": "第9問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、とき。とうじ、どうじ、じかん、とけい、です。",
+   "pad": 1.4
+  },
+  {
+   "type": "cross",
+   "answer": "海",
+   "top": "深",
+   "left": "航",
+   "right": "岸",
+   "bottom": "外",
+   "readings": [
+    "しんかい",
+    "こうかい",
+    "かいがん",
+    "かいがい"
+   ],
+   "text": "第10問",
+   "voice": "第10問。どの漢字が入るでしょう。"
+  },
+  {
+   "type": "cross",
+   "answer": "海",
+   "top": "深",
+   "left": "航",
+   "right": "岸",
+   "bottom": "外",
+   "readings": [
+    "しんかい",
+    "こうかい",
+    "かいがん",
+    "かいがい"
+   ],
+   "text": "第10問",
+   "think": true,
+   "seconds": 25
+  },
+  {
+   "type": "cross",
+   "answer": "海",
+   "top": "深",
+   "left": "航",
+   "right": "岸",
+   "bottom": "外",
+   "readings": [
+    "しんかい",
+    "こうかい",
+    "かいがん",
+    "かいがい"
+   ],
+   "text": "第10問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、うみ。しんかい、こうかい、かいがん、かいがい、です。",
+   "pad": 1.4
+  },
+  {
+   "type": "title",
+   "text": "何問わかりましたか？",
+   "size": 100,
+   "sub": "コメントで教えてください",
+   "voice": "何問わかりましたか？コメントで教えてください。また、いっしょに頭の体操をしましょう。"
+  }
+ ]
+}

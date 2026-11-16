@@ -1,0 +1,349 @@
+{
+ "id": "brain_showa_tools_002",
+ "series": "頭の体操",
+ "style": "showa",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "昭和なつかし道具クイズ",
+   "size": 110,
+   "sub": "この道具、なんという名前？　その2",
+   "voice": "昭和のなつかし道具クイズ、その2です。むかしの暮らしで使われていた道具の名前を、3つの中から選んでください。全部で8問です。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw09_kurodenwa",
+   "options": [
+    "黒電話",
+    "ラジオ",
+    "インターホン"
+   ],
+   "correct": 0,
+   "text": "第1問",
+   "voice": "第1問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw09_kurodenwa",
+   "options": [
+    "黒電話",
+    "ラジオ",
+    "インターホン"
+   ],
+   "correct": 0,
+   "text": "第1問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw09_kurodenwa",
+   "options": [
+    "黒電話",
+    "ラジオ",
+    "インターホン"
+   ],
+   "correct": 0,
+   "text": "第1問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "黒電話　ダイヤルを指で回して、電話をかけました",
+   "voice": "答えは、くろでんわ。ダイヤルを指で回して、電話をかけました。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw10_tv",
+   "options": [
+    "ステレオ",
+    "テレビ",
+    "たんす"
+   ],
+   "correct": 1,
+   "text": "第2問",
+   "voice": "第2問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw10_tv",
+   "options": [
+    "ステレオ",
+    "テレビ",
+    "たんす"
+   ],
+   "correct": 1,
+   "text": "第2問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw10_tv",
+   "options": [
+    "ステレオ",
+    "テレビ",
+    "たんす"
+   ],
+   "correct": 1,
+   "text": "第2問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "テレビ　脚つきで、布のカバーをかけて大切に使いました",
+   "voice": "答えは、テレビ。脚つきで、布のカバーをかけて大切に使いました。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw11_washer",
+   "options": [
+    "かき氷機",
+    "ローラー付き洗濯機",
+    "脱穀機"
+   ],
+   "correct": 1,
+   "text": "第3問",
+   "voice": "第3問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw11_washer",
+   "options": [
+    "かき氷機",
+    "ローラー付き洗濯機",
+    "脱穀機"
+   ],
+   "correct": 1,
+   "text": "第3問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw11_washer",
+   "options": [
+    "かき氷機",
+    "ローラー付き洗濯機",
+    "脱穀機"
+   ],
+   "correct": 1,
+   "text": "第3問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "ローラー付き洗濯機　洗った服をローラーにはさみ、ハンドルを回してしぼりました",
+   "voice": "答えは、ローラーつきせんたくき。洗った服をローラーにはさみ、ハンドルを回してしぼりました。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw12_kayari",
+   "options": [
+    "蚊遣りぶた",
+    "花びん",
+    "貯金箱"
+   ],
+   "correct": 0,
+   "text": "第4問",
+   "voice": "第4問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw12_kayari",
+   "options": [
+    "蚊遣りぶた",
+    "花びん",
+    "貯金箱"
+   ],
+   "correct": 0,
+   "text": "第4問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw12_kayari",
+   "options": [
+    "蚊遣りぶた",
+    "花びん",
+    "貯金箱"
+   ],
+   "correct": 0,
+   "text": "第4問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "蚊遣りぶた　中に蚊取り線香を入れて、蚊をよけました",
+   "voice": "答えは、かやりぶた。中に蚊取り線香を入れて、蚊をよけました。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw13_soroban",
+   "options": [
+    "琴",
+    "すだれ",
+    "そろばん"
+   ],
+   "correct": 2,
+   "text": "第5問",
+   "voice": "第5問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw13_soroban",
+   "options": [
+    "琴",
+    "すだれ",
+    "そろばん"
+   ],
+   "correct": 2,
+   "text": "第5問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw13_soroban",
+   "options": [
+    "琴",
+    "すだれ",
+    "そろばん"
+   ],
+   "correct": 2,
+   "text": "第5問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "そろばん　珠をはじいて、計算をしました",
+   "voice": "答えは、そろばん。珠をはじいて、計算をしました。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw14_iron",
+   "options": [
+    "鉄びん",
+    "炭火アイロン",
+    "七輪"
+   ],
+   "correct": 1,
+   "text": "第6問",
+   "voice": "第6問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw14_iron",
+   "options": [
+    "鉄びん",
+    "炭火アイロン",
+    "七輪"
+   ],
+   "correct": 1,
+   "text": "第6問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw14_iron",
+   "options": [
+    "鉄びん",
+    "炭火アイロン",
+    "七輪"
+   ],
+   "correct": 1,
+   "text": "第6問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "炭火アイロン　中に炭火を入れて、熱で服のしわをのばしました",
+   "voice": "答えは、すみびアイロン。中に炭火を入れて、熱で服のしわをのばしました。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw15_bento",
+   "options": [
+    "アルマイトの弁当箱",
+    "筆箱",
+    "たばこ入れ"
+   ],
+   "correct": 0,
+   "text": "第7問",
+   "voice": "第7問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw15_bento",
+   "options": [
+    "アルマイトの弁当箱",
+    "筆箱",
+    "たばこ入れ"
+   ],
+   "correct": 0,
+   "text": "第7問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw15_bento",
+   "options": [
+    "アルマイトの弁当箱",
+    "筆箱",
+    "たばこ入れ"
+   ],
+   "correct": 0,
+   "text": "第7問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "アルマイトの弁当箱　ストーブの上で温められる、丈夫な弁当箱でした",
+   "voice": "答えは、アルマイトのべんとうばこ。ストーブの上で温められる、丈夫な弁当箱でした。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw16_milkbox",
+   "options": [
+    "巣箱",
+    "牛乳受け箱",
+    "郵便受け"
+   ],
+   "correct": 1,
+   "text": "第8問",
+   "voice": "第8問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw16_milkbox",
+   "options": [
+    "巣箱",
+    "牛乳受け箱",
+    "郵便受け"
+   ],
+   "correct": 1,
+   "text": "第8問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw16_milkbox",
+   "options": [
+    "巣箱",
+    "牛乳受け箱",
+    "郵便受け"
+   ],
+   "correct": 1,
+   "text": "第8問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "牛乳受け箱　毎朝、配達された牛乳びんがここに入りました",
+   "voice": "答えは、ぎゅうにゅううけばこ。毎朝、配達された牛乳びんがここに入りました。",
+   "pad": 1.4
+  },
+  {
+   "type": "title",
+   "text": "いくつ知っていましたか？",
+   "size": 96,
+   "sub": "思い出をコメントで教えてください",
+   "voice": "いくつ知っていましたか？使ったことのある道具や、思い出があれば、ぜひコメントで教えてください。"
+  }
+ ]
+}

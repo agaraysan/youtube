@@ -1,0 +1,513 @@
+{
+ "id": "brain_silhouette_002",
+ "series": "頭の体操",
+ "style": "shadow",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "シルエットクイズ",
+   "size": 130,
+   "sub": "このかげ、なんだろう？　その2",
+   "voice": "頭の体操、シルエットクイズ、その2です。黒いかげの形を見て、何のかげか当ててください。全部で12問です。"
+  },
+  {
+   "type": "choice",
+   "emoji": "🐻",
+   "options": [
+    "くま",
+    "たぬき",
+    "いぬ"
+   ],
+   "correct": 0,
+   "text": "第1問",
+   "voice": "第1問。このかげは、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "emoji": "🐻",
+   "options": [
+    "くま",
+    "たぬき",
+    "いぬ"
+   ],
+   "correct": 0,
+   "text": "第1問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "emoji": "🐻",
+   "options": [
+    "くま",
+    "たぬき",
+    "いぬ"
+   ],
+   "correct": 0,
+   "text": "第1問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、くまでした。",
+   "pad": 1.4,
+   "caption": "答えは「くま」"
+  },
+  {
+   "type": "choice",
+   "emoji": "🦉",
+   "options": [
+    "にわとり",
+    "ふくろう",
+    "はと"
+   ],
+   "correct": 1,
+   "text": "第2問",
+   "voice": "第2問。このかげは、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "emoji": "🦉",
+   "options": [
+    "にわとり",
+    "ふくろう",
+    "はと"
+   ],
+   "correct": 1,
+   "text": "第2問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "emoji": "🦉",
+   "options": [
+    "にわとり",
+    "ふくろう",
+    "はと"
+   ],
+   "correct": 1,
+   "text": "第2問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、ふくろうでした。",
+   "pad": 1.4,
+   "caption": "答えは「ふくろう」"
+  },
+  {
+   "type": "choice",
+   "emoji": "🐌",
+   "options": [
+    "かたつむり",
+    "かに",
+    "かめ"
+   ],
+   "correct": 0,
+   "text": "第3問",
+   "voice": "第3問。このかげは、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "emoji": "🐌",
+   "options": [
+    "かたつむり",
+    "かに",
+    "かめ"
+   ],
+   "correct": 0,
+   "text": "第3問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "emoji": "🐌",
+   "options": [
+    "かたつむり",
+    "かに",
+    "かめ"
+   ],
+   "correct": 0,
+   "text": "第3問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、かたつむりでした。",
+   "pad": 1.4,
+   "caption": "答えは「かたつむり」"
+  },
+  {
+   "type": "choice",
+   "emoji": "🐙",
+   "options": [
+    "くらげ",
+    "いか",
+    "たこ"
+   ],
+   "correct": 2,
+   "text": "第4問",
+   "voice": "第4問。このかげは、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "emoji": "🐙",
+   "options": [
+    "くらげ",
+    "いか",
+    "たこ"
+   ],
+   "correct": 2,
+   "text": "第4問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "emoji": "🐙",
+   "options": [
+    "くらげ",
+    "いか",
+    "たこ"
+   ],
+   "correct": 2,
+   "text": "第4問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、たこでした。",
+   "pad": 1.4,
+   "caption": "答えは「たこ」"
+  },
+  {
+   "type": "choice",
+   "emoji": "🦔",
+   "options": [
+    "たぬき",
+    "はりねずみ",
+    "ねずみ"
+   ],
+   "correct": 1,
+   "text": "第5問",
+   "voice": "第5問。このかげは、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "emoji": "🦔",
+   "options": [
+    "たぬき",
+    "はりねずみ",
+    "ねずみ"
+   ],
+   "correct": 1,
+   "text": "第5問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "emoji": "🦔",
+   "options": [
+    "たぬき",
+    "はりねずみ",
+    "ねずみ"
+   ],
+   "correct": 1,
+   "text": "第5問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、はりねずみでした。",
+   "pad": 1.4,
+   "caption": "答えは「はりねずみ」"
+  },
+  {
+   "type": "choice",
+   "emoji": "🐳",
+   "options": [
+    "くじら",
+    "いるか",
+    "さめ"
+   ],
+   "correct": 0,
+   "text": "第6問",
+   "voice": "第6問。このかげは、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "emoji": "🐳",
+   "options": [
+    "くじら",
+    "いるか",
+    "さめ"
+   ],
+   "correct": 0,
+   "text": "第6問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "emoji": "🐳",
+   "options": [
+    "くじら",
+    "いるか",
+    "さめ"
+   ],
+   "correct": 0,
+   "text": "第6問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、くじらでした。",
+   "pad": 1.4,
+   "caption": "答えは「くじら」"
+  },
+  {
+   "type": "choice",
+   "emoji": "🦜",
+   "options": [
+    "すずめ",
+    "からす",
+    "おうむ"
+   ],
+   "correct": 2,
+   "text": "第7問",
+   "voice": "第7問。このかげは、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "emoji": "🦜",
+   "options": [
+    "すずめ",
+    "からす",
+    "おうむ"
+   ],
+   "correct": 2,
+   "text": "第7問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "emoji": "🦜",
+   "options": [
+    "すずめ",
+    "からす",
+    "おうむ"
+   ],
+   "correct": 2,
+   "text": "第7問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、おうむでした。",
+   "pad": 1.4,
+   "caption": "答えは「おうむ」"
+  },
+  {
+   "type": "choice",
+   "emoji": "🚂",
+   "options": [
+    "船",
+    "機関車",
+    "バス"
+   ],
+   "correct": 1,
+   "text": "第8問",
+   "voice": "第8問。このかげは、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "emoji": "🚂",
+   "options": [
+    "船",
+    "機関車",
+    "バス"
+   ],
+   "correct": 1,
+   "text": "第8問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "emoji": "🚂",
+   "options": [
+    "船",
+    "機関車",
+    "バス"
+   ],
+   "correct": 1,
+   "text": "第8問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、機関車でした。",
+   "pad": 1.4,
+   "caption": "答えは「機関車」"
+  },
+  {
+   "type": "choice",
+   "emoji": "🎻",
+   "options": [
+    "ギター",
+    "バイオリン",
+    "しゃもじ"
+   ],
+   "correct": 1,
+   "text": "第9問",
+   "voice": "第9問。このかげは、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "emoji": "🎻",
+   "options": [
+    "ギター",
+    "バイオリン",
+    "しゃもじ"
+   ],
+   "correct": 1,
+   "text": "第9問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "emoji": "🎻",
+   "options": [
+    "ギター",
+    "バイオリン",
+    "しゃもじ"
+   ],
+   "correct": 1,
+   "text": "第9問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、バイオリンでした。",
+   "pad": 1.4,
+   "caption": "答えは「バイオリン」"
+  },
+  {
+   "type": "choice",
+   "emoji": "🔨",
+   "options": [
+    "かなづち",
+    "はさみ",
+    "スプーン"
+   ],
+   "correct": 0,
+   "text": "第10問",
+   "voice": "第10問。このかげは、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "emoji": "🔨",
+   "options": [
+    "かなづち",
+    "はさみ",
+    "スプーン"
+   ],
+   "correct": 0,
+   "text": "第10問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "emoji": "🔨",
+   "options": [
+    "かなづち",
+    "はさみ",
+    "スプーン"
+   ],
+   "correct": 0,
+   "text": "第10問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、かなづちでした。",
+   "pad": 1.4,
+   "caption": "答えは「かなづち」"
+  },
+  {
+   "type": "choice",
+   "emoji": "✈",
+   "options": [
+    "ひこうき",
+    "とり",
+    "ヘリコプター"
+   ],
+   "correct": 0,
+   "text": "第11問",
+   "voice": "第11問。このかげは、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "emoji": "✈",
+   "options": [
+    "ひこうき",
+    "とり",
+    "ヘリコプター"
+   ],
+   "correct": 0,
+   "text": "第11問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "emoji": "✈",
+   "options": [
+    "ひこうき",
+    "とり",
+    "ヘリコプター"
+   ],
+   "correct": 0,
+   "text": "第11問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、ひこうきでした。",
+   "pad": 1.4,
+   "caption": "答えは「ひこうき」"
+  },
+  {
+   "type": "choice",
+   "emoji": "🍍",
+   "options": [
+    "まつぼっくり",
+    "にんじん",
+    "パイナップル"
+   ],
+   "correct": 2,
+   "text": "第12問",
+   "voice": "第12問。このかげは、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "emoji": "🍍",
+   "options": [
+    "まつぼっくり",
+    "にんじん",
+    "パイナップル"
+   ],
+   "correct": 2,
+   "text": "第12問",
+   "think": true,
+   "seconds": 8
+  },
+  {
+   "type": "choice",
+   "emoji": "🍍",
+   "options": [
+    "まつぼっくり",
+    "にんじん",
+    "パイナップル"
+   ],
+   "correct": 2,
+   "text": "第12問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、パイナップルでした。",
+   "pad": 1.4,
+   "caption": "答えは「パイナップル」"
+  },
+  {
+   "type": "title",
+   "text": "何問わかりましたか？",
+   "size": 100,
+   "sub": "コメントで教えてください",
+   "voice": "何問わかりましたか？コメントで教えてください。毎日の頭の体操に、チャンネル登録もよろしくお願いします。"
+  }
+ ]
+}

@@ -1,0 +1,621 @@
+{
+ "id": "brain_fish_kanji_002",
+ "series": "頭の体操",
+ "style": "fish",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "魚へんの漢字 読めますか？",
+   "size": 100,
+   "sub": "3つの中から読み方を選ぼう　その2",
+   "voice": "頭の体操、魚へんの漢字クイズ、その2です。読み方を3つの中から選んでください。全部で12問です。"
+  },
+  {
+   "type": "choice",
+   "big": "鯉",
+   "size": 260,
+   "ruby": "こい",
+   "options": [
+    "こい",
+    "ふな",
+    "さけ"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第1問",
+   "voice": "第1問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鯉",
+   "size": 260,
+   "ruby": "こい",
+   "options": [
+    "こい",
+    "ふな",
+    "さけ"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第1問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "鯉",
+   "size": 260,
+   "ruby": "こい",
+   "options": [
+    "こい",
+    "ふな",
+    "さけ"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第1問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、こい。",
+   "pad": 1.4,
+   "caption": "鯉（こい）　こいのぼりでおなじみの川魚"
+  },
+  {
+   "type": "choice",
+   "big": "鮎",
+   "size": 260,
+   "ruby": "あゆ",
+   "options": [
+    "ます",
+    "あゆ",
+    "はぜ"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第2問",
+   "voice": "第2問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鮎",
+   "size": 260,
+   "ruby": "あゆ",
+   "options": [
+    "ます",
+    "あゆ",
+    "はぜ"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第2問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "鮎",
+   "size": 260,
+   "ruby": "あゆ",
+   "options": [
+    "ます",
+    "あゆ",
+    "はぜ"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第2問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、あゆ。",
+   "pad": 1.4,
+   "caption": "鮎（あゆ）　昔、この魚で占ったという言い伝えから「占」"
+  },
+  {
+   "type": "choice",
+   "big": "鯨",
+   "size": 260,
+   "ruby": "くじら",
+   "options": [
+    "しゃち",
+    "いるか",
+    "くじら"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第3問",
+   "voice": "第3問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鯨",
+   "size": 260,
+   "ruby": "くじら",
+   "options": [
+    "しゃち",
+    "いるか",
+    "くじら"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第3問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "鯨",
+   "size": 260,
+   "ruby": "くじら",
+   "options": [
+    "しゃち",
+    "いるか",
+    "くじら"
+   ],
+   "correct": 2,
+   "q": "この漢字、なんと読む？",
+   "text": "第3問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、くじら。",
+   "pad": 1.4,
+   "caption": "鯨（くじら）　「京」は大きいという意味。とても大きいから、という説"
+  },
+  {
+   "type": "choice",
+   "big": "鮫",
+   "size": 260,
+   "ruby": "さめ",
+   "options": [
+    "さめ",
+    "えい",
+    "たら"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第4問",
+   "voice": "第4問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鮫",
+   "size": 260,
+   "ruby": "さめ",
+   "options": [
+    "さめ",
+    "えい",
+    "たら"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第4問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "鮫",
+   "size": 260,
+   "ruby": "さめ",
+   "options": [
+    "さめ",
+    "えい",
+    "たら"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第4問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、さめ。",
+   "pad": 1.4,
+   "caption": "鮫（さめ）　するどい歯を持つ大きな魚"
+  },
+  {
+   "type": "choice",
+   "big": "鯰",
+   "size": 260,
+   "ruby": "なまず",
+   "options": [
+    "どじょう",
+    "なまず",
+    "うなぎ"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第5問",
+   "voice": "第5問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鯰",
+   "size": 260,
+   "ruby": "なまず",
+   "options": [
+    "どじょう",
+    "なまず",
+    "うなぎ"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第5問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "鯰",
+   "size": 260,
+   "ruby": "なまず",
+   "options": [
+    "どじょう",
+    "なまず",
+    "うなぎ"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第5問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、なまず。",
+   "pad": 1.4,
+   "caption": "鯰（なまず）　長いひげのある川魚"
+  },
+  {
+   "type": "choice",
+   "big": "鰐",
+   "size": 260,
+   "ruby": "わに",
+   "options": [
+    "わに",
+    "へび",
+    "かめ"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第6問",
+   "voice": "第6問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鰐",
+   "size": 260,
+   "ruby": "わに",
+   "options": [
+    "わに",
+    "へび",
+    "かめ"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第6問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "big": "鰐",
+   "size": 260,
+   "ruby": "わに",
+   "options": [
+    "わに",
+    "へび",
+    "かめ"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第6問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、わに。",
+   "pad": 1.4,
+   "caption": "鰐（わに）　魚ではないけれど、魚へん"
+  },
+  {
+   "type": "choice",
+   "big": "鮃",
+   "size": 260,
+   "ruby": "ひらめ",
+   "options": [
+    "かれい",
+    "ひらめ",
+    "こち"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第7問",
+   "voice": "第7問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鮃",
+   "size": 260,
+   "ruby": "ひらめ",
+   "options": [
+    "かれい",
+    "ひらめ",
+    "こち"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第7問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "鮃",
+   "size": 260,
+   "ruby": "ひらめ",
+   "options": [
+    "かれい",
+    "ひらめ",
+    "こち"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第7問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、ひらめ。",
+   "pad": 1.4,
+   "caption": "鮃（ひらめ）　「平」の字。平たい魚"
+  },
+  {
+   "type": "choice",
+   "big": "鱚",
+   "size": 260,
+   "ruby": "きす",
+   "options": [
+    "あじ",
+    "きす",
+    "めだか"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第8問",
+   "voice": "第8問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鱚",
+   "size": 260,
+   "ruby": "きす",
+   "options": [
+    "あじ",
+    "きす",
+    "めだか"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第8問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "鱚",
+   "size": 260,
+   "ruby": "きす",
+   "options": [
+    "あじ",
+    "きす",
+    "めだか"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第8問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、きす。",
+   "pad": 1.4,
+   "caption": "鱚（きす）　「喜」の字。天ぷらでおなじみ"
+  },
+  {
+   "type": "choice",
+   "big": "鱸",
+   "size": 260,
+   "ruby": "すずき",
+   "options": [
+    "ぶり",
+    "すずき",
+    "たい"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第9問",
+   "voice": "第9問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鱸",
+   "size": 260,
+   "ruby": "すずき",
+   "options": [
+    "ぶり",
+    "すずき",
+    "たい"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第9問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "鱸",
+   "size": 260,
+   "ruby": "すずき",
+   "options": [
+    "ぶり",
+    "すずき",
+    "たい"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第9問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、すずき。",
+   "pad": 1.4,
+   "caption": "鱸（すずき）　夏においしい白身の魚"
+  },
+  {
+   "type": "choice",
+   "big": "鰊",
+   "size": 260,
+   "ruby": "にしん",
+   "options": [
+    "にしん",
+    "いわし",
+    "さんま"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第10問",
+   "voice": "第10問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鰊",
+   "size": 260,
+   "ruby": "にしん",
+   "options": [
+    "にしん",
+    "いわし",
+    "さんま"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第10問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "鰊",
+   "size": 260,
+   "ruby": "にしん",
+   "options": [
+    "にしん",
+    "いわし",
+    "さんま"
+   ],
+   "correct": 0,
+   "q": "この漢字、なんと読む？",
+   "text": "第10問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、にしん。",
+   "pad": 1.4,
+   "caption": "鰊（にしん）　春に北の海でとれる魚。数の子はこの魚の卵"
+  },
+  {
+   "type": "choice",
+   "big": "鰰",
+   "size": 260,
+   "ruby": "はたはた",
+   "options": [
+    "ほっけ",
+    "はたはた",
+    "めばる"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第11問",
+   "voice": "第11問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鰰",
+   "size": 260,
+   "ruby": "はたはた",
+   "options": [
+    "ほっけ",
+    "はたはた",
+    "めばる"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第11問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "鰰",
+   "size": 260,
+   "ruby": "はたはた",
+   "options": [
+    "ほっけ",
+    "はたはた",
+    "めばる"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第11問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、はたはた。",
+   "pad": 1.4,
+   "caption": "鰰（はたはた）　「神」の字。秋田の冬の名物"
+  },
+  {
+   "type": "choice",
+   "big": "鯱",
+   "size": 260,
+   "ruby": "しゃち",
+   "options": [
+    "さめ",
+    "しゃち",
+    "くじら"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第12問",
+   "voice": "第12問。この漢字は、なんと読むでしょう。"
+  },
+  {
+   "type": "choice",
+   "big": "鯱",
+   "size": 260,
+   "ruby": "しゃち",
+   "options": [
+    "さめ",
+    "しゃち",
+    "くじら"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第12問",
+   "think": true,
+   "seconds": 12
+  },
+  {
+   "type": "choice",
+   "big": "鯱",
+   "size": 260,
+   "ruby": "しゃち",
+   "options": [
+    "さめ",
+    "しゃち",
+    "くじら"
+   ],
+   "correct": 1,
+   "q": "この漢字、なんと読む？",
+   "text": "第12問 答え",
+   "reveal": true,
+   "chime": true,
+   "voice": "答えは、しゃち。",
+   "pad": 1.4,
+   "caption": "鯱（しゃち）　お城の屋根の、しゃちほこにも使う字"
+  },
+  {
+   "type": "title",
+   "text": "何問読めましたか？",
+   "size": 100,
+   "sub": "コメントで教えてください",
+   "voice": "何問読めましたか？コメントで教えてください。チャンネル登録もよろしくお願いします。"
+  }
+ ]
+}

@@ -1,0 +1,413 @@
+{
+ "id": "brain_kanji_odd_002",
+ "series": "頭の体操",
+ "style": "kanji",
+ "bg": "assets/generated/br_bg_washi",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "漢字の仲間はずれ探し",
+   "size": 110,
+   "sub": "1つだけちがう漢字をさがそう　その2",
+   "voice": "頭の体操、漢字の仲間はずれ探し、その2です。同じ漢字がならぶ中に、1つだけちがう漢字がまじっています。全部で12問。後半ほど、むずかしくなります。"
+  },
+  {
+   "type": "grid",
+   "base": "天",
+   "odd": "夫",
+   "rows": 5,
+   "cols": 9,
+   "text": "第1問",
+   "voice": "第1問。この中に、1つだけちがう漢字があります。さがしてみてください。"
+  },
+  {
+   "type": "grid",
+   "base": "天",
+   "odd": "夫",
+   "rows": 5,
+   "cols": 9,
+   "text": "第1問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "grid",
+   "base": "天",
+   "odd": "夫",
+   "rows": 5,
+   "cols": 9,
+   "text": "第1問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「夫」は、上の横線をつきぬけます",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "午",
+   "odd": "牛",
+   "rows": 5,
+   "cols": 10,
+   "text": "第2問",
+   "voice": "第2問。どこにちがう漢字があるでしょう。"
+  },
+  {
+   "type": "grid",
+   "base": "午",
+   "odd": "牛",
+   "rows": 5,
+   "cols": 10,
+   "text": "第2問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "grid",
+   "base": "午",
+   "odd": "牛",
+   "rows": 5,
+   "cols": 10,
+   "text": "第2問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「牛」は、縦の線が上につきぬけます",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "今",
+   "odd": "令",
+   "rows": 6,
+   "cols": 10,
+   "text": "第3問",
+   "voice": "第3問。1つだけ、ちがう漢字がまじっています。"
+  },
+  {
+   "type": "grid",
+   "base": "今",
+   "odd": "令",
+   "rows": 6,
+   "cols": 10,
+   "text": "第3問",
+   "think": true,
+   "seconds": 18
+  },
+  {
+   "type": "grid",
+   "base": "今",
+   "odd": "令",
+   "rows": 6,
+   "cols": 10,
+   "text": "第3問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「令」は、下が「マ」の形です",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "矢",
+   "odd": "失",
+   "rows": 6,
+   "cols": 11,
+   "text": "第4問",
+   "voice": "第4問。さあ、見つけられるかな。"
+  },
+  {
+   "type": "grid",
+   "base": "矢",
+   "odd": "失",
+   "rows": 6,
+   "cols": 11,
+   "text": "第4問",
+   "think": true,
+   "seconds": 18
+  },
+  {
+   "type": "grid",
+   "base": "矢",
+   "odd": "失",
+   "rows": 6,
+   "cols": 11,
+   "text": "第4問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「失」は、縦の線が上につきぬけます",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "休",
+   "odd": "体",
+   "rows": 6,
+   "cols": 12,
+   "text": "第5問",
+   "voice": "第5問。この中に、1つだけちがう漢字があります。さがしてみてください。"
+  },
+  {
+   "type": "grid",
+   "base": "休",
+   "odd": "体",
+   "rows": 6,
+   "cols": 12,
+   "text": "第5問",
+   "think": true,
+   "seconds": 20
+  },
+  {
+   "type": "grid",
+   "base": "休",
+   "odd": "体",
+   "rows": 6,
+   "cols": 12,
+   "text": "第5問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「体」は、右側が「本」です",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "刀",
+   "odd": "刃",
+   "rows": 7,
+   "cols": 12,
+   "text": "第6問",
+   "voice": "第6問。どこにちがう漢字があるでしょう。"
+  },
+  {
+   "type": "grid",
+   "base": "刀",
+   "odd": "刃",
+   "rows": 7,
+   "cols": 12,
+   "text": "第6問",
+   "think": true,
+   "seconds": 20
+  },
+  {
+   "type": "grid",
+   "base": "刀",
+   "odd": "刃",
+   "rows": 7,
+   "cols": 12,
+   "text": "第6問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「刃」は、点が1つ多い",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "title",
+   "text": "ここから後半",
+   "size": 110,
+   "sub": "よく似た漢字が出てきます",
+   "voice": "ここから後半です。もっとよく似た漢字が出てきますよ。"
+  },
+  {
+   "type": "grid",
+   "base": "見",
+   "odd": "貝",
+   "rows": 7,
+   "cols": 13,
+   "text": "第7問",
+   "voice": "第7問。1つだけ、ちがう漢字がまじっています。"
+  },
+  {
+   "type": "grid",
+   "base": "見",
+   "odd": "貝",
+   "rows": 7,
+   "cols": 13,
+   "text": "第7問",
+   "think": true,
+   "seconds": 22
+  },
+  {
+   "type": "grid",
+   "base": "見",
+   "odd": "貝",
+   "rows": 7,
+   "cols": 13,
+   "text": "第7問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「貝」は、下が2本の短い線です",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "待",
+   "odd": "侍",
+   "rows": 7,
+   "cols": 13,
+   "text": "第8問",
+   "voice": "第8問。さあ、見つけられるかな。"
+  },
+  {
+   "type": "grid",
+   "base": "待",
+   "odd": "侍",
+   "rows": 7,
+   "cols": 13,
+   "text": "第8問",
+   "think": true,
+   "seconds": 22
+  },
+  {
+   "type": "grid",
+   "base": "待",
+   "odd": "侍",
+   "rows": 7,
+   "cols": 13,
+   "text": "第8問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「侍」はにんべん、「待」はぎょうにんべん",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "緑",
+   "odd": "録",
+   "rows": 7,
+   "cols": 14,
+   "text": "第9問",
+   "voice": "第9問。この中に、1つだけちがう漢字があります。さがしてみてください。"
+  },
+  {
+   "type": "grid",
+   "base": "緑",
+   "odd": "録",
+   "rows": 7,
+   "cols": 14,
+   "text": "第9問",
+   "think": true,
+   "seconds": 25
+  },
+  {
+   "type": "grid",
+   "base": "緑",
+   "odd": "録",
+   "rows": 7,
+   "cols": 14,
+   "text": "第9問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「緑」はいとへん、「録」はかねへん",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "暦",
+   "odd": "歴",
+   "rows": 8,
+   "cols": 14,
+   "text": "第10問",
+   "voice": "第10問。どこにちがう漢字があるでしょう。"
+  },
+  {
+   "type": "grid",
+   "base": "暦",
+   "odd": "歴",
+   "rows": 8,
+   "cols": 14,
+   "text": "第10問",
+   "think": true,
+   "seconds": 25
+  },
+  {
+   "type": "grid",
+   "base": "暦",
+   "odd": "歴",
+   "rows": 8,
+   "cols": 14,
+   "text": "第10問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「暦」は中が「日」、「歴」は中が「止」",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "崇",
+   "odd": "祟",
+   "rows": 8,
+   "cols": 15,
+   "text": "第11問",
+   "voice": "第11問。1つだけ、ちがう漢字がまじっています。"
+  },
+  {
+   "type": "grid",
+   "base": "崇",
+   "odd": "祟",
+   "rows": 8,
+   "cols": 15,
+   "text": "第11問",
+   "think": true,
+   "seconds": 30
+  },
+  {
+   "type": "grid",
+   "base": "崇",
+   "odd": "祟",
+   "rows": 8,
+   "cols": 15,
+   "text": "第11問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「崇」は上が「山」、「祟」は上が「出」",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "壁",
+   "odd": "璧",
+   "rows": 8,
+   "cols": 15,
+   "text": "第12問",
+   "voice": "第12問。さあ、見つけられるかな。"
+  },
+  {
+   "type": "grid",
+   "base": "壁",
+   "odd": "璧",
+   "rows": 8,
+   "cols": 15,
+   "text": "第12問",
+   "think": true,
+   "seconds": 30
+  },
+  {
+   "type": "grid",
+   "base": "壁",
+   "odd": "璧",
+   "rows": 8,
+   "cols": 15,
+   "text": "第12問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「壁」は下が「土」、「璧」は下が「玉」",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "title",
+   "text": "何問わかりましたか？",
+   "size": 100,
+   "sub": "コメントで教えてください",
+   "voice": "何問わかりましたか？よかったらコメントで教えてください。毎日の頭の体操に、チャンネル登録もしていただけるとうれしいです。"
+  }
+ ]
+}
