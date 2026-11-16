@@ -1,8 +1,10 @@
 {
-  "id": "ex012_02_moon",
-  "status": "ok",
-  "via": "codex-cloud",
-  "files": [
-    "assets/generated/ex012_02_moon/moon.png"
-  ]
+ "id": "ex012_02_moon",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "moon.png"
+ ],
+ "at_utc": "2026-11-16T15:25:26.771630Z"
 }
