@@ -1,0 +1,30 @@
+name: explainer-images
+# AI解説動画の試作用。requests/explainer_images/*.json を push すると Codex が描き、1枚ごとに同じ枝へコミットする。
+# 共通の codex-image とは順番待ちを分けている（待ちの取り合いで取り消されないように）。
+on:
+  push:
+    paths: ["requests/explainer_images/*.json"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: { group: "explainer-images-${{ github.ref_name }}", cancel-in-progress: false }
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: "${{ github.ref_name }}" }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm install -g @openai/codex && pip install -q pillow
+      - name: Sign in to Codex (ChatGPT login)
+        env: { CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}" }
+        run: |
+          if [ -z "$CODEX_AUTH_JSON" ]; then echo "CODEX_AUTH_JSON がまだありません"; exit 1; fi
+          mkdir -p ~/.codex && printenv CODEX_AUTH_JSON > ~/.codex/auth.json && chmod 600 ~/.codex/auth.json
+      - name: Generate
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 scripts/explainer/codex_images.py
