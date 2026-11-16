@@ -1,8 +1,10 @@
 {
-  "id": "ex031_03_nail",
-  "status": "ok",
-  "via": "codex-cloud",
-  "files": [
-    "assets/generated/ex031_03_nail/image.png"
-  ]
+ "id": "ex031_03_nail",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "image.png"
+ ],
+ "at_utc": "2026-11-16T23:51:16.093978Z"
 }
