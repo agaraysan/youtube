@@ -91,9 +91,10 @@ def render(ep, out_dir, no_voice=False):
             r = r[0]
         else:
             length = sc.get("seconds", voice_len + sc.get("voice_delay", 0.4) + sc.get("pad", 0.8))
+            length = max(length, sc.get("min_seconds", 0))
         if sc.get("chime"):
             sfx_parts.append((t, chime))
-        kind = "title" if sc["type"] == "title" else ("reveal" if sc.get("reveal") or sc.get("chime") else "plain")
+        kind = "title" if sc["type"] == "title" and not sc.get("end") else ("reveal" if sc.get("reveal") or sc.get("chime") else "plain")
         plan.append((kind, r, length))
         t += length
 

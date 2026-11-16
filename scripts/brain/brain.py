@@ -581,11 +581,47 @@ def scene_title(sc, ep, size):
     return im.convert("RGB")
 
 
+def scene_endcard(sc, ep, size):
+    """終わりの画面：左に「何問できた？」と登録のお願い、右に次の動画と登録ボタンの枠（YouTube の終了画面を置く場所）。"""
+    W, H = size
+    u = H / 1080
+    im = paper(size)
+    acc = R.accent(ep)
+    d = ImageDraw.Draw(im)
+    d.rectangle([0, 0, 34 * u, H], fill=acc)
+    fs = 84 * u
+    while d.textlength(sc.get("text", ""), font=serif(fs)) > 800 * u:
+        fs *= 0.92
+    d.text((140 * u, 250 * u), sc.get("text", "何問わかりましたか？"), font=serif(fs), fill=INK, anchor="lm")
+    d.text((140 * u, 360 * u), sc.get("sub", "コメントで教えてください"), font=R.font(48 * u, "bold"), fill=(90, 90, 100), anchor="lm")
+    # 登録のお願い
+    R.shadow_box(im, (140 * u, 470 * u, 860 * u, 640 * u), int(24 * u), acc + (255,), blur=16, offset=8)
+    d = ImageDraw.Draw(im)
+    d.text((500 * u, 525 * u), "チャンネル登録", font=R.font(64 * u, "heavy"), fill=(255, 255, 255), anchor="mm")
+    d.text((500 * u, 600 * u), "毎日の頭の体操をお届けします", font=R.font(36 * u, "bold"), fill=(255, 255, 255), anchor="mm")
+    d.text((140 * u, 760 * u), "▶ 次の問題もどうぞ", font=R.font(46 * u, "heavy"), fill=acc, anchor="lm")
+    # 終了画面の要素を置く枠（動画と登録ボタン）。うすい点線で場所だけ示す
+    def dashed(box):
+        x0, y0, x1, y1 = box
+        step = 22 * u
+        for x in range(int(x0), int(x1), int(step)):
+            d.line([(x, y0), (min(x + step / 2, x1), y0)], fill=(200, 195, 185), width=int(4 * u))
+            d.line([(x, y1), (min(x + step / 2, x1), y1)], fill=(200, 195, 185), width=int(4 * u))
+        for y in range(int(y0), int(y1), int(step)):
+            d.line([(x0, y), (x0, min(y + step / 2, y1))], fill=(200, 195, 185), width=int(4 * u))
+            d.line([(x1, y), (x1, min(y + step / 2, y1))], fill=(200, 195, 185), width=int(4 * u))
+    dashed((1000 * u, 200 * u, 1780 * u, 640 * u))       # おすすめ動画
+    d.ellipse([1290 * u, 700 * u, 1490 * u, 900 * u], outline=(200, 195, 185), width=int(4 * u))  # 登録ボタン
+    return im.convert("RGB")
+
+
 _orig = R.render_scene
 
 
 def render_scene(sc, ep, size):
     t = sc["type"]
+    if t == "title" and sc.get("end"):
+        return scene_endcard(sc, ep, size)
     if t == "title":
         return scene_title(sc, ep, size)
     if t == "grid":
@@ -638,6 +674,15 @@ def main(spec, out_dir, no_voice=False):
             if not got:
                 raise SystemExit(f"絵がまだ届いていないので、今回は作りません: {sc['image']}")
             sc["image"] = got
+    last = ep["scenes"][-1]
+    if last.get("type") == "title":
+        last["end"] = True
+        v = last.get("voice", "")
+        if "チャンネル登録" not in v:
+            v += "毎日の頭の体操に、ぜひチャンネル登録をお願いします。"
+        last["voice"] = v + "また次の問題で、お会いしましょう。"
+        last.setdefault("pad", 0)
+        last["min_seconds"] = 16
     if bgm_playlist(ep.get("style"), 60) and "bgm_volume" not in ep:
         ep["bgm_volume"] = BGM_VOLUME
     import motion  # 1コマずつ描く書き出し（場面のつなぎ・なめらかなタイマー・表紙の動き）
