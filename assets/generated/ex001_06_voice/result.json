@@ -1,0 +1,11 @@
+{
+ "id": "ex001_06_voice",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "image.png"
+ ],
+ "check": null,
+ "at_utc": "2026-11-16T03:49:06.213934Z"
+}
