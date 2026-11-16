@@ -203,8 +203,8 @@ def render_scene(sc, ep, size):
         for k in range(n, 0, -1):
             f = im.copy()
             d = ImageDraw.Draw(f)
-            R = int(H * 0.09)
-            cx, cy = W - R - 50, R + 50
+            R = int(H * (0.07 if pair else 0.09))
+            cx, cy = (W - R - 30, R + 10) if pair else (W - R - 50, R + 50)
             d.ellipse([cx - R, cy - R, cx + R, cy + R], fill=(255, 255, 255, 235), outline=(30, 90, 60), width=8)
             d.pieslice([cx - R + 14, cy - R + 14, cx + R - 14, cy + R - 14], -90, -90 + 360 * k / n, fill=(70, 170, 110))
             ft = font(int(R * 0.9))

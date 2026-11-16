@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
       - name: Install Codex CLI
-        run: npm install -g @openai/codex
+        run: npm install -g @openai/codex && pip install -q pillow
       # Codex は ChatGPT のログイン（PCの ~/.codex/auth.json）で動かす。APIキーは音声専用なので使わない。
       - name: Sign in to Codex (ChatGPT login)
         env: { CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}" }
@@ -26,7 +26,7 @@ jobs:
         if: env.SKIP != '1'
         run: python3 scripts/codex_image.py
       - name: Save results
-        if: env.SKIP != '1'
+        if: always() && env.SKIP != '1'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
