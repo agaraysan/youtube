@@ -66,7 +66,13 @@ jobs:
       - name: Make
         run: |
           git pull -q --rebase origin "${GITHUB_REF_NAME}" || true   # 先に終わった実行の素材を取り込む
-          python3 scripts/art/run.py art/${{ matrix.id }}.json out
+          f=art/${{ matrix.id }}.json
+          if [ "$(jq -r '.frame // false' $f)" = true ]; then
+            # 枠をくぐるズーム：絵は zoom_frame.py（中央のずれを直す）で作り、描画は同じ
+            python3 scripts/art/zoom_frame.py $f && python3 scripts/art/run.py $f out --render-only
+          else
+            python3 scripts/art/run.py $f out
+          fi
       - name: Save materials
         if: always()
         run: |

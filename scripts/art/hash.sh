@@ -3,4 +3,5 @@
 f="$1"; d=$(dirname "$0")
 t=$(jq -r .type "$f")
 case "$t" in zoom) m="zoom_chain.py zoom_render.py";; *) m="$t.py";; esac
+[ "$(jq -r '.frame // false' "$f")" = true ] && m="zoom_frame.py zoom_render.py"
 (cd "$d" && cat common.py ambient.py run.py $m) | cat "$f" - | sha1sum | cut -c1-12
