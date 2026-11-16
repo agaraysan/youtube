@@ -1,0 +1,61 @@
+{
+ "id": "ex024_drink_rank_short",
+ "title": "冬に飲みたい あったかドリンクランキングTOP5（独断）",
+ "bgm_track": "little_fish",
+ "size": [
+  1080,
+  1920
+ ],
+ "meta": {
+  "title": "冬に飲みたい！あったかドリンクランキングTOP5 #Shorts",
+  "tags": [
+   "ランキング",
+   "冬",
+   "ドリンク",
+   "ホットドリンク",
+   "おうちカフェ"
+  ]
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex011_00_title",
+   "telop": "冬に飲みたい\nあったかドリンクTOP5",
+   "voice": "寒い日にほっとする、あったかい飲みもの。今日は、わたしの独断で選んだ、冬に飲みたいドリンク、トップ5を紹介します。"
+  },
+  {
+   "image": "assets/generated/ex011_05_hojicha",
+   "rank": 5,
+   "telop": "ほうじ茶ラテ",
+   "voice": "第5位は、ほうじ茶ラテ。香ばしい香りと、ミルクのやさしい甘さ。夜でも飲みやすい一杯です。"
+  },
+  {
+   "image": "assets/generated/ex011_04_lemon",
+   "rank": 4,
+   "telop": "ホットレモン",
+   "voice": "第4位は、ホットレモン。すっきりした酸味で、体がぽかぽか温まります。はちみつを入れるのもおすすめ。"
+  },
+  {
+   "image": "assets/generated/ex011_03_amazake",
+   "rank": 3,
+   "telop": "甘酒",
+   "voice": "第3位は、甘酒。とろりとした、やさしい甘さ。しょうがを少し入れると、さらに温まります。"
+  },
+  {
+   "image": "assets/generated/ex011_02_yuzu",
+   "rank": 2,
+   "telop": "ゆず茶",
+   "voice": "第2位は、ゆず茶。さわやかな香りに、思わずほっとします。冬にぴったりの味です。"
+  },
+  {
+   "image": "assets/generated/ex011_01_cocoa",
+   "rank": 1,
+   "telop": "ホットココア",
+   "voice": "そして第1位は、ホットココア！ 甘くて、こくがあって、心までほっとする。冬の定番です。"
+  },
+  {
+   "image": "assets/generated/ex011_06_outro",
+   "telop": "あなたの冬の定番は？",
+   "voice": "あなたの冬の定番ドリンクは、何ですか？ ぜひ、コメントで教えてください。"
+  }
+ ]
+}

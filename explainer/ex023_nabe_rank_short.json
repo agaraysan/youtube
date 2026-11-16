@@ -1,0 +1,62 @@
+{
+ "id": "ex023_nabe_rank_short",
+ "title": "冬に食べたい鍋ランキングTOP5（独断）",
+ "bgm_track": "estela",
+ "size": [
+  1080,
+  1920
+ ],
+ "bgm_style": "match",
+ "scenes": [
+  {
+   "image": "assets/generated/ex002_00_title",
+   "telop": "冬に食べたい鍋\nランキングTOP5",
+   "voice": "寒い日に、無性に食べたくなる鍋。今日は、わたしの独断で選んだ、冬に食べたい鍋ランキング、トップ5を発表します。"
+  },
+  {
+   "image": "assets/generated/ex002_05_kimchi",
+   "rank": 5,
+   "telop": "キムチ鍋",
+   "voice": "第5位は、キムチ鍋。ピリッと辛くて、体の芯から温まります。シメのラーメンも最高です。"
+  },
+  {
+   "image": "assets/generated/ex002_04_tonyu",
+   "rank": 4,
+   "telop": "豆乳鍋",
+   "voice": "第4位は、豆乳鍋。まろやかで、やさしい味。野菜がたっぷり食べられます。"
+  },
+  {
+   "image": "assets/generated/ex002_03_motsu",
+   "rank": 3,
+   "telop": "もつ鍋",
+   "voice": "第3位は、もつ鍋。ぷるぷるのもつと、山盛りのキャベツとにら。にんにくの香りが、たまりません。"
+  },
+  {
+   "image": "assets/generated/ex002_02_sukiyaki",
+   "rank": 2,
+   "telop": "すき焼き",
+   "voice": "第2位は、すき焼き。甘辛い割り下に、とろける牛肉。溶き卵にくぐらせて、どうぞ。"
+  },
+  {
+   "image": "assets/generated/ex002_01_yosenabe",
+   "rank": 1,
+   "telop": "寄せ鍋",
+   "voice": "そして第1位は、寄せ鍋！ 肉も魚も野菜も、好きなものを入れられて、みんなで囲めるのが一番の魅力です。"
+  },
+  {
+   "image": "assets/generated/ex002_06_outro",
+   "telop": "あなたの推し鍋は？",
+   "voice": "あなたの一番好きな鍋は、何ですか？ ぜひ、コメントで教えてください。"
+  }
+ ],
+ "meta": {
+  "title": "冬に食べたい鍋ランキングTOP5【独断】 #Shorts",
+  "tags": [
+   "ランキング",
+   "鍋",
+   "冬",
+   "鍋料理",
+   "グルメ"
+  ]
+ }
+}

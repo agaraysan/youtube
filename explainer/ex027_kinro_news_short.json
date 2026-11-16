@@ -1,0 +1,49 @@
+{
+ "id": "ex027_kinro_news_short",
+ "title": "勤労感謝の日ってどんな日？",
+ "bgm_track": "cruise",
+ "size": [
+  1080,
+  1920
+ ],
+ "caption_style": "news",
+ "news_label": "季節の解説",
+ "voice_instructions": "ニュース番組のキャスターのように、はっきり、落ち着いた自然な日本語で話してください。",
+ "meta": {
+  "title": "勤労感謝の日（11月23日）ってどんな日？由来をやさしく解説 #Shorts",
+  "tags": [
+   "勤労感謝の日",
+   "祝日",
+   "由来",
+   "雑学",
+   "季節の話題"
+  ]
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex018_00_city",
+   "telop": "勤労感謝の日って\nどんな日？",
+   "voice": "こんにちは。今日は、季節の話題です。11月23日は、勤労感謝の日です。"
+  },
+  {
+   "image": "assets/generated/ex018_01_work",
+   "telop": "働くことに感謝する日",
+   "voice": "法律では、勤労をたっとび、生産を祝い、国民たがいに感謝しあう日、とされています。"
+  },
+  {
+   "image": "assets/generated/ex018_02_harvest",
+   "telop": "もとは収穫を祝う行事",
+   "voice": "もとになったのは、その年の収穫を祝う、新嘗祭という行事。1948年に、今の勤労感謝の日になりました。"
+  },
+  {
+   "image": "assets/generated/ex018_03_thanks",
+   "telop": "身近な人に「ありがとう」",
+   "voice": "家族や、身近で働く人に、ありがとうを伝えてみる。そんな一日にしてみてはいかがでしょうか。"
+  },
+  {
+   "image": "assets/generated/ex018_04_sunset",
+   "telop": "お疲れさまでした",
+   "voice": "毎日はたらく、すべての人に、お疲れさまでした。季節の話題でした。"
+  }
+ ]
+}

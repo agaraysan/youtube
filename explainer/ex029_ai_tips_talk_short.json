@@ -1,0 +1,129 @@
+{
+ "id": "ex029_ai_tips_talk_short",
+ "title": "AIへの頼み方 3つのコツ（掛け合い）",
+ "bgm_track": "cruise",
+ "size": [
+  1080,
+  1920
+ ],
+ "bgm_style": "riddle",
+ "bgm_volume": 0.11,
+ "chapters": {
+  "1": "目的を伝える",
+  "2": "条件を具体的に",
+  "3": "お手本を見せる"
+ },
+ "cast": {
+  "sora": {
+   "name": "ソラ",
+   "voice": "echo",
+   "color": [
+    60,
+    150,
+    255
+   ],
+   "side": "left",
+   "instructions": "元気で素直な、若い男性の声。自然な日本語で、会話のように話してください。"
+  },
+  "haru": {
+   "name": "ハル先生",
+   "voice": "nova",
+   "color": [
+    255,
+    140,
+    60
+   ],
+   "side": "right",
+   "instructions": "落ち着いた、やさしい先生のように。自然な日本語で、会話のように話してください。"
+  }
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex004p_00_room",
+   "telop": "AIへの頼み方\n3つのコツ",
+   "lines": [
+    {
+     "who": "sora",
+     "text": "先生、AIに質問しても、なんだかイマイチな答えしか返ってこないんです。"
+    },
+    {
+     "who": "haru",
+     "text": "それは、頼み方を少し変えるだけで、ぐっと良くなりますよ。"
+    }
+   ]
+  },
+  {
+   "image": "assets/generated/ex004p_01_target",
+   "chapter": "1",
+   "telop": "目的を伝える",
+   "lines": [
+    {
+     "who": "haru",
+     "text": "1つ目は、何のために使うのかを伝えることです。"
+    },
+    {
+     "who": "sora",
+     "text": "目的、ですか？"
+    },
+    {
+     "who": "haru",
+     "text": "メールを書いて、ではなく、納期が遅れるおわびのメールを書いて、と頼むんです。"
+    }
+   ]
+  },
+  {
+   "image": "assets/generated/ex004p_02_checklist",
+   "chapter": "2",
+   "telop": "条件を具体的に",
+   "lines": [
+    {
+     "who": "haru",
+     "text": "2つ目は、条件をはっきり書くこと。文字数や、読む相手を決めておくと、ぶれません。"
+    },
+    {
+     "who": "sora",
+     "text": "小学生にもわかるように、200文字で、みたいな感じですね！"
+    }
+   ]
+  },
+  {
+   "image": "assets/generated/ex004p_03_example",
+   "chapter": "3",
+   "telop": "お手本を見せる",
+   "lines": [
+    {
+     "who": "haru",
+     "text": "3つ目は、お手本を見せること。こんな感じで、と例を貼ると、雰囲気を合わせてくれます。"
+    },
+    {
+     "who": "sora",
+     "text": "なるほど。人に頼むときと、同じなんですね。"
+    }
+   ]
+  },
+  {
+   "image": "assets/generated/ex004p_04_sunset",
+   "telop": "目的・条件・お手本",
+   "lines": [
+    {
+     "who": "haru",
+     "text": "その通り。目的、条件、お手本。この3つを意識してみてください。"
+    },
+    {
+     "who": "sora",
+     "text": "さっそく、試してみます！"
+    }
+   ]
+  }
+ ],
+ "meta": {
+  "title": "AIへの頼み方 3つのコツ【これだけで答えが変わる】 #Shorts",
+  "tags": [
+   "ChatGPT",
+   "AI",
+   "プロンプト",
+   "使い方",
+   "コツ"
+  ]
+ }
+}

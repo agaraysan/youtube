@@ -1,0 +1,109 @@
+{
+ "id": "ex021_capital_quiz_short",
+ "title": "世界の首都 3択クイズ",
+ "bgm_track": "estela",
+ "size": [
+  1080,
+  1920
+ ],
+ "chapters": {
+  "1": "オーストラリア",
+  "2": "カナダ",
+  "3": "ブラジル"
+ },
+ "chapter_label": "Q",
+ "meta": {
+  "title": "【3択クイズ】意外と間違える！世界の首都クイズ #Shorts",
+  "tags": [
+   "クイズ",
+   "3択クイズ",
+   "首都",
+   "地理",
+   "脳トレ"
+  ]
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex013_00_title",
+   "telop": "世界の首都\n3択クイズ",
+   "voice": "意外と間違えやすい、世界の首都の3択クイズです。全部わかるかな？"
+  },
+  {
+   "image": "assets/generated/ex013_01_q",
+   "chapter": "1",
+   "telop": "オーストラリアの首都は？",
+   "choices": [
+    "A シドニー",
+    "B キャンベラ",
+    "C メルボルン"
+   ],
+   "countdown": 3,
+   "voice": "第1問。オーストラリアの首都は、どこでしょう？"
+  },
+  {
+   "image": "assets/generated/ex013_01_a",
+   "chapter": "1",
+   "telop": "正解は キャンベラ",
+   "choices": [
+    "A シドニー",
+    "B キャンベラ",
+    "C メルボルン"
+   ],
+   "reveal": 1,
+   "voice": "正解は、B、キャンベラ。首都にするために計画してつくられた町です。"
+  },
+  {
+   "image": "assets/generated/ex013_02_q",
+   "chapter": "2",
+   "telop": "カナダの首都は？",
+   "choices": [
+    "A トロント",
+    "B バンクーバー",
+    "C オタワ"
+   ],
+   "countdown": 3,
+   "voice": "第2問。カナダの首都は、どこでしょう？"
+  },
+  {
+   "image": "assets/generated/ex013_02_a",
+   "chapter": "2",
+   "telop": "正解は オタワ",
+   "choices": [
+    "A トロント",
+    "B バンクーバー",
+    "C オタワ"
+   ],
+   "reveal": 2,
+   "voice": "正解は、C、オタワ。大きな都市のトロントではないんです。"
+  },
+  {
+   "image": "assets/generated/ex013_03_q",
+   "chapter": "3",
+   "telop": "ブラジルの首都は？",
+   "choices": [
+    "A リオデジャネイロ",
+    "B ブラジリア",
+    "C サンパウロ"
+   ],
+   "countdown": 3,
+   "voice": "第3問。ブラジルの首都は、どこでしょう？"
+  },
+  {
+   "image": "assets/generated/ex013_03_a",
+   "chapter": "3",
+   "telop": "正解は ブラジリア",
+   "choices": [
+    "A リオデジャネイロ",
+    "B ブラジリア",
+    "C サンパウロ"
+   ],
+   "reveal": 1,
+   "voice": "正解は、B、ブラジリア。こちらも、首都として新しくつくられた町です。"
+  },
+  {
+   "image": "assets/generated/ex013_00_title",
+   "telop": "何問 正解できた？",
+   "voice": "あなたは、何問正解できましたか？ コメントで教えてね。"
+  }
+ ]
+}

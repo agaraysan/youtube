@@ -1,0 +1,61 @@
+{
+ "id": "ex034_picture_book_short",
+ "title": "ねこのミルと ほしのかけら（読み聞かせ）",
+ "bgm_track": "you_are_the_only",
+ "size": [
+  1080,
+  1920
+ ],
+ "bgm_style": "riddle",
+ "bgm_volume": 0.12,
+ "transition": "slide",
+ "caption_style": "box",
+ "voice_instructions": "やさしく、ゆっくり、子どもに絵本を読み聞かせるように話してください。",
+ "scenes": [
+  {
+   "image": "assets/generated/ex005_00_title",
+   "telop": "ねこのミルと\nほしのかけら",
+   "move": "in_up",
+   "voice": "ねこのミルと、ほしのかけら。"
+  },
+  {
+   "image": "assets/generated/ex005_01_roof",
+   "voice": "ある夜、白い子ねこのミルは、屋根の上で、ひとりで星を見ていました。"
+  },
+  {
+   "image": "assets/generated/ex005_02_fall",
+   "voice": "すると、空から、きらきら光るものが、すうっと落ちてきました。"
+  },
+  {
+   "image": "assets/generated/ex005_03_found",
+   "voice": "森へ走っていくと、草のあいだで、小さな星のかけらが、泣いていました。"
+  },
+  {
+   "image": "assets/generated/ex005_04_lookup",
+   "voice": "おうちに、帰れないの。かけらは、空を見上げて、言いました。"
+  },
+  {
+   "image": "assets/generated/ex005_05_tower",
+   "move": "in_up",
+   "voice": "ミルは、かけらをマフラーでそっと包むと、町でいちばん高い、時計台にのぼりました。"
+  },
+  {
+   "image": "assets/generated/ex005_06_return",
+   "voice": "せーの！ ミルがかけらを放すと、かけらは光のしっぽを残して、空へ帰っていきました。"
+  },
+  {
+   "image": "assets/generated/ex005_07_wink",
+   "telop": "おしまい",
+   "voice": "それからというもの、ミルが夜空を見上げるたび、ひとつの星が、ぱちりとウインクするのです。おしまい。"
+  }
+ ],
+ "meta": {
+  "title": "【絵本 読み聞かせ】ねこのミルと ほしのかけら #Shorts",
+  "tags": [
+   "絵本",
+   "読み聞かせ",
+   "寝かしつけ",
+   "オリジナル絵本"
+  ]
+ }
+}
