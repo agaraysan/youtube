@@ -1,0 +1,11 @@
+{
+ "id": "br_sw11_washer",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "washer.png"
+ ],
+ "check": null,
+ "at_utc": "2026-11-16T14:23:08.382730Z"
+}

@@ -1,0 +1,11 @@
+{
+ "id": "br_sw16_milkbox",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "milkbox.png"
+ ],
+ "check": null,
+ "at_utc": "2026-11-16T14:28:07.114194Z"
+}

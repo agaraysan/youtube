@@ -1,0 +1,11 @@
+{
+ "id": "br_sw12_kayari",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "kayari.png"
+ ],
+ "check": null,
+ "at_utc": "2026-11-16T14:24:28.809188Z"
+}

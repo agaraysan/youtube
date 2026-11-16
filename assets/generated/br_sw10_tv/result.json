@@ -1,0 +1,11 @@
+{
+ "id": "br_sw10_tv",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "image.png"
+ ],
+ "check": null,
+ "at_utc": "2026-11-16T14:22:09.648312Z"
+}
