@@ -505,7 +505,7 @@ def ensure_bg(ep):
     if pick(ep.get("bg")):
         ep["bg"] = pick(ep["bg"])
         return ep
-    p = pathlib.Path(os.environ.get("TMPDIR", "/tmp")) / "brain_paper.png"
+    p = pathlib.Path(os.environ.get("TMPDIR", "/tmp")) / f"brain_paper_{ep.get('id', 'x')}.png"
     paper((1920, 1080)).convert("RGB").filter(ImageFilter.GaussianBlur(1)).save(p)
     ep["bg"] = str(p)
     return ep
