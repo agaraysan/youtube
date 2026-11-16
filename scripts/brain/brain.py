@@ -46,6 +46,7 @@ BGM_FIRST = {"kanji": "valley_drive", "proverb": "you_are_the_only", "yoji": "cr
              "veg": "you_are_the_only", "antonym": "cruise", "pref": "cruise", "showa": "valley_drive", "trivia": "you_are_the_only",
              "calc": "little_fish", "mushikui": "estela", "count": "little_fish", "memory": "estela", "shadow": "wager_with_angels",
              "color": "wager_with_angels", "number": "estela"}
+LOUDNESS = -18  # 動画全体の大きさ（LUFS）。render.py の -16 より少し控えめ
 BGM_VOLUME = 0.22  # 曲は -20 LUFS にそろえてから、この倍率で小さめに入れる（声の間はさらに下がる）
 _make, _save = R.BGM.make, R.BGM.save
 
@@ -579,6 +580,12 @@ def main(spec, out_dir, no_voice=False):
     tmp = pathlib.Path(os.environ.get("TMPDIR", "/tmp")) / f"{ep['id']}.resolved.json"
     tmp.write_text(json.dumps(ep, ensure_ascii=False), encoding="utf-8")
     R.main(str(tmp), out_dir, no_voice)
+    # 全体の音量を控えめにそろえる（大きすぎると飛ばされやすい）。映像はそのまま、音だけ作り直す
+    out = pathlib.Path(out_dir) / f"{ep['id']}.mp4"
+    quiet = out.with_suffix(".quiet.mp4")
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(out), "-c:v", "copy", "-af", f"loudnorm=I={LOUDNESS}:TP=-2:LRA=11",
+                    "-ar", str(R.SR), "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(quiet)], check=True)
+    quiet.replace(out)
 
 
 if __name__ == "__main__":
