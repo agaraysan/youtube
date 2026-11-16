@@ -24,11 +24,15 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           mkdir -p pv/out
+          # 台本（episodes/<id>.json）が変わった回だけ作り直す。描画プログラムを直しただけでは作り直さない
+          # （作り直したい回は、台本に "rev" を足して変える）。
           for f in episodes/*.json; do
             id=$(basename "$f" .json)
-            h=$(cat "$f" scripts/render/*.py | sha1sum | cut -c1-12)
-            if [ -f "pv/out/$id.hash" ] && [ "$(cat pv/out/$id.hash)" = "$h" ]; then echo "skip $id"; continue; fi
-            python3 scripts/render/render.py "$f" pv/out && echo "$h" > "pv/out/$id.hash"
+            h=$(sha1sum "$f" | cut -c1-12)
+            if [ -f "pv/out/$id.mp4" ] && { [ ! -f "pv/out/$id.src" ] || [ "$(cat pv/out/$id.src)" = "$h" ]; }; then
+              echo "$h" > "pv/out/$id.src"; rm -f "pv/out/$id.hash"; echo "skip $id"; continue
+            fi
+            python3 scripts/render/render.py "$f" pv/out && echo "$h" > "pv/out/$id.src" && rm -f "pv/out/$id.hash"
           done
       - name: Push previews
         run: |

@@ -426,7 +426,7 @@ def main(spec_path, out_dir, no_voice=False):
     lst.write_text("".join(f"file '{p}'\nduration {d:.3f}\n" for p, d in concat) + f"file '{concat[-1][0]}'\n")
     video = tmp / "video.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", str(lst), "-vf", f"fps={FPS},format=yuv420p",
-                    "-c:v", "libx264", "-crf", "20", "-preset", "medium", "-t", f"{t:.3f}", str(video)], check=True)
+                    "-c:v", "libx264", "-crf", "23", "-maxrate", "3M", "-bufsize", "6M", "-preset", "medium", "-t", f"{t:.3f}", str(video)], check=True)
 
     # 音：声と効果音をそれぞれ1本に。BGMは声が出ている間だけ自動で下げる（ダッキング）。
     def mixdown(parts, out):
@@ -465,6 +465,13 @@ def main(spec_path, out_dir, no_voice=False):
     out = out_dir / f"{ep['id']}.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(video), "-i", str(audio), "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
                     "-af", "loudnorm=I=-16:TP=-1.5:LRA=11", "-movflags", "+faststart", "-shortest", str(out)], check=True)
+    # GitHub は1ファイル100MBまで。大きすぎたら、ビットレートを決めて作り直す
+    if out.stat().st_size > 90e6:
+        kbps = int(85e6 * 8 / t / 1000) - 200
+        tmp_out = out.with_suffix(".small.mp4")
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(out), "-c:v", "libx264", "-b:v", f"{kbps}k", "-maxrate", f"{kbps}k",
+                        "-bufsize", f"{kbps * 2}k", "-c:a", "copy", "-movflags", "+faststart", str(tmp_out)], check=True)
+        tmp_out.replace(out)
     # 確認用の一覧画像（場面ごとの最初のコマ）
     firsts, seen = [], set()
     for p, _ in concat:
