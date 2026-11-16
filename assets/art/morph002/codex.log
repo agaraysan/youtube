@@ -1,0 +1,290 @@
+内蔵画像生成で、構図と北斎風の画風を保ち、満開の桜と春霞を加えました。文字も除去済みです。
+
+1536×1024 PNG を [var_01.png](/home/runner/work/youtube/youtube/tmp_art/morph002/var_01.png) に保存しました。他のファイルは変更していません。
+
+--- stderr ---
+40x2160` 4K landscape
+- `2160x3840` 4K portrait
+- `auto`
+
+## Fallback CLI mode only
+
+### Temp and output conventions
+These conventions apply only to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc 'cp /home/runner/.codex/generated_images/01a1e281-61c1-7642-b111-8895b513e5ea/exec-1f7d11db-4e12-4dc1-a8a9-683c74a562d4.png /home/runner/work/youtube/youtube/tmp_art/morph002/var_01.png
+file /home/runner/work/youtube/youtube/tmp_art/morph002/var_01.png' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+/home/runner/work/youtube/youtube/tmp_art/morph002/var_01.png: PNG image data, 1536 x 1024, 8-bit/color RGB, non-interlaced
+
+codex
+内蔵画像生成で、構図と北斎風の画風を保ち、満開の桜と春霞を加えました。文字も除去済みです。
+
+1536×1024 PNG を [var_01.png](/home/runner/work/youtube/youtube/tmp_art/morph002/var_01.png) に保存しました。他のファイルは変更していません。
+tokens used
+15,990
+
+=====
+内蔵画像生成で、構図を保ちながら紅葉と雁の列を追加しました。文字も除去済みです。
+
+[編集画像（1536×1024 PNG）]( /home/runner/work/youtube/youtube/tmp_art/morph002/var_02.png) に保存しました。ほかのファイルは変更していません。
+
+--- stderr ---
+for the situation, you don't have to use it.
+
+**Before entering plan mode:** if you haven't already brainstormed, invoke the brainstorming skill first.
+
+Then announce "Using [skill] to [purpose]" and follow the skill exactly. If it has a checklist, create a todo per item.
+
+## Skill Priority
+
+When multiple skills apply, process skills come first — they set the approach, then implementation skills (frontend-design, etc.) carry it out. Brainstorming and systematic-debugging are Superpowers' most common process skills, but the rule holds for any of them.
+
+- "Let's build X" → superpowers:brainstorming first, then implementation skills.
+- "Fix this bug" → superpowers:systematic-debugging first, then domain skills.
+
+## Red Flags
+
+These thoughts mean STOP—you're rationalizing:
+
+| Thought | Reality |
+|---------|---------|
+| "This is just a simple question" | Questions are tasks. Check for skills. |
+| "I need more context first" | Skill check comes BEFORE clarifying questions. |
+| "Let me explore the codebase first" | Skills tell you HOW to explore. Check first. |
+| "I can check git/files quickly" | Files lack conversation context. Check for skills. |
+| "Let me gather information first" | Skills tell you HOW to gather information. |
+| "This doesn't need a formal skill" | If a skill exists, use it. |
+| "I remember this skill" | Skills evolve. Read current version. |
+| "This doesn't count as a task" | Action = task. Check for skills. |
+| "The skill is overkill" | Simple things become complex. Use it. |
+| "I'll just do this one thing first" | Check BEFORE doing anything. |
+| "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
+| "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
+
+## Platform Adaptation
+
+If your harness appears here, read its reference file for special instructions:
+
+- Claude Code: `references/claude-code-tools.md`
+- Codex: `references/codex-tools.md`
+- Pi: `references/pi-tools.md`
+- Antigravity: `references/antigravity-tools.md`
+- Hermes Agent: `references/hermes-tools.md`
+- Muse: `references/muse-tools.md`
+
+## User Instructions
+
+User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+
+exec
+/bin/bash -lc 'cp /home/runner/.codex/generated_images/01a1e282-4fb0-7322-ba82-38a564b2882f/exec-1fe44401-cd7a-46b2-804a-2cc00e321643.png /home/runner/work/youtube/youtube/tmp_art/morph002/var_02.png
+file /home/runner/work/youtube/youtube/tmp_art/morph002/var_02.png' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+/home/runner/work/youtube/youtube/tmp_art/morph002/var_02.png: PNG image data, 1536 x 1024, 8-bit/color RGB, non-interlaced
+
+codex
+内蔵画像生成で、構図を保ちながら紅葉と雁の列を追加しました。文字も除去済みです。
+
+[編集画像（1536×1024 PNG）]( /home/runner/work/youtube/youtube/tmp_art/morph002/var_02.png) に保存しました。ほかのファイルは変更していません。
+tokens used
+22,962
+
+=====
+内蔵画像生成で、構図と木版画の画風を保ち、山とふもとの積雪・降雪を反映しました。文字も除去しています。
+
+1536×1024 PNG：[var_03.png](/home/runner/work/youtube/youtube/tmp_art/morph002/var_03.png)
+
+指定ファイル以外は変更していません。
+
+--- stderr ---
+60` 4K landscape
+- `2160x3840` 4K portrait
+- `auto`
+
+## Fallback CLI mode only
+
+### Temp and output conventions
+These conventions apply only to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+src='/home/runner/.codex/generated_images/01a1e283-2cbf-7c62-b0e3-0e6af50296cb/exec-dc627148-1b44-43e1-9590-62c7f2c47fba.png'
+dst='/home/runner/work/youtube/youtube/tmp_art/morph002/var_03.png'
+im=Image.open(src)
+if im.size "'!= (1536,1024):
+    im=im.resize((1536,1024), Image.Resampling.LANCZOS)
+im.save(dst)
+print(im.size)
+PY' in /home/runner/work/youtube/youtube
+ succeeded in 301ms:
+(1536, 1024)
+
+codex
+内蔵画像生成で、構図と木版画の画風を保ち、山とふもとの積雪・降雪を反映しました。文字も除去しています。
+
+1536×1024 PNG：[var_03.png](/home/runner/work/youtube/youtube/tmp_art/morph002/var_03.png)
+
+指定ファイル以外は変更していません。
+tokens used
+24,022
+
+=====
+内蔵の画像生成機能で、構図と浮世絵の画風を保ち、満月・星空・青い月明かりの夜景に編集しました。
+
+保存先：[var_04.png](/home/runner/work/youtube/youtube/tmp_art/morph002/var_04.png)（1536×1024）。ほかのファイルは変更していません。
+
+--- stderr ---
+the situation, you don't have to use it.
+
+**Before entering plan mode:** if you haven't already brainstormed, invoke the brainstorming skill first.
+
+Then announce "Using [skill] to [purpose]" and follow the skill exactly. If it has a checklist, create a todo per item.
+
+## Skill Priority
+
+When multiple skills apply, process skills come first — they set the approach, then implementation skills (frontend-design, etc.) carry it out. Brainstorming and systematic-debugging are Superpowers' most common process skills, but the rule holds for any of them.
+
+- "Let's build X" → superpowers:brainstorming first, then implementation skills.
+- "Fix this bug" → superpowers:systematic-debugging first, then domain skills.
+
+## Red Flags
+
+These thoughts mean STOP—you're rationalizing:
+
+| Thought | Reality |
+|---------|---------|
+| "This is just a simple question" | Questions are tasks. Check for skills. |
+| "I need more context first" | Skill check comes BEFORE clarifying questions. |
+| "Let me explore the codebase first" | Skills tell you HOW to explore. Check first. |
+| "I can check git/files quickly" | Files lack conversation context. Check for skills. |
+| "Let me gather information first" | Skills tell you HOW to gather information. |
+| "This doesn't need a formal skill" | If a skill exists, use it. |
+| "I remember this skill" | Skills evolve. Read current version. |
+| "This doesn't count as a task" | Action = task. Check for skills. |
+| "The skill is overkill" | Simple things become complex. Use it. |
+| "I'll just do this one thing first" | Check BEFORE doing anything. |
+| "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
+| "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
+
+## Platform Adaptation
+
+If your harness appears here, read its reference file for special instructions:
+
+- Claude Code: `references/claude-code-tools.md`
+- Codex: `references/codex-tools.md`
+- Pi: `references/pi-tools.md`
+- Antigravity: `references/antigravity-tools.md`
+- Hermes Agent: `references/hermes-tools.md`
+- Muse: `references/muse-tools.md`
+
+## User Instructions
+
+User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+
+exec
+/bin/bash -lc 'cp /home/runner/.codex/generated_images/01a1e284-1839-7701-a1af-6125e9a3d6dc/exec-8e175070-4160-4c12-a00c-9e371bbb8846.png /home/runner/work/youtube/youtube/tmp_art/morph002/var_04.png
+file /home/runner/work/youtube/youtube/tmp_art/morph002/var_04.png' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+/home/runner/work/youtube/youtube/tmp_art/morph002/var_04.png: PNG image data, 1536 x 1024, 8-bit/color RGB, non-interlaced
+
+codex
+内蔵の画像生成機能で、構図と浮世絵の画風を保ち、満月・星空・青い月明かりの夜景に編集しました。
+
+保存先：[var_04.png](/home/runner/work/youtube/youtube/tmp_art/morph002/var_04.png)（1536×1024）。ほかのファイルは変更していません。
+tokens used
+39,915
+
+=====
