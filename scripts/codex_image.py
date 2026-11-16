@@ -38,15 +38,25 @@ def main():
         via = "codex"
         status = "ok" if files else "failed"
         check = None
-        if status == "ok" and r.get("base_image"):  # 間違い探し: 画素で比べて一覧と合うか確かめる
+        if status == "ok" and (r.get("base_image") or r.get("pair")):  # 間違い探し: 画素で比べて一覧と合うか確かめる
             import spotcheck
             for attempt in range(2):
-                img = out / sorted(files)[0]
+                if r.get("pair"):  # 元の絵 a.png と違いの絵 b.png を同時に作る依頼
+                    base, img = out / "a.png", out / "b.png"
+                    if not (base.exists() and img.exists()):
+                        ok, check = False, "a.png と b.png がそろっていない"
+                        if attempt == 1:
+                            break
+                        rc = run_codex(r, out, "a.png と b.png の両方を保存してください。\n")
+                        files = [f.name for f in out.iterdir() if f.suffix.lower() in MEDIA]
+                        continue
+                else:
+                    base, img = ROOT / r["base_image"], out / sorted(files)[0]
                 lst = out / "differences.json"
                 if not lst.exists():
                     ok, check = False, "differences.json がない"
                 else:
-                    ok, check, _ = spotcheck.check(ROOT / r["base_image"], img, lst)
+                    ok, check, _ = spotcheck.check(base, img, lst)
                 print(r["id"], "spotcheck", check)
                 if ok or attempt == 1:
                     break
