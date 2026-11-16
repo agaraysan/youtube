@@ -1,0 +1,12 @@
+{
+ "id": "API_TEST_001",
+ "video_path": "assets/test/upload_test.mp4",
+ "title": "自動投稿のテスト",
+ "description": "自動投稿の仕組みを確かめるための非公開テストです。",
+ "tags": [],
+ "category_id": "27",
+ "privacy": "private",
+ "language": "ja",
+ "made_for_kids": false,
+ "note": "API の接続確認用。10秒の専用動画なので、ブラウザで予約済みの本編と重ならない。審査に出す投稿の流れの録画にも使う。"
+}
