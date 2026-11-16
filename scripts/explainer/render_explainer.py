@@ -157,15 +157,13 @@ def stroke_text(img, xy, text, f, fill, stroke, sw, anchor="mm"):
                                        align="center", spacing=int(f.size * 0.15))
 
 
-def _cut(c, maxlen, strict=False):
-    """読点（なければ助詞の後ろ）のうち、真ん中に近いところで2つに分ける。"""
-    def best(chars):
-        cands = [i for i, ch in enumerate(c[:-1]) if ch in chars and max(i + 1, len(c) - i - 1) <= maxlen]
-        return min(cands, key=lambda i: abs(i + 1 - len(c) / 2), default=None)
-    cut = best("、？！")
-    if cut is None or abs(cut + 1 - len(c) / 2) > len(c) / 4:
-        cut2 = best("をはがにでとものへや")
-        cut = cut2 if cut2 is not None else cut
+PARTICLES = "をはがにでも"
+
+
+def _cut(c, maxlen, strict=False, chars="、？！"):
+    """chars のどれかの後ろで、真ん中に近いところで2つに分ける（どちらも maxlen 字以内）。"""
+    cands = [i for i, ch in enumerate(c[:-1]) if ch in chars and max(i + 1, len(c) - i - 1) <= maxlen]
+    cut = min(cands, key=lambda i: abs(i + 1 - len(c) / 2), default=None)
     if cut is None:
         if strict:
             return None
@@ -174,20 +172,22 @@ def _cut(c, maxlen, strict=False):
 
 
 def split_caption(text, maxlen):
-    """文ごとに1枚。長い文は読点で分け、1枚は2行・1行 maxlen 字まで。2行にうまく収まらなければ別の1枚にする。"""
+    """文ごとに1枚。1枚は2行・1行 maxlen 字まで。
+    分け方の優先順：読点で2行 → 読点で別の1枚 → 助詞の後ろで2行 → 真ん中。"""
     todo = [p.strip().rstrip("。") for p in re.split(r"(?<=[。？！])", text.replace("　", "")) if p.strip()]
     out = []
     while todo:
         c = todo.pop(0)
         if len(c) <= maxlen:
             out.append([c]); continue
-        two = _cut(c, maxlen, strict=True)
-        if len(c) <= maxlen * 2 and two:
+        two = _cut(c, maxlen, True) if len(c) <= maxlen * 2 else None
+        if two:
             out.append(list(two)); continue
-        halves = _cut(c, maxlen * 2, strict=True)
-        if halves and len(c) > maxlen + 4:
+        halves = _cut(c, max(maxlen * 2, len(c) - 1), True)
+        if halves and min(len(halves[0]), len(halves[1])) >= 3:
             todo[:0] = list(halves); continue
-        out.append(list(_cut(c, maxlen)))
+        two = _cut(c, maxlen, True, PARTICLES + "、") if len(c) <= maxlen * 2 else None
+        out.append(list(two or _cut(c, maxlen)))
     return out
 
 
@@ -563,7 +563,10 @@ def draw_scene(s, lt, ep, cast, base_only=False):
         t2 = tl.resize((max(1, int(tl.width * sc)), max(1, int(tl.height * sc))), Image.BILINEAR)
         if a < 1:
             t2.putalpha(t2.getchannel("A").point(lambda v: int(v * min(1, a * 1.5))))
-        y = max(L.telop_y + (60 * u if s["chap"] is not None and not L.vertical else 0), tl.height / 2 + 20 * u) + bob
+        y = max(L.telop_y + (60 * u if s["chap"] is not None and not L.vertical else 0), tl.height / 2 + 20 * u)
+        if s["chap"] is not None and L.vertical:  # 章の札と重ならないように
+            y = max(y, L.chap_y + 110 * u + tl.height / 2)
+        y += bob
         x = W / 2 + (130 * u if s.get("rank") and not L.vertical else 0)
         im.alpha_composite(t2, (int(x - t2.width / 2), int(y - t2.height / 2)))
     if cast:  # 掛け合いの話し手：話している方が口を動かして弾む
