@@ -1,0 +1,39 @@
+{
+ "id": "zoom_ladybug_001",
+ "kind": "zoom",
+ "style": "zoom",
+ "seconds": 5,
+ "zoom": 3,
+ "layers": [
+  {
+   "image": "assets/generated/zm002_01_space",
+   "voice": "星の海に浮かぶ、青い地球。",
+   "caption": "星の海に浮かぶ、青い地球"
+  },
+  {
+   "image": "assets/generated/zm002_02_earth",
+   "voice": "近づいていくと……",
+   "caption": "近づいていくと……"
+  },
+  {
+   "image": "assets/generated/zm002_03_satoyama",
+   "voice": "緑の里山。いちばん大きな木の上に……",
+   "caption": "いちばん大きな木の上に……"
+  },
+  {
+   "image": "assets/generated/zm002_04_tree",
+   "voice": "一枚の葉っぱと、てんとう虫。",
+   "caption": "一枚の葉っぱと、てんとう虫"
+  },
+  {
+   "image": "assets/generated/zm002_05_ladybug",
+   "voice": "その背中の模様をのぞくと……",
+   "caption": "背中の模様をのぞくと……"
+  },
+  {
+   "image": "assets/generated/zm002_01_space",
+   "voice": "そこには、また宇宙が広がっていました。",
+   "caption": "また宇宙が広がっていた"
+  }
+ ]
+}

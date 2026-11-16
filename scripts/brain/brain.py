@@ -11,12 +11,13 @@ render.py は変更しない。
   choice  : 3択クイズ。big（大きな文字。□は色つき）か image（絵）と q（問題文）、options, correct（0から）。reveal で正解に色
             big_answer（答えで差し替える文字）, hl（答えで色をつける文字）, ruby（答えで出す読み）
             big_color（大きな文字の色。色の名前クイズ用）, emoji（シルエットクイズ。答えまで黒い影）
+  count   : 数えてクイズ。target（絵文字）が n 個、others [[絵文字, 個数]] にまぜる。key で配置を固定
   grid に cells（文字のリスト）を渡すと自由な並び（数字さがし）
   memo    : 記憶力。items（絵文字）を並べる。hide で1つを「？」に。options/correct で下に3択
 共通: text（左上の見出し）, caption, voice, chime, seconds, pad（render.py と同じ）
 使い方: brain.py brain/episodes/<id>.json out_dir [--no-voice]
 """
-import os, pathlib, random, sys
+import math, os, pathlib, random, sys
 from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -27,11 +28,13 @@ import render as R  # noqa: E402
 R.ACCENT.update({"kanji": (196, 52, 52), "trivia": (44, 120, 200), "proverb": (120, 84, 170), "showa": (176, 104, 40),
                  "memory": (0, 150, 136), "calc": (230, 110, 30), "fish": (30, 110, 170),
                  "yoji": (150, 60, 90), "veg": (60, 140, 60), "pref": (40, 100, 180), "color": (90, 90, 110), "shadow": (70, 70, 150),
-                 "number": (210, 90, 40)})
+                 "number": (210, 90, 40), "antonym": (70, 120, 160), "mushikui": (200, 80, 60), "count": (40, 150, 90)})
 for _k in ("proverb", "showa", "fish", "yoji", "veg", "pref"):
     R.BGM.STYLES.setdefault(_k, R.BGM.STYLES["riddle"])
-for _k in ("memory", "calc", "color", "shadow", "number"):
+for _k in ("memory", "calc", "color", "shadow", "number", "mushikui", "count"):
     R.BGM.STYLES.setdefault(_k, R.BGM.STYLES["spot"])
+for _k in ("antonym",):
+    R.BGM.STYLES.setdefault(_k, R.BGM.STYLES["riddle"])
 R.BGM.STYLES.setdefault("kanji", R.BGM.STYLES["riddle"])
 R.BGM.STYLES.setdefault("trivia", (96, 60, [(0, "maj7"), (5, "maj7"), (2, "m7"), (7, "dom7")]))
 
@@ -431,6 +434,38 @@ def scene_memo(sc, ep, size):
     return think_frames(im, ep, sc, H) if sc.get("think") else im.convert("RGB")
 
 
+def scene_count(sc, ep, size):
+    """数えてクイズ：絵文字をばらばらに置き、target がいくつあるか。reveal で target に丸。"""
+    W, H = size
+    u = H / 1080
+    im = paper(size)
+    x0, y0, x1, y1 = 120 * u, 140 * u, W - 120 * u, H - (300 * u if sc.get("options") else 60 * u)
+    R.shadow_box(im, (x0, y0, x1, y1), int(24 * u), (255, 255, 255, 250))
+    rnd = random.Random(f"{ep['id']}:{sc['key']}")
+    items = [sc["target"]] * sc["n"] + [e for e, k in sc["others"] for _ in range(k)]
+    rnd.shuffle(items)
+    cols = math.ceil(math.sqrt(len(items) * (x1 - x0) / (y1 - y0)))
+    rows = math.ceil(len(items) / cols)
+    cw, ch = (x1 - x0 - 40 * u) / cols, (y1 - y0 - 40 * u) / rows
+    slots = [(r, c) for r in range(rows) for c in range(cols)]
+    rnd.shuffle(slots)
+    sz = min(cw, ch) * 0.70
+    marks = []
+    for e, (r, c) in zip(items, slots):
+        cx = x0 + 20 * u + cw * (c + 0.5) + rnd.uniform(-0.12, 0.12) * cw
+        cy = y0 + 20 * u + ch * (r + 0.5) + rnd.uniform(-0.12, 0.12) * ch
+        paste_center(im, emoji(e, sz), cx, cy)
+        if e == sc["target"]:
+            marks.append((cx, cy))
+    if sc.get("reveal"):
+        for cx, cy in marks:
+            R.ring(im, cx, cy, sz * 0.62, R.accent(ep), u)
+    if sc.get("options"):
+        options_row(im, ep, sc, 300 * u, W - 300 * u, H - 250 * u, 190 * u)
+    R.header(im, ep, sc, H)
+    return think_frames(im, ep, sc, H) if sc.get("think") else im.convert("RGB")
+
+
 _orig = R.render_scene
 
 
@@ -446,6 +481,8 @@ def render_scene(sc, ep, size):
         return scene_choice(sc, ep, size)
     if t == "memo":
         return scene_memo(sc, ep, size)
+    if t == "count":
+        return scene_count(sc, ep, size)
     return _orig(sc, ep, size)
 
 
