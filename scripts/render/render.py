@@ -206,7 +206,7 @@ def reveal_frames(sc, ep, size):
     u = H / 1080
     a = Image.open(ROOT / sc["images"][0]).convert("RGB")
     b = Image.open(ROOT / sc["images"][1]).convert("RGB")
-    x, y, ww, hh = ep["differences"][sc["index"]]["box"]
+    x, y, ww, hh = diffs_of(ep, sc)[sc["index"]]["box"]
     top, gap = 140 * u, 36 * u
     side = int(min(H - top - 40 * u, (W - gap * 3) / 2))
     x0 = (W - (side * 2 + gap)) / 2
@@ -234,6 +234,13 @@ def reveal_frames(sc, ep, size):
         out.append((im.convert("RGB"), sc.get("hold_full", 0.6) if n == 0 else 1 / FPS))
     out[-1] = (out[-1][0], None)
     return out
+
+def diffs_of(ep, sc):
+    """その場面の絵の違い一覧（1本に絵が何枚もある回は scene の "spot" で選ぶ）。"""
+    if sc.get("spot"):
+        return ep["diffs_by"][sc["spot"]]
+    return ep["differences"]
+
 
 # ---- 場面 ----
 def render_scene(sc, ep, size):
@@ -308,7 +315,7 @@ def render_scene(sc, ep, size):
             framed(im, src, (x0 + k * (side + gap), top, side, side), int(18 * u))
         if kind == "circles":
             s = (int(side) - 12) / a.width
-            for df in ep["differences"][: sc.get("upto", 99)]:
+            for df in diffs_of(ep, sc)[: sc.get("upto", 99)]:
                 x, y, ww, hh = df["box"]
                 for k in range(2):
                     ox = int(x0 + k * (side + gap)) + 6
@@ -317,7 +324,7 @@ def render_scene(sc, ep, size):
     if kind == "zoom":
         a = Image.open(ROOT / sc["images"][0]).convert("RGB")
         b = Image.open(ROOT / sc["images"][1]).convert("RGB")
-        x, y, ww, hh = ep["differences"][sc["index"]]["box"]
+        x, y, ww, hh = diffs_of(ep, sc)[sc["index"]]["box"]
         cw = min(max(max(ww, hh * 4 / 3) * 2.4, a.width * 0.28), a.width)
         ch = min(cw * 3 / 4, a.height)
         cx, cy = x + ww / 2, y + hh / 2
@@ -367,6 +374,14 @@ def main(spec_path, out_dir, no_voice=False):
         if not ok:
             raise SystemExit(f"間違い探しの確認に失敗: {msg}")
         ep["differences"] = res
+    if "spots" in ep:  # 絵が何枚もある回
+        ep["diffs_by"] = {}
+        for gid, sp in ep["spots"].items():
+            ok, msg, res = spotcheck.check(ROOT / sp["a"], ROOT / sp["b"], ROOT / sp["list"])
+            print("spotcheck", gid, msg)
+            if not ok:
+                raise SystemExit(f"間違い探しの確認に失敗: {gid} {msg}")
+            ep["diffs_by"][gid] = res
     out_dir = pathlib.Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     tmp = pathlib.Path(tempfile.mkdtemp())
