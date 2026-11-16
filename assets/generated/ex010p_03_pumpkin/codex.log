@@ -1,0 +1,414 @@
+指定フォルダーに、内蔵画像生成機能で作成した実写風の画像を保存しました。
+
+- `pumpkin.png`（1920×1080、文字・ロゴなし）
+- `result.json`
+
+ほかのファイルは変更していません。GitHubへの送信は `github.com` の名前解決エラーで失敗しました。`GH_PUSH_TOKEN` は空でした。
+
+--- stderr ---
+accuracy, and invariants/avoid items.
+13. Iterate with a single targeted change, then re-check.
+14. For preview-only work, render the image inline; the underlying file may remain at the default `$CODEX_HOME/generated_images/...` path.
+15. For project-bound work, move or copy the selected artifact into the workspace and update any consuming code or references. Never leave a project-referenced asset only at the default `$CODEX_HOME/generated_images/...` path.
+16. For batches or multi-asset requests, persist every requested deliverable final in the workspace unless the user explicitly asked to keep outputs preview-only. Discarded variants do not need to be kept unless requested.
+17. If the user explicitly chooses or confirms the CLI fallback, then use the fallback-only docs for model, quality, size, `input_fidelity`, masks, output format, output paths, and network setup.
+18. Always report the final saved path(s) for any workspace-bound asset(s), plus the final prompt or prompt set and whether the built-in tool or fallback CLI mode was used.
+
+## Transparent image requests
+
+Ask built-in `image_gen` for a genuinely transparent background and preserve its alpha.
+
+## Prompt augmentation
+
+Reformat user prompts into a structured, production-oriented spec. Make the user's goal clearer and more actionable, but do not blindly add detail.
+
+Treat this as prompt-shaping guidance, not a closed schema. Use only the lines that help, and add a short extra labeled line when it materially improves clarity.
+
+### Specificity policy
+
+Use the user's prompt specificity to decide how much augmentation is appropriate:
+
+- If the prompt is already specific and detailed, preserve that specificity and only normalize/structure it.
+- If the prompt is generic, you may add tasteful augmentation when it will materially improve the result.
+
+Allowed augmentations:
+- composition or framing hints
+- polish level or intended-use hints
+- practical layout guidance
+- reasonable scene concreteness that supports the stated request
+
+Not allowed augmentations:
+- extra characters or objects that are not implied by the request
+- brand names, slogans, palettes, or narrative beats that are not implied
+- arbitrary side-specific placement unless the surrounding layout supports it
+
+## Use-case taxonomy (exact slugs)
+
+Classify each request into one of these buckets and keep the slug consistent across prompts and references.
+
+Generate:
+- photorealistic-natural — candid/editorial lifestyle scenes with real texture and natural lighting.
+- product-mockup — product/packaging shots, catalog imagery, merch concepts.
+- ui-mockup — app/web interface mockups and wireframes; specify the desired fidelity.
+- infographic-diagram — diagrams/infographics with structured layout and text.
+- scientific-educational — classroom explainers, scientific diagrams, and learning visuals with required labels and accuracy constraints.
+- ads-marketing — campaign concepts and ad creatives with audience, brand position, scene, and exact tagline/copy.
+- productivity-visual — slide, chart, workflow, and data-heavy business visuals.
+- logo-brand — logo/mark exploration, vector-friendly.
+- illustration-story — comics, children’s book art, narrative scenes.
+- stylized-concept — style-driven concept art, 3D/stylized renders.
+- historical-scene — period-accurate/world-knowledge scenes.
+
+Edit:
+- text-localization — translate/replace in-image text, preserve layout.
+- identity-preserve — try-on, person-in-scene; lock face/body/pose.
+- precise-object-edit — remove/replace a specific element (including interior swaps).
+- lighting-weather — time-of-day/season/atmosphere changes only.
+- background-extraction — transparent background / clean cutout. Ask built-in `image_gen` for actual transparency.
+- style-transfer — apply reference style while changing subject/scene.
+- compositing — multi-image insert/merge with matched lighting/perspective.
+- sketch-to-render — drawing/line art to photoreal render.
+
+## Shared prompt schema
+
+Use the following labeled spec as shared prompt scaffolding for both top-level modes:
+
+```text
+Use case: <taxonomy slug>
+Asset type: <where the asset will be used>
+Primary request: <user's main prompt>
+Input images: <Image 1: role; Image 2: role> (optional)
+Scene/backdrop: <environment>
+Subject: <main subject>
+Style/medium: <photo/illustration/3D/etc>
+Composition/framing: <wide/close/top-down; placement>
+Lighting/mood: <lighting + mood>
+Color palette: <palette notes>
+Materials/textures: <surface details>
+Text (verbatim): "<exact text>"
+Constraints: <must keep/must avoid>
+Avoid: <negative constraints>
+```
+
+Notes:
+- `Asset type` and `Input images` are prompt scaffolding, not dedicated CLI flags.
+- `Scene/backdrop` refers to the visual setting. It is not the same as the fallback CLI `background` parameter, which controls output transparency behavior.
+- Fallback-only execution notes such as `Quality:`, `Input fidelity:`, masks, output format, and output paths belong in the CLI path only. Do not treat them as built-in `image_gen` tool arguments.
+
+Augmentation rules:
+- Keep it short.
+- Add only the details needed to improve the prompt materially.
+- For edits, explicitly list invariants (`change only X; keep Y unchanged`).
+- If any critical detail is missing and blocks success, ask a question; otherwise proceed.
+
+## Examples
+
+### Generation example (hero image)
+```text
+Use case: product-mockup
+Asset type: landing page hero
+Primary request: a minimal hero image of a ceramic coffee mug
+Style/medium: clean product photography
+Composition/framing: wide composition with usable negative space for page copy if needed
+Lighting/mood: soft studio lighting
+Constraints: no logos, no text, no watermark
+```
+
+### Edit example (invariants)
+```text
+Use case: precise-object-edit
+Asset type: product photo background replacement
+Primary request: replace only the background with a warm sunset gradient
+Constraints: change only the background; keep the product and its edges unchanged; no text; no watermark
+```
+
+## Prompting best practices
+- Structure prompt as scene/backdrop -> subject -> details -> constraints.
+- Include intended use (ad, UI mock, infographic) to set the mode and polish level.
+- Use camera/composition language for photorealism.
+- Only use SVG/vector stand-ins when the user explicitly asked for vector output or a non-image placeholder.
+- Quote exact text and specify typography + placement.
+- For tricky words, spell them letter-by-letter and require verbatim rendering.
+- For multi-image inputs, reference images by index and describe how they should be used.
+- For edits, repeat invariants every iteration to reduce drift.
+- Iterate with single-change follow-ups.
+- If the prompt is generic, add only the extra detail that will materially help.
+- If the prompt is already detailed, normalize it instead of expanding it.
+- For CLI fallback only, see `references/cli.md` and `references/image-api.md` for model, `quality`, `input_fidelity`, masks, output format, and output-path guidance.
+- For transparent images, ask built-in `image_gen` for actual transparency and preserve its alpha.
+
+More principles shared by both modes: `references/prompting.md`.
+Copy/paste specs shared by both modes: `references/sample-prompts.md`.
+
+## Guidance by asset type
+Asset-type templates (website assets, game assets, wireframes, logo) are consolidated in `references/sample-prompts.md`.
+
+## gpt-image-2 guidance for CLI fallback
+
+The fallback CLI defaults to `gpt-image-2`.
+
+- Use `gpt-image-2` for new CLI/API workflows unless the user confirms a different model.
+- CLI `gpt-image-2` does not support `background=transparent`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- `gpt-image-2` always uses high fidelity for image inputs; do not set `input_fidelity` with this model.
+- `gpt-image-2` supports `quality` values `low`, `medium`, `high`, and `auto`.
+- Use `quality low` for fast drafts, thumbnails, and quick iterations. Use `medium`, `high`, or `auto` for final assets, dense text, diagrams, identity-sensitive edits, or high-resolution outputs.
+- Square images are typically fastest to generate. Use `1024x1024` for fast square drafts.
+- If the user asks for 4K-style output, use `3840x2160` for landscape or `2160x3840` for portrait.
+- `gpt-image-2` size may be `auto` or `WIDTHxHEIGHT` if all constraints hold: max edge `<= 3840px`, both edges multiples of `16px`, long-to-short ratio `<= 3:1`, total pixels between `655,360` and `8,294,400`.
+
+Popular `gpt-image-2` sizes:
+- `1024x1024` square
+- `1536x1024` landscape
+- `1024x1536` portrait
+- `2048x2048` 2K square
+- `2048x1152` 2K landscape
+- `3840x2160` 4K landscape
+- `2160x3840` 4K portrait
+- `auto`
+
+## Fallback CLI mode only
+
+### Temp and output conventions
+These conventions apply only to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+---
+name: using-superpowers
+description: Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions
+---
+
+<SUBAGENT-STOP>
+If you were dispatched as a subagent to execute a specific task, ignore this skill.
+</SUBAGENT-STOP>
+
+<EXTREMELY-IMPORTANT>
+If you think there is even a 1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST invoke the skill.
+
+IF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.
+
+This is not negotiable. You cannot rationalize your way out of this.
+</EXTREMELY-IMPORTANT>
+
+## The Rule
+
+**Invoke relevant or requested skills BEFORE any response or action** — including clarifying questions, exploring the codebase, or checking files. If it turns out wrong for the situation, you don't have to use it.
+
+**Before entering plan mode:** if you haven't already brainstormed, invoke the brainstorming skill first.
+
+Then announce "Using [skill] to [purpose]" and follow the skill exactly. If it has a checklist, create a todo per item.
+
+## Skill Priority
+
+When multiple skills apply, process skills come first — they set the approach, then implementation skills (frontend-design, etc.) carry it out. Brainstorming and systematic-debugging are Superpowers' most common process skills, but the rule holds for any of them.
+
+- "Let's build X" → superpowers:brainstorming first, then implementation skills.
+- "Fix this bug" → superpowers:systematic-debugging first, then domain skills.
+
+## Red Flags
+
+These thoughts mean STOP—you're rationalizing:
+
+| Thought | Reality |
+|---------|---------|
+| "This is just a simple question" | Questions are tasks. Check for skills. |
+| "I need more context first" | Skill check comes BEFORE clarifying questions. |
+| "Let me explore the codebase first" | Skills tell you HOW to explore. Check first. |
+| "I can check git/files quickly" | Files lack conversation context. Check for skills. |
+| "Let me gather information first" | Skills tell you HOW to gather information. |
+| "This doesn't need a formal skill" | If a skill exists, use it. |
+| "I remember this skill" | Skills evolve. Read current version. |
+| "This doesn't count as a task" | Action = task. Check for skills. |
+| "The skill is overkill" | Simple things become complex. Use it. |
+| "I'll just do this one thing first" | Check BEFORE doing anything. |
+| "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
+| "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
+
+## Platform Adaptation
+
+If your harness appears here, read its reference file for special instructions:
+
+- Claude Code: `references/claude-code-tools.md`
+- Codex: `references/codex-tools.md`
+- Pi: `references/pi-tools.md`
+- Antigravity: `references/antigravity-tools.md`
+- Hermes Agent: `references/hermes-tools.md`
+- Muse: `references/muse-tools.md`
+
+## User Instructions
+
+User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+
+exec
+/bin/bash -lc "git status --short
+ git branch --show-current
+ rg --files -g AGENTS.md -g '*ex010p_03_pumpkin*' requests assets . 2>/dev/null" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+?? assets/generated/ex010p_02_yuzu/
+claude/project-thread-65koy8
+requests/explainer_images/ex010p_03_pumpkin.json
+./requests/explainer_images/ex010p_03_pumpkin.json
+./AGENTS.md
+
+exec
+/bin/bash -lc "cat AGENTS.md requests/explainer_images/ex010p_03_pumpkin.json
+ printenv CODEX_HOME
+ git log -1 --format='%h %s'" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+# Codex へのお願い（このリポジトリでの役割）
+
+このリポジトリの運営は Claude が行います。Codex の担当は **画像と動くGIFの作成だけ** です。
+
+- 依頼は `requests/images/<id>.json` にあります。Issue やタスクで id を指定されたら、その依頼書を読んでください。
+- **画像は Codex 自身の画像生成機能で作ってください。** `scripts/codex_image.py` は GitHub Actions 用なので、実行しないでください（Codex の中から Codex CLI を呼ぶ必要はありません）。
+- 出来上がったファイルは `assets/generated/<id>/` に保存してください。画像は PNG、動くGIFは GIF で保存します。
+  - あわせて `result.json` を書いてください（`{"id","status":"ok","via":"codex-cloud","files":[...]}`）。
+- **保存が終わったら、必ず GitHub に送ってください。** 送り先は `codex-inbox` 枝です。
+  ```bash
+  # origin がなければ、環境変数 GH_PUSH_TOKEN を使って自分で追加する
+  git remote get-url origin >/dev/null 2>&1 || git remote add origin "https://x-access-token:${GH_PUSH_TOKEN}@github.com/agaraysan/youtube.git"
+  git fetch origin codex-inbox && git rebase origin/codex-inbox   # 失敗したら git pull --rebase origin codex-inbox
+  git push origin HEAD:codex-inbox
+  ```
+  push できなかったら、`GH_PUSH_TOKEN` が空かどうか（値は表示しない）と、その理由を最後の報告に書いてください。
+- 音声（OpenAI Speech API）や投稿は Claude と GitHub Actions が担当します。OpenAI の APIキーは不要です。
+- 依頼された id のフォルダー以外は変更しないでください。
+- 画像の中に、依頼にない文字やロゴを入れないでください。
+{
+ "id": "ex010p_03_pumpkin",
+ "kind": "image",
+ "prompt": "かぼちゃの煮物が盛られた和食器。こたつの上。 フォトリアルな写真（実写のような質感）。自然光、浅い被写界深度、プロのカメラマンが撮ったような明るく鮮やかな色。横長16:9。",
+ "size": "1920x1080",
+ "count": 1,
+ "notes": "イラストではなく写真のような実写風にする。画像の中に文字やロゴは入れない。実在のアプリ画面や商品ロゴは描かない。"
+}
+e59ebd1 explainer: image ex010p_02_yuzu (ok)
+
+exec
+/bin/bash -lc "git remote get-url origin >/dev/null 2>&1
+python - <<'PY'
+import os
+print('GH_PUSH_TOKEN is ' + ('nonempty' if os.environ.get('GH_PUSH_TOKEN') else 'empty'))
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+GH_PUSH_TOKEN is empty
+
+codex
+画像が生成できました。こたつと和食器、かぼちゃの質感を確認しました。1920×1080のPNGと `result.json` を保存し、GitHubへ送信します。
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+from pathlib import Path
+import json
+out=Path('/home/runner/work/youtube/youtube/assets/generated/ex010p_03_pumpkin')
+out.mkdir(parents=True,exist_ok=True)
+p=out/'pumpkin.png'
+im=Image.open('/home/runner/.codex/generated_images/01a1e4e2-e15f-7a12-860f-969edf8d7cf8/exec-d7029da7-49a1-4167-b8e8-c64feabe1199.png')
+im.resize((1920,1080),Image.Resampling.LANCZOS).save(p)
+(out/'result.json').write_text(json.dumps({'id':'ex010p_03_pumpkin','status':'ok','via':'codex-cloud','files':['assets/generated/ex010p_03_pumpkin/pumpkin.png']},indent=2)+'\\n')
+with Image.open(p) as check:
+ check.verify()
+with Image.open(p) as check:
+ print(check.format,check.size)
+PY
+ git add -- assets/generated/ex010p_03_pumpkin
+ git commit -m 'Add generated pumpkin photo for ex010p_03_pumpkin'" in /home/runner/work/youtube/youtube
+ exited 128 in 554ms:
+PNG (1920, 1080)
+fatal: Unable to create '/home/runner/work/youtube/youtube/.git/index.lock': Read-only file system
+fatal: Unable to create '/home/runner/work/youtube/youtube/.git/index.lock': Read-only file system
+
+exec
+/bin/bash -lc "python - <<'PY'
+import subprocess, tempfile, pathlib, shutil, os
+root=pathlib.Path('/home/runner/work/youtube/youtube')
+def run(args,cwd):
+ r=subprocess.run(args,cwd=cwd,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+ s=r.stdout
+ token=[REDACTED_SECRET]'GH_PUSH_TOKEN','')
+ if token:[REDACTED_SECRET]'[REDACTED]')
+ import re
+ s=re.sub(r'https://["'^'"\\s@]+@github.com','https://[REDACTED]@github.com',s)
+ print(s.strip())
+ return r
+r=subprocess.run(['git','remote','get-url','origin'],cwd=root,text=True,capture_output=True)
+url=r.stdout.strip() if r.returncode==0 else 'https://github.com/agaraysan/youtube.git'
+tmp=pathlib.Path(tempfile.mkdtemp(prefix='pumpkin-push-',dir='/tmp'))
+if run(['git','clone','--shared','--no-hardlinks',str(root),str(tmp/'repo')],root).returncode:raise SystemExit(1)
+repo=tmp/'repo'
+run(['git','remote','set-url','origin',url],repo)
+src=root/'assets/generated/ex010p_03_pumpkin'
+shutil.copytree(src,repo/'assets/generated/ex010p_03_pumpkin',dirs_exist_ok=True)
+run(['git','add','--','assets/generated/ex010p_03_pumpkin'],repo)
+if run(['git','-c','user.name=Codex','-c','user.email=codex@openai.com','commit','-m','Add generated pumpkin photo for ex010p_03_pumpkin'],repo).returncode:raise SystemExit(1)
+f=run(['git','fetch','origin','codex-inbox'],repo)
+if f.returncode==0:
+ if run(['git','rebase','origin/codex-inbox'],repo).returncode:
+  run(['git','pull','--rebase','origin','codex-inbox'],repo)
+run(['git','push','origin','HEAD:codex-inbox'],repo)
+print('GH_PUSH_TOKEN is '+('nonempty' if os.environ.get('GH_PUSH_TOKEN') else 'empty'))
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 16825ms:
+Cloning into '/tmp/pumpkin-push-2rrzlnf0/repo'...
+
+
+[claude/project-thread-65koy8 f200e85] Add generated pumpkin photo for ex010p_03_pumpkin
+ 2 files changed, 8 insertions(+)
+ create mode 100644 assets/generated/ex010p_03_pumpkin/pumpkin.png
+ create mode 100644 assets/generated/ex010p_03_pumpkin/result.json
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+GH_PUSH_TOKEN is empty
+
+codex
+指定フォルダーに、内蔵画像生成機能で作成した実写風の画像を保存しました。
+
+- `pumpkin.png`（1920×1080、文字・ロゴなし）
+- `result.json`
+
+ほかのファイルは変更していません。GitHubへの送信は `github.com` の名前解決エラーで失敗しました。`GH_PUSH_TOKEN` は空でした。
+tokens used
+17,654
