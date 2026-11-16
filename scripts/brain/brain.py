@@ -163,20 +163,46 @@ def caption(img, ep, text, H):
         d.text((W / 2 + 7 * u, y0 + 20 * u + lh * (i + 0.5)), ln, font=f, fill=INK, anchor="mm")
 
 
+class ThinkFrames(list):
+    """考える時間の画像（1秒ごと）。base（タイマーなしの土台）と n（秒数）も持つ。なめらかな描画で使う。"""
+
+
 def think_frames(im, ep, sc, H):
-    """考える時間：右上のタイマーと下の進み具合。1秒ごとの画像を返す。"""
-    W = im.width
-    u = H / 1080
+    """考える時間：右上のタイマーと下の進み具合。1秒ごとの画像を返す（動きのある描画では base を使う）。"""
     n = int(sc["seconds"])
+    out = ThinkFrames()
+    out.base, out.n = im.copy(), n
+    out.append(draw_timer(im.copy(), ep, n, n).convert("RGB"))  # 確認用に最初の1枚だけ作る
+    return out
+
+
+def timer_shadow(f):
+    """タイマーの土台（影つきの紺の円）。重い処理なので1回だけ描く。"""
+    W, H = f.size
+    u = H / 1080
     Rr = int(62 * u)
     cx, cy = W - Rr - 40 * u, Rr + 22 * u
-    out = []
-    for k in range(n, 0, -1):
-        f = im.copy()
-        R.timer(f, ep, k, n, cx, cy, Rr)
-        R.progress_bar(f, ep, k / n, H)
-        out.append(f.convert("RGB"))
-    return out
+    R.shadow_box(f, (cx - Rr, cy - Rr, cx + Rr, cy + Rr), Rr, R.NAVY + (255,), blur=12, offset=5)
+    return f
+
+
+def draw_timer(f, ep, remain, n, shadow=True):
+    """タイマー（残り remain 秒、小数可）と下の進み具合のバーを描く。"""
+    W, H = f.size
+    u = H / 1080
+    Rr = int(62 * u)
+    cx, cy = W - Rr - 40 * u, Rr + 22 * u
+    if shadow:
+        timer_shadow(f)
+    d = ImageDraw.Draw(f)
+    w = max(6, int(Rr * 0.14))
+    bb = [cx - Rr + w, cy - Rr + w, cx + Rr - w, cy + Rr - w]
+    d.ellipse(bb, outline=(60, 78, 105), width=w)
+    if remain > 0:
+        d.arc(bb, -90, -90 + 360 * remain / n, fill=R.accent(ep), width=w)
+    d.text((cx, cy), str(max(0, math.ceil(remain - 1e-6))), font=R.font(Rr * 0.9, "heavy"), fill=(255, 255, 255), anchor="mm")
+    R.progress_bar(f, ep, max(0.0, remain / n), H)
+    return f
 
 
 def grid_pos(ep, sc):
@@ -521,11 +547,47 @@ def scene_count(sc, ep, size):
     return think_frames(im, ep, sc, H) if sc.get("think") else im.convert("RGB")
 
 
+def scene_title(sc, ep, size):
+    """和紙の表紙：左に色の帯、番組名の札、大きな題、下線、小さな説明。"""
+    W, H = size
+    u = H / 1080
+    if ep.get("_paper"):
+        im = paper(size)
+    else:  # 絵の背景は、明るくぼかして使う
+        im = R.bg(sc.get("bg", ep["bg"]), size, dim=0.35, blur=10, tint=(250, 247, 240))
+    acc = R.accent(ep)
+    d = ImageDraw.Draw(im)
+    d.rectangle([0, 0, 34 * u, H], fill=acc)
+    d.rectangle([34 * u, 0, 40 * u, H], fill=(255, 255, 255))
+    # 大きな白いカード
+    cx0, cy0, cx1, cy1 = 170 * u, 190 * u, W - 170 * u, H - 190 * u
+    R.shadow_box(im, (cx0, cy0, cx1, cy1), int(30 * u), (255, 255, 255, 250), blur=26, offset=12, alpha=70)
+    d = ImageDraw.Draw(im)
+    if ep.get("series"):
+        f = R.font(42 * u, "heavy")
+        tw = d.textlength(ep["series"], font=f)
+        bx = W / 2 - tw / 2 - 34 * u
+        d.rounded_rectangle([bx, cy0 - 36 * u, W / 2 + tw / 2 + 34 * u, cy0 + 36 * u], radius=int(36 * u), fill=acc)
+        d.text((W / 2, cy0), ep["series"], font=f, fill=(255, 255, 255), anchor="mm")
+    fs = sc.get("size", 120) * u * 1.05
+    f = serif(fs)
+    while d.textlength(sc["text"], font=f) > (cx1 - cx0) - 140 * u:
+        fs *= 0.92; f = serif(fs)
+    my = (cy0 + cy1) / 2 - (40 * u if sc.get("sub") else 0)
+    d.text((W / 2, my), sc["text"], font=f, fill=INK, anchor="mm")
+    d.rounded_rectangle([W / 2 - 90 * u, my + fs * 0.78, W / 2 + 90 * u, my + fs * 0.78 + 10 * u], radius=int(5 * u), fill=acc)
+    if sc.get("sub"):
+        d.text((W / 2, my + fs * 0.78 + 85 * u), sc["sub"], font=R.font(50 * u, "bold"), fill=(90, 90, 100), anchor="mm")
+    return im.convert("RGB")
+
+
 _orig = R.render_scene
 
 
 def render_scene(sc, ep, size):
     t = sc["type"]
+    if t == "title":
+        return scene_title(sc, ep, size)
     if t == "grid":
         return scene_grid(sc, ep, size)
     if t == "cross":
@@ -563,6 +625,7 @@ def ensure_bg(ep):
     p = pathlib.Path(os.environ.get("TMPDIR", "/tmp")) / f"brain_paper_{ep.get('id', 'x')}.png"
     paper((1920, 1080)).convert("RGB").filter(ImageFilter.GaussianBlur(1)).save(p)
     ep["bg"] = str(p)
+    ep["_paper"] = True
     return ep
 
 
@@ -577,15 +640,8 @@ def main(spec, out_dir, no_voice=False):
             sc["image"] = got
     if bgm_playlist(ep.get("style"), 60) and "bgm_volume" not in ep:
         ep["bgm_volume"] = BGM_VOLUME
-    tmp = pathlib.Path(os.environ.get("TMPDIR", "/tmp")) / f"{ep['id']}.resolved.json"
-    tmp.write_text(json.dumps(ep, ensure_ascii=False), encoding="utf-8")
-    R.main(str(tmp), out_dir, no_voice)
-    # 全体の音量を控えめにそろえる（大きすぎると飛ばされやすい）。映像はそのまま、音だけ作り直す
-    out = pathlib.Path(out_dir) / f"{ep['id']}.mp4"
-    quiet = out.with_suffix(".quiet.mp4")
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(out), "-c:v", "copy", "-af", f"loudnorm=I={LOUDNESS}:TP=-2:LRA=11",
-                    "-ar", str(R.SR), "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(quiet)], check=True)
-    quiet.replace(out)
+    import motion  # 1コマずつ描く書き出し（場面のつなぎ・なめらかなタイマー・表紙の動き）
+    motion.render(ep, out_dir, no_voice)
 
 
 if __name__ == "__main__":
