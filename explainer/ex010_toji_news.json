@@ -1,0 +1,40 @@
+{
+ "id": "ex010_toji_news",
+ "title": "今年の冬至はいつ？ ゆず湯とかぼちゃの理由",
+ "size": [
+  1920,
+  1080
+ ],
+ "bgm_style": "riddle",
+ "bgm_volume": 0.1,
+ "caption_style": "news",
+ "news_label": "季節の解説",
+ "voice_instructions": "ニュース番組のキャスターのように、はっきり、落ち着いた自然な日本語で話してください。",
+ "scenes": [
+  {
+   "image": "assets/generated/ex010_00_sunset",
+   "telop": "今年の冬至は\n12月22日",
+   "voice": "こんにちは。今日は、季節の話題です。今年、2026年の冬至は、12月22日です。"
+  },
+  {
+   "image": "assets/generated/ex010_01_shortday",
+   "telop": "一年でいちばん\n昼が短い日",
+   "voice": "冬至は、一年のうちで、いちばん昼の時間が短い日。この日を過ぎると、少しずつ、日が長くなっていきます。"
+  },
+  {
+   "image": "assets/generated/ex010_02_yuzu",
+   "telop": "ゆず湯に入る理由",
+   "voice": "冬至には、ゆず湯に入る習わしがあります。冬至と湯治をかけた、語呂合わせとも言われ、体がぽかぽか温まります。"
+  },
+  {
+   "image": "assets/generated/ex010_03_pumpkin",
+   "telop": "かぼちゃを食べる理由",
+   "voice": "かぼちゃを食べるのは、名前に、んのつく食べ物で、運を呼ぶという言い伝えから。かぼちゃは、なんきんとも呼ばれます。"
+  },
+  {
+   "image": "assets/generated/ex010_04_sunrise",
+   "telop": "あたたかくして\nお過ごしください",
+   "voice": "寒さが本格的になる季節。ゆず湯とかぼちゃで、あたたかくお過ごしください。季節の話題でした。"
+  }
+ ]
+}

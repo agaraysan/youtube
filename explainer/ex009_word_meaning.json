@@ -1,0 +1,61 @@
+{
+ "id": "ex009_word_meaning",
+ "title": "実は意味を間違えやすい言葉3選",
+ "size": [
+  1080,
+  1920
+ ],
+ "bgm_style": "spot",
+ "chapters": {
+  "1": "情けは人のためならず",
+  "2": "役不足",
+  "3": "気が置けない"
+ },
+ "chapter_label": "",
+ "scenes": [
+  {
+   "image": "assets/generated/ex009_00_books",
+   "telop": "意味を間違えやすい\n言葉3選",
+   "voice": "実は、意味を間違えて使われやすい言葉を、3つ紹介します。"
+  },
+  {
+   "image": "assets/generated/ex009_01_kindness",
+   "chapter": "1",
+   "telop": "情けは\n人のためならず",
+   "choices": [
+    "× 甘やかすのは良くない",
+    "○ 親切はめぐって自分に返る"
+   ],
+   "reveal": 1,
+   "voice": "情けは人のためならず。人に親切にすると、めぐりめぐって自分に返ってくる、という意味です。"
+  },
+  {
+   "image": "assets/generated/ex009_02_role",
+   "chapter": "2",
+   "telop": "役不足",
+   "choices": [
+    "× 力が足りない",
+    "○ 役目が軽すぎる"
+   ],
+   "reveal": 1,
+   "voice": "役不足。力が足りないことではなく、その人の力に対して、役目が軽すぎることを言います。"
+  },
+  {
+   "image": "assets/generated/ex009_03_friends",
+   "chapter": "3",
+   "telop": "気が置けない",
+   "choices": [
+    "× 油断できない",
+    "○ 遠慮がいらない"
+   ],
+   "reveal": 1,
+   "voice": "気が置けない。油断できない、ではなく、遠慮しなくていい、気楽につき合える、という意味です。"
+  },
+  {
+   "image": "assets/generated/ex009_00_books",
+   "telop": "いくつ\n知ってた？",
+   "move": "out",
+   "voice": "いくつ、知っていましたか？ 誰かに話したくなったら、シェアしてね。"
+  }
+ ]
+}

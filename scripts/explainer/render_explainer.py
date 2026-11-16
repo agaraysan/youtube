@@ -214,9 +214,50 @@ def caption_layer(lines, style="outline", color=None, name=None):
             d.text((x0 + 30 * u + nw / 2, y0 - 29 * u), name, font=nf, fill=WHITE, anchor="mm")
         for k, ln in enumerate(lines):
             d.text((W / 2, y0 + lh * k + lh / 2 - 10 * u), ln, font=f, fill=INK, anchor="mm")
+    elif style == "news":  # ニュース風：画面下の帯の中に字幕
+        top = hgt - 40 * u - lh * 2 - 30 * u
+        d.rectangle([0, top, W, hgt], fill=(12, 30, 70, 235))
+        d.rectangle([0, top, W, top + 8 * u], fill=(230, 50, 60, 255))
+        lab = font(36 * u, heavy=True)
+        d.rectangle([40 * u, top - 56 * u, 40 * u + d.textlength(name or "解説", font=lab) + 40 * u, top], fill=(230, 50, 60, 255))
+        d.text((60 * u, top - 28 * u), name or "解説", font=lab, fill=WHITE, anchor="lm")
+        mid = (top + 8 * u + hgt) / 2
+        for k, ln in enumerate(lines):
+            d.text((W / 2, mid + (k - (len(lines) - 1) / 2) * lh), ln, font=f, fill=WHITE, anchor="mm")
     else:
         for k, ln in enumerate(lines):
             stroke_text(im, (W / 2, y0 + lh * k + lh / 2), ln, f, WHITE, INK, int(9 * u))
+    return im
+
+
+def choice_card(text, state):
+    """選択肢カード。state: normal / right / dim"""
+    u = L.u
+    f = font((56 if L.vertical else 54) * u, heavy=True)
+    w = int((900 if L.vertical else 1000) * u)
+    h = int(118 * u)
+    im = Image.new("RGBA", (w + 16, h + 16), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    fill = {"normal": (255, 255, 255, 240), "right": (255, 214, 60, 255), "dim": (255, 255, 255, 120)}[state]
+    d.rounded_rectangle([8, 14, w + 8, h + 14], h // 2, fill=(0, 0, 0, 90 if state != "dim" else 40))
+    d.rounded_rectangle([0, 0, w, h], h // 2, fill=fill, outline=(230, 50, 60) if state == "right" else None, width=int(8 * u))
+    head, _, body = text.partition(" ")
+    d.ellipse([12 * u, 12 * u, h - 12 * u, h - 12 * u], fill=ACCENT2 if state != "right" else (230, 50, 60))
+    d.text(((h) / 2, h / 2), head, font=f, fill=WHITE, anchor="mm")
+    d.text((h + 20 * u, h / 2), body, font=f, fill=INK if state != "dim" else (90, 90, 100), anchor="lm")
+    return im
+
+
+def timer_layer(k, frac):
+    """考える時間の丸い時計（残り k 秒）。"""
+    u = L.u
+    R = int(90 * u)
+    im = Image.new("RGBA", (2 * R + 20, 2 * R + 20), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.ellipse([10, 10, 10 + 2 * R, 10 + 2 * R], fill=(255, 255, 255, 235))
+    d.pieslice([10 + 10 * u, 10 + 10 * u, 10 + 2 * R - 10 * u, 10 + 2 * R - 10 * u], -90, -90 + 360 * frac, fill=(230, 50, 60, 200))
+    d.ellipse([10 + 26 * u, 10 + 26 * u, 10 + 2 * R - 26 * u, 10 + 2 * R - 26 * u], fill=(255, 255, 255, 255))
+    d.text((10 + R, 10 + R), str(k), font=font(84 * u, heavy=True), fill=INK, anchor="mm")
     return im
 
 
@@ -349,6 +390,8 @@ def main(spec, out_dir, fast=False):
     cast = ep.get("cast", {})
     cap_style = ep.get("caption_style", "box" if cast else "outline")
     nch = len(ep.get("chapters", {}))
+    if cap_style == "news":
+        L.cap_bottom = L.H
     if cast and not L.vertical:
         L.cap_max = 20  # 左右のキャラクターに字幕がかからないように
 
@@ -370,7 +413,7 @@ def main(spec, out_dir, fast=False):
             parts.append({"start": acc, "len": len(data) / SR, "data": data, "env": env / (env.max() + 1e-6),
                           "who": ln.get("who"), "text": ln["text"]})
             acc += len(data) / SR + GAP
-        length = acc - GAP + PAD + sc.get("extra", 0)
+        length = acc - GAP + PAD + sc.get("extra", 0) + sc.get("countdown", 0)
         scenes.append({**sc, "n": n, "start": t, "len": length, "parts": parts})
         t += length
     total = t
@@ -391,6 +434,10 @@ def main(spec, out_dir, fast=False):
             last_ch = nch
         s["prog"] = progress_layer(nch, last_ch) if nch else None
         s["rank_l"] = rank_layer(s["rank"]) if s.get("rank") else None
+        if s.get("choices"):
+            rv = s.get("reveal")
+            s["cards"] = [choice_card(c, "normal" if rv is None else ("right" if i == rv else "dim")) for i, c in enumerate(s["choices"])]
+        s["voice_end"] = max((p["start"] + p["len"] for p in s["parts"]), default=LEAD)
         s["caps"] = []
         for p in s["parts"]:
             who = cast.get(p["who"], {})
@@ -399,7 +446,7 @@ def main(spec, out_dir, fast=False):
             acc = p["start"]
             for c, wgt in zip(caps, weights):
                 d = p["len"] * wgt / sum(weights)
-                s["caps"].append((acc, acc + d, caption_layer(c, cap_style, who.get("color"), who.get("name"))))
+                s["caps"].append((acc, acc + d, caption_layer(c, cap_style, who.get("color"), who.get("name") or ep.get("news_label"))))
                 acc += d
 
     # 3) 1コマずつ描いて ffmpeg に流す
@@ -445,6 +492,11 @@ def main(spec, out_dir, fast=False):
     for s in scenes:
         for p in s["parts"]:
             put(voice, p["data"], s["start"] + p["start"])
+        if s.get("countdown"):
+            for i in range(int(s["countdown"])):
+                put(sfx, sfx_pop(), s["start"] + s["voice_end"] + 0.3 + i, 0.5)
+        if s.get("reveal") is not None:
+            put(sfx, drum[-int(0.8 * SR):], s["start"] + 0.05, 0.4)
         if s.get("rank"):
             put(sfx, drum, s["start"] + 0.05, 0.35)
         elif s["telop_l"] is not None:
@@ -511,7 +563,7 @@ def draw_scene(s, lt, ep, cast, base_only=False):
         t2 = tl.resize((max(1, int(tl.width * sc)), max(1, int(tl.height * sc))), Image.BILINEAR)
         if a < 1:
             t2.putalpha(t2.getchannel("A").point(lambda v: int(v * min(1, a * 1.5))))
-        y = L.telop_y + (60 * u if s["chap"] is not None and not L.vertical else 0) + bob
+        y = max(L.telop_y + (60 * u if s["chap"] is not None and not L.vertical else 0), tl.height / 2 + 20 * u) + bob
         x = W / 2 + (130 * u if s.get("rank") and not L.vertical else 0)
         im.alpha_composite(t2, (int(x - t2.width / 2), int(y - t2.height / 2)))
     if cast:  # 掛け合いの話し手：話している方が口を動かして弾む
@@ -532,10 +584,40 @@ def draw_scene(s, lt, ep, cast, base_only=False):
                 x = int(40 * u if who.get("side") == "left" else W - av.width - 40 * u)
                 y = int(H - av.height - 30 * u - hop)
             im.alpha_composite(av, (x, y))
+    if s.get("cards"):
+        n = len(s["cards"])
+        ch = s["cards"][0].height
+        gap = 20 * u
+        cy0 = (H * 0.47 if L.vertical else H * 0.5) - (n * ch + (n - 1) * gap) / 2
+        for i, card in enumerate(s["cards"]):
+            t_in = 0.3 + 0.3 * i if s.get("reveal") is None else 0
+            if lt < t_in:
+                continue
+            a = back_out((lt - t_in) / 0.35) if s.get("reveal") is None else 1
+            sc = 0.7 + 0.3 * a
+            if s.get("reveal") == i:
+                sc *= 1 + 0.05 * math.sin(lt * 6)
+            c2 = card.resize((max(1, int(card.width * sc)), max(1, int(card.height * sc))), Image.BILINEAR)
+            im.alpha_composite(c2, (int(W / 2 - c2.width / 2), int(cy0 + i * (ch + gap) + (ch - c2.height) / 2)))
+    if s.get("countdown"):
+        t_cd = lt - s["voice_end"] - 0.3
+        n_cd = int(s["countdown"])
+        if 0 <= t_cd < n_cd:
+            tl_ = timer_layer(n_cd - int(t_cd), 1 - (t_cd / n_cd))
+            x = W - tl_.width - 50 * u
+            y = (L.chap_y + 120 * u) if not L.vertical else (L.cap_bottom - tl_.height - 40 * u)
+            im.alpha_composite(tl_, (int(x), int(y)))
+    sticky = ep.get("caption_style") == "news"  # ニュース風は帯を出しっぱなしにする
+    shown = None
     for a0, a1, layer in s["caps"]:
-        if a0 - 0.05 <= lt < a1 + 0.35:
-            im.alpha_composite(layer, (0, int(L.cap_bottom - layer.height)))
-            break
+        if a0 - 0.05 <= lt < a1 + 0.35 or (sticky and a0 - 0.05 <= lt):
+            shown = layer
+            if not sticky:
+                break
+    if sticky and shown is None and s["caps"]:
+        shown = s["caps"][0][2]
+    if shown is not None:
+        im.alpha_composite(shown, (0, int(L.cap_bottom - shown.height)))
     if s["prog"] is not None:
         im.alpha_composite(s["prog"], (0, int(L.prog_y)))
     return im.convert("RGB")

@@ -1,0 +1,99 @@
+{
+ "id": "ex007_japan_quiz",
+ "title": "日本の地理 3択クイズ",
+ "size": [
+  1920,
+  1080
+ ],
+ "bgm_style": "match",
+ "chapters": {
+  "1": "面積",
+  "2": "山",
+  "3": "川"
+ },
+ "chapter_label": "Q",
+ "scenes": [
+  {
+   "image": "assets/generated/ex007_00_title",
+   "telop": "日本の地理\n3択クイズ",
+   "voice": "日本の地理、3択クイズ。全部わかるかな？"
+  },
+  {
+   "image": "assets/generated/ex007_01_q",
+   "chapter": "1",
+   "telop": "面積が2番目に大きい県は？",
+   "choices": [
+    "A 岩手県",
+    "B 福島県",
+    "C 長野県"
+   ],
+   "countdown": 3,
+   "voice": "第1問。北海道の次に、面積が大きい都道府県は、どれでしょう？"
+  },
+  {
+   "image": "assets/generated/ex007_01_a",
+   "chapter": "1",
+   "telop": "正解は 岩手県",
+   "choices": [
+    "A 岩手県",
+    "B 福島県",
+    "C 長野県"
+   ],
+   "reveal": 0,
+   "voice": "正解は、A、岩手県。本州の都道府県の中では、いちばん広いんです。"
+  },
+  {
+   "image": "assets/generated/ex007_02_q",
+   "chapter": "2",
+   "telop": "2番目に高い山は？",
+   "choices": [
+    "A 北岳",
+    "B 奥穂高岳",
+    "C 槍ヶ岳"
+   ],
+   "countdown": 3,
+   "voice": "第2問。日本でいちばん高い山は、富士山。では、2番目に高い山は、どれでしょう？"
+  },
+  {
+   "image": "assets/generated/ex007_02_a",
+   "chapter": "2",
+   "telop": "正解は 北岳",
+   "choices": [
+    "A 北岳",
+    "B 奥穂高岳",
+    "C 槍ヶ岳"
+   ],
+   "reveal": 0,
+   "voice": "正解は、A、北岳。山梨県にある、南アルプスの山です。"
+  },
+  {
+   "image": "assets/generated/ex007_03_q",
+   "chapter": "3",
+   "telop": "日本一長い川は？",
+   "choices": [
+    "A 利根川",
+    "B 信濃川",
+    "C 石狩川"
+   ],
+   "countdown": 3,
+   "voice": "第3問。日本でいちばん長い川は、どれでしょう？"
+  },
+  {
+   "image": "assets/generated/ex007_03_a",
+   "chapter": "3",
+   "telop": "正解は 信濃川",
+   "choices": [
+    "A 利根川",
+    "B 信濃川",
+    "C 石狩川"
+   ],
+   "reveal": 1,
+   "voice": "正解は、B、信濃川。長野県から新潟県へ流れ、日本海にそそぎます。"
+  },
+  {
+   "image": "assets/generated/ex007_00_title",
+   "telop": "何問 正解できた？",
+   "voice": "あなたは、何問正解できましたか？ コメントで教えてね。"
+  }
+ ]
+}
