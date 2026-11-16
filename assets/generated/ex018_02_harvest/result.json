@@ -1,8 +1,10 @@
 {
-  "id": "ex018_02_harvest",
-  "status": "ok",
-  "via": "codex-cloud",
-  "files": [
-    "assets/generated/ex018_02_harvest/harvest.png"
-  ]
+ "id": "ex018_02_harvest",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "harvest.png"
+ ],
+ "at_utc": "2026-11-16T15:42:19.273842Z"
 }
