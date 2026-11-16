@@ -18,67 +18,43 @@
    "text": "違いは3つ"
   },
   {
-   "type": "circles",
-   "images": [
-    "assets/generated/spot002_market_sq/a.png",
-    "assets/generated/spot002_market_sq/b.png"
-   ],
-   "upto": 1,
-   "text": "1つめ  鳥がいない",
-   "voice": "1つめ。左上の空を飛んでいた鳥が、いなくなっています。",
-   "chime": true
-  },
-  {
-   "type": "zoom",
+   "type": "reveal",
    "images": [
     "assets/generated/spot002_market_sq/a.png",
     "assets/generated/spot002_market_sq/b.png"
    ],
    "index": 0,
    "text": "1つめ  鳥がいない",
-   "seconds": 3.5
-  },
-  {
-   "type": "circles",
-   "images": [
-    "assets/generated/spot002_market_sq/a.png",
-    "assets/generated/spot002_market_sq/b.png"
-   ],
-   "upto": 2,
-   "text": "2つめ  みかんが2個",
-   "voice": "2つめ。かごのみかんが、3個から2個に減っています。",
+   "voice": "1つめ。空の鳥がいません。",
+   "voice_delay": 0.15,
+   "pad": 0.5,
    "chime": true
   },
   {
-   "type": "zoom",
+   "type": "reveal",
    "images": [
     "assets/generated/spot002_market_sq/a.png",
     "assets/generated/spot002_market_sq/b.png"
    ],
    "index": 1,
    "text": "2つめ  みかんが2個",
-   "seconds": 3.5
-  },
-  {
-   "type": "circles",
-   "images": [
-    "assets/generated/spot002_market_sq/a.png",
-    "assets/generated/spot002_market_sq/b.png"
-   ],
-   "upto": 3,
-   "text": "3つめ  猫がうさぎに",
-   "voice": "3つめ。右下の猫が、うさぎに変わっています。",
+   "voice": "2つめ。みかんが2個に減っています。",
+   "voice_delay": 0.15,
+   "pad": 0.5,
    "chime": true
   },
   {
-   "type": "zoom",
+   "type": "reveal",
    "images": [
     "assets/generated/spot002_market_sq/a.png",
     "assets/generated/spot002_market_sq/b.png"
    ],
    "index": 2,
    "text": "3つめ  猫がうさぎに",
-   "seconds": 3.5
+   "voice": "3つめ。猫がうさぎに変わっています。",
+   "voice_delay": 0.15,
+   "pad": 0.5,
+   "chime": true
   },
   {
    "type": "title",

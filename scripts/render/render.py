@@ -198,10 +198,49 @@ def tone(out, kind):
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", f"aevalsrc={expr}:s={SR}:d={d}", "-ac", "2", out], check=True)
 
 
+
+def reveal_frames(sc, ep, size):
+    """間違い探しの答え：丸を出してすぐ、その場所へ左右そろってズームする（声と同時に進む）。
+    (画像, 秒) のリストを返す。最後の画像の秒は None（声の長さに合わせて main が決める）。"""
+    W, H = size
+    u = H / 1080
+    a = Image.open(ROOT / sc["images"][0]).convert("RGB")
+    b = Image.open(ROOT / sc["images"][1]).convert("RGB")
+    x, y, ww, hh = ep["differences"][sc["index"]]["box"]
+    top, gap = 140 * u, 36 * u
+    side = int(min(H - top - 40 * u, (W - gap * 3) / 2))
+    x0 = (W - (side * 2 + gap)) / 2
+    cx, cy = x + ww / 2, y + hh / 2
+    zs = min(max(max(ww, hh) * 2.6, a.width * 0.3), a.width)  # ズーム後に見せる範囲（正方形）
+    base = panel_bg(size)
+    header(base, ep, sc, H)
+    if sc.get("caption"):
+        caption(base, ep, sc["caption"], H)
+    out = []
+    steps = [0.0] * 1 + [((k + 1) / 14) for k in range(14)]  # 0 = 全体、1 = ズーム
+    for n, k in enumerate(steps):
+        e = 1 - (1 - k) ** 3  # だんだんゆっくり
+        cs = a.width + (zs - a.width) * e
+        l = min(max(cx - cs / 2, 0), a.width - cs) * e if e > 0 else 0
+        t = min(max(cy - cs / 2, 0), a.height - cs) * e if e > 0 else 0
+        im = base.copy()
+        for j, src in enumerate((a, b)):
+            ox = x0 + j * (side + gap)
+            framed(im, src.crop((int(l), int(t), int(l + cs), int(t + cs))), (ox, top, side, side), int(18 * u))
+            s = (side - 12) / cs
+            ring(im, int(ox) + 6 + (cx - l) * s, int(top) + 6 + (cy - t) * s, max(ww, hh) * s / 2 + (16 + 8 * e) * u, accent(ep), u)
+            if e >= 1:
+                chip(im, ("左", "右")[j], ox + 22 * u, top + 22 * u, 62 * u, NAVY + (230,))
+        out.append((im.convert("RGB"), sc.get("hold_full", 0.6) if n == 0 else 1 / FPS))
+    out[-1] = (out[-1][0], None)
+    return out
+
 # ---- 場面 ----
 def render_scene(sc, ep, size):
     """1場面の静止画（think の場合は1秒ごとの画像のリスト）を返す。"""
     kind = sc["type"]
+    if kind == "reveal":
+        return reveal_frames(sc, ep, size)
     W, H = size
     u = H / 1080
     pair = kind in ("image", "circles", "zoom") or (kind == "think" and "images" in sc)
@@ -347,7 +386,15 @@ def main(spec_path, out_dir, no_voice=False):
         if sc.get("chime"):
             sfx_parts.append((t, chime))
         r = render_scene(sc, ep, size)
-        if isinstance(r, list):
+        if isinstance(r, list) and r and isinstance(r[0], tuple):  # (画像, 秒) の列
+            fixed = sum(d for _, d in r if d)
+            rest = max(0.8, length - fixed)
+            for k, (fr, d) in enumerate(r):
+                p = tmp / f"s{n:02d}_{k:03d}.png"
+                fr.save(p)
+                concat.append((p, d if d else rest))
+            length = fixed + rest
+        elif isinstance(r, list):
             for k, fr in enumerate(r):
                 p = tmp / f"s{n:02d}_{k:03d}.png"
                 fr.save(p)
