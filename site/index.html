@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>quiz-uploader</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1d2433; --muted:#5b6578; --line:#e3e7ee; --accent:#1f4e8c; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.7 system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Yu Gothic", sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:48px 16px; }
+  h1 { font-size:28px; margin:0 0 4px; }
+  h2 { font-size:19px; margin:32px 0 8px; border-top:1px solid var(--line); padding-top:24px; }
+  p, li { color:var(--fg); }
+  .sub { color:var(--muted); margin:0 0 24px; }
+  a { color:var(--accent); }
+  footer { margin-top:40px; color:var(--muted); font-size:14px; border-top:1px solid var(--line); padding-top:16px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>quiz-uploader</h1>
+  <p class="sub">A private upload tool for one creator's own quiz channel</p>
+
+  <p>quiz-uploader is an internal tool used by a single individual creator. It publishes the creator's own original quiz and brain-teaser videos (matchstick puzzles, riddles, spot-the-difference and kanji quizzes) to the creator's own YouTube channel.</p>
+
+  <h2>What it does</h2>
+  <ul>
+    <li>Uploads finished videos to the owner's own channel (YouTube Data API: videos.insert).</li>
+    <li>Sets the title, description, tags, thumbnail and scheduled publish time (videos.insert, thumbnails.set).</li>
+    <li>Changes the privacy status of the owner's own videos (videos.list, videos.update).</li>
+  </ul>
+
+  <h2>Who can use it</h2>
+  <p>Only the channel owner. The tool runs in the owner's private GitHub repository on GitHub Actions. It has no public sign-up, is not distributed or sold, and never accesses any other user's channel or data.</p>
+
+  <h2>Data</h2>
+  <p>See the <a href="privacy.html">Privacy Policy</a>. This tool uses YouTube API Services. By using it you agree to the <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a>.</p>
+
+  <h2>日本語</h2>
+  <p>quiz-uploader は、個人のクリエイター1人が、自分で作ったクイズ動画を自分の YouTube チャンネルへ投稿するための非公開の道具です。他の人のチャンネルやデータには触れません。詳しくは<a href="privacy.html">個人情報の方針</a>をご覧ください。</p>
+
+  <footer>Last updated: 2026-11-16 · <a href="privacy.html">Privacy Policy</a></footer>
+</main>
+</body>
+</html>
