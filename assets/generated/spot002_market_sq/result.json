@@ -1,0 +1,12 @@
+{
+ "id": "spot002_market_sq",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "a.png",
+  "b.png"
+ ],
+ "check": "OK 3 か所",
+ "at_utc": "2026-11-16T03:29:28.240119Z"
+}
