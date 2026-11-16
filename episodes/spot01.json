@@ -1,0 +1,494 @@
+{
+ "id": "spot01",
+ "series": "間違い探し",
+ "style": "spot",
+ "bg": "assets/generated/spotS01_01/a.png",
+ "spots": {
+  "spotS01_01": {
+   "a": "assets/generated/spotS01_01/a.png",
+   "b": "assets/generated/spotS01_01/b.png",
+   "list": "assets/generated/spotS01_01/differences.json"
+  },
+  "spotS01_02": {
+   "a": "assets/generated/spotS01_02/a.png",
+   "b": "assets/generated/spotS01_02/b.png",
+   "list": "assets/generated/spotS01_02/differences.json"
+  },
+  "spotS01_03": {
+   "a": "assets/generated/spotS01_03/a.png",
+   "b": "assets/generated/spotS01_03/b.png",
+   "list": "assets/generated/spotS01_03/differences.json"
+  },
+  "spotS01_04": {
+   "a": "assets/generated/spotS01_04/a.png",
+   "b": "assets/generated/spotS01_04/b.png",
+   "list": "assets/generated/spotS01_04/differences.json"
+  },
+  "spotS01_05": {
+   "a": "assets/generated/spotS01_05/a.png",
+   "b": "assets/generated/spotS01_05/b.png",
+   "list": "assets/generated/spotS01_05/differences.json"
+  }
+ },
+ "scenes": [
+  {
+   "type": "title",
+   "text": "間違い探し",
+   "sub": "夏の間違い探し　海・プール・夏祭り",
+   "bg": "assets/generated/spotS01_01/a.png",
+   "voice": "間違い探し、全5問です。左と右の絵の違いを見つけてください。"
+  },
+  {
+   "type": "think",
+   "images": [
+    "assets/generated/spotS01_01/a.png",
+    "assets/generated/spotS01_01/b.png"
+   ],
+   "text": "第1問  違いは5つ",
+   "seconds": 30,
+   "spot": "spotS01_01",
+   "voice": "第1問。違いは5つです。",
+   "voice_delay": 0.2
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_01/a.png",
+    "assets/generated/spotS01_01/b.png"
+   ],
+   "index": 0,
+   "spot": "spotS01_01",
+   "text": "1つめ  空の一番高いカモメが消えている",
+   "voice": "1つめ。空の一番高いカモメが消えている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_01/a.png",
+    "assets/generated/spotS01_01/b.png"
+   ],
+   "index": 1,
+   "spot": "spotS01_01",
+   "text": "2つめ  青いかき氷が丸い山から上面の平…",
+   "voice": "2つめ。青いかき氷が丸い山から上面の平らな四角い形に変わっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_01/a.png",
+    "assets/generated/spotS01_01/b.png"
+   ],
+   "index": 2,
+   "spot": "spotS01_01",
+   "text": "3つめ  砂のお城の赤い旗が三角から四角…",
+   "voice": "3つめ。砂のお城の赤い旗が三角から四角になっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_01/a.png",
+    "assets/generated/spotS01_01/b.png"
+   ],
+   "index": 3,
+   "spot": "spotS01_01",
+   "text": "4つめ  青い星の砂型がハートの砂型にな…",
+   "voice": "4つめ。青い星の砂型がハートの砂型になっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_01/a.png",
+    "assets/generated/spotS01_01/b.png"
+   ],
+   "index": 4,
+   "spot": "spotS01_01",
+   "text": "5つめ  パイナップルの葉が短くなっている",
+   "voice": "5つめ。パイナップルの葉が短くなっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "think",
+   "images": [
+    "assets/generated/spotS01_02/a.png",
+    "assets/generated/spotS01_02/b.png"
+   ],
+   "text": "第2問  違いは5つ",
+   "seconds": 30,
+   "spot": "spotS01_02",
+   "voice": "第2問。違いは5つです。",
+   "voice_delay": 0.2
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_02/a.png",
+    "assets/generated/spotS01_02/b.png"
+   ],
+   "index": 0,
+   "spot": "spotS01_02",
+   "text": "1つめ  監視員の椅子の横のビーチボール…",
+   "voice": "1つめ。監視員の椅子の横のビーチボールが消えている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_02/a.png",
+    "assets/generated/spotS01_02/b.png"
+   ],
+   "index": 1,
+   "spot": "spotS01_02",
+   "text": "2つめ  売店の飲み物がアイスクリームに…",
+   "voice": "2つめ。売店の飲み物がアイスクリームに変わっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_02/a.png",
+    "assets/generated/spotS01_02/b.png"
+   ],
+   "index": 2,
+   "spot": "spotS01_02",
+   "text": "3つめ  デッキチェアのタオルがしま模様…",
+   "voice": "3つめ。デッキチェアのタオルがしま模様から水玉模様に変わっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_02/a.png",
+    "assets/generated/spotS01_02/b.png"
+   ],
+   "index": 3,
+   "spot": "spotS01_02",
+   "text": "4つめ  左下の青いサンダルが2個から1…",
+   "voice": "4つめ。左下の青いサンダルが2個から1個に減っている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_02/a.png",
+    "assets/generated/spotS01_02/b.png"
+   ],
+   "index": 4,
+   "spot": "spotS01_02",
+   "text": "5つめ  黄色い浮き輪の星が三日月に変わ…",
+   "voice": "5つめ。黄色い浮き輪の星が三日月に変わっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "think",
+   "images": [
+    "assets/generated/spotS01_03/a.png",
+    "assets/generated/spotS01_03/b.png"
+   ],
+   "text": "第3問  違いは5つ",
+   "seconds": 30,
+   "spot": "spotS01_03",
+   "voice": "第3問。違いは5つです。",
+   "voice_delay": 0.2
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_03/a.png",
+    "assets/generated/spotS01_03/b.png"
+   ],
+   "index": 0,
+   "spot": "spotS01_03",
+   "text": "1つめ  風鈴の下の短冊が消えている",
+   "voice": "1つめ。風鈴の下の短冊が消えている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_03/a.png",
+    "assets/generated/spotS01_03/b.png"
+   ],
+   "index": 1,
+   "spot": "spotS01_03",
+   "text": "2つめ  上部中央の赤い提灯が小さくなっ…",
+   "voice": "2つめ。上部中央の赤い提灯が小さくなっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_03/a.png",
+    "assets/generated/spotS01_03/b.png"
+   ],
+   "index": 2,
+   "spot": "spotS01_03",
+   "text": "3つめ  うちわの金魚が蝶に変わっている",
+   "voice": "3つめ。うちわの金魚が蝶に変わっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_03/a.png",
+    "assets/generated/spotS01_03/b.png"
+   ],
+   "index": 3,
+   "spot": "spotS01_03",
+   "text": "4つめ  器の青い花模様が水玉模様になっ…",
+   "voice": "4つめ。器の青い花模様が水玉模様になっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_03/a.png",
+    "assets/generated/spotS01_03/b.png"
+   ],
+   "index": 4,
+   "spot": "spotS01_03",
+   "text": "5つめ  右下の招き猫がウサギの置物にな…",
+   "voice": "5つめ。右下の招き猫がウサギの置物になっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "think",
+   "images": [
+    "assets/generated/spotS01_04/a.png",
+    "assets/generated/spotS01_04/b.png"
+   ],
+   "text": "第4問  違いは5つ",
+   "seconds": 30,
+   "spot": "spotS01_04",
+   "voice": "第4問。違いは5つです。",
+   "voice_delay": 0.2
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_04/a.png",
+    "assets/generated/spotS01_04/b.png"
+   ],
+   "index": 0,
+   "spot": "spotS01_04",
+   "text": "1つめ  木から下がる上のランタンが消え…",
+   "voice": "1つめ。木から下がる上のランタンが消えている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_04/a.png",
+    "assets/generated/spotS01_04/b.png"
+   ],
+   "index": 1,
+   "spot": "spotS01_04",
+   "text": "2つめ  川のビーチボールが立方体になっ…",
+   "voice": "2つめ。川のビーチボールが立方体になっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_04/a.png",
+    "assets/generated/spotS01_04/b.png"
+   ],
+   "index": 2,
+   "spot": "spotS01_04",
+   "text": "3つめ  左下の蝶がトンボに入れ替わって…",
+   "voice": "3つめ。左下の蝶がトンボに入れ替わっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_04/a.png",
+    "assets/generated/spotS01_04/b.png"
+   ],
+   "index": 3,
+   "spot": "spotS01_04",
+   "text": "4つめ  テーブルの木製ミルが2本から1…",
+   "voice": "4つめ。テーブルの木製ミルが2本から1本になっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_04/a.png",
+    "assets/generated/spotS01_04/b.png"
+   ],
+   "index": 4,
+   "spot": "spotS01_04",
+   "text": "5つめ  リュックに下がる銀色のカップが…",
+   "voice": "5つめ。リュックに下がる銀色のカップが小さくなっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "think",
+   "images": [
+    "assets/generated/spotS01_05/a.png",
+    "assets/generated/spotS01_05/b.png"
+   ],
+   "text": "第5問  違いは5つ",
+   "seconds": 30,
+   "spot": "spotS01_05",
+   "voice": "第5問。違いは5つです。",
+   "voice_delay": 0.2
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_05/a.png",
+    "assets/generated/spotS01_05/b.png"
+   ],
+   "index": 0,
+   "spot": "spotS01_05",
+   "text": "1つめ  風鈴の右側の金魚が消えている",
+   "voice": "1つめ。風鈴の右側の金魚が消えている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_05/a.png",
+    "assets/generated/spotS01_05/b.png"
+   ],
+   "index": 1,
+   "spot": "spotS01_05",
+   "text": "2つめ  棚の瓶の中の貝殻がヒトデに変わ…",
+   "voice": "2つめ。棚の瓶の中の貝殻がヒトデに変わっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_05/a.png",
+    "assets/generated/spotS01_05/b.png"
+   ],
+   "index": 2,
+   "spot": "spotS01_05",
+   "text": "3つめ  麦わら帽子の青いリボンに水玉模…",
+   "voice": "3つめ。麦わら帽子の青いリボンに水玉模様がある。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_05/a.png",
+    "assets/generated/spotS01_05/b.png"
+   ],
+   "index": 3,
+   "spot": "spotS01_05",
+   "text": "4つめ  手前のビーチボールが小さくなっ…",
+   "voice": "4つめ。手前のビーチボールが小さくなっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotS01_05/a.png",
+    "assets/generated/spotS01_05/b.png"
+   ],
+   "index": 4,
+   "spot": "spotS01_05",
+   "text": "5つめ  帆船の左の帆が三角形から四角形…",
+   "voice": "5つめ。帆船の左の帆が三角形から四角形に変わっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "title",
+   "text": "全部見つけられた？",
+   "sub": "コメントで教えてください",
+   "bg": "assets/generated/spotS01_05/a.png",
+   "voice": "全部見つけられましたか？コメントで教えてください。チャンネル登録もよろしくお願いします。"
+  }
+ ],
+ "meta": {
+  "genre": "spot",
+  "pictures": [
+   "spotS01_01",
+   "spotS01_02",
+   "spotS01_03",
+   "spotS01_04",
+   "spotS01_05"
+  ]
+ }
+}

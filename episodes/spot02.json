@@ -1,0 +1,401 @@
+{
+ "id": "spot02",
+ "series": "間違い探し",
+ "style": "spot",
+ "bg": "assets/generated/spotA01_01/a.png",
+ "spots": {
+  "spotA01_01": {
+   "a": "assets/generated/spotA01_01/a.png",
+   "b": "assets/generated/spotA01_01/b.png",
+   "list": "assets/generated/spotA01_01/differences.json"
+  },
+  "spotA01_03": {
+   "a": "assets/generated/spotA01_03/a.png",
+   "b": "assets/generated/spotA01_03/b.png",
+   "list": "assets/generated/spotA01_03/differences.json"
+  },
+  "spotA01_04": {
+   "a": "assets/generated/spotA01_04/a.png",
+   "b": "assets/generated/spotA01_04/b.png",
+   "list": "assets/generated/spotA01_04/differences.json"
+  },
+  "spotA01_05": {
+   "a": "assets/generated/spotA01_05/a.png",
+   "b": "assets/generated/spotA01_05/b.png",
+   "list": "assets/generated/spotA01_05/differences.json"
+  }
+ },
+ "scenes": [
+  {
+   "type": "title",
+   "text": "間違い探し",
+   "sub": "秋の間違い探し　紅葉・ハロウィン・収穫祭",
+   "bg": "assets/generated/spotA01_01/a.png",
+   "voice": "間違い探し、全4問です。左と右の絵の違いを見つけてください。"
+  },
+  {
+   "type": "think",
+   "images": [
+    "assets/generated/spotA01_01/a.png",
+    "assets/generated/spotA01_01/b.png"
+   ],
+   "text": "第1問  違いは5つ",
+   "seconds": 30,
+   "spot": "spotA01_01",
+   "voice": "第1問。違いは5つです。",
+   "voice_delay": 0.2
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_01/a.png",
+    "assets/generated/spotA01_01/b.png"
+   ],
+   "index": 0,
+   "spot": "spotA01_01",
+   "text": "1つめ  灯籠の四角い窓が丸い窓になって…",
+   "voice": "1つめ。灯籠の四角い窓が丸い窓になっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_01/a.png",
+    "assets/generated/spotA01_01/b.png"
+   ],
+   "index": 1,
+   "spot": "spotA01_01",
+   "text": "2つめ  橋のそばの陶器の植木鉢が編み籠…",
+   "voice": "2つめ。橋のそばの陶器の植木鉢が編み籠に替わっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_01/a.png",
+    "assets/generated/spotA01_01/b.png"
+   ],
+   "index": 2,
+   "spot": "spotA01_01",
+   "text": "3つめ  右岸の岩の上の鴨が消えている",
+   "voice": "3つめ。右岸の岩の上の鴨が消えている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_01/a.png",
+    "assets/generated/spotA01_01/b.png"
+   ],
+   "index": 3,
+   "spot": "spotA01_01",
+   "text": "4つめ  お盆の湯飲みが2個から1個に減…",
+   "voice": "4つめ。お盆の湯飲みが2個から1個に減っている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_01/a.png",
+    "assets/generated/spotA01_01/b.png"
+   ],
+   "index": 4,
+   "spot": "spotA01_01",
+   "text": "5つめ  籠に掛かった布が花柄から縞柄に…",
+   "voice": "5つめ。籠に掛かった布が花柄から縞柄になっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "think",
+   "images": [
+    "assets/generated/spotA01_03/a.png",
+    "assets/generated/spotA01_03/b.png"
+   ],
+   "text": "第2問  違いは5つ",
+   "seconds": 30,
+   "spot": "spotA01_03",
+   "voice": "第2問。違いは5つです。",
+   "voice_delay": 0.2
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_03/a.png",
+    "assets/generated/spotA01_03/b.png"
+   ],
+   "index": 0,
+   "spot": "spotA01_03",
+   "text": "1つめ  左の柱の濃い色のトウモロコシが…",
+   "voice": "1つめ。左の柱の濃い色のトウモロコシが消える。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_03/a.png",
+    "assets/generated/spotA01_03/b.png"
+   ],
+   "index": 1,
+   "spot": "spotA01_03",
+   "text": "2つめ  エプロンの胸元に縦縞が入る",
+   "voice": "2つめ。エプロンの胸元に縦縞が入る。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_03/a.png",
+    "assets/generated/spotA01_03/b.png"
+   ],
+   "index": 2,
+   "spot": "spotA01_03",
+   "text": "3つめ  右のヒマワリが白いデイジーに変…",
+   "voice": "3つめ。右のヒマワリが白いデイジーに変わる。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_03/a.png",
+    "assets/generated/spotA01_03/b.png"
+   ],
+   "index": 3,
+   "spot": "spotA01_03",
+   "text": "4つめ  卓上の単独のりんごがなくなる",
+   "voice": "4つめ。卓上の単独のりんごがなくなる。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_03/a.png",
+    "assets/generated/spotA01_03/b.png"
+   ],
+   "index": 4,
+   "spot": "spotA01_03",
+   "text": "5つめ  右下の小さなオレンジのかぼちゃ…",
+   "voice": "5つめ。右下の小さなオレンジのかぼちゃがさらに小さくなる。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "think",
+   "images": [
+    "assets/generated/spotA01_04/a.png",
+    "assets/generated/spotA01_04/b.png"
+   ],
+   "text": "第3問  違いは5つ",
+   "seconds": 30,
+   "spot": "spotA01_04",
+   "voice": "第3問。違いは5つです。",
+   "voice_delay": 0.2
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_04/a.png",
+    "assets/generated/spotA01_04/b.png"
+   ],
+   "index": 0,
+   "spot": "spotA01_04",
+   "text": "1つめ  左奥の花瓶のピンクの花が消えて…",
+   "voice": "1つめ。左奥の花瓶のピンクの花が消えている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_04/a.png",
+    "assets/generated/spotA01_04/b.png"
+   ],
+   "index": 1,
+   "spot": "spotA01_04",
+   "text": "2つめ  右奥のガラスのティーポットが小…",
+   "voice": "2つめ。右奥のガラスのティーポットが小さくなっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_04/a.png",
+    "assets/generated/spotA01_04/b.png"
+   ],
+   "index": 2,
+   "spot": "spotA01_04",
+   "text": "3つめ  左手前のクロワッサンが輪の形に…",
+   "voice": "3つめ。左手前のクロワッサンが輪の形になっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_04/a.png",
+    "assets/generated/spotA01_04/b.png"
+   ],
+   "index": 3,
+   "spot": "spotA01_04",
+   "text": "4つめ  手前の本の表紙に斜めのしま模様…",
+   "voice": "4つめ。手前の本の表紙に斜めのしま模様がある。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_04/a.png",
+    "assets/generated/spotA01_04/b.png"
+   ],
+   "index": 4,
+   "spot": "spotA01_04",
+   "text": "5つめ  手前右のマフィンがリンゴに変わ…",
+   "voice": "5つめ。手前右のマフィンがリンゴに変わっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "think",
+   "images": [
+    "assets/generated/spotA01_05/a.png",
+    "assets/generated/spotA01_05/b.png"
+   ],
+   "text": "第4問  違いは5つ",
+   "seconds": 30,
+   "spot": "spotA01_05",
+   "voice": "第4問。違いは5つです。",
+   "voice_delay": 0.2
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_05/a.png",
+    "assets/generated/spotA01_05/b.png"
+   ],
+   "index": 0,
+   "spot": "spotA01_05",
+   "text": "1つめ  左上の黄色いフリスビーが消えて…",
+   "voice": "1つめ。左上の黄色いフリスビーが消えている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_05/a.png",
+    "assets/generated/spotA01_05/b.png"
+   ],
+   "index": 1,
+   "spot": "spotA01_05",
+   "text": "2つめ  右上のじょうろの持ち手が丸形か…",
+   "voice": "2つめ。右上のじょうろの持ち手が丸形から四角形になっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_05/a.png",
+    "assets/generated/spotA01_05/b.png"
+   ],
+   "index": 2,
+   "spot": "spotA01_05",
+   "text": "3つめ  左下の赤いリンゴが赤い洋ナシに…",
+   "voice": "3つめ。左下の赤いリンゴが赤い洋ナシに替わっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_05/a.png",
+    "assets/generated/spotA01_05/b.png"
+   ],
+   "index": 3,
+   "spot": "spotA01_05",
+   "text": "4つめ  中央下の皿のクッキーが3枚から…",
+   "voice": "4つめ。中央下の皿のクッキーが3枚から2枚に減っている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "reveal",
+   "images": [
+    "assets/generated/spotA01_05/a.png",
+    "assets/generated/spotA01_05/b.png"
+   ],
+   "index": 4,
+   "spot": "spotA01_05",
+   "text": "5つめ  右下のナプキンが縞模様から水玉…",
+   "voice": "5つめ。右下のナプキンが縞模様から水玉模様になっている。",
+   "voice_delay": 0.15,
+   "pad": 0.4,
+   "hold_full": 0.5,
+   "chime": true
+  },
+  {
+   "type": "title",
+   "text": "全部見つけられた？",
+   "sub": "コメントで教えてください",
+   "bg": "assets/generated/spotA01_05/a.png",
+   "voice": "全部見つけられましたか？コメントで教えてください。チャンネル登録もよろしくお願いします。"
+  }
+ ],
+ "meta": {
+  "genre": "spot",
+  "pictures": [
+   "spotA01_01",
+   "spotA01_03",
+   "spotA01_04",
+   "spotA01_05"
+  ]
+ }
+}
