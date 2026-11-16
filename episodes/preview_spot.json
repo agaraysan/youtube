@@ -1,6 +1,6 @@
 {
  "id": "preview_spot",
- "bg": "assets/generated/t009_scene_spot_market/market.png",
+ "bg": "assets/generated/spot002_market_sq/a.png",
  "scenes": [
   {
    "type": "title",
@@ -12,72 +12,72 @@
    "type": "think",
    "seconds": 20,
    "images": [
-    "assets/generated/t009_scene_spot_market/market.png",
-    "assets/generated/spot001_market_b/image.png"
+    "assets/generated/spot002_market_sq/a.png",
+    "assets/generated/spot002_market_sq/b.png"
    ],
    "text": "違いは3つ"
   },
   {
    "type": "circles",
    "images": [
-    "assets/generated/t009_scene_spot_market/market.png",
-    "assets/generated/spot001_market_b/image.png"
+    "assets/generated/spot002_market_sq/a.png",
+    "assets/generated/spot002_market_sq/b.png"
    ],
    "upto": 1,
-   "text": "1つめ：スズメが1羽いない",
-   "voice": "1つめ。右上のスズメが、1羽いなくなっています。",
+   "text": "1つめ：鳥がいない",
+   "voice": "1つめ。左上の空を飛んでいた鳥が、いなくなっています。",
    "chime": true
   },
   {
    "type": "zoom",
    "images": [
-    "assets/generated/t009_scene_spot_market/market.png",
-    "assets/generated/spot001_market_b/image.png"
+    "assets/generated/spot002_market_sq/a.png",
+    "assets/generated/spot002_market_sq/b.png"
    ],
    "index": 0,
-   "text": "1つめ：スズメが1羽いない",
+   "text": "1つめ：鳥がいない",
    "seconds": 3.5
   },
   {
    "type": "circles",
    "images": [
-    "assets/generated/t009_scene_spot_market/market.png",
-    "assets/generated/spot001_market_b/image.png"
+    "assets/generated/spot002_market_sq/a.png",
+    "assets/generated/spot002_market_sq/b.png"
    ],
    "upto": 2,
-   "text": "2つめ：猫のしっぽが短い",
-   "voice": "2つめ。三毛猫のしっぽが、短くなっています。",
+   "text": "2つめ：みかんが2個",
+   "voice": "2つめ。かごのみかんが、3個から2個に減っています。",
    "chime": true
   },
   {
    "type": "zoom",
    "images": [
-    "assets/generated/t009_scene_spot_market/market.png",
-    "assets/generated/spot001_market_b/image.png"
+    "assets/generated/spot002_market_sq/a.png",
+    "assets/generated/spot002_market_sq/b.png"
    ],
    "index": 1,
-   "text": "2つめ：猫のしっぽが短い",
+   "text": "2つめ：みかんが2個",
    "seconds": 3.5
   },
   {
    "type": "circles",
    "images": [
-    "assets/generated/t009_scene_spot_market/market.png",
-    "assets/generated/spot001_market_b/image.png"
+    "assets/generated/spot002_market_sq/a.png",
+    "assets/generated/spot002_market_sq/b.png"
    ],
    "upto": 3,
-   "text": "3つめ：リンゴが洋梨に",
-   "voice": "3つめ。男の子のリンゴが、洋梨に変わっています。",
+   "text": "3つめ：猫がうさぎに",
+   "voice": "3つめ。右下の猫が、うさぎに変わっています。",
    "chime": true
   },
   {
    "type": "zoom",
    "images": [
-    "assets/generated/t009_scene_spot_market/market.png",
-    "assets/generated/spot001_market_b/image.png"
+    "assets/generated/spot002_market_sq/a.png",
+    "assets/generated/spot002_market_sq/b.png"
    ],
    "index": 2,
-   "text": "3つめ：リンゴが洋梨に",
+   "text": "3つめ：猫がうさぎに",
    "seconds": 3.5
   },
   {
@@ -88,8 +88,8 @@
   }
  ],
  "spot": {
-  "a": "assets/generated/t009_scene_spot_market/market.png",
-  "b": "assets/generated/spot001_market_b/image.png",
-  "list": "assets/generated/spot001_market_b/differences.json"
+  "a": "assets/generated/spot002_market_sq/a.png",
+  "b": "assets/generated/spot002_market_sq/b.png",
+  "list": "assets/generated/spot002_market_sq/differences.json"
  }
 }
