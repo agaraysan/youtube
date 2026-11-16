@@ -43,6 +43,10 @@ def _find_font(names):
 
 FONT_BLACK = _find_font(["NotoSansCJK-Black.ttc", "NotoSansJP_900Black.ttf", "NotoSansCJK-Bold.ttc"])
 FONT_BOLD = _find_font(["NotoSansCJK-Bold.ttc", "NotoSansJP_700Bold.ttf"])
+FONT_MED = _find_font(["NotoSansCJK-Medium.ttc", "NotoSansJP_500Medium.ttf", "NotoSansCJK-Bold.ttc"])
+PRO = True          # 企業の動画のような落ち着いたデザイン（theme: "pop" で以前の派手なデザイン）
+NAVY = (12, 24, 44)
+PRO_ACC = (0, 150, 200)
 
 
 def font(size, heavy=False):
@@ -351,6 +355,180 @@ def avatar(color, mouth, blink, active):
     return im
 
 
+# ---------- 落ち着いたデザイン（PRO） ----------
+def fmed(size):
+    return ImageFont.truetype(FONT_MED, int(size))
+
+
+def soft_text(im, xy, text, f, fill=WHITE, anchor="mm", shadow=150):
+    """細い影だけの白文字（太い縁取りをしない）。"""
+    u = L.u
+    sh = Image.new("RGBA", im.size, (0, 0, 0, 0))
+    ImageDraw.Draw(sh).text((xy[0], xy[1] + 3 * u), text, font=f, fill=(0, 0, 0, shadow), anchor=anchor)
+    im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(5 * u)))
+    ImageDraw.Draw(im).text(xy, text, font=f, fill=fill, anchor=anchor)
+
+
+def pro_headline(text, kicker=None, rank=None):
+    """左寄せの見出しパネル：紺の半透明の板＋左の細いアクセント線（順位があれば左に番号の四角）。"""
+    u = L.u
+    hf = font((60 if L.vertical else 62) * u)
+    kf = font(26 * u)
+    lines = text.split("\n")
+    tmp = ImageDraw.Draw(Image.new("RGBA", (10, 10)))
+    tw = max(tmp.textlength(ln, font=hf) for ln in lines)
+    lh = hf.size * 1.3
+    kh = 44 * u if kicker else 0
+    pad = 34 * u
+    h = int(pad * 2 + kh + lh * len(lines) - hf.size * 0.3)
+    block = h if rank else int(10 * u)
+    w = int(block + pad + tw + pad)
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.rectangle([0, 0, w, h], fill=NAVY + (222,))
+    if rank:
+        d.rectangle([0, 0, block, h], fill=MEDAL.get(rank, PRO_ACC))
+        d.text((block / 2 - 10 * u, h / 2), str(rank), font=font(h * 0.62, heavy=True), fill=WHITE, anchor="mm")
+        d.text((block / 2 + h * 0.24, h / 2 + h * 0.16), "位", font=font(h * 0.2), fill=WHITE, anchor="mm")
+    else:
+        d.rectangle([0, 0, block, h], fill=PRO_ACC)
+    x = block + pad
+    y = pad
+    if kicker:
+        d.text((x, y), "  ".join(kicker) if kicker.isascii() and len(kicker) < 12 else kicker, font=kf, fill=PRO_ACC if not rank else MEDAL.get(rank, PRO_ACC), anchor="lt")
+        y += kh
+    for k, ln in enumerate(lines):
+        d.text((x, y + lh * k), ln, font=hf, fill=WHITE, anchor="lt")
+    return im
+
+
+def pro_title(text, sub=None):
+    """冒頭のタイトル：中央に大きく、下に短いアクセント線。"""
+    W, u = L.W, L.u
+    hf = font((84 if L.vertical else 96) * u)
+    lines = text.split("\n")
+    lh = hf.size * 1.28
+    h = int(lh * len(lines) + 120 * u)
+    im = Image.new("RGBA", (W, h), (0, 0, 0, 0))
+    for k, ln in enumerate(lines):
+        soft_text(im, (W / 2, 20 * u + lh * k + lh / 2), ln, hf, shadow=170)
+    y = 20 * u + lh * len(lines) + 24 * u
+    ImageDraw.Draw(im).rectangle([W / 2 - 70 * u, y, W / 2 + 70 * u, y + 7 * u], fill=PRO_ACC)
+    return im
+
+
+def pro_caption(lines, name=None, color=None, style=None):
+    W, u = L.W, L.u
+    hgt = int(320 * u)
+    im = Image.new("RGBA", (W, hgt), (0, 0, 0, 0))
+    f = fmed(L.cap_size * 0.92)
+    lh = f.size * 1.42
+    y0 = hgt - 24 * u - lh * len(lines)
+    if style == "box":  # 絵本：うすいクリーム色の帯
+        tw = max(ImageDraw.Draw(im).textlength(ln, font=f) for ln in lines)
+        bw = tw + 80 * u
+        ImageDraw.Draw(im).rounded_rectangle([W / 2 - bw / 2, y0 - 18 * u, W / 2 + bw / 2, hgt - 8 * u], 14 * u, fill=(250, 246, 236, 225))
+        for k, ln in enumerate(lines):
+            ImageDraw.Draw(im).text((W / 2, y0 + lh * k + lh / 2 - 8 * u), ln, font=f, fill=(40, 40, 52), anchor="mm")
+        return im
+    if name:
+        nf = font(30 * u)
+        d = ImageDraw.Draw(im)
+        nw = d.textlength(name, font=nf)
+        y = y0 - 44 * u
+        d.rectangle([W / 2 - nw / 2 - 18 * u, y - 4 * u, W / 2 + nw / 2 + 18 * u, y + 40 * u], fill=tuple(color or PRO_ACC) + (235,))
+        d.text((W / 2, y + 18 * u), name, font=nf, fill=WHITE, anchor="mm")
+    for k, ln in enumerate(lines):
+        soft_text(im, (W / 2, y0 + lh * k + lh / 2), ln, f, shadow=200)
+    return im
+
+
+def pro_card(text, state):
+    u = L.u
+    f = font((50 if L.vertical else 48) * u)
+    w = int((880 if L.vertical else 900) * u)
+    h = int(100 * u)
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    head, _, body = text.partition(" ")
+    if state == "right":
+        d.rectangle([0, 0, w, h], fill=PRO_ACC + (245,))
+        d.rectangle([0, 0, h, h], fill=NAVY + (255,))
+        tc = WHITE
+    else:
+        a = 232 if state == "normal" else 105
+        d.rectangle([0, 0, w, h], fill=(255, 255, 255, a))
+        d.rectangle([0, 0, h, h], fill=NAVY + (a,))
+        tc = INK if state == "normal" else (70, 70, 80)
+    d.text((h / 2, h / 2), head, font=f, fill=WHITE, anchor="mm")
+    d.text((h + 30 * u, h / 2), body, font=f, fill=tc, anchor="lm")
+    return im
+
+
+def pro_timer(k, frac):
+    u = L.u
+    R = int(70 * u)
+    im = Image.new("RGBA", (2 * R + 8, 2 * R + 8), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.ellipse([4, 4, 4 + 2 * R, 4 + 2 * R], fill=NAVY + (215,))
+    d.arc([4 + 8 * u, 4 + 8 * u, 4 + 2 * R - 8 * u, 4 + 2 * R - 8 * u], -90, -90 + 360 * frac, fill=PRO_ACC, width=int(8 * u))
+    d.text((4 + R, 4 + R), str(k), font=fmed(64 * u), fill=WHITE, anchor="mm")
+    return im
+
+
+def pro_progress(n, current):
+    W, u = L.W, L.u
+    im = Image.new("RGBA", (W, int(6 * u)), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    seg = W / n
+    for k in range(n):
+        on = current is not None and k + 1 <= current
+        d.rectangle([seg * k + (2 * u if k else 0), 0, seg * (k + 1) - 2 * u, 6 * u], fill=PRO_ACC + (240,) if on else (255, 255, 255, 70))
+    return im
+
+
+def draw_pro(s, lt, ep, im):
+    W, H, u = L.W, L.H, L.u
+    if s.get("telop_l") is not None and (s["n"] == 0 or ep.get("transition") == "slide"):  # 冒頭のタイトル：少し暗くして中央に
+        a = ease(lt / 0.8)
+        im.alpha_composite(Image.new("RGBA", (W, H), NAVY + (int(110 * a),)))
+        tl = s["telop_l"]
+        b = ease((lt - 0.2) / 0.7)
+        if b > 0:
+            t2 = tl.copy()
+            t2.putalpha(t2.getchannel("A").point(lambda v: int(v * b)))
+            im.alpha_composite(t2, (0, int(H * (0.36 if L.vertical else 0.42) - tl.height / 2 + 24 * u * (1 - b))))
+    elif s.get("telop_l") is not None:
+        t0 = 1.0 if s.get("rank") else 0.15
+        a = ease((lt - t0) / 0.5)
+        if a > 0:
+            tl = s["telop_l"]
+            cw = max(1, int(tl.width * a))
+            x, y = (54 * u, 210 * u) if L.vertical else (72 * u, 64 * u)
+            im.alpha_composite(tl.crop((0, 0, cw, tl.height)), (int(x), int(y)))
+    if s.get("cards"):
+        n = len(s["cards"])
+        ch = s["cards"][0].height
+        gap = 16 * u
+        cy0 = (H * 0.5 if L.vertical else H * 0.52) - (n * ch + (n - 1) * gap) / 2
+        for i, card in enumerate(s["cards"]):
+            t_in = 0.4 + 0.25 * i if s.get("reveal") is None else 0.1
+            a = ease((lt - t_in) / 0.35)
+            if a <= 0:
+                continue
+            c2 = card.copy()
+            c2.putalpha(c2.getchannel("A").point(lambda v: int(v * a)))
+            im.alpha_composite(c2, (int(W / 2 - card.width / 2), int(cy0 + i * (ch + gap) + 16 * u * (1 - a))))
+    if s.get("countdown"):
+        t_cd = lt - s["voice_end"] - 0.3
+        n_cd = int(s["countdown"])
+        if 0 <= t_cd < n_cd:
+            tl_ = pro_timer(n_cd - int(t_cd), 1 - (t_cd / n_cd))
+            x = W - tl_.width - 60 * u
+            y = (H * 0.52 - tl_.height / 2) if not L.vertical else (L.cap_bottom - tl_.height - 330 * u)
+            im.alpha_composite(tl_, (int(x), int(y)))
+
+
 # ---------- 動き ----------
 MOVES = ["in", "pan_r", "out", "pan_l", "in_up", "pan_r", "out", "in"]
 
@@ -369,6 +547,10 @@ def kenburns(src, move, p):
         "still": (1.04, 1.06, (0.5, 0.5), (0.5, 0.5)),
     }
     z0, z1, c0, c1 = table.get(move, table["in"])
+    if PRO:  # 動きは控えめに
+        z0, z1 = 1 + (z0 - 1) * 0.6, 1 + (z1 - 1) * 0.6
+        c0 = (0.5 + (c0[0] - 0.5) * 0.7, 0.5 + (c0[1] - 0.5) * 0.7)
+        c1 = (0.5 + (c1[0] - 0.5) * 0.7, 0.5 + (c1[1] - 0.5) * 0.7)
     z = z0 + (z1 - z0) * e
     cx, cy = c0[0] + (c1[0] - c0[0]) * e, c0[1] + (c1[1] - c0[1]) * e
     vw, vh = sw / 1.2 / z, sh / 1.2 / z  # 表示する範囲（z=1で出力と同じ大きさ）
@@ -378,8 +560,12 @@ def kenburns(src, move, p):
 
 # ---------- 本体 ----------
 def main(spec, out_dir, fast=False):
-    global L, GRAD
+    global L, GRAD, PRO, PRO_ACC, XFADE
     ep = json.loads(pathlib.Path(spec).read_text(encoding="utf-8"))
+    PRO = ep.get("theme", "pro") == "pro"
+    PRO_ACC = tuple(ep.get("accent", PRO_ACC))
+    if PRO:
+        XFADE = 0.45
     L = Layout(tuple(ep.get("size", [1920, 1080])))
     GRAD = _grad()
     W, H = L.W, L.H
@@ -425,18 +611,32 @@ def main(spec, out_dir, fast=False):
     for s in scenes:
         s["img"] = load_image(s["image"], s["n"])
         s["move"] = s.get("move") or MOVES[s["n"] % len(MOVES)]
-        s["telop_l"] = telop_layer(s["telop"]) if s.get("telop") else None
         ch = s.get("chapter")
-        s["chap"] = chapter_layer(ch, ep["chapters"][ch], ep.get("chapter_label", "")) if ch else None
+        if PRO:
+            lab = ep.get("chapter_label", "")
+            kicker = None
+            if ch:
+                kicker = f"{lab}{ch}" if lab else f"POINT {int(ch):02d}"
+            if s.get("rank"):
+                kicker = "RANKING"
+            head = s.get("telop") or (ep["chapters"][ch] if ch else None)
+            if s.get("telop") and (s["n"] == 0 or ep.get("transition") == "slide"):  # 冒頭（絵本は全部）は中央のタイトル
+                s["telop_l"] = pro_title(s["telop"])
+            else:
+                s["telop_l"] = pro_headline(head, kicker, s.get("rank")) if head else None
+            s["chap"] = None
+        else:
+            s["telop_l"] = telop_layer(s["telop"]) if s.get("telop") else None
+            s["chap"] = chapter_layer(ch, ep["chapters"][ch], ep.get("chapter_label", "")) if ch else None
         if ch:
             last_ch = int(ch)
         elif last_ch and s["n"] >= len(scenes) - 3:
             last_ch = nch
-        s["prog"] = progress_layer(nch, last_ch) if nch else None
-        s["rank_l"] = rank_layer(s["rank"]) if s.get("rank") else None
+        s["prog"] = (pro_progress if PRO else progress_layer)(nch, last_ch) if nch else None
+        s["rank_l"] = rank_layer(s["rank"]) if s.get("rank") and not PRO else None
         if s.get("choices"):
             rv = s.get("reveal")
-            s["cards"] = [choice_card(c, "normal" if rv is None else ("right" if i == rv else "dim")) for i, c in enumerate(s["choices"])]
+            s["cards"] = [(pro_card if PRO else choice_card)(c, "normal" if rv is None else ("right" if i == rv else "dim")) for i, c in enumerate(s["choices"])]
         s["voice_end"] = max((p["start"] + p["len"] for p in s["parts"]), default=LEAD)
         s["caps"] = []
         for p in s["parts"]:
@@ -446,7 +646,11 @@ def main(spec, out_dir, fast=False):
             acc = p["start"]
             for c, wgt in zip(caps, weights):
                 d = p["len"] * wgt / sum(weights)
-                s["caps"].append((acc, acc + d, caption_layer(c, cap_style, who.get("color"), who.get("name") or ep.get("news_label"))))
+                if PRO and cap_style != "news":
+                    lay = pro_caption(c, who.get("name"), who.get("color"), cap_style)
+                else:
+                    lay = caption_layer(c, cap_style, who.get("color"), who.get("name") or ep.get("news_label"))
+                s["caps"].append((acc, acc + d, lay))
                 acc += d
 
     # 3) 1コマずつ描いて ffmpeg に流す
@@ -492,17 +696,18 @@ def main(spec, out_dir, fast=False):
     for s in scenes:
         for p in s["parts"]:
             put(voice, p["data"], s["start"] + p["start"])
+        g = 0.5 if PRO else 1.0  # 落ち着いたデザインでは効果音を控えめに
         if s.get("countdown"):
             for i in range(int(s["countdown"])):
-                put(sfx, sfx_pop(), s["start"] + s["voice_end"] + 0.3 + i, 0.5)
+                put(sfx, sfx_pop(), s["start"] + s["voice_end"] + 0.3 + i, 0.5 * g)
         if s.get("reveal") is not None:
-            put(sfx, drum[-int(0.8 * SR):], s["start"] + 0.05, 0.4)
+            put(sfx, drum[-int(0.8 * SR):], s["start"] + 0.05, 0.4 * g)
         if s.get("rank"):
-            put(sfx, drum, s["start"] + 0.05, 0.35)
-        elif s["telop_l"] is not None:
+            put(sfx, drum, s["start"] + 0.05, 0.35 * g)
+        elif s["telop_l"] is not None and not PRO:
             put(sfx, pop, s["start"] + 0.05, 0.35)
-        if s["n"] > 0:
-            put(sfx, wh, s["start"] - XFADE, 0.22 if trans == "fade" else 0.3)
+        if s["n"] > 0 and (not PRO or trans == "slide"):
+            put(sfx, wh, s["start"] - XFADE, 0.22 if trans == "fade" else 0.3 * g)
     n_s = int(total * SR)
     vw, sw_ = tmp / "voice.wav", tmp / "sfx.wav"
     write_wav(vw, voice[:n_s]); write_wav(sw_, sfx[:n_s])
@@ -540,7 +745,7 @@ def main(spec, out_dir, fast=False):
 def draw_scene(s, lt, ep, cast, base_only=False):
     W, H, u = L.W, L.H, L.u
     frame = kenburns(s["img"], s["move"], lt / (s["len"] + XFADE))
-    if lt < 0.25 and s["n"] > 0 and ep.get("transition", "fade") == "fade":  # 入りの軽い押し込み
+    if lt < 0.25 and s["n"] > 0 and ep.get("transition", "fade") == "fade" and not PRO:  # 入りの軽い押し込み
         z = 1 + 0.04 * (1 - ease(lt / 0.25))
         big = frame.resize((int(W * z), int(H * z)), Image.BILINEAR)
         ox, oy = (big.width - W) // 2, (big.height - H) // 2
@@ -549,6 +754,9 @@ def draw_scene(s, lt, ep, cast, base_only=False):
         return frame
     im = frame.convert("RGBA")
     im.alpha_composite(GRAD)
+    if PRO:
+        draw_pro(s, lt, ep, im)
+        cast = {}
     if s["chap"] is not None:
         a = ease(lt / 0.35)
         x = int(-s["chap"].width + (48 * u + s["chap"].width) * a)
@@ -562,7 +770,7 @@ def draw_scene(s, lt, ep, cast, base_only=False):
         cx, cy = L.rank_xy
         im.alpha_composite(r2, (int(cx - r2.width / 2), int(cy - r2.height / 2)))
     t0 = 1.0 if s.get("rank") else 0.05
-    if s["telop_l"] is not None and lt > t0:
+    if s["telop_l"] is not None and lt > t0 and not PRO:
         a = back_out((lt - t0) / 0.4)
         tl = s["telop_l"]
         sc = 0.6 + 0.4 * a
@@ -594,7 +802,7 @@ def draw_scene(s, lt, ep, cast, base_only=False):
                 x = int(40 * u if who.get("side") == "left" else W - av.width - 40 * u)
                 y = int(H - av.height - 30 * u - hop)
             im.alpha_composite(av, (x, y))
-    if s.get("cards"):
+    if s.get("cards") and not PRO:
         n = len(s["cards"])
         ch = s["cards"][0].height
         gap = 20 * u
@@ -609,7 +817,7 @@ def draw_scene(s, lt, ep, cast, base_only=False):
                 sc *= 1 + 0.05 * math.sin(lt * 6)
             c2 = card.resize((max(1, int(card.width * sc)), max(1, int(card.height * sc))), Image.BILINEAR)
             im.alpha_composite(c2, (int(W / 2 - c2.width / 2), int(cy0 + i * (ch + gap) + (ch - c2.height) / 2)))
-    if s.get("countdown"):
+    if s.get("countdown") and not PRO:
         t_cd = lt - s["voice_end"] - 0.3
         n_cd = int(s["countdown"])
         if 0 <= t_cd < n_cd:
@@ -629,7 +837,7 @@ def draw_scene(s, lt, ep, cast, base_only=False):
     if shown is not None:
         im.alpha_composite(shown, (0, int(L.cap_bottom - shown.height)))
     if s["prog"] is not None:
-        im.alpha_composite(s["prog"], (0, int(L.prog_y)))
+        im.alpha_composite(s["prog"], (0, int(H - s["prog"].height if PRO and not L.vertical else L.prog_y)))
     return im.convert("RGB")
 
 
@@ -643,6 +851,14 @@ def _grad():
     top = int(H * (0.3 if L.vertical else 0.28))
     for y in range(0, top):
         d.line([(0, y), (W, y)], fill=(0, 0, 0, int(80 * (1 - y / top) ** 2)))
+    if PRO:  # 周辺を少しだけ暗く（映画のような落ち着き）
+        v = Image.new("L", (W // 8, H // 8), 0)
+        vd = ImageDraw.Draw(v)
+        vd.ellipse([-W // 40, -H // 40, W // 8 + W // 40, H // 8 + H // 40], fill=255)
+        v = v.filter(ImageFilter.GaussianBlur(W // 60)).resize((W, H))
+        vig = Image.new("RGBA", (W, H), (0, 0, 0, 70))
+        vig.putalpha(v.point(lambda x: int(70 * (1 - x / 255))))
+        g.alpha_composite(vig)
     return g
 
 
