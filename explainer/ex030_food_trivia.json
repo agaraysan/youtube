@@ -1,0 +1,54 @@
+{
+ "id": "ex030_food_trivia",
+ "title": "誰かに話したくなる食べ物の雑学",
+ "bgm_track": "little_fish",
+ "size": [
+  1080,
+  1920
+ ],
+ "chapters": {
+  "1": "はちみつ",
+  "2": "バナナ",
+  "3": "イチゴ"
+ },
+ "chapter_label": "雑学",
+ "meta": {
+  "title": "誰かに話したくなる食べ物の雑学3選 #Shorts",
+  "tags": [
+   "雑学",
+   "食べ物",
+   "豆知識",
+   "Shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex030_00_hook",
+   "telop": "誰かに話したくなる\n食べ物の雑学",
+   "voice": "知ると誰かに話したくなる、食べ物の雑学を、3つ紹介します。"
+  },
+  {
+   "image": "assets/generated/ex030_01_honey",
+   "telop": "はちみつは\nとても腐りにくい",
+   "voice": "はちみつは、水分がとても少ないので、菌が増えにくく、とても腐りにくい食べ物なんです。",
+   "chapter": "1"
+  },
+  {
+   "image": "assets/generated/ex030_02_banana",
+   "telop": "バナナは木ではなく\n草のなかま",
+   "voice": "バナナは、木のように大きく育ちますが、実は草のなかま。幹のように見えるのは、葉が重なったものです。",
+   "chapter": "2"
+  },
+  {
+   "image": "assets/generated/ex030_03_strawberry",
+   "telop": "イチゴのつぶつぶが\n本当の実",
+   "voice": "イチゴの表面のつぶつぶ。実は、あれ一つひとつが、本当の実なんです。",
+   "chapter": "3"
+  },
+  {
+   "image": "assets/generated/ex030_04_outro",
+   "telop": "どれが一番\n驚いた？",
+   "voice": "どれが一番、驚きましたか？ ほかの雑学も、チェックしてみてね。"
+  }
+ ]
+}

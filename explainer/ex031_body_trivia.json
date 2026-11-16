@@ -1,0 +1,54 @@
+{
+ "id": "ex031_body_trivia",
+ "title": "誰かに話したくなる体の雑学",
+ "bgm_track": "estela",
+ "size": [
+  1080,
+  1920
+ ],
+ "chapters": {
+  "1": "骨",
+  "2": "呼吸",
+  "3": "爪"
+ },
+ "chapter_label": "雑学",
+ "meta": {
+  "title": "誰かに話したくなる体の雑学3選 #Shorts",
+  "tags": [
+   "雑学",
+   "人体",
+   "豆知識",
+   "Shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex031_00_hook",
+   "telop": "誰かに話したくなる\n体の雑学",
+   "voice": "知ると誰かに話したくなる、体の雑学を、3つ紹介します。"
+  },
+  {
+   "image": "assets/generated/ex031_01_baby",
+   "telop": "赤ちゃんの骨は\n大人より多い",
+   "voice": "赤ちゃんの骨は、300本ほど。成長とともにくっついて、大人になると、およそ206本になります。",
+   "chapter": "1"
+  },
+  {
+   "image": "assets/generated/ex031_02_breath",
+   "telop": "呼吸は1日に\nおよそ2万回",
+   "voice": "わたしたちは、1日におよそ2万回、呼吸をしています。",
+   "chapter": "2"
+  },
+  {
+   "image": "assets/generated/ex031_03_nail",
+   "telop": "手の爪は\n足の爪より早く伸びる",
+   "voice": "爪が伸びる速さは、手と足でちがいます。手の爪のほうが、足の爪より早く伸びるんです。",
+   "chapter": "3"
+  },
+  {
+   "image": "assets/generated/ex031_04_outro",
+   "telop": "どれが一番\n驚いた？",
+   "voice": "どれが一番、驚きましたか？ ほかの雑学も、チェックしてみてね。"
+  }
+ ]
+}

@@ -1,0 +1,54 @@
+{
+ "id": "ex032_winter_trivia",
+ "title": "誰かに話したくなる冬の雑学",
+ "bgm_track": "valley_drive",
+ "size": [
+  1080,
+  1920
+ ],
+ "chapters": {
+  "1": "雪の結晶",
+  "2": "静電気",
+  "3": "みかん"
+ },
+ "chapter_label": "雑学",
+ "meta": {
+  "title": "誰かに話したくなる冬の雑学3選 #Shorts",
+  "tags": [
+   "雑学",
+   "冬",
+   "豆知識",
+   "Shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex032_00_hook",
+   "telop": "誰かに話したくなる\n冬の雑学",
+   "voice": "知ると誰かに話したくなる、冬の雑学を、3つ紹介します。"
+  },
+  {
+   "image": "assets/generated/ex032_01_snow",
+   "telop": "雪の結晶は\nほとんど六角形",
+   "voice": "雪の結晶は、形がひとつひとつちがいますが、そのほとんどが、六角形をもとにした形です。",
+   "chapter": "1"
+  },
+  {
+   "image": "assets/generated/ex032_02_static",
+   "telop": "冬に静電気が\n起きやすいのは乾燥",
+   "voice": "冬に静電気が起きやすいのは、空気が乾燥しているから。湿気があると、電気がにげやすいんです。",
+   "chapter": "2"
+  },
+  {
+   "image": "assets/generated/ex032_03_mikan",
+   "telop": "みかんを食べすぎると\n手が黄色くなる",
+   "voice": "みかんを食べすぎると、手のひらが黄色くなることがあります。みかんの色のもとが、体にたまるためで、心配はいりません。",
+   "chapter": "3"
+  },
+  {
+   "image": "assets/generated/ex032_04_outro",
+   "telop": "どれが一番\n驚いた？",
+   "voice": "どれが一番、驚きましたか？ ほかの雑学も、チェックしてみてね。"
+  }
+ ]
+}
