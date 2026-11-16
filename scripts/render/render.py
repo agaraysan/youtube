@@ -15,6 +15,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 import matchstick as M
+import spotcheck
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 FONT_CANDIDATES = ["/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc", "/usr/share/fonts/noto-cjk/NotoSansCJK-Bold.ttc",
@@ -113,12 +114,41 @@ def render_scene(sc, ep, size):
     pair = kind in ("image", "circles") or (kind == "think" and "images" in sc)
     if kind in ("title", "match", "think", "riddle") and not pair:
         im = bg(sc.get("bg", ep["bg"]), size, dim=sc.get("dim", 0.4 if kind == "title" else 0.15), blur=6 if kind == "title" else 0)
-    else:
+    else:  # image / circles / zoom / 絵つきの think
         im = Image.new("RGBA", size, (24, 52, 40, 255))
     if kind == "title":
         text_box(im, sc["text"], H * 0.33, size=sc.get("size", 96))
         if sc.get("sub"):
             text_box(im, sc["sub"], H * 0.62, size=60, fill=(255, 235, 170))
+    if kind == "zoom":
+        a = Image.open(ROOT / sc["images"][0]).convert("RGBA")
+        b = Image.open(ROOT / sc["images"][1]).convert("RGBA")
+        x, y, ww, hh = ep["differences"][sc["index"]]["box"]
+        cw = max(ww, hh * 4 / 3) * 2.6
+        cw = min(max(cw, 320), a.width)
+        ch = cw * 3 / 4
+        cx, cy = x + ww / 2, y + hh / 2
+        l = min(max(cx - cw / 2, 0), a.width - cw)
+        t = min(max(cy - ch / 2, 0), a.height - ch)
+        gap = 40
+        w = (W - gap * 3) // 2
+        h = int(w * 3 / 4)
+        top = int(H * 0.17) + (H - int(H * 0.17) - h) // 2 - 10
+        x0 = (W - (w * 2 + gap)) // 2
+        d = ImageDraw.Draw(im)
+        sc_ = w / cw
+        for k, src in enumerate((a, b)):
+            ox = x0 + k * (w + gap)
+            crop = src.crop((int(l), int(t), int(l + cw), int(t + ch))).resize((w, h), Image.LANCZOS)
+            im.alpha_composite(crop, (ox, top))
+            d.rectangle([ox - 4, top - 4, ox + w + 4, top + h + 4], outline=(255, 255, 255), width=6)
+            ex, ey = ox + (cx - l) * sc_, top + (cy - t) * sc_
+            r = max(ww, hh) * sc_ / 2 + 24
+            d.ellipse([ex - r, ey - r, ex + r, ey + r], outline=(255, 40, 40), width=10)
+            label = ("前", "後")[k] if sc.get("labels") else ("左", "右")[k]
+            badge(im, label, (ox + 16, top + 16), size=44)
+        if sc.get("text"):
+            text_box(im, sc["text"], int(H * 0.04), size=60)
     if kind == "think" and not pair and "puzzle" not in ep:
         text_box(im, sc.get("text", "考えてね"), H * 0.25, size=sc.get("size", 84))
     if kind == "match" or (kind == "think" and not pair and "puzzle" in ep):
@@ -188,6 +218,13 @@ def render_scene(sc, ep, size):
 def main(spec_path, out_dir, no_voice=False):
     ep = json.loads(pathlib.Path(spec_path).read_text(encoding="utf-8"))
     size = tuple(ep.get("size", [1920, 1080]))
+    if "spot" in ep:  # 間違い探し: 画素の比較で違いを確かめ、正確な枠を使う
+        sp = ep["spot"]
+        ok, msg, res = spotcheck.check(ROOT / sp["a"], ROOT / sp["b"], ROOT / sp["list"])
+        print("spotcheck", ep["id"], msg)
+        if not ok:
+            raise SystemExit(f"間違い探しの確認に失敗: {msg}")
+        ep["differences"] = res
     out_dir = pathlib.Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     tmp = pathlib.Path(tempfile.mkdtemp())

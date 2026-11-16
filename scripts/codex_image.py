@@ -6,6 +6,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 REQ = ROOT / "requests" / "images"
 OUT = ROOT / "assets" / "generated"
 MEDIA = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
+sys.path.insert(0, str(ROOT / "scripts" / "render"))
 
 
 def pending():
@@ -15,8 +16,8 @@ def pending():
             yield r
 
 
-def run_codex(r, out):
-    task = (
+def run_codex(r, out, feedback=""):
+    task = feedback + (
         f"次の依頼どおりに{'動くGIF' if r.get('kind') == 'gif' else '画像'}を作成し、"
         f"ファイルを {out} に保存してください。ほかのファイルは変更しないでください。\n"
         f"依頼: {json.dumps(r, ensure_ascii=False)}"
@@ -36,8 +37,26 @@ def main():
         files = [f.name for f in out.iterdir() if f.suffix.lower() in MEDIA]
         via = "codex"
         status = "ok" if files else "failed"
+        check = None
+        if status == "ok" and r.get("base_image"):  # 間違い探し: 画素で比べて一覧と合うか確かめる
+            import spotcheck
+            for attempt in range(2):
+                img = out / sorted(files)[0]
+                lst = out / "differences.json"
+                if not lst.exists():
+                    ok, check = False, "differences.json がない"
+                else:
+                    ok, check, _ = spotcheck.check(ROOT / r["base_image"], img, lst)
+                print(r["id"], "spotcheck", check)
+                if ok or attempt == 1:
+                    break
+                rc = run_codex(r, out, f"前回の結果は確認に失敗しました（{check}）。違い以外は元の絵と画素単位で同じにし、"
+                                       "differences.json を実際の違いと一致させて、作り直してください。\n")
+                files = [f.name for f in out.iterdir() if f.suffix.lower() in MEDIA]
+            if not ok:
+                status = "rejected"
         (out / "result.json").write_text(json.dumps({
-            "id": r["id"], "status": status, "via": via, "codex_returncode": rc, "files": sorted(files),
+            "id": r["id"], "status": status, "via": via, "codex_returncode": rc, "files": sorted(files), "check": check,
             "at_utc": datetime.datetime.utcnow().isoformat() + "Z"}, ensure_ascii=False, indent=1), encoding="utf-8")
         print(r["id"], status, via, files)
         done += 1
