@@ -1,0 +1,360 @@
+指定フォルダーに保存しました。
+
+- [image.png（1920×1080）](assets/generated/test001/image.png)
+- [result.json](assets/generated/test001/result.json)
+
+内蔵画像生成機能を使用し、指定の「5+3=6」、温かい木の机、自然光のプロンプトで作成しました。他のファイルは変更していません。
+
+GitHub への送信は `.git` が読み取り専用のため失敗しました。`GH_PUSH_TOKEN` は空です。
+
+--- stderr ---
+er wants to edit a local image file with the built-in tool, first load it with built-in `view_image` tool so the image is visible in the conversation context, then proceed with the built-in edit flow.
+- Do not promise arbitrary filesystem-path editing through the built-in tool.
+- If a local file still needs direct file-path control, masks, or other explicit CLI-only parameters, use the explicit CLI fallback only when the user asks for it.
+- For edits, preserve invariants aggressively and save non-destructively by default.
+
+Execution strategy:
+- In the built-in default path, produce many assets or variants by issuing one `image_gen` call per requested asset or variant.
+- In the CLI fallback path, use the CLI `generate-batch` subcommand only when the user explicitly chose CLI mode and needs many prompts/assets.
+- For many distinct assets, do not use `n` as a substitute for separate prompts. `n` is for variants of one prompt; distinct assets need distinct built-in calls or distinct CLI `generate-batch` jobs.
+
+Assume the user wants a new image unless they clearly ask to change an existing one.
+
+## Workflow
+1. Decide the top-level mode: built-in by default, including transparent-output requests; fallback CLI only if explicitly requested or confirmed.
+2. Decide the intent: `generate` or `edit`.
+3. Decide whether the output is preview-only or meant to be consumed by the current project.
+4. Decide the execution strategy: single asset vs repeated built-in calls vs CLI `generate-batch`.
+5. Collect inputs up front: prompt(s), exact text (verbatim), constraints/avoid list, and any input images.
+6. For every input image, label its role explicitly:
+   - reference image
+   - edit target
+   - supporting insert/style/compositing input
+7. If the edit target is only on the local filesystem and you are staying on the built-in path, inspect it with `view_image` first so the image is available in conversation context.
+8. If the user asked for a photo, illustration, sprite, product image, banner, or other explicitly raster-style asset, use `image_gen` rather than substituting SVG/HTML/CSS placeholders. If the request is for an icon, logo, or UI graphic that should match existing repo-native SVG/vector/code assets, prefer editing those directly instead.
+9. Augment the prompt based on specificity:
+   - If the user's prompt is already specific and detailed, normalize it into a clear spec without adding creative requirements.
+   - If the user's prompt is generic, add tasteful augmentation only when it materially improves output quality.
+10. Use the built-in `image_gen` tool by default.
+11. For transparent-output requests, ask built-in `image_gen` for a transparent background and preserve the generated alpha channel.
+12. Inspect outputs and validate: subject, style, composition, text accuracy, and invariants/avoid items.
+13. Iterate with a single targeted change, then re-check.
+14. For preview-only work, render the image inline; the underlying file may remain at the default `$CODEX_HOME/generated_images/...` path.
+15. For project-bound work, move or copy the selected artifact into the workspace and update any consuming code or references. Never leave a project-referenced asset only at the default `$CODEX_HOME/generated_images/...` path.
+16. For batches or multi-asset requests, persist every requested deliverable final in the workspace unless the user explicitly asked to keep outputs preview-only. Discarded variants do not need to be kept unless requested.
+17. If the user explicitly chooses or confirms the CLI fallback, then use the fallback-only docs for model, quality, size, `input_fidelity`, masks, output format, output paths, and network setup.
+18. Always report the final saved path(s) for any workspace-bound asset(s), plus the final prompt or prompt set and whether the built-in tool or fallback CLI mode was used.
+
+## Transparent image requests
+
+Ask built-in `image_gen` for a genuinely transparent background and preserve its alpha.
+
+## Prompt augmentation
+
+Reformat user prompts into a structured, production-oriented spec. Make the user's goal clearer and more actionable, but do not blindly add detail.
+
+Treat this as prompt-shaping guidance, not a closed schema. Use only the lines that help, and add a short extra labeled line when it materially improves clarity.
+
+### Specificity policy
+
+Use the user's prompt specificity to decide how much augmentation is appropriate:
+
+- If the prompt is already specific and detailed, preserve that specificity and only normalize/structure it.
+- If the prompt is generic, you may add tasteful augmentation when it will materially improve the result.
+
+Allowed augmentations:
+- composition or framing hints
+- polish level or intended-use hints
+- practical layout guidance
+- reasonable scene concreteness that supports the stated request
+
+Not allowed augmentations:
+- extra characters or objects that are not implied by the request
+- brand names, slogans, palettes, or narrative beats that are not implied
+- arbitrary side-specific placement unless the surrounding layout supports it
+
+## Use-case taxonomy (exact slugs)
+
+Classify each request into one of these buckets and keep the slug consistent across prompts and references.
+
+Generate:
+- photorealistic-natural — candid/editorial lifestyle scenes with real texture and natural lighting.
+- product-mockup — product/packaging shots, catalog imagery, merch concepts.
+- ui-mockup — app/web interface mockups and wireframes; specify the desired fidelity.
+- infographic-diagram — diagrams/infographics with structured layout and text.
+- scientific-educational — classroom explainers, scientific diagrams, and learning visuals with required labels and accuracy constraints.
+- ads-marketing — campaign concepts and ad creatives with audience, brand position, scene, and exact tagline/copy.
+- productivity-visual — slide, chart, workflow, and data-heavy business visuals.
+- logo-brand — logo/mark exploration, vector-friendly.
+- illustration-story — comics, children’s book art, narrative scenes.
+- stylized-concept — style-driven concept art, 3D/stylized renders.
+- historical-scene — period-accurate/world-knowledge scenes.
+
+Edit:
+- text-localization — translate/replace in-image text, preserve layout.
+- identity-preserve — try-on, person-in-scene; lock face/body/pose.
+- precise-object-edit — remove/replace a specific element (including interior swaps).
+- lighting-weather — time-of-day/season/atmosphere changes only.
+- background-extraction — transparent background / clean cutout. Ask built-in `image_gen` for actual transparency.
+- style-transfer — apply reference style while changing subject/scene.
+- compositing — multi-image insert/merge with matched lighting/perspective.
+- sketch-to-render — drawing/line art to photoreal render.
+
+## Shared prompt schema
+
+Use the following labeled spec as shared prompt scaffolding for both top-level modes:
+
+```text
+Use case: <taxonomy slug>
+Asset type: <where the asset will be used>
+Primary request: <user's main prompt>
+Input images: <Image 1: role; Image 2: role> (optional)
+Scene/backdrop: <environment>
+Subject: <main subject>
+Style/medium: <photo/illustration/3D/etc>
+Composition/framing: <wide/close/top-down; placement>
+Lighting/mood: <lighting + mood>
+Color palette: <palette notes>
+Materials/textures: <surface details>
+Text (verbatim): "<exact text>"
+Constraints: <must keep/must avoid>
+Avoid: <negative constraints>
+```
+
+Notes:
+- `Asset type` and `Input images` are prompt scaffolding, not dedicated CLI flags.
+- `Scene/backdrop` refers to the visual setting. It is not the same as the fallback CLI `background` parameter, which controls output transparency behavior.
+- Fallback-only execution notes such as `Quality:`, `Input fidelity:`, masks, output format, and output paths belong in the CLI path only. Do not treat them as built-in `image_gen` tool arguments.
+
+Augmentation rules:
+- Keep it short.
+- Add only the details needed to improve the prompt materially.
+- For edits, explicitly list invariants (`change only X; keep Y unchanged`).
+- If any critical detail is missing and blocks success, ask a question; otherwise proceed.
+
+## Examples
+
+### Generation example (hero image)
+```text
+Use case: product-mockup
+Asset type: landing page hero
+Primary request: a minimal hero image of a ceramic coffee mug
+Style/medium: clean product photography
+Composition/framing: wide composition with usable negative space for page copy if needed
+Lighting/mood: soft studio lighting
+Constraints: no logos, no text, no watermark
+```
+
+### Edit example (invariants)
+```text
+Use case: precise-object-edit
+Asset type: product photo background replacement
+Primary request: replace only the background with a warm sunset gradient
+Constraints: change only the background; keep the product and its edges unchanged; no text; no watermark
+```
+
+## Prompting best practices
+- Structure prompt as scene/backdrop -> subject -> details -> constraints.
+- Include intended use (ad, UI mock, infographic) to set the mode and polish level.
+- Use camera/composition language for photorealism.
+- Only use SVG/vector stand-ins when the user explicitly asked for vector output or a non-image placeholder.
+- Quote exact text and specify typography + placement.
+- For tricky words, spell them letter-by-letter and require verbatim rendering.
+- For multi-image inputs, reference images by index and describe how they should be used.
+- For edits, repeat invariants every iteration to reduce drift.
+- Iterate with single-change follow-ups.
+- If the prompt is generic, add only the extra detail that will materially help.
+- If the prompt is already detailed, normalize it instead of expanding it.
+- For CLI fallback only, see `references/cli.md` and `references/image-api.md` for model, `quality`, `input_fidelity`, masks, output format, and output-path guidance.
+- For transparent images, ask built-in `image_gen` for actual transparency and preserve its alpha.
+
+More principles shared by both modes: `references/prompting.md`.
+Copy/paste specs shared by both modes: `references/sample-prompts.md`.
+
+## Guidance by asset type
+Asset-type templates (website assets, game assets, wireframes, logo) are consolidated in `references/sample-prompts.md`.
+
+## gpt-image-2 guidance for CLI fallback
+
+The fallback CLI defaults to `gpt-image-2`.
+
+- Use `gpt-image-2` for new CLI/API workflows unless the user confirms a different model.
+- CLI `gpt-image-2` does not support `background=transparent`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- `gpt-image-2` always uses high fidelity for image inputs; do not set `input_fidelity` with this model.
+- `gpt-image-2` supports `quality` values `low`, `medium`, `high`, and `auto`.
+- Use `quality low` for fast drafts, thumbnails, and quick iterations. Use `medium`, `high`, or `auto` for final assets, dense text, diagrams, identity-sensitive edits, or high-resolution outputs.
+- Square images are typically fastest to generate. Use `1024x1024` for fast square drafts.
+- If the user asks for 4K-style output, use `3840x2160` for landscape or `2160x3840` for portrait.
+- `gpt-image-2` size may be `auto` or `WIDTHxHEIGHT` if all constraints hold: max edge `<= 3840px`, both edges multiples of `16px`, long-to-short ratio `<= 3:1`, total pixels between `655,360` and `8,294,400`.
+
+Popular `gpt-image-2` sizes:
+- `1024x1024` square
+- `1536x1024` landscape
+- `1024x1536` portrait
+- `2048x2048` 2K square
+- `2048x1152` 2K landscape
+- `3840x2160` 4K landscape
+- `2160x3840` 4K portrait
+- `auto`
+
+## Fallback CLI mode only
+
+### Temp and output conventions
+These conventions apply only to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc 'git status --short; git remote -v' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+?? assets/
+origin	https://github.com/agaraysan/youtube (fetch)
+origin	https://github.com/agaraysan/youtube (push)
+
+exec
+/bin/bash -lc 'ls -la assets/generated/test001; cat requests/images/test001.json' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+total 8
+drwxr-xr-x  2 runner runner 4096 Nov 16 02:51 .
+drwxr-xr-x 13 runner runner 4096 Nov 16 02:51 ..
+{
+  "id": "test001",
+  "kind": "image",
+  "prompt": "温かい木の机の上に、マッチ棒で作った数式「5+3=6」が並んでいる。やわらかい自然光、写真のようにリアル、真上から少し斜めの視点。",
+  "size": "1920x1080",
+  "count": 1,
+  "notes": "画像の中に文字やロゴは入れない（マッチ棒の数式だけ）"
+}
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+import json
+from pathlib import Path
+p=Path('assets/generated/test001')
+im=Image.open('/home/runner/.codex/generated_images/01a1e244-0afa-72e2-84db-6e5f02d2488c/exec-6f705a10-e1d5-492f-8db2-31ed2612da51.png')
+im.resize((1920,1080),Image.Resampling.LANCZOS).save(p/'image.png')
+(p/'result.json').write_text(json.dumps({'id':'test001','status':'ok','via':'codex-cloud','files':['assets/generated/test001/image.png']},indent=2)+'\\n')
+print(Image.open(p/'image.png').size)
+PY
+" in /home/runner/work/youtube/youtube
+ exited 1 in 15ms:
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'PIL'
+
+exec
+/bin/bash -lc 'command -v convert || command -v magick || command -v ffmpeg; if [ -n "${GH_PUSH_TOKEN:-}" ]; then echo GH_PUSH_TOKEN=nonempty; else echo GH_PUSH_TOKEN=empty; fi' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+GH_PUSH_TOKEN=empty
+
+codex
+「5+3=6」の画像を生成できました。1920×1080 の PNG と結果ファイルを保存します。GitHub への送信は、環境の `.git` が読み取り専用のため進められず、`GH_PUSH_TOKEN` も未設定でした。
+exec
+/bin/bash -lc 'python -m pip install --target /tmp/test001-pillow Pillow' in /home/runner/work/youtube/youtube
+ exited 1 in 7798ms:
+WARNING: The directory '/home/runner/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x75ab4bf9e7b0>: Failed to establish a new connection: [Errno -2] Name or service not known')': /simple/pillow/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x75ab4c126c10>: Failed to establish a new connection: [Errno -2] Name or service not known')': /simple/pillow/
+WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x75ab4c126d50>: Failed to establish a new connection: [Errno -2] Name or service not known')': /simple/pillow/
+WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x75ab4c126e90>: Failed to establish a new connection: [Errno -2] Name or service not known')': /simple/pillow/
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x75ab4c126fd0>: Failed to establish a new connection: [Errno -2] Name or service not known')': /simple/pillow/
+ERROR: Could not find a version that satisfies the requirement Pillow (from versions: none)
+ERROR: No matching distribution found for Pillow
+
+exec
+/bin/bash -lc "python - <<'PY'
+import struct,zlib,json
+from pathlib import Path
+s=Path('/home/runner/.codex/generated_images/01a1e244-0afa-72e2-84db-6e5f02d2488c/exec-6f705a10-e1d5-492f-8db2-31ed2612da51.png').read_bytes()
+pos=8; data=b''
+while pos<len(s):
+ n=struct.unpack('>I',s[pos:pos+4])[0]; t=s[pos+4:pos+8]; d=s[pos+8:pos+8+n]; pos+=12+n
+ if t==b'IHDR': header=d; w,h,depth,color,_,_,inter=struct.unpack('>IIBBBBB',d)
+ if t==b'IDAT': data+=d
+assert depth==8 and color in (2,6) and inter==0
+bpp={2:3,6:4}[color]; stride=w*bpp; raw=zlib.decompress(data); rows=[]; prev=bytearray(stride)
+def paeth(a,b,c):
+ p=a+b-c; ds=[abs(p-a),abs(p-b),abs(p-c)]; return (a,b,c)[ds.index(min(ds))]
+for y in range(h):
+ f=raw[y*(stride+1)]; r=bytearray(raw[y*(stride+1)+1:(y+1)*(stride+1)])
+ for x in range(stride):
+  a=r[x-bpp] if x>=bpp else 0; b=prev[x]; c=prev[x-bpp] if x>=bpp else 0
+  r[x]=(r[x]+(0,a,b,(a+b)//2,paeth(a,b,c))[f])&255
+ rows.append(r); prev=r
+W,H=1920,1080
+# Bilinear interpolation for delivery dimensions.
+out=bytearray()
+xs=[]
+for x in range(W):
+ q=max(0,min(w-1,(x+.5)*w/W-.5)); a=int(q); xs.append((a,min(w-1,a+1),q-a))
+for y in range(H):
+ q=max(0,min(h-1,(y+.5)*h/H-.5)); a=int(q); b=min(h-1,a+1); v=q-a; out.append(0)
+ for x0,x1,u in xs:
+  for c in range(bpp):
+   t=rows[a][x0*bpp+c]*(1-u)+rows[a][x1*bpp+c]*u
+   z=rows[b][x0*bpp+c]*(1-u)+rows[b][x1*bpp+c]*u
+   out.append(round(t*(1-v)+z*v))
+def chunk(t,d): return struct.pack('>I',len(d))+t+d+struct.pack('>I',zlib.crc32(t+d)&0xffffffff)
+p=Path('assets/generated/test001'); p.mkdir(parents=True,exist_ok=True)
+p.joinpath('image.png').write_bytes(s[:8]+chunk(b'IHDR',struct.pack('>IIBBBBB',W,H,depth,color,0,0,0))+chunk(b'IDAT',zlib.compress(out))+chunk(b'IEND',b''))
+p.joinpath('result.json').write_text(json.dumps({'id':'test001','status':'ok','via':'codex-cloud','files':['assets/generated/test001/image.png']},indent=2)+'\\n')
+print('Saved image.png: 1920x1080 PNG; result.json')
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 8326ms:
+Saved image.png: 1920x1080 PNG; result.json
+
+codex
+指定フォルダーに保存しました。
+
+- [image.png（1920×1080）](assets/generated/test001/image.png)
+- [result.json](assets/generated/test001/result.json)
+
+内蔵画像生成機能を使用し、指定の「5+3=6」、温かい木の机、自然光のプロンプトで作成しました。他のファイルは変更していません。
+
+GitHub への送信は `.git` が読み取り専用のため失敗しました。`GH_PUSH_TOKEN` は空です。
+tokens used
+13,685

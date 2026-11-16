@@ -1,0 +1,388 @@
+内蔵画像生成機能で、指定の「手・マッチ棒1本・濃緑の黒板、文字やロゴなし」の画像を作成しました。
+
+保存先： [image.png](/home/runner/work/youtube/youtube/assets/generated/t007_thumb_match_hand/image.png)（1920×1080）。同じフォルダーに result.json も保存済みです。他のファイルは変更していません。
+
+GitHubへの送信は失敗しました。`.git` が読み取り専用で、github.com の名前解決もできません。`GH_PUSH_TOKEN` は空です。
+
+--- stderr ---
+ these buckets and keep the slug consistent across prompts and references.
+
+Generate:
+- photorealistic-natural — candid/editorial lifestyle scenes with real texture and natural lighting.
+- product-mockup — product/packaging shots, catalog imagery, merch concepts.
+- ui-mockup — app/web interface mockups and wireframes; specify the desired fidelity.
+- infographic-diagram — diagrams/infographics with structured layout and text.
+- scientific-educational — classroom explainers, scientific diagrams, and learning visuals with required labels and accuracy constraints.
+- ads-marketing — campaign concepts and ad creatives with audience, brand position, scene, and exact tagline/copy.
+- productivity-visual — slide, chart, workflow, and data-heavy business visuals.
+- logo-brand — logo/mark exploration, vector-friendly.
+- illustration-story — comics, children’s book art, narrative scenes.
+- stylized-concept — style-driven concept art, 3D/stylized renders.
+- historical-scene — period-accurate/world-knowledge scenes.
+
+Edit:
+- text-localization — translate/replace in-image text, preserve layout.
+- identity-preserve — try-on, person-in-scene; lock face/body/pose.
+- precise-object-edit — remove/replace a specific element (including interior swaps).
+- lighting-weather — time-of-day/season/atmosphere changes only.
+- background-extraction — transparent background / clean cutout. Ask built-in `image_gen` for actual transparency.
+- style-transfer — apply reference style while changing subject/scene.
+- compositing — multi-image insert/merge with matched lighting/perspective.
+- sketch-to-render — drawing/line art to photoreal render.
+
+## Shared prompt schema
+
+Use the following labeled spec as shared prompt scaffolding for both top-level modes:
+
+```text
+Use case: <taxonomy slug>
+Asset type: <where the asset will be used>
+Primary request: <user's main prompt>
+Input images: <Image 1: role; Image 2: role> (optional)
+Scene/backdrop: <environment>
+Subject: <main subject>
+Style/medium: <photo/illustration/3D/etc>
+Composition/framing: <wide/close/top-down; placement>
+Lighting/mood: <lighting + mood>
+Color palette: <palette notes>
+Materials/textures: <surface details>
+Text (verbatim): "<exact text>"
+Constraints: <must keep/must avoid>
+Avoid: <negative constraints>
+```
+
+Notes:
+- `Asset type` and `Input images` are prompt scaffolding, not dedicated CLI flags.
+- `Scene/backdrop` refers to the visual setting. It is not the same as the fallback CLI `background` parameter, which controls output transparency behavior.
+- Fallback-only execution notes such as `Quality:`, `Input fidelity:`, masks, output format, and output paths belong in the CLI path only. Do not treat them as built-in `image_gen` tool arguments.
+
+Augmentation rules:
+- Keep it short.
+- Add only the details needed to improve the prompt materially.
+- For edits, explicitly list invariants (`change only X; keep Y unchanged`).
+- If any critical detail is missing and blocks success, ask a question; otherwise proceed.
+
+## Examples
+
+### Generation example (hero image)
+```text
+Use case: product-mockup
+Asset type: landing page hero
+Primary request: a minimal hero image of a ceramic coffee mug
+Style/medium: clean product photography
+Composition/framing: wide composition with usable negative space for page copy if needed
+Lighting/mood: soft studio lighting
+Constraints: no logos, no text, no watermark
+```
+
+### Edit example (invariants)
+```text
+Use case: precise-object-edit
+Asset type: product photo background replacement
+Primary request: replace only the background with a warm sunset gradient
+Constraints: change only the background; keep the product and its edges unchanged; no text; no watermark
+```
+
+## Prompting best practices
+- Structure prompt as scene/backdrop -> subject -> details -> constraints.
+- Include intended use (ad, UI mock, infographic) to set the mode and polish level.
+- Use camera/composition language for photorealism.
+- Only use SVG/vector stand-ins when the user explicitly asked for vector output or a non-image placeholder.
+- Quote exact text and specify typography + placement.
+- For tricky words, spell them letter-by-letter and require verbatim rendering.
+- For multi-image inputs, reference images by index and describe how they should be used.
+- For edits, repeat invariants every iteration to reduce drift.
+- Iterate with single-change follow-ups.
+- If the prompt is generic, add only the extra detail that will materially help.
+- If the prompt is already detailed, normalize it instead of expanding it.
+- For CLI fallback only, see `references/cli.md` and `references/image-api.md` for model, `quality`, `input_fidelity`, masks, output format, and output-path guidance.
+- For transparent images, ask built-in `image_gen` for actual transparency and preserve its alpha.
+
+More principles shared by both modes: `references/prompting.md`.
+Copy/paste specs shared by both modes: `references/sample-prompts.md`.
+
+## Guidance by asset type
+Asset-type templates (website assets, game assets, wireframes, logo) are consolidated in `references/sample-prompts.md`.
+
+## gpt-image-2 guidance for CLI fallback
+
+The fallback CLI defaults to `gpt-image-2`.
+
+- Use `gpt-image-2` for new CLI/API workflows unless the user confirms a different model.
+- CLI `gpt-image-2` does not support `background=transparent`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- `gpt-image-2` always uses high fidelity for image inputs; do not set `input_fidelity` with this model.
+- `gpt-image-2` supports `quality` values `low`, `medium`, `high`, and `auto`.
+- Use `quality low` for fast drafts, thumbnails, and quick iterations. Use `medium`, `high`, or `auto` for final assets, dense text, diagrams, identity-sensitive edits, or high-resolution outputs.
+- Square images are typically fastest to generate. Use `1024x1024` for fast square drafts.
+- If the user asks for 4K-style output, use `3840x2160` for landscape or `2160x3840` for portrait.
+- `gpt-image-2` size may be `auto` or `WIDTHxHEIGHT` if all constraints hold: max edge `<= 3840px`, both edges multiples of `16px`, long-to-short ratio `<= 3:1`, total pixels between `655,360` and `8,294,400`.
+
+Popular `gpt-image-2` sizes:
+- `1024x1024` square
+- `1536x1024` landscape
+- `1024x1536` portrait
+- `2048x2048` 2K square
+- `2048x1152` 2K landscape
+- `3840x2160` 4K landscape
+- `2160x3840` 4K portrait
+- `auto`
+
+## Fallback CLI mode only
+
+### Temp and output conventions
+These conventions apply only to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+---
+name: using-superpowers
+description: Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions
+---
+
+<SUBAGENT-STOP>
+If you were dispatched as a subagent to execute a specific task, ignore this skill.
+</SUBAGENT-STOP>
+
+<EXTREMELY-IMPORTANT>
+If you think there is even a 1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST invoke the skill.
+
+IF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.
+
+This is not negotiable. You cannot rationalize your way out of this.
+</EXTREMELY-IMPORTANT>
+
+## The Rule
+
+**Invoke relevant or requested skills BEFORE any response or action** — including clarifying questions, exploring the codebase, or checking files. If it turns out wrong for the situation, you don't have to use it.
+
+**Before entering plan mode:** if you haven't already brainstormed, invoke the brainstorming skill first.
+
+Then announce "Using [skill] to [purpose]" and follow the skill exactly. If it has a checklist, create a todo per item.
+
+## Skill Priority
+
+When multiple skills apply, process skills come first — they set the approach, then implementation skills (frontend-design, etc.) carry it out. Brainstorming and systematic-debugging are Superpowers' most common process skills, but the rule holds for any of them.
+
+- "Let's build X" → superpowers:brainstorming first, then implementation skills.
+- "Fix this bug" → superpowers:systematic-debugging first, then domain skills.
+
+## Red Flags
+
+These thoughts mean STOP—you're rationalizing:
+
+| Thought | Reality |
+|---------|---------|
+| "This is just a simple question" | Questions are tasks. Check for skills. |
+| "I need more context first" | Skill check comes BEFORE clarifying questions. |
+| "Let me explore the codebase first" | Skills tell you HOW to explore. Check first. |
+| "I can check git/files quickly" | Files lack conversation context. Check for skills. |
+| "Let me gather information first" | Skills tell you HOW to gather information. |
+| "This doesn't need a formal skill" | If a skill exists, use it. |
+| "I remember this skill" | Skills evolve. Read current version. |
+| "This doesn't count as a task" | Action = task. Check for skills. |
+| "The skill is overkill" | Simple things become complex. Use it. |
+| "I'll just do this one thing first" | Check BEFORE doing anything. |
+| "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
+| "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
+
+## Platform Adaptation
+
+If your harness appears here, read its reference file for special instructions:
+
+- Claude Code: `references/claude-code-tools.md`
+- Codex: `references/codex-tools.md`
+- Pi: `references/pi-tools.md`
+- Antigravity: `references/antigravity-tools.md`
+- Hermes Agent: `references/hermes-tools.md`
+- Muse: `references/muse-tools.md`
+
+## User Instructions
+
+User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+
+exec
+/bin/bash -lc 'git status --short; ls assets/generated/t007_thumb_match_hand 2>/dev/null; cat requests/images/t007_thumb_match_hand.json 2>/dev/null' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+?? assets/
+{
+ "id": "t007_thumb_match_hand",
+ "kind": "image",
+ "prompt": "人の手がマッチ棒を1本つまんで持ち上げている瞬間のクローズアップ。背景は濃い緑の黒板。強いコントラスト、サムネイル向け。",
+ "size": "1920x1080",
+ "count": 1,
+ "notes": "画像の中に文字やロゴは入れない"
+}
+exec
+/bin/bash -lc "git remote -v | sed -E 's#https://["'^@]*@#https://***@#g'"'; find assets/generated -maxdepth 2 -type f | head -15" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+origin	https://github.com/agaraysan/youtube (fetch)
+origin	https://github.com/agaraysan/youtube (push)
+assets/generated/t005_bg_winter_cafe/result.json
+assets/generated/t005_bg_winter_cafe/codex.log
+assets/generated/t005_bg_winter_cafe/image.png
+assets/generated/t002_bg_match_desk/result.json
+assets/generated/t002_bg_match_desk/codex.log
+assets/generated/t002_bg_match_desk/background.png
+assets/generated/t004_bg_autumn_park/result.json
+assets/generated/t004_bg_autumn_park/codex.log
+assets/generated/t004_bg_autumn_park/autumn_park.png
+assets/generated/t006_bg_quiz_studio/result.json
+assets/generated/t006_bg_quiz_studio/codex.log
+assets/generated/t006_bg_quiz_studio/image.png
+assets/generated/t003_bg_riddle_library/result.json
+assets/generated/t003_bg_riddle_library/codex.log
+assets/generated/t003_bg_riddle_library/image.png
+
+codex
+手がマッチ棒を1本つまむ構図で生成できました。文字やロゴがないことを確認し、1920×1080のPNGとして保存します。
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+from pathlib import Path
+import json
+p=Path('assets/generated/t007_thumb_match_hand')
+p.mkdir(parents=True,exist_ok=True)
+im=Image.open('/home/runner/.codex/generated_images/01a1e23c-41dc-7ac1-8851-3f09a97bbe99/exec-0d45f00d-62d7-49ae-9d37-a52448b5ca11.png')
+im.resize((1920,1080),Image.Resampling.LANCZOS).save(p/'image.png')
+(p/'result.json').write_text(json.dumps({'id':'t007_thumb_match_hand','status':'ok','via':'codex-cloud','files':['assets/generated/t007_thumb_match_hand/image.png']},ensure_ascii=False,indent=2)+'\\n')
+with Image.open(p/'image.png') as check:
+ print(check.format,check.size)
+PY
+ git add -- assets/generated/t007_thumb_match_hand
+ git commit -m 'Add t007 match hand thumbnail'
+ git fetch origin codex-inbox" in /home/runner/work/youtube/youtube
+ exited 255 in 19ms:
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'PIL'
+fatal: Unable to create '/home/runner/work/youtube/youtube/.git/index.lock': Read-only file system
+fatal: Unable to create '/home/runner/work/youtube/youtube/.git/index.lock': Read-only file system
+error: cannot open '.git/FETCH_HEAD': Read-only file system
+
+exec
+/bin/bash -lc "command -v convert; command -v magick; command -v ffmpeg; python - <<'PY'
+import os
+print('GH_PUSH_TOKEN: '+('nonempty' if os.environ.get('GH_PUSH_TOKEN') else 'empty'))
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+GH_PUSH_TOKEN: empty
+
+exec
+/bin/bash -lc 'python -m pip install --target /tmp/t007-pillow Pillow' in /home/runner/work/youtube/youtube
+exec
+/bin/bash -lc "ls /usr/bin/python*; rg --files /opt /usr/local/lib /home/runner 2>/dev/null | rg '/PIL/Image.py"'$|/bin/(convert|ffmpeg|magick)$'"' | head" in /home/runner/work/youtube/youtube
+ exited 1 in 7835ms:
+WARNING: The directory '/home/runner/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x766f3d6fa7b0>: Failed to establish a new connection: [Errno -2] Name or service not known')': /simple/pillow/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x766f3d882c10>: Failed to establish a new connection: [Errno -2] Name or service not known')': /simple/pillow/
+WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x766f3d882d50>: Failed to establish a new connection: [Errno -2] Name or service not known')': /simple/pillow/
+WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x766f3d882e90>: Failed to establish a new connection: [Errno -2] Name or service not known')': /simple/pillow/
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x766f3d882fd0>: Failed to establish a new connection: [Errno -2] Name or service not known')': /simple/pillow/
+ERROR: Could not find a version that satisfies the requirement Pillow (from versions: none)
+ERROR: No matching distribution found for Pillow
+
+ succeeded in 1828ms:
+/usr/bin/python
+/usr/bin/python3
+/usr/bin/python3-config
+/usr/bin/python3.14
+/usr/bin/python3.14-config
+
+codex
+保存作業を進めています。GitHubへの送信は、環境の制限で `.git` が読み取り専用のため実行できません。`GH_PUSH_TOKEN` も空であることを確認しました。
+exec
+/bin/bash -lc "python - <<'PY'
+import struct,zlib,json
+from pathlib import Path
+src=Path('/home/runner/.codex/generated_images/01a1e23c-41dc-7ac1-8851-3f09a97bbe99/exec-0d45f00d-62d7-49ae-9d37-a52448b5ca11.png').read_bytes()
+pos=8; dat=b''
+while pos<len(src):
+ n=struct.unpack('>I',src[pos:pos+4])[0]; t=src[pos+4:pos+8]; d=src[pos+8:pos+8+n]; pos+=12+n
+ if t==b'IHDR': w,h,depth,color,_,_,inter=struct.unpack('>IIBBBBB',d)
+ if t==b'IDAT': dat+=d
+assert depth==8 and color in (2,6) and inter==0
+bpp=3 if color==2 else 4; stride=w*bpp; raw=zlib.decompress(dat); rows=[]; prev=bytearray(stride)
+def paeth(a,b,c):
+ p=a+b-c; x,y,z=abs(p-a),abs(p-b),abs(p-c)
+ return a if x<=y and x<=z else b if y<=z else c
+for y in range(h):
+ off=y*(stride+1); f=raw[off]; row=bytearray(raw[off+1:off+1+stride])
+ for i in range(stride):
+  a=row[i-bpp] if i>=bpp else 0; b=prev[i]; c=prev[i-bpp] if i>=bpp else 0
+  v=0 if f==0 else a if f==1 else b if f==2 else (a+b)//2 if f==3 else paeth(a,b,c)
+  row[i]=(row[i]+v)&255
+ rows.append(row); prev=row
+W,H=1920,1080
+xs=[]
+for x in range(W):
+ s=max(0,min(w-1,(x+.5)*w/W-.5)); a=int(s); xs.append((a*bpp,min(a+1,w-1)*bpp,s-a))
+out=bytearray()
+for y in range(H):
+ s=max(0,min(h-1,(y+.5)*h/H-.5)); a=int(s); fy=s-a; r0,r1=rows[a],rows[min(a+1,h-1)]; out.append(0)
+ for x0,x1,fx in xs:
+  for c in range(bpp):
+   top=r0[x0+c]*(1-fx)+r0[x1+c]*fx; bot=r1[x0+c]*(1-fx)+r1[x1+c]*fx
+   out.append(round(top*(1-fy)+bot*fy))
+def chunk(t,d): return struct.pack('>I',len(d))+t+d+struct.pack('>I',zlib.crc32(t+d)&0xffffffff)
+p=Path('assets/generated/t007_thumb_match_hand'); p.mkdir(parents=True,exist_ok=True)
+image=b'\\x89PNG\\r\\n\\x1a\\n'+chunk(b'IHDR',struct.pack('>IIBBBBB',W,H,8,color,0,0,0))+chunk(b'IDAT',zlib.compress(out))+chunk(b'IEND',b'')
+(p/'image.png').write_bytes(image)
+(p/'result.json').write_text(json.dumps({'id':'t007_thumb_match_hand','status':'ok','via':'codex-cloud','files':['assets/generated/t007_thumb_match_hand/image.png']},indent=2)+'\\n')
+assert struct.unpack('>II',image[16:24])==(1920,1080)
+print('Verified PNG 1920x1080; result.json saved')
+PY
+ git push origin HEAD:codex-inbox" in /home/runner/work/youtube/youtube
+ exited 128 in 6054ms:
+Verified PNG 1920x1080; result.json saved
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+
+codex
+内蔵画像生成機能で、指定の「手・マッチ棒1本・濃緑の黒板、文字やロゴなし」の画像を作成しました。
+
+保存先： [image.png](/home/runner/work/youtube/youtube/assets/generated/t007_thumb_match_hand/image.png)（1920×1080）。同じフォルダーに result.json も保存済みです。他のファイルは変更していません。
+
+GitHubへの送信は失敗しました。`.git` が読み取り専用で、github.com の名前解決もできません。`GH_PUSH_TOKEN` は空です。
+tokens used
+38,787
