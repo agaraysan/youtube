@@ -1,8 +1,10 @@
 {
-  "id": "ex011_00_title",
-  "status": "ok",
-  "via": "codex-cloud",
-  "files": [
-    "assets/generated/ex011_00_title/image.png"
-  ]
+ "id": "ex011_00_title",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "image.png"
+ ],
+ "at_utc": "2026-11-16T15:19:45.624886Z"
 }
