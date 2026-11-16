@@ -1,0 +1,11 @@
+{
+ "id": "br_tv06_susuharai",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "susuharai.png"
+ ],
+ "check": null,
+ "at_utc": "2026-11-16T05:05:13.105278Z"
+}

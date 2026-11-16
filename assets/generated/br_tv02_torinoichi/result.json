@@ -1,0 +1,11 @@
+{
+ "id": "br_tv02_torinoichi",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "image.png"
+ ],
+ "check": null,
+ "at_utc": "2026-11-16T05:01:22.429554Z"
+}

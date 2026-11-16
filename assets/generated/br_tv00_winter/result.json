@@ -1,0 +1,11 @@
+{
+ "id": "br_tv00_winter",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "winter.png"
+ ],
+ "check": null,
+ "at_utc": "2026-11-16T04:59:21.520430Z"
+}

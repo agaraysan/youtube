@@ -1,0 +1,11 @@
+{
+ "id": "br_tv10_joya",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "image.png"
+ ],
+ "check": null,
+ "at_utc": "2026-11-16T05:08:36.669597Z"
+}

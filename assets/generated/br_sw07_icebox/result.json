@@ -1,0 +1,11 @@
+{
+ "id": "br_sw07_icebox",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "icebox.png"
+ ],
+ "check": null,
+ "at_utc": "2026-11-16T04:57:43.258298Z"
+}
