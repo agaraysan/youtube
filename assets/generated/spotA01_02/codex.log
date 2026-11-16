@@ -1,0 +1,530 @@
+[指定フォルダー](/home/runner/work/youtube/youtube/assets/generated/spotA01_02)に修正版を保存しました。
+
+- おばけの口を明確な笑顔に変更し、`differences.json` を更新。
+- 両画像は1024×1024、5か所以外の画素差は0と検証済み。
+- 組み込み画像生成で「右上のおばけの口だけを笑顔にする」編集を行いました。
+
+GitHubへの送信は、`github.com` の名前解決に失敗して完了できませんでした。`GH_PUSH_TOKEN` も空です。
+
+--- stderr ---
+:**
+
+1. **Read Error Messages Carefully**
+   - Don't skip past errors or warnings
+   - They often contain the exact solution
+   - Read stack traces completely
+   - Note line numbers, file paths, error codes
+
+2. **Reproduce Consistently**
+   - Can you trigger it reliably?
+   - What are the exact steps?
+   - Does it happen every time?
+   - If not reproducible → gather more data, don't guess
+
+3. **Check Recent Changes**
+   - What changed that could cause this?
+   - Git diff, recent commits
+   - New dependencies, config changes
+   - Environmental differences
+
+4. **Gather Evidence in Multi-Component Systems**
+
+   **WHEN system has multiple components (CI → build → signing, API → service → database):**
+
+   **BEFORE proposing fixes, add diagnostic instrumentation:**
+   ```
+   For EACH component boundary:
+     - Log what data enters component
+     - Log what data exits component
+     - Verify environment/config propagation
+     - Check state at each layer
+
+   Run once to gather evidence showing WHERE it breaks
+   THEN analyze evidence to identify failing component
+   THEN investigate that specific component
+   ```
+
+   **Example (multi-layer system):**
+   ```bash
+   # Layer 1: Workflow
+   echo "=== Secrets available in workflow: ==="
+   echo "IDENTITY: $([ -n "${IDENTITY:-}" ] && echo SET || echo UNSET)"
+
+   # Layer 2: Build script
+   echo "=== Env vars in build script: ==="
+   printenv IDENTITY >/dev/null 2>&1 && echo "IDENTITY in environment" || echo "IDENTITY not in environment"
+
+   # Layer 3: Signing script
+   echo "=== Keychain state: ==="
+   security list-keychains
+   security find-identity -v
+
+   # Layer 4: Actual signing
+   codesign --sign "$IDENTITY" --verbose=4 "$APP"
+   ```
+
+   **This reveals:** Which layer fails (secrets → workflow ✓, workflow → build ✗)
+
+5. **Trace Data Flow**
+
+   **WHEN error is deep in call stack:**
+
+   See `root-cause-tracing.md` in this directory for the complete backward tracing technique.
+
+   **Quick version:**
+   - Where does bad value originate?
+   - What called this with bad value?
+   - Keep tracing up until you find the source
+   - Fix at source, not at symptom
+
+### Phase 2: Pattern Analysis
+
+**Find the pattern before fixing:**
+
+1. **Find Working Examples**
+   - Locate similar working code in same codebase
+   - What works that's similar to what's broken?
+
+2. **Compare Against References**
+   - If implementing pattern, read reference implementation COMPLETELY
+   - Don't skim - read every line
+   - Understand the pattern fully before applying
+
+3. **Identify Differences**
+   - What's different between working and broken?
+   - List every difference, however small
+   - Don't assume "that can't matter"
+
+4. **Understand Dependencies**
+   - What other components does this need?
+   - What settings, config, environment?
+   - What assumptions does it make?
+
+### Phase 3: Hypothesis and Testing
+
+**Scientific method:**
+
+1. **Form Single Hypothesis**
+   - State clearly: "I think X is the root cause because Y"
+   - Write it down
+   - Be specific, not vague
+
+2. **Test Minimally**
+   - Make the SMALLEST possible change to test hypothesis
+   - One variable at a time
+   - Don't fix multiple things at once
+
+3. **Verify Before Continuing**
+   - Did it work? Yes → Phase 4
+   - Didn't work? Form NEW hypothesis
+   - DON'T add more fixes on top
+
+4. **When You Don't Know**
+   - Say "I don't understand X"
+   - Don't pretend to know
+   - Ask for help
+   - Research more
+
+### Phase 4: Implementation
+
+**Fix the root cause, not the symptom:**
+
+1. **Create Failing Test Case**
+   - Simplest possible reproduction
+   - Automated test if possible
+   - One-off test script if no framework
+   - MUST have before fixing
+   - Use the `superpowers:test-driven-development` skill for writing proper failing tests
+
+2. **Implement Single Fix**
+   - Address the root cause identified
+   - ONE change at a time
+   - No "while I'm here" improvements
+   - No bundled refactoring
+
+3. **Verify Fix**
+   - Test passes now?
+   - No other tests broken?
+   - Issue actually resolved?
+   - Use the `superpowers:verification-before-completion` skill before claiming success
+
+4. **If Fix Doesn't Work**
+   - STOP
+   - Count: How many fixes have you tried?
+   - If < 3: Return to Phase 1, re-analyze with new information
+   - **If ≥ 3: STOP and question the architecture (step 5 below)**
+   - DON'T attempt Fix #4 without architectural discussion
+
+5. **If 3+ Fixes Failed: Question Architecture**
+
+   **Pattern indicating architectural problem:**
+   - Each fix reveals new shared state/coupling/problem in different place
+   - Fixes require "massive refactoring" to implement
+   - Each fix creates new symptoms elsewhere
+
+   **STOP and question fundamentals:**
+   - Is this pattern fundamentally sound?
+   - Are we "sticking with it through sheer inertia"?
+   - Should we refactor architecture vs. continue fixing symptoms?
+
+   **Discuss with your human partner before attempting more fixes**
+
+   This is NOT a failed hypothesis - this is a wrong architecture.
+
+## Red Flags - STOP and Follow Process
+
+If you catch yourself thinking:
+- "Quick fix for now, investigate later"
+- "Just try changing X and see if it works"
+- "Add multiple changes, run tests"
+- "Skip the test, I'll manually verify"
+- "It's probably X, let me fix that"
+- "I don't fully understand but this might work"
+- "Pattern says X but I'll adapt it differently"
+- "Here are the main problems: [lists fixes without investigation]"
+- Proposing solutions before tracing data flow
+- **"One more fix attempt" (when already tried 2+)**
+- **Each fix reveals new problem in different place**
+
+**ALL of these mean: STOP. Return to Phase 1.**
+
+**If 3+ fixes failed:** Question the architecture (see Phase 4.5)
+
+## your human partner's Signals You're Doing It Wrong
+
+**Watch for these redirections:**
+- "Is that not happening?" - You assumed without verifying
+- "Will it show us...?" - You should have added evidence gathering
+- "Stop guessing" - You're proposing fixes without understanding
+- "Ultra-think this" - Question fundamentals, not just symptoms
+- "We're stuck?" (frustrated) - Your approach isn't working
+
+**When you see these:** STOP. Return to Phase 1.
+
+## Common Rationalizations
+
+| Excuse | Reality |
+|--------|---------|
+| "Issue is simple, don't need process" | Simple issues have root causes too. Process is fast for simple bugs. |
+| "Emergency, no time for process" | Systematic debugging is FASTER than guess-and-check thrashing. |
+| "Just try this first, then investigate" | First fix sets the pattern. Do it right from the start. |
+| "I'll write test after confirming fix works" | Untested fixes don't stick. Test first proves it. |
+| "Multiple fixes at once saves time" | Can't isolate what worked. Causes new bugs. |
+| "Reference too long, I'll adapt the pattern" | Partial understanding guarantees bugs. Read it completely. |
+| "I see the problem, let me fix it" | Seeing symptoms ≠ understanding root cause. |
+| "One more fix attempt" (after 2+ failures) | 3+ failures = architectural problem. Question pattern, don't fix again. |
+
+## Quick Reference
+
+| Phase | Key Activities | Success Criteria |
+|-------|---------------|------------------|
+| **1. Root Cause** | Read errors, reproduce, check changes, gather evidence | Understand WHAT and WHY |
+| **2. Pattern** | Find working examples, compare | Identify differences |
+| **3. Hypothesis** | Form theory, test minimally | Confirmed or new hypothesis |
+| **4. Implementation** | Create test, fix, verify | Bug resolved, tests pass |
+
+## When Process Reveals "No Root Cause"
+
+If systematic investigation reveals issue is truly environmental, timing-dependent, or external:
+
+1. You've completed the process
+2. Document what you investigated
+3. Implement appropriate handling (retry, timeout, error message)
+4. Add monitoring/logging for future investigation
+
+**But:** 95% of "no root cause" cases are incomplete investigation.
+
+## Supporting Techniques
+
+These techniques are part of systematic debugging and available in this directory:
+
+- **`root-cause-tracing.md`** - Trace bugs backward through call stack to find original trigger
+- **`defense-in-depth.md`** - Add validation at multiple layers after finding root cause
+- **`condition-based-waiting.md`** - Replace arbitrary timeouts with condition polling
+---
+name: verification-before-completion
+description: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always
+---
+
+# Verification Before Completion
+
+## Overview
+
+**Core principle:** Evidence before claims, always.
+
+**Violating the letter of this rule is violating the spirit of this rule.**
+
+## The Iron Law
+
+```
+NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE
+```
+
+If you haven't run the verification command in this message, you cannot claim it passes.
+
+## The Gate Function
+
+```
+BEFORE claiming any status or expressing satisfaction:
+
+1. IDENTIFY: What command proves this claim?
+2. RUN: Execute the FULL command (fresh, complete)
+3. READ: Full output, check exit code, count failures
+4. VERIFY: Does output confirm the claim?
+   - If NO: State actual status with evidence
+   - If YES: State claim WITH evidence
+5. ONLY THEN: Make the claim
+
+Skip any step = lying, not verifying
+```
+
+## Common Failures
+
+| Claim | Requires | Not Sufficient |
+|-------|----------|----------------|
+| Tests pass | Test command output: 0 failures | Previous run, "should pass" |
+| Linter clean | Linter output: 0 errors | Partial check, extrapolation |
+| Build succeeds | Build command: exit 0 | Linter passing, logs look good |
+| Bug fixed | Test original symptom: passes | Code changed, assumed fixed |
+| Regression test works | Red-green cycle verified | Test passes once |
+| Agent completed | VCS diff shows changes | Agent reports "success" |
+| Requirements met | Line-by-line checklist | Tests passing |
+
+## Red Flags - STOP
+
+- Using "should", "probably", "seems to"
+- Expressing satisfaction before verification ("Great!", "Perfect!", "Done!", etc.)
+- About to commit/push/PR without verification
+- Trusting agent success reports
+- Relying on partial verification
+- Thinking "just this once"
+- Tired and wanting work over
+- **ANY wording implying success without having run verification**
+
+## Rationalization Prevention
+
+| Excuse | Reality |
+|--------|---------|
+| "Should work now" | RUN the verification |
+| "I'm confident" | Confidence ≠ evidence |
+| "Just this once" | No exceptions |
+| "Linter passed" | Linter ≠ compiler |
+| "Agent said success" | Verify independently |
+| "I'm tired" | Exhaustion ≠ excuse |
+| "Partial check is enough" | Partial proves nothing |
+| "Different words so rule doesn't apply" | Spirit over letter |
+
+## Key Patterns
+
+**Tests:**
+```
+✅ [Run test command] [See: 34/34 pass] "All tests pass"
+❌ "Should pass now" / "Looks correct"
+```
+
+**Regression tests (TDD Red-Green):**
+```
+✅ Write → Run (pass) → Revert fix → Run (MUST FAIL) → Restore → Run (pass)
+❌ "I've written a regression test" (without red-green verification)
+```
+
+**Build:**
+```
+✅ [Run build] [See: exit 0] "Build passes"
+❌ "Linter passed" (linter doesn't check compilation)
+```
+
+**Requirements:**
+```
+✅ Re-read plan → Create checklist → Verify each → Report gaps or completion
+❌ "Tests pass, phase complete"
+```
+
+**Agent delegation:**
+```
+✅ Agent reports success → Check VCS diff → Verify changes → Report actual state
+❌ Trust agent report
+```
+
+## When To Apply
+
+**ALWAYS before:**
+- ANY variation of success/completion claims
+- ANY expression of satisfaction
+- ANY positive statement about work state
+- Committing, PR creation, task completion
+- Moving to next task
+- Delegating to agents
+
+**Rule applies to:**
+- Exact phrases
+- Paraphrases and synonyms
+- Implications of success
+- ANY communication suggesting completion/correctness
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+import numpy as np,json
+p='assets/generated/spotA01_02/'
+a=np.array(Image.open(p+'a.png').convert('RGB'));b=np.array(Image.open(p+'b.png').convert('RGB'));m=np.any(a"'!=b,2); covered=np.zeros(m.shape,bool)
+for d in json.load(open(p+'"'differences.json'))['differences']:
+ x,y,w,h=[d[k] for k in ['x','y','width','height']]; covered[y:y+h,x:x+w]=1; print(d['description'],int(m[y:y+h,x:x+w].sum()))
+print('outside',int((m&~covered).sum()))
+PY" in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+ModuleNotFoundError: No module named 'numpy'
+
+codex
+右上のおばけの目の変化は、縮小表示では判別しにくい状態でした。ここを「おばけの口が丸から横に広い笑顔になる」という明確な形の違いに作り直し、残りの4か所と合わせて差分領域を検証します。
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image,ImageChops
+import json
+p='assets/generated/spotA01_02/'
+a=Image.open(p+'a.png').convert('RGB');b=Image.open(p+'b.png').convert('RGB'); m=ImageChops.difference(a,b).convert('RGB'); boxes=[]
+for d in json.load(open(p+'differences.json'))['differences']:
+ x,y,w,h=[d[k] for k in ['x','y','width','height']]; box=(x,y,x+w,y+h); boxes.append(box); print(d['description'],m.crop(box).getbbox())
+for box in boxes:m.paste((0,0,0),box)
+print('outside bbox',m.getbbox())
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 2ms:
+左上の大きなコウモリが消えている (1, 1, 167, 82)
+右上のおばけの目が楕円から三日月形に変わっている (1, 1, 35, 22)
+魔女の袖の星飾りが月飾りに変わっている (1, 1, 44, 45)
+右側のお菓子かごの持ち手が高くなっている (1, 1, 77, 64)
+左下のかぼちゃの目が三角から丸に変わっている (1, 1, 71, 26)
+outside bbox None
+
+exec
+/bin/bash -lc "python - <<'PY'
+import os,subprocess
+print('GH_PUSH_TOKEN:', 'nonempty' if os.environ.get('GH_PUSH_TOKEN') else 'empty')
+r=subprocess.run(['git','remote','get-url','origin'],capture_output=True,text=True)
+print('origin configured:',r.returncode==0)
+print(subprocess.run(['git','branch','--show-current'],capture_output=True,text=True).stdout.strip())
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+GH_PUSH_TOKEN: empty
+origin configured: True
+main
+
+exec
+/bin/bash -lc "git log -1 --format='%h %s'; cat assets/generated/spotA01_02/result.json; rg --files -g AGENTS.md" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+6dddf9f 間違い探しの本番用の絵を依頼（夏アニメ調5枚・秋実写風5枚、違い5か所）
+{
+  "id": "spotA01_02",
+  "status": "ok",
+  "via": "codex-cloud",
+  "files": [
+    "a.png",
+    "b.png",
+    "differences.json"
+  ]
+}
+AGENTS.md
+
+exec
+/bin/bash -lc 'cat AGENTS.md; command -v magick || command -v convert' in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+# Codex へのお願い（このリポジトリでの役割）
+
+このリポジトリの運営は Claude が行います。Codex の担当は **画像と動くGIFの作成だけ** です。
+
+- 依頼は `requests/images/<id>.json` にあります。Issue やタスクで id を指定されたら、その依頼書を読んでください。
+- **画像は Codex 自身の画像生成機能で作ってください。** `scripts/codex_image.py` は GitHub Actions 用なので、実行しないでください（Codex の中から Codex CLI を呼ぶ必要はありません）。
+- 出来上がったファイルは `assets/generated/<id>/` に保存してください。画像は PNG、動くGIFは GIF で保存します。
+  - あわせて `result.json` を書いてください（`{"id","status":"ok","via":"codex-cloud","files":[...]}`）。
+- **保存が終わったら、必ず GitHub に送ってください。** 送り先は `codex-inbox` 枝です。
+  ```bash
+  # origin がなければ、環境変数 GH_PUSH_TOKEN を使って自分で追加する
+  git remote get-url origin >/dev/null 2>&1 || git remote add origin "https://x-access-token:${GH_PUSH_TOKEN}@github.com/agaraysan/youtube.git"
+  git fetch origin codex-inbox && git rebase origin/codex-inbox   # 失敗したら git pull --rebase origin codex-inbox
+  git push origin HEAD:codex-inbox
+  ```
+  push できなかったら、`GH_PUSH_TOKEN` が空かどうか（値は表示しない）と、その理由を最後の報告に書いてください。
+- 音声（OpenAI Speech API）や投稿は Claude と GitHub Actions が担当します。OpenAI の APIキーは不要です。
+- 依頼された id のフォルダー以外は変更しないでください。
+- 画像の中に、依頼にない文字やロゴを入れないでください。
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image,ImageChops
+import json
+from pathlib import Path
+p=Path('assets/generated/spotA01_02'); a=Image.open(p/'a.png').convert('RGB'); b=Image.open(p/'b.png').convert('RGB')
+g=Image.open('/home/runner/.codex/generated_images/01a1e292-0bd1-7df1-b97b-232d975ac394/exec-1add6ca3-90c9-44c8-a86a-0b7ec31fcb84.png').convert('RGB').resize(a.size,Image.Resampling.LANCZOS)
+b.paste(a.crop((870,103,906,125)),(870,103))
+box=(871,121,905,143); patch=g.crop(box); mask=Image.new('L',patch.size)
+mask.putdata([round(255*min(1,min(x,y,patch.width-1-x,patch.height-1-y)/3)) for y in range(patch.height) for x in range(patch.width)])
+b.paste(patch,box,mask); b.save(p/'b.png')
+data=json.loads((p/'differences.json').read_text()); data['differences'][1]={'description':'右上のおばけの口が小さな丸口から横に広い笑顔に変わっている','type':'形の変更','x':871,'y':121,'width':34,'height':22}
+(p/'differences.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\\n')
+(p/'result.json').write_text(json.dumps({'id':'spotA01_02','status':'ok','via':'codex-cloud','files':['a.png','b.png','differences.json']},ensure_ascii=False,indent=2)+'\\n')
+canvas=Image.new('RGB',(480,480)); canvas.paste(a.crop((845,95,925,175)).resize((240,240)),(0,0)); canvas.paste(b.crop((845,95,925,175)).resize((240,240)),(240,0)); canvas.save('/tmp/spotA01_02-check.png')
+diff=ImageChops.difference(a,b)
+for d in data['differences']:
+ x,y,w,h=(d[k] for k in ('x','y','width','height')); r=(x,y,x+w,y+h); n=sum(px"'!=(0,0,0) for px in diff.crop(r).getdata()); assert n>0; print(d['"'description'],n,'changed pixels'); diff.paste((0,0,0),r)
+assert diff.getbbox() is None
+assert a.size==b.size==(1024,1024)
+print('PASS: exactly zero changed pixels outside the five regions; both 1024x1024')
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 350ms:
+<stdin>:16: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+左上の大きなコウモリが消えている 13044 changed pixels
+右上のおばけの口が小さな丸口から横に広い笑顔に変わっている 636 changed pixels
+魔女の袖の星飾りが月飾りに変わっている 1797 changed pixels
+右側のお菓子かごの持ち手が高くなっている 4679 changed pixels
+左下のかぼちゃの目が三角から丸に変わっている 1701 changed pixels
+PASS: exactly zero changed pixels outside the five regions; both 1024x1024
+
+codex
+5か所の変更を確認し、その領域外の画素差が0であることを検証しました。両画像は1024×1024で、`differences.json` も実際の変更内容に合わせて更新しました。続けて `codex-inbox` 枝への送信を試みます。
+
+exec
+/bin/bash -lc "python - <<'PY'
+import subprocess,tempfile,pathlib,shutil,os
+root=pathlib.Path.cwd(); tmp=pathlib.Path(tempfile.mkdtemp(prefix='spotA01_02-push-'))
+def run(args):
+ r=subprocess.run(args,cwd=tmp,capture_output=True,text=True); print((r.stdout+r.stderr)[:2500]); return r.returncode
+url=subprocess.check_output(['git','remote','get-url','origin'],text=True).strip()
+if run(['git','clone','--quiet','--no-hardlinks',str(root),str(tmp)]) : raise SystemExit(1)
+subprocess.run(['git','remote','set-url','origin',url],cwd=tmp,check=True)
+p=pathlib.Path('assets/generated/spotA01_02'); (tmp/p).mkdir(parents=True,exist_ok=True)
+for name in ['a.png','b.png','differences.json','result.json']: shutil.copy2(root/p/name,tmp/p/name)
+run(['git','add','--',str(p)])
+if run(['git','-c','user.name=Codex','-c','user.email=codex@openai.com','commit','-m','Regenerate spotA01_02 with five verified localized differences']): raise SystemExit(1)
+if run(['git','fetch','origin','codex-inbox']):
+ print('GH_PUSH_TOKEN empty:',not bool(os.environ.get('GH_PUSH_TOKEN'))); raise SystemExit(1)
+if run(['git','rebase','origin/codex-inbox']):
+ if run(['git','pull','--rebase','origin','codex-inbox']):raise SystemExit(1)
+raise SystemExit(run(['git','push','origin','HEAD:codex-inbox']))
+PY" in /home/runner/work/youtube/youtube
+ exited 1 in 1462ms:
+
+
+[main f6c9bcb] Regenerate spotA01_02 with five verified localized differences
+ 4 files changed, 54 insertions(+)
+ create mode 100644 assets/generated/spotA01_02/a.png
+ create mode 100644 assets/generated/spotA01_02/b.png
+ create mode 100644 assets/generated/spotA01_02/differences.json
+ create mode 100644 assets/generated/spotA01_02/result.json
+
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+
+GH_PUSH_TOKEN empty: True
+
+codex
+[指定フォルダー](/home/runner/work/youtube/youtube/assets/generated/spotA01_02)に修正版を保存しました。
+
+- おばけの口を明確な笑顔に変更し、`differences.json` を更新。
+- 両画像は1024×1024、5か所以外の画素差は0と検証済み。
+- 組み込み画像生成で「右上のおばけの口だけを笑顔にする」編集を行いました。
+
+GitHubへの送信は、`github.com` の名前解決に失敗して完了できませんでした。`GH_PUSH_TOKEN` も空です。
+tokens used
+22,819

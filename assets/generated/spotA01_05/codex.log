@@ -1,0 +1,438 @@
+指定フォルダーに保存しました。
+
+- `a.png`・`b.png`（1024×1024）
+- `differences.json`（違い5か所の座標）
+- `result.json`
+
+5領域の外は画素が完全一致しています。他のファイルは変更していません。
+
+GitHub送信は失敗しました。`.git` が読み取り専用で、別領域からの送信も `github.com` の名前解決に失敗しました。`GH_PUSH_TOKEN` は空です。
+
+--- stderr ---
+ than reading:
+
+- something they'll look at: a screen, a page, a printout, a sign
+- a layout or arrangement: of a screen, a room, a schedule
+- a flow or a sequence of steps
+- options that would look different from each other
+- a structure that's easier to see than read: a diagram, a timeline, a map
+
+Once they've accepted, use it for mockups to react to, side-by-side
+options, and throwaway prototypes they can click.
+
+**Spike to feel things out.** Agentic work is waterfall, but very, very
+fast. A quick throwaway build is often the cheapest way to learn what
+they want or whether something works. Offer one when it would help.
+When they just want to spike, get out of the way. Spikes get no tests
+or minimal ones, aren't bulletproof, and skip the plan, implementation,
+and review process. Bring what the spike taught you back into the
+conversation.
+
+## Play It Back
+
+Play back as you go. As soon as you understand one part well enough to
+describe it (what it's for and who it serves, say, or how one piece
+behaves), describe that part back in about 200-300 words, then return to
+questions about the next part. Playback and questions alternate through
+the whole conversation; the last chunk covers whatever is left.
+
+Only what they said goes in as theirs. Anything you filled in goes in
+as your proposal, with your reason. End each chunk by asking what's wrong
+or missing.
+
+Before you send a chunk, check it: does it describe something they'll
+look at, like a page, a screen, a schedule, or a printout? If so, and
+they haven't seen the visual companion offer yet, send the offer instead
+(its own message, below) and hold the chunk for the next message. Once
+they've accepted, put a mockup next to the description.
+
+## Size the Work
+
+Once you understand what they want and they've picked an approach, say
+how big the work is in plain words. They can override it.
+
+| Size | The design doc |
+|------|----------------|
+| A small change | a short one: what you already covered together, written down |
+| A project | the full written design (below) |
+
+Short or full, the design doc has an **Approaches** part: the two or
+three ways you considered building it, what each trades off, which one
+they picked, and why. They pick in the conversation, before you write
+the doc.
+
+If it grows mid-task, stop, say so, and step up a size.
+
+If this is really several independent projects, say so, agree on an
+order, and brainstorm them one at a time.
+
+## The Written Design
+
+Write a plain document a talented builder in the domain could plan
+from without going back to your human partner. Cover:
+
+- intent and the why
+- goals, non-goals, anti-goals
+- constraints
+- approaches (above)
+- the parts of the how they decided, as they decided them
+- what's left to the builder
+
+For a small change, the short design covers the same points in a line
+or two each and goes straight to your human partner, without the
+builder check.
+
+**Where it goes:** in a software repo,
+`docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`, committed.
+Otherwise, ask. Your human partner's preferences override both.
+
+**Builder check** (for a project): dispatch a fresh subagent with
+`builder-check-prompt.md` in this directory. When you tell your human
+partner you're writing it up, say a reviewer will read it first and you
+may come back once with a few questions. Don't hand over the document
+until the check is back. Sort what the builder asks into three piles:
+
+- **Answered already** by the conversation or the project: put the answer
+  in the document.
+- **Minor:** a sensible builder could settle it without changing what gets
+  built. Settle it yourself and mark it in the document as your call.
+- **Theirs:** only your human partner can answer it, and the answer changes
+  what gets built.
+
+Bring the "theirs" pile in one message, most important first. Update the
+document with their answers, then hand it over with a short list of the
+calls you made so they can check those while reading. That's the only
+round of questions the check produces. Without a subagent tool, read the
+document as that builder yourself.
+
+<HARD-GATE>
+Nothing gets built until your human partner approves the design doc:
+the short one for a small change, the full one for a project.
+Building includes writing product code, scaffolding, installing
+dependencies, creating projects, and invoking an implementation skill.
+Reading and exploring are fine.
+
+Two exceptions. If they opted out of the questions, the skill is done
+and the gate goes with it. A spike they said yes to may be built; it
+stays labeled throwaway, and keeping what it produced is a new request
+that comes back through this gate.
+
+After the design doc is approved, the next step is the plan: invoke
+superpowers:writing-plans and no other skill.
+</HARD-GATE>
+
+## Red Flags
+
+| Thought | Reality |
+|---------|---------|
+| "I'll offer a menu of what they might want" | Options steer. Ask them to describe it first. |
+| "I'll fill in sensible defaults" | Good. Say them out loud. A default they never heard is one they couldn't reject. |
+| "I've answered their questions, so I'll write the doc" | Lay out the approaches first, in a message of their own. |
+| "I should explain the process first" | Ask your question. The process shows itself. |
+| "They said 'sounds good' to the idea" | Approval covers what you showed them. A design doc you haven't written isn't approved. |
+| "The spike works, I'll keep building on it" | Keeping it is a new request. Back through the gate. |
+
+## Visual Companion
+
+A browser tab for showing mockups, diagrams, and prototypes. It's a
+tool, not a mode: accepting it doesn't send every question to the
+browser.
+
+**Offer it just-in-time.** Offer it the first time one of the moments
+above comes up, never upfront. The offer is its own message with nothing
+else in it:
+
+> "This might be easier if I show you. Want me to open a browser tab with some mockups?"
+
+If they decline, stay in text and don't offer again unless they raise it.
+
+**Per question, ask: would they understand this better by seeing it?**
+Mockups, layouts, diagrams, and side-by-side designs go in the browser.
+Requirements, scope, tradeoffs, and conceptual choices stay in text. A
+question about a UI topic isn't automatically a visual question.
+
+If they accept, read `visual-companion.md` in this directory before
+starting the server.
+
+exec
+/bin/bash -lc "git status --short; git branch --show-current; rg --files -g AGENTS.md -g '*spotA01_05*'" in /home/runner/work/youtube/youtube
+ succeeded in 23ms:
+?? assets/generated/spotA01_01/
+?? assets/generated/spotA01_02/
+?? assets/generated/spotA01_03/
+?? assets/generated/spotA01_04/
+main
+requests/images/spotA01_05.json
+AGENTS.md
+
+exec
+/bin/bash -lc 'cat AGENTS.md requests/images/spotA01_05.json' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+# Codex へのお願い（このリポジトリでの役割）
+
+このリポジトリの運営は Claude が行います。Codex の担当は **画像と動くGIFの作成だけ** です。
+
+- 依頼は `requests/images/<id>.json` にあります。Issue やタスクで id を指定されたら、その依頼書を読んでください。
+- **画像は Codex 自身の画像生成機能で作ってください。** `scripts/codex_image.py` は GitHub Actions 用なので、実行しないでください（Codex の中から Codex CLI を呼ぶ必要はありません）。
+- 出来上がったファイルは `assets/generated/<id>/` に保存してください。画像は PNG、動くGIFは GIF で保存します。
+  - あわせて `result.json` を書いてください（`{"id","status":"ok","via":"codex-cloud","files":[...]}`）。
+- **保存が終わったら、必ず GitHub に送ってください。** 送り先は `codex-inbox` 枝です。
+  ```bash
+  # origin がなければ、環境変数 GH_PUSH_TOKEN を使って自分で追加する
+  git remote get-url origin >/dev/null 2>&1 || git remote add origin "https://x-access-token:${GH_PUSH_TOKEN}@github.com/agaraysan/youtube.git"
+  git fetch origin codex-inbox && git rebase origin/codex-inbox   # 失敗したら git pull --rebase origin codex-inbox
+  git push origin HEAD:codex-inbox
+  ```
+  push できなかったら、`GH_PUSH_TOKEN` が空かどうか（値は表示しない）と、その理由を最後の報告に書いてください。
+- 音声（OpenAI Speech API）や投稿は Claude と GitHub Actions が担当します。OpenAI の APIキーは不要です。
+- 依頼された id のフォルダー以外は変更しないでください。
+- 画像の中に、依頼にない文字やロゴを入れないでください。
+{
+ "id": "spotA01_05",
+ "kind": "image",
+ "pair": true,
+ "size": "1024x1024",
+ "count": 1,
+ "prompt": "間違い探し用の絵を2枚作ってください。1枚目 a.png：正方形（1024x1024）。本物の写真のようなフォトリアルな画像（自然な光、高精細、実在の人物や商標は使わない）。場面：秋の公園でピクニックする家族。シート、お弁当、どんぐり、犬、紅葉した木。人物や小物をたくさん（30個以上の物が見えるように）入れて、見るところが多いにぎやかな絵にする。文字やロゴは入れない。2枚目 b.png：a.png をそのまま元にして、違いを5か所だけ入れる。違い以外は a.png と完全に同じにする（構図・色・人物・位置・明るさを変えない）。違いの種類は混ぜる：①ある物が消えている ②物の数が変わっている ③物の形が変わっている ④別の物に入れ替わっている ⑤大きさが変わっている ⑥向きや位置が少し変わっている ⑦服や物の模様が変わっている。色だけを変える違いは多くても1か所まで。簡単すぎないように、すぐ目に入る大きな物ばかりにはせず、中くらいの物や細かい所も混ぜる。ただしスマホで見て気づける大きさにする。5か所は絵の中で離れた場所に散らす。",
+ "notes": "出力は a.png と b.png（どちらも 1024x1024）。あわせて differences.json に {\"differences\": [{\"description\": 日本語の短い説明, \"type\": 種類, \"x\", \"y\", \"width\", \"height\"}]} の形で、5か所の位置（1024x1024の座標）を書いてください。"
+}
+exec
+/bin/bash -lc "command -v magick || command -v convert; git log -1 --format='%h %s'; if [ -n \""'$GH_PUSH_TOKEN" ]; then echo GH_PUSH_TOKEN=nonempty; else echo GH_PUSH_TOKEN=empty; fi' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+6dddf9f 間違い探しの本番用の絵を依頼（夏アニメ調5枚・秋実写風5枚、違い5か所）
+GH_PUSH_TOKEN=empty
+
+exec
+/bin/bash -lc 'command -v node; command -v ffmpeg; command -v git; ls /usr/bin/*magick* /usr/bin/*convert* 2>/dev/null' in /home/runner/work/youtube/youtube
+ exited 2 in 0ms:
+/opt/hostedtoolcache/node/22.23.4/x64/bin/node
+/usr/bin/git
+/usr/bin/btrfs-convert
+/usr/bin/kubectl-convert
+
+codex
+元画像を生成しています。2枚目は小物の削除・数・形・入れ替え・模様の5種類を使い、画面内に離して配置します。
+
+exec
+/bin/bash -lc "node -e \"for (const m of ['sharp','pngjs','@napi-rs/canvas']) {try{console.log(m,require.resolve(m))}catch{}}\"; ls /home/runner/.codex/generated_images" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+01a1e28b-cb12-7e13-9808-60c12dba6a59
+01a1e28e-6024-7583-acc2-427e96d697f7
+01a1e292-0bd1-7df1-b97b-232d975ac394
+01a1e293-bdbd-7562-970d-d8135fb3e9e7
+01a1e296-7f1b-75b0-9890-2abd6c740a32
+
+exec
+/bin/bash -lc 'cat /home/runner/.codex/plugins/cache/openai-curated-remote/superpowers/7.0.1/skills/verification-before-completion/SKILL.md; git remote | head' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+---
+name: verification-before-completion
+description: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always
+---
+
+# Verification Before Completion
+
+## Overview
+
+**Core principle:** Evidence before claims, always.
+
+**Violating the letter of this rule is violating the spirit of this rule.**
+
+## The Iron Law
+
+```
+NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE
+```
+
+If you haven't run the verification command in this message, you cannot claim it passes.
+
+## The Gate Function
+
+```
+BEFORE claiming any status or expressing satisfaction:
+
+1. IDENTIFY: What command proves this claim?
+2. RUN: Execute the FULL command (fresh, complete)
+3. READ: Full output, check exit code, count failures
+4. VERIFY: Does output confirm the claim?
+   - If NO: State actual status with evidence
+   - If YES: State claim WITH evidence
+5. ONLY THEN: Make the claim
+
+Skip any step = lying, not verifying
+```
+
+## Common Failures
+
+| Claim | Requires | Not Sufficient |
+|-------|----------|----------------|
+| Tests pass | Test command output: 0 failures | Previous run, "should pass" |
+| Linter clean | Linter output: 0 errors | Partial check, extrapolation |
+| Build succeeds | Build command: exit 0 | Linter passing, logs look good |
+| Bug fixed | Test original symptom: passes | Code changed, assumed fixed |
+| Regression test works | Red-green cycle verified | Test passes once |
+| Agent completed | VCS diff shows changes | Agent reports "success" |
+| Requirements met | Line-by-line checklist | Tests passing |
+
+## Red Flags - STOP
+
+- Using "should", "probably", "seems to"
+- Expressing satisfaction before verification ("Great!", "Perfect!", "Done!", etc.)
+- About to commit/push/PR without verification
+- Trusting agent success reports
+- Relying on partial verification
+- Thinking "just this once"
+- Tired and wanting work over
+- **ANY wording implying success without having run verification**
+
+## Rationalization Prevention
+
+| Excuse | Reality |
+|--------|---------|
+| "Should work now" | RUN the verification |
+| "I'm confident" | Confidence ≠ evidence |
+| "Just this once" | No exceptions |
+| "Linter passed" | Linter ≠ compiler |
+| "Agent said success" | Verify independently |
+| "I'm tired" | Exhaustion ≠ excuse |
+| "Partial check is enough" | Partial proves nothing |
+| "Different words so rule doesn't apply" | Spirit over letter |
+
+## Key Patterns
+
+**Tests:**
+```
+✅ [Run test command] [See: 34/34 pass] "All tests pass"
+❌ "Should pass now" / "Looks correct"
+```
+
+**Regression tests (TDD Red-Green):**
+```
+✅ Write → Run (pass) → Revert fix → Run (MUST FAIL) → Restore → Run (pass)
+❌ "I've written a regression test" (without red-green verification)
+```
+
+**Build:**
+```
+✅ [Run build] [See: exit 0] "Build passes"
+❌ "Linter passed" (linter doesn't check compilation)
+```
+
+**Requirements:**
+```
+✅ Re-read plan → Create checklist → Verify each → Report gaps or completion
+❌ "Tests pass, phase complete"
+```
+
+**Agent delegation:**
+```
+✅ Agent reports success → Check VCS diff → Verify changes → Report actual state
+❌ Trust agent report
+```
+
+## When To Apply
+
+**ALWAYS before:**
+- ANY variation of success/completion claims
+- ANY expression of satisfaction
+- ANY positive statement about work state
+- Committing, PR creation, task completion
+- Moving to next task
+- Delegating to agents
+
+**Rule applies to:**
+- Exact phrases
+- Paraphrases and synonyms
+- Implications of success
+- ANY communication suggesting completion/correctness
+origin
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+p='/home/runner/.codex/generated_images/01a1e29a-faa9-7922-b056-8a485f109a03/exec-d99fdff9-334b-4d4d-9125-b5a699453ca3.png'
+im=Image.open(p)
+print(im.size,im.mode)
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+(1254, 1254) RGB
+
+codex
+元画像ができました。秋の公園で家族4人と犬がピクニックする写真風の絵です。現在、小物5か所を編集しています。指定範囲外の画素は元画像にそろえ、両画像を1024×1024に仕上げます。
+
+exec
+/bin/bash -lc "cat > /tmp/spot_png.cjs <<'JS'
+const fs=require('fs'),z=require('zlib');
+function read(p){let b=fs.readFileSync(p),pos=8,ds=[],w,h,c;while(pos<b.length){let n=b.readUInt32BE(pos),t=b.toString('ascii',pos+4,pos+8),d=b.subarray(pos+8,pos+8+n);if(t==='IHDR'){w=d.readUInt32BE(0);h=d.readUInt32BE(4);if(d[8]"'!==8)throw Error('"'depth');c=d[9]===2?3:d[9]===6?4:0;if("'!c)throw Error('"'color '+d[9]);}if(t==='IDAT')ds.push(d);pos+=12+n;}let raw=z.inflateSync(Buffer.concat(ds)),out=Buffer.alloc(w*h*3),prev=Buffer.alloc(w*c),at=0;for(let y=0;y<h;y++){let f=raw[at++],row=Buffer.from(raw.subarray(at,at+w*c));at+=w*c;for(let x=0;x<row.length;x++){let a=x>=c?row[x-c]:0,b=prev[x],cc=x>=c?prev[x-c]:0,v=0;if(f===1)v=a;if(f===2)v=b;if(f===3)v=Math.floor((a+b)/2);if(f===4){let p=a+b-cc,pa=Math.abs(p-a),pb=Math.abs(p-b),pc=Math.abs(p-cc);v=pa<=pb&&pa<=pc?a:pb<=pc?b:cc;}row[x]=(row[x]+v)&255;}for(let x=0;x<w;x++)for(let k=0;k<3;k++)out[(y*w+x)*3+k]=row[x*c+k];prev=row;}return {w,h,data:out};}
+const tab=Array.from({length:256},(_,n)=>{for(let k=0;k<8;k++)n=n&1?0xedb88320"'^(n>>>1):n>>>1;return n>>>0});
+function chunk(t,d){let tb=Buffer.from(t),c=0xffffffff;for(const n of Buffer.concat([tb,d]))c=tab[(c''^n)&255]''^(c>>>8);let b=Buffer.alloc(12+d.length);b.writeUInt32BE(d.length);tb.copy(b,4);d.copy(b,8);b.writeUInt32BE((c''^0xffffffff)>>>0,8+d.length);return b;}
+function write(p,im){let hd=Buffer.alloc(13);hd.writeUInt32BE(im.w);hd.writeUInt32BE(im.h,4);hd[8]=8;hd[9]=2;let raw=Buffer.alloc((im.w*3+1)*im.h);for(let y=0;y<im.h;y++)im.data.copy(raw,y*(im.w*3+1)+1,y*im.w*3,(y+1)*im.w*3);fs.writeFileSync(p,Buffer.concat([Buffer.from([137,80,78,71,13,10,26,10]),chunk('"'IHDR',hd),chunk('IDAT',z.deflateSync(raw)),chunk('IEND',Buffer.alloc(0))]));}
+function resize(im,w=1024,h=1024){let data=Buffer.alloc(w*h*3);for(let y=0;y<h;y++)for(let x=0;x<w;x++){let sx=(x+.5)*im.w/w-.5,sy=(y+.5)*im.h/h-.5,x0=Math.max(0,Math.floor(sx)),y0=Math.max(0,Math.floor(sy)),x1=Math.min(im.w-1,x0+1),y1=Math.min(im.h-1,y0+1),dx=sx-x0,dy=sy-y0;for(let k=0;k<3;k++)data[(y*w+x)*3+k]=Math.round((1-dy)*((1-dx)*im.data[(y0*im.w+x0)*3+k]+dx*im.data[(y0*im.w+x1)*3+k])+dy*((1-dx)*im.data[(y1*im.w+x0)*3+k]+dx*im.data[(y1*im.w+x1)*3+k]));}return {w,h,data};}
+module.exports={read,write,resize};
+JS" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+exec
+/bin/bash -lc "cat > /tmp/spot_finish.cjs <<'JS'
+const fs=require('fs'),{read,write,resize}=require('/tmp/spot_png.cjs');
+const root='/home/runner/work/youtube/youtube/assets/generated/spotA01_05';fs.mkdirSync(root,{recursive:true});
+const base='/home/runner/.codex/generated_images/01a1e29a-faa9-7922-b056-8a485f109a03/';
+let a=resize(read(base+'exec-d99fdff9-334b-4d4d-9125-b5a699453ca3.png')),e=resize(read(base+'exec-f6c603b7-5428-4c43-8e4c-a5402466471b.png'));let b={w:1024,h:1024,data:Buffer.from(a.data)};
+let differences=[
+{description:'左上の黄色いフリスビーが消えている',type:'消失',x:48,y:251,width:83,height:44},
+{description:'右上のじょうろの持ち手が丸形から四角形になっている',type:'形の変化',x:927,y:301,width:51,height:33},
+{description:'左下の赤いリンゴが赤い洋ナシに替わっている',type:'入れ替え',x:194,y:815,width:81,height:103},
+{description:'中央下の皿のクッキーが3枚から2枚に減っている',type:'数の変化',x:487,y:845,width:62,height:44},
+{description:'右下のナプキンが縞模様から水玉模様になっている',type:'模様の変化',x:725,y:841,width:263,height:148}
+];
+for(const r of differences)for(let y=r.y;y<r.y+r.height;y++)for(let x=r.x;x<r.x+r.width;x++){let edge=Math.min(x-r.x,y-r.y,r.x+r.width-1-x,r.y+r.height-1-y),alpha=Math.min(1,edge/5);for(let k=0;k<3;k++){let i=(y*1024+x)*3+k;b.data[i]=Math.round(a.data[i]*(1-alpha)+e.data[i]*alpha);}}
+write(root+'/a.png',a);write(root+'/b.png',b);fs.writeFileSync(root+'/differences.json',JSON.stringify({differences},null,2)+'\\n');fs.writeFileSync(root+'/result.json',JSON.stringify({id:'spotA01_05',status:'ok',via:'codex-cloud',files:['a.png','b.png','differences.json']},null,2)+'\\n');
+let counts=differences.map(()=>0),outside=0;for(let y=0;y<1024;y++)for(let x=0;x<1024;x++){let i=(y*1024+x)*3;if(a.data.subarray(i,i+3).equals(b.data.subarray(i,i+3)))continue;let j=differences.findIndex(r=>x>=r.x&&x<r.x+r.width&&y>=r.y&&y<r.y+r.height);if(j<0)outside++;else counts[j]++;}console.log(JSON.stringify({dimensions:[a.w,a.h],differences:counts,outsideChangedPixels:outside}));if(outside||counts.some(n=>"'!n))throw Error('"'verification');
+JS
+node /tmp/spot_finish.cjs" in /home/runner/work/youtube/youtube
+ succeeded in 477ms:
+{"dimensions":[1024,1024],"differences":[3398,1504,7963,2488,37997],"outsideChangedPixels":0}
+
+codex
+画像2枚とJSONを保存しました。両画像が1024×1024で、指定した5領域の外には画素の違いがないことを確認済みです。これから今回のフォルダーだけをコミットし、`codex-inbox` へ送信します。
+
+exec
+/bin/bash -lc "cat > /tmp/spot_push.py <<'PY'
+import subprocess,tempfile,os,shutil
+root='/home/runner/work/youtube/youtube'
+gitdir=tempfile.mkdtemp(prefix='spotA01_05-git-')
+shutil.copytree(root+'/.git',gitdir,dirs_exist_ok=True)
+env=dict(os.environ,GIT_DIR=gitdir,GIT_WORK_TREE=root)
+def run(args):
+ p=subprocess.run(['git']+args,env=env,cwd=root,text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+ if p.returncode:
+  msg=p.stderr
+  import re
+  msg=re.sub(r'https://["'^'"\\s@]+@','https://[redacted]@',msg)
+  print(msg[:1800]);raise SystemExit(p.returncode)
+ return p.stdout.strip()
+run(['fetch','origin','codex-inbox'])
+parent=run(['rev-parse','FETCH_HEAD'])
+run(['read-tree',parent])
+run(['add','--','assets/generated/spotA01_05'])
+tree=run(['write-tree'])
+commit=run(['commit-tree',tree,'-p',parent,'-m','Add autumn picnic spot-the-difference pair spotA01_05'])
+print(run(['push','origin',commit+':refs/heads/codex-inbox']))
+print('PUSHED '+commit)
+PY
+python /tmp/spot_push.py" in /home/runner/work/youtube/youtube
+ exited 128 in 0ms:
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+
+
+codex
+指定フォルダーに保存しました。
+
+- `a.png`・`b.png`（1024×1024）
+- `differences.json`（違い5か所の座標）
+- `result.json`
+
+5領域の外は画素が完全一致しています。他のファイルは変更していません。
+
+GitHub送信は失敗しました。`.git` が読み取り専用で、別領域からの送信も `github.com` の名前解決に失敗しました。`GH_PUSH_TOKEN` は空です。
+tokens used
+49,008

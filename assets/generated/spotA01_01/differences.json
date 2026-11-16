@@ -1,0 +1,44 @@
+{
+  "differences": [
+    {
+      "description": "灯籠の四角い窓が丸い窓になっている",
+      "type": "shape",
+      "x": 47,
+      "y": 120,
+      "width": 73,
+      "height": 57
+    },
+    {
+      "description": "橋のそばの陶器の植木鉢が編み籠に替わっている",
+      "type": "replacement",
+      "x": 832,
+      "y": 283,
+      "width": 59,
+      "height": 48
+    },
+    {
+      "description": "右岸の岩の上の鴨が消えている",
+      "type": "disappearance",
+      "x": 913,
+      "y": 482,
+      "width": 105,
+      "height": 66
+    },
+    {
+      "description": "お盆の湯飲みが2個から1個に減っている",
+      "type": "count",
+      "x": 177,
+      "y": 810,
+      "width": 69,
+      "height": 59
+    },
+    {
+      "description": "籠に掛かった布が花柄から縞柄になっている",
+      "type": "pattern",
+      "x": 855,
+      "y": 834,
+      "width": 95,
+      "height": 130
+    }
+  ]
+}

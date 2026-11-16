@@ -1,0 +1,12 @@
+{
+ "id": "spotA01_02",
+ "status": "rejected",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "a.png",
+  "b.png"
+ ],
+ "check": "一覧の違いが絵に見つからない: 左下のかぼちゃの目が三角から丸に変わっている",
+ "at_utc": "2026-11-16T04:18:15.507417Z"
+}
