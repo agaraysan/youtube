@@ -1,8 +1,10 @@
 {
-  "id": "ex019_04_mail",
-  "status": "ok",
-  "via": "codex-cloud",
-  "files": [
-    "assets/generated/ex019_04_mail/image.png"
-  ]
+ "id": "ex019_04_mail",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "image.png"
+ ],
+ "at_utc": "2026-11-16T15:47:15.942976Z"
 }
