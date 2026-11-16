@@ -9,7 +9,9 @@ render.py は変更しない。
   cross   : 漢字穴埋め。真ん中の□に入る漢字（top, left, right, bottom, answer）。think / reveal は grid と同じ
   fact    : 雑学クイズ。左に絵（image）、右に問題（q）。think で考える時間、answer で答え（caption に解説）
   choice  : 3択クイズ。big（大きな文字。□は色つき）か image（絵）と q（問題文）、options, correct（0から）。reveal で正解に色
-            big_answer（答えで差し替える文字）, hl（答えで色をつける文字）, ruby（答えで上に出す読み）
+            big_answer（答えで差し替える文字）, hl（答えで色をつける文字）, ruby（答えで出す読み）
+            big_color（大きな文字の色。色の名前クイズ用）, emoji（シルエットクイズ。答えまで黒い影）
+  grid に cells（文字のリスト）を渡すと自由な並び（数字さがし）
   memo    : 記憶力。items（絵文字）を並べる。hide で1つを「？」に。options/correct で下に3択
 共通: text（左上の見出し）, caption, voice, chime, seconds, pad（render.py と同じ）
 使い方: brain.py brain/episodes/<id>.json out_dir [--no-voice]
@@ -23,10 +25,12 @@ import render as R  # noqa: E402
 
 # シリーズの色とBGM（render.py の表に、この実行の間だけ足す）
 R.ACCENT.update({"kanji": (196, 52, 52), "trivia": (44, 120, 200), "proverb": (120, 84, 170), "showa": (176, 104, 40),
-                 "memory": (0, 150, 136), "calc": (230, 110, 30), "fish": (30, 110, 170)})
-for _k in ("proverb", "showa", "fish"):
+                 "memory": (0, 150, 136), "calc": (230, 110, 30), "fish": (30, 110, 170),
+                 "yoji": (150, 60, 90), "veg": (60, 140, 60), "pref": (40, 100, 180), "color": (90, 90, 110), "shadow": (70, 70, 150),
+                 "number": (210, 90, 40)})
+for _k in ("proverb", "showa", "fish", "yoji", "veg", "pref"):
     R.BGM.STYLES.setdefault(_k, R.BGM.STYLES["riddle"])
-for _k in ("memory", "calc"):
+for _k in ("memory", "calc", "color", "shadow", "number"):
     R.BGM.STYLES.setdefault(_k, R.BGM.STYLES["spot"])
 R.BGM.STYLES.setdefault("kanji", R.BGM.STYLES["riddle"])
 R.BGM.STYLES.setdefault("trivia", (96, 60, [(0, "maj7"), (5, "maj7"), (2, "m7"), (7, "dom7")]))
@@ -130,13 +134,24 @@ def scene_grid(sc, ep, size):
     u = H / 1080
     im = paper(size)
     rows, cols = sc["rows"], sc["cols"]
-    top, bottom, side = 140 * u, 150 * u, 70 * u
+    top, bottom, side = 140 * u, 185 * u, 70 * u
     cell = min((W - side * 2) / cols, (H - top - bottom) / rows)
     x0 = (W - cell * cols) / 2
     y0 = top + (H - top - bottom - cell * rows) / 2
     # 白いカード
     R.shadow_box(im, (x0 - 24 * u, y0 - 20 * u, x0 + cell * cols + 24 * u, y0 + cell * rows + 20 * u), int(24 * u), (255, 255, 255, 250))
     d = ImageDraw.Draw(im)
+    if sc.get("cells"):  # 自由な並び（例：1〜50の数字）
+        cells = sc["cells"]
+        longest = max(len(str(x)) for x in cells)
+        f = R.font(cell * (0.62 if longest <= 2 else 0.45), "heavy")
+        for i, ch in enumerate(cells):
+            r, c = divmod(i, cols)
+            d.text((x0 + cell * (c + 0.5), y0 + cell * (r + 0.5)), str(ch), font=f, fill=INK, anchor="mm")
+        R.header(im, ep, sc, H)
+        if sc.get("caption"):
+            caption(im, ep, sc["caption"], H)
+        return think_frames(im, ep, sc, H) if sc.get("think") else im.convert("RGB")
     f = serif(cell * 0.78)
     r0, c0 = grid_pos(ep, sc)
     for r in range(rows):
@@ -343,6 +358,19 @@ def scene_choice(sc, ep, size):
             d.text((W / 2, 175 * u), sc["ruby"], font=R.font(60 * u, "bold"), fill=R.accent(ep), anchor="mm")
         elif sc.get("q"):
             d.text((W / 2, 175 * u), sc["q"], font=R.font(60 * u, "bold"), fill=INK, anchor="mm")
+        if sc.get("emoji"):  # シルエット：答えまでは黒い影
+            e = emoji(sc["emoji"], 420 * u)
+            if not sc.get("reveal"):
+                sil = Image.new("RGBA", e.size, (40, 40, 52, 255))
+                sil.putalpha(e.getchannel("A").point(lambda a: 255 if a > 90 else 0))
+                e = sil
+            R.shadow_box(im, (W / 2 - 300 * u, 120 * u, W / 2 + 300 * u, 640 * u), int(28 * u), (255, 255, 255, 250))
+            paste_center(im, e, W / 2, 380 * u)
+            options_row(im, ep, sc, 90 * u, W - 90 * u, 700 * u, 170 * u)
+            R.header(im, ep, sc, H)
+            if sc.get("caption"):
+                caption(im, ep, sc["caption"], H)
+            return think_frames(im, ep, sc, H) if sc.get("think") else im.convert("RGB")
         big = sc.get("big", "")
         if sc.get("reveal") and sc.get("big_answer"):
             big = sc["big_answer"]
@@ -359,7 +387,8 @@ def scene_choice(sc, ep, size):
         x = W / 2 - tw / 2
         for c in big:
             cwid = d.textlength(c, font=f)
-            d.text((x, cy0 + ch / 2), c, font=f, fill=acc if c == "□" or (sc.get("reveal") and c in sc.get("hl", "")) else INK, anchor="lm")
+            col = tuple(sc["big_color"]) if sc.get("big_color") else (acc if c == "□" or (sc.get("reveal") and c in sc.get("hl", "")) else INK)
+            d.text((x, cy0 + ch / 2), c, font=f, fill=col, anchor="lm")
             x += cwid
         oy = cy0 + ch + 70 * u
     oh = 170 * u
@@ -455,8 +484,8 @@ def main(spec, out_dir, no_voice=False):
         if sc.get("image"):
             got = pick(sc["image"])
             if not got:
-                print("まだない絵:", sc["image"])
-            sc["image"] = got or ep["bg"]
+                raise SystemExit(f"絵がまだ届いていないので、今回は作りません: {sc['image']}")
+            sc["image"] = got
     tmp = pathlib.Path(os.environ.get("TMPDIR", "/tmp")) / f"{ep['id']}.resolved.json"
     tmp.write_text(json.dumps(ep, ensure_ascii=False), encoding="utf-8")
     R.main(str(tmp), out_dir, no_voice)

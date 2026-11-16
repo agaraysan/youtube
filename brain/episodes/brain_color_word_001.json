@@ -1,0 +1,765 @@
+{
+ "id": "brain_color_word_001",
+ "series": "頭の体操",
+ "style": "color",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "文字の色クイズ",
+   "size": 130,
+   "sub": "読まずに「色」を答えよう",
+   "voice": "頭の体操、文字の色クイズです。出てくる文字を読むのではなく、文字に塗られている色を答えてください。かんたんそうで、意外とまちがえますよ。全部で12問です。"
+  },
+  {
+   "type": "choice",
+   "big": "むらさき",
+   "size": 230,
+   "big_color": [
+    135,
+    50,
+    175
+   ],
+   "options": [
+    "むらさき",
+    "みどり",
+    "あか"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第1問",
+   "voice": "第1問。"
+  },
+  {
+   "type": "choice",
+   "big": "むらさき",
+   "size": 230,
+   "big_color": [
+    135,
+    50,
+    175
+   ],
+   "options": [
+    "むらさき",
+    "みどり",
+    "あか"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第1問",
+   "think": true,
+   "seconds": 5
+  },
+  {
+   "type": "choice",
+   "big": "むらさき",
+   "size": 230,
+   "big_color": [
+    135,
+    50,
+    175
+   ],
+   "options": [
+    "むらさき",
+    "みどり",
+    "あか"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第1問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "文字は「むらさき」、色は「むらさき」",
+   "voice": "答えは、むらさき。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    20,
+    145,
+    60
+   ],
+   "options": [
+    "みどり",
+    "あか",
+    "むらさき"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第2問",
+   "voice": "第2問。"
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    20,
+    145,
+    60
+   ],
+   "options": [
+    "みどり",
+    "あか",
+    "むらさき"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第2問",
+   "think": true,
+   "seconds": 5
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    20,
+    145,
+    60
+   ],
+   "options": [
+    "みどり",
+    "あか",
+    "むらさき"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第2問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "文字は「みどり」、色は「みどり」",
+   "voice": "答えは、みどり。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    215,
+    40,
+    40
+   ],
+   "options": [
+    "むらさき",
+    "あか",
+    "みどり"
+   ],
+   "correct": 1,
+   "q": "この文字の「色」は？",
+   "text": "第3問",
+   "voice": "第3問。"
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    215,
+    40,
+    40
+   ],
+   "options": [
+    "むらさき",
+    "あか",
+    "みどり"
+   ],
+   "correct": 1,
+   "q": "この文字の「色」は？",
+   "text": "第3問",
+   "think": true,
+   "seconds": 5
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    215,
+    40,
+    40
+   ],
+   "options": [
+    "むらさき",
+    "あか",
+    "みどり"
+   ],
+   "correct": 1,
+   "q": "この文字の「色」は？",
+   "text": "第3問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "文字は「みどり」、色は「あか」",
+   "voice": "答えは、あか。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    135,
+    50,
+    175
+   ],
+   "options": [
+    "あか",
+    "むらさき",
+    "みどり"
+   ],
+   "correct": 1,
+   "q": "この文字の「色」は？",
+   "text": "第4問",
+   "voice": "第4問。"
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    135,
+    50,
+    175
+   ],
+   "options": [
+    "あか",
+    "むらさき",
+    "みどり"
+   ],
+   "correct": 1,
+   "q": "この文字の「色」は？",
+   "text": "第4問",
+   "think": true,
+   "seconds": 5
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    135,
+    50,
+    175
+   ],
+   "options": [
+    "あか",
+    "むらさき",
+    "みどり"
+   ],
+   "correct": 1,
+   "q": "この文字の「色」は？",
+   "text": "第4問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "文字は「みどり」、色は「むらさき」",
+   "voice": "答えは、むらさき。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    215,
+    40,
+    40
+   ],
+   "options": [
+    "あお",
+    "みどり",
+    "あか"
+   ],
+   "correct": 2,
+   "q": "この文字の「色」は？",
+   "text": "第5問",
+   "voice": "第5問。"
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    215,
+    40,
+    40
+   ],
+   "options": [
+    "あお",
+    "みどり",
+    "あか"
+   ],
+   "correct": 2,
+   "q": "この文字の「色」は？",
+   "text": "第5問",
+   "think": true,
+   "seconds": 5
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    215,
+    40,
+    40
+   ],
+   "options": [
+    "あお",
+    "みどり",
+    "あか"
+   ],
+   "correct": 2,
+   "q": "この文字の「色」は？",
+   "text": "第5問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "文字は「みどり」、色は「あか」",
+   "voice": "答えは、あか。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    30,
+    90,
+    215
+   ],
+   "options": [
+    "あお",
+    "みどり",
+    "むらさき"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第6問",
+   "voice": "第6問。"
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    30,
+    90,
+    215
+   ],
+   "options": [
+    "あお",
+    "みどり",
+    "むらさき"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第6問",
+   "think": true,
+   "seconds": 5
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    30,
+    90,
+    215
+   ],
+   "options": [
+    "あお",
+    "みどり",
+    "むらさき"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第6問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "文字は「みどり」、色は「あお」",
+   "voice": "答えは、あお。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    135,
+    50,
+    175
+   ],
+   "options": [
+    "むらさき",
+    "みどり",
+    "あか"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第7問",
+   "voice": "第7問。"
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    135,
+    50,
+    175
+   ],
+   "options": [
+    "むらさき",
+    "みどり",
+    "あか"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第7問",
+   "think": true,
+   "seconds": 4
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    135,
+    50,
+    175
+   ],
+   "options": [
+    "むらさき",
+    "みどり",
+    "あか"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第7問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "文字は「みどり」、色は「むらさき」",
+   "voice": "答えは、むらさき。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "むらさき",
+   "size": 230,
+   "big_color": [
+    30,
+    90,
+    215
+   ],
+   "options": [
+    "あか",
+    "むらさき",
+    "あお"
+   ],
+   "correct": 2,
+   "q": "この文字の「色」は？",
+   "text": "第8問",
+   "voice": "第8問。"
+  },
+  {
+   "type": "choice",
+   "big": "むらさき",
+   "size": 230,
+   "big_color": [
+    30,
+    90,
+    215
+   ],
+   "options": [
+    "あか",
+    "むらさき",
+    "あお"
+   ],
+   "correct": 2,
+   "q": "この文字の「色」は？",
+   "text": "第8問",
+   "think": true,
+   "seconds": 4
+  },
+  {
+   "type": "choice",
+   "big": "むらさき",
+   "size": 230,
+   "big_color": [
+    30,
+    90,
+    215
+   ],
+   "options": [
+    "あか",
+    "むらさき",
+    "あお"
+   ],
+   "correct": 2,
+   "q": "この文字の「色」は？",
+   "text": "第8問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "文字は「むらさき」、色は「あお」",
+   "voice": "答えは、あお。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    30,
+    90,
+    215
+   ],
+   "options": [
+    "みどり",
+    "あか",
+    "あお"
+   ],
+   "correct": 2,
+   "q": "この文字の「色」は？",
+   "text": "第9問",
+   "voice": "第9問。"
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    30,
+    90,
+    215
+   ],
+   "options": [
+    "みどり",
+    "あか",
+    "あお"
+   ],
+   "correct": 2,
+   "q": "この文字の「色」は？",
+   "text": "第9問",
+   "think": true,
+   "seconds": 4
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    30,
+    90,
+    215
+   ],
+   "options": [
+    "みどり",
+    "あか",
+    "あお"
+   ],
+   "correct": 2,
+   "q": "この文字の「色」は？",
+   "text": "第9問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "文字は「みどり」、色は「あお」",
+   "voice": "答えは、あお。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "あか",
+   "size": 230,
+   "big_color": [
+    20,
+    145,
+    60
+   ],
+   "options": [
+    "みどり",
+    "むらさき",
+    "あか"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第10問",
+   "voice": "第10問。"
+  },
+  {
+   "type": "choice",
+   "big": "あか",
+   "size": 230,
+   "big_color": [
+    20,
+    145,
+    60
+   ],
+   "options": [
+    "みどり",
+    "むらさき",
+    "あか"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第10問",
+   "think": true,
+   "seconds": 4
+  },
+  {
+   "type": "choice",
+   "big": "あか",
+   "size": 230,
+   "big_color": [
+    20,
+    145,
+    60
+   ],
+   "options": [
+    "みどり",
+    "むらさき",
+    "あか"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第10問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "文字は「あか」、色は「みどり」",
+   "voice": "答えは、みどり。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "あか",
+   "size": 230,
+   "big_color": [
+    20,
+    145,
+    60
+   ],
+   "options": [
+    "みどり",
+    "あか",
+    "むらさき"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第11問",
+   "voice": "第11問。"
+  },
+  {
+   "type": "choice",
+   "big": "あか",
+   "size": 230,
+   "big_color": [
+    20,
+    145,
+    60
+   ],
+   "options": [
+    "みどり",
+    "あか",
+    "むらさき"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第11問",
+   "think": true,
+   "seconds": 4
+  },
+  {
+   "type": "choice",
+   "big": "あか",
+   "size": 230,
+   "big_color": [
+    20,
+    145,
+    60
+   ],
+   "options": [
+    "みどり",
+    "あか",
+    "むらさき"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第11問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "文字は「あか」、色は「みどり」",
+   "voice": "答えは、みどり。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    215,
+    40,
+    40
+   ],
+   "options": [
+    "あか",
+    "むらさき",
+    "みどり"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第12問",
+   "voice": "第12問。"
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    215,
+    40,
+    40
+   ],
+   "options": [
+    "あか",
+    "むらさき",
+    "みどり"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第12問",
+   "think": true,
+   "seconds": 4
+  },
+  {
+   "type": "choice",
+   "big": "みどり",
+   "size": 230,
+   "big_color": [
+    215,
+    40,
+    40
+   ],
+   "options": [
+    "あか",
+    "むらさき",
+    "みどり"
+   ],
+   "correct": 0,
+   "q": "この文字の「色」は？",
+   "text": "第12問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "文字は「みどり」、色は「あか」",
+   "voice": "答えは、あか。",
+   "pad": 1.4
+  },
+  {
+   "type": "title",
+   "text": "何問正解しましたか？",
+   "size": 100,
+   "sub": "コメントで教えてください",
+   "voice": "何問正解しましたか？コメントで教えてください。脳のいい準備運動になりますよ。"
+  }
+ ]
+}

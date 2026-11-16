@@ -1,0 +1,349 @@
+{
+ "id": "brain_showa_tools_001",
+ "series": "頭の体操",
+ "style": "showa",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "昭和なつかし道具クイズ",
+   "size": 110,
+   "sub": "この道具、なんという名前？",
+   "voice": "昭和のなつかし道具クイズです。むかしの暮らしで使われていた道具の名前を、3つの中から選んでください。全部で8問です。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw01_washboard",
+   "options": [
+    "すのこ",
+    "まな板",
+    "洗濯板"
+   ],
+   "correct": 2,
+   "text": "第1問",
+   "voice": "第1問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw01_washboard",
+   "options": [
+    "すのこ",
+    "まな板",
+    "洗濯板"
+   ],
+   "correct": 2,
+   "text": "第1問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw01_washboard",
+   "options": [
+    "すのこ",
+    "まな板",
+    "洗濯板"
+   ],
+   "correct": 2,
+   "text": "第1問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "洗濯板　みぞに服をこすりつけて、手で洗いました",
+   "voice": "答えは、せんたくいた。みぞに服をこすりつけて、手で洗いました。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw02_yutanpo",
+   "options": [
+    "やかん",
+    "湯たんぽ",
+    "水筒"
+   ],
+   "correct": 1,
+   "text": "第2問",
+   "voice": "第2問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw02_yutanpo",
+   "options": [
+    "やかん",
+    "湯たんぽ",
+    "水筒"
+   ],
+   "correct": 1,
+   "text": "第2問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw02_yutanpo",
+   "options": [
+    "やかん",
+    "湯たんぽ",
+    "水筒"
+   ],
+   "correct": 1,
+   "text": "第2問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "湯たんぽ　お湯を入れて、ふとんを温めました",
+   "voice": "答えは、ゆたんぽ。お湯を入れて、ふとんを温めました。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw03_hibachi",
+   "options": [
+    "植木鉢",
+    "すり鉢",
+    "火鉢"
+   ],
+   "correct": 2,
+   "text": "第3問",
+   "voice": "第3問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw03_hibachi",
+   "options": [
+    "植木鉢",
+    "すり鉢",
+    "火鉢"
+   ],
+   "correct": 2,
+   "text": "第3問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw03_hibachi",
+   "options": [
+    "植木鉢",
+    "すり鉢",
+    "火鉢"
+   ],
+   "correct": 2,
+   "text": "第3問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "火鉢　炭を入れて、手を温めたり、お湯をわかしたり",
+   "voice": "答えは、ひばち。炭を入れて、手を温めたり、お湯をわかしたり。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw04_kaya",
+   "options": [
+    "のれん",
+    "すだれ",
+    "蚊帳"
+   ],
+   "correct": 2,
+   "text": "第4問",
+   "voice": "第4問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw04_kaya",
+   "options": [
+    "のれん",
+    "すだれ",
+    "蚊帳"
+   ],
+   "correct": 2,
+   "text": "第4問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw04_kaya",
+   "options": [
+    "のれん",
+    "すだれ",
+    "蚊帳"
+   ],
+   "correct": 2,
+   "text": "第4問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "蚊帳　夏の夜、蚊にさされないよう、ふとんのまわりにつりました",
+   "voice": "答えは、かや。夏の夜、蚊にさされないよう、ふとんのまわりにつりました。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw05_mishin",
+   "options": [
+    "はた織り機",
+    "オルガン",
+    "足踏みミシン"
+   ],
+   "correct": 2,
+   "text": "第5問",
+   "voice": "第5問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw05_mishin",
+   "options": [
+    "はた織り機",
+    "オルガン",
+    "足踏みミシン"
+   ],
+   "correct": 2,
+   "text": "第5問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw05_mishin",
+   "options": [
+    "はた織り機",
+    "オルガン",
+    "足踏みミシン"
+   ],
+   "correct": 2,
+   "text": "第5問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "足踏みミシン　足でペダルをこいで、針を動かしました",
+   "voice": "答えは、あしぶみミシン。足でペダルをこいで、針を動かしました。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw06_shichirin",
+   "options": [
+    "いろり",
+    "七輪",
+    "かまど"
+   ],
+   "correct": 1,
+   "text": "第6問",
+   "voice": "第6問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw06_shichirin",
+   "options": [
+    "いろり",
+    "七輪",
+    "かまど"
+   ],
+   "correct": 1,
+   "text": "第6問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw06_shichirin",
+   "options": [
+    "いろり",
+    "七輪",
+    "かまど"
+   ],
+   "correct": 1,
+   "text": "第6問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "七輪　炭火で、さんまやおもちを焼きました",
+   "voice": "答えは、しちりん。炭火で、さんまやおもちを焼きました。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw07_icebox",
+   "options": [
+    "氷の冷蔵庫",
+    "食器棚",
+    "金庫"
+   ],
+   "correct": 0,
+   "text": "第7問",
+   "voice": "第7問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw07_icebox",
+   "options": [
+    "氷の冷蔵庫",
+    "食器棚",
+    "金庫"
+   ],
+   "correct": 0,
+   "text": "第7問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw07_icebox",
+   "options": [
+    "氷の冷蔵庫",
+    "食器棚",
+    "金庫"
+   ],
+   "correct": 0,
+   "text": "第7問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "氷の冷蔵庫　上の段に氷のかたまりを入れて、冷やしました",
+   "voice": "答えは、こおりのれいぞうこ。上の段に氷のかたまりを入れて、冷やしました。",
+   "pad": 1.4
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw08_chabudai",
+   "options": [
+    "ちゃぶ台",
+    "おぼん",
+    "将棋盤"
+   ],
+   "correct": 0,
+   "text": "第8問",
+   "voice": "第8問。この道具の名前は、なんでしょう。"
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw08_chabudai",
+   "options": [
+    "ちゃぶ台",
+    "おぼん",
+    "将棋盤"
+   ],
+   "correct": 0,
+   "text": "第8問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "choice",
+   "image": "assets/generated/br_sw08_chabudai",
+   "options": [
+    "ちゃぶ台",
+    "おぼん",
+    "将棋盤"
+   ],
+   "correct": 0,
+   "text": "第8問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "ちゃぶ台　脚をたたんで、片づけられる食卓でした",
+   "voice": "答えは、ちゃぶだい。脚をたたんで、片づけられる食卓でした。",
+   "pad": 1.4
+  },
+  {
+   "type": "title",
+   "text": "いくつ知っていましたか？",
+   "size": 96,
+   "sub": "思い出をコメントで教えてください",
+   "voice": "いくつ知っていましたか？使ったことのある道具や、思い出があれば、ぜひコメントで教えてください。"
+  }
+ ]
+}
