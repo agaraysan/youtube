@@ -1,0 +1,38 @@
+name: render
+# episodes/*.json を push すると動画を作り、previews 枝の out/<id>.mp4 に置く（投稿はしない）。
+on:
+  push:
+    branches: [main]
+    paths: ["episodes/*.json", "scripts/render/**"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: { group: render, cancel-in-progress: false }
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk && pip install -q pillow
+      - name: Fetch previews branch
+        run: |
+          git fetch origin previews:previews 2>/dev/null || true
+          git worktree add pv previews 2>/dev/null || { git worktree add --detach pv && cd pv && git checkout --orphan previews && git rm -rfq . ; }
+      - name: Render new or changed episodes
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          mkdir -p pv/out
+          for f in episodes/*.json; do
+            id=$(basename "$f" .json)
+            h=$(cat "$f" scripts/render/*.py | sha1sum | cut -c1-12)
+            if [ -f "pv/out/$id.hash" ] && [ "$(cat pv/out/$id.hash)" = "$h" ]; then echo "skip $id"; continue; fi
+            python3 scripts/render/render.py "$f" pv/out && echo "$h" > "pv/out/$id.hash"
+          done
+      - name: Push previews
+        run: |
+          cd pv
+          git config user.name "render-bot"; git config user.email "render-bot@users.noreply.github.com"
+          git add -A out
+          git diff --cached --quiet || { git commit -qm "render previews"; git push -q origin HEAD:previews; }

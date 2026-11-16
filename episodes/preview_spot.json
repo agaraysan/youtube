@@ -1,0 +1,89 @@
+{
+ "id": "preview_spot",
+ "bg": "assets/generated/t009_scene_spot_market/market.png",
+ "differences": [
+  {
+   "box": [
+    1655,
+    20,
+    75,
+    74
+   ],
+   "note": "右上の棒に止まっていた左側のスズメが消え、2羽から1羽になっている。"
+  },
+  {
+   "box": [
+    545,
+    1008,
+    120,
+    60
+   ],
+   "note": "三毛猫の左へ伸びる長いしっぽが短くなっている。"
+  },
+  {
+   "box": [
+    1195,
+    650,
+    63,
+    68
+   ],
+   "note": "男の子が持つ赤いリンゴが赤い洋梨に変わっている。"
+  }
+ ],
+ "scenes": [
+  {
+   "type": "title",
+   "text": "間違い探し",
+   "sub": "違いは3つ 見つけられるかな？",
+   "voice": "間違い探しです。左と右の絵で、違うところが3つあります。"
+  },
+  {
+   "type": "think",
+   "seconds": 20,
+   "images": [
+    "assets/generated/t009_scene_spot_market/market.png",
+    "assets/generated/spot001_market_b/image.png"
+   ],
+   "text": "違いは3つ"
+  },
+  {
+   "type": "circles",
+   "images": [
+    "assets/generated/t009_scene_spot_market/market.png",
+    "assets/generated/spot001_market_b/image.png"
+   ],
+   "upto": 1,
+   "text": "1つめ：スズメが1羽いない",
+   "voice": "1つめ。右上のスズメが、1羽いなくなっています。",
+   "chime": true
+  },
+  {
+   "type": "circles",
+   "images": [
+    "assets/generated/t009_scene_spot_market/market.png",
+    "assets/generated/spot001_market_b/image.png"
+   ],
+   "upto": 2,
+   "text": "2つめ：猫のしっぽが短い",
+   "voice": "2つめ。三毛猫のしっぽが、短くなっています。",
+   "chime": true
+  },
+  {
+   "type": "circles",
+   "images": [
+    "assets/generated/t009_scene_spot_market/market.png",
+    "assets/generated/spot001_market_b/image.png"
+   ],
+   "upto": 3,
+   "text": "3つめ：リンゴが洋梨に",
+   "voice": "3つめ。男の子のリンゴが、洋梨に変わっています。",
+   "chime": true
+  },
+  {
+   "type": "title",
+   "text": "全部見つけられた？",
+   "sub": "コメントで教えてね",
+   "voice": "全部見つけられましたか？コメントで教えてください。チャンネル登録もよろしくお願いします。"
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+{
+ "id": "preview_match",
+ "bg": "assets/generated/t002_bg_match_desk/background.png",
+ "puzzle": {
+  "question": "3+8=5",
+  "answer": "3+6=9",
+  "move": [
+   "3+6=9",
+   2,
+   "b",
+   4,
+   "b"
+  ]
+ },
+ "scenes": [
+  {
+   "type": "title",
+   "text": "マッチ棒クイズ",
+   "sub": "1本だけ動かして 正しい式にしよう",
+   "voice": "マッチ棒クイズ！1本だけ動かして、正しい式にしてください。"
+  },
+  {
+   "type": "match",
+   "state": "question",
+   "text": "第1問",
+   "caption": "1本だけ動かして 正しい式に",
+   "voice": "第1問。3たす8は5。このままでは間違いです。どの1本を動かせばいいでしょうか？"
+  },
+  {
+   "type": "think",
+   "seconds": 10
+  },
+  {
+   "type": "match",
+   "state": "move",
+   "text": "正解は…",
+   "caption": "8の右上の1本をぬくと 6になる",
+   "voice": "正解です。8の右上の1本をぬくと、6になります。",
+   "chime": true
+  },
+  {
+   "type": "match",
+   "state": "move2",
+   "text": "正解",
+   "caption": "その1本を5に足すと 9！",
+   "voice": "その1本を5に足すと、9。3たす6は9。正しい式になりました！"
+  },
+  {
+   "type": "title",
+   "text": "何秒で解けた？",
+   "sub": "コメントで教えてね",
+   "voice": "何秒で解けましたか？コメントで教えてください。チャンネル登録もよろしくお願いします。"
+  }
+ ]
+}
