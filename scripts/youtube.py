@@ -87,6 +87,11 @@ def publish(yt, j):
 def main():
     LOG.mkdir(parents=True, exist_ok=True)
     yt = client()
+    try:  # どのチャンネルにつながったかを記録に残す（youtube スコープが必要）
+        ch = yt.channels().list(part="snippet", mine=True).execute()["items"][0]
+        print("channel:", ch["snippet"]["title"], ch["id"], flush=True)
+    except Exception as e:
+        print("channel: unknown", str(e)[:200], flush=True)
     n = 0
     for kind, fn in (("upload", upload), ("publish", publish)):
         for p in sorted((ROOT / "queue" / kind).glob("*.json")):
