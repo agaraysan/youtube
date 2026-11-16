@@ -891,3 +891,215 @@ tokens used
 28,727
 
 =====
+内蔵の画像生成機能で描き足し、1024×1536 の PNG を[指定先に保存しました](tmp_art/zoom121/loop_raw_0.png)。ほかのファイルは変更していません。
+
+--- stderr ---
+ to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc 'ls -lt /home/runner/.codex/generated_images' in /home/runner/work/youtube/youtube
+ exited 2 in 0ms:
+ls: cannot access '/home/runner/.codex/generated_images': No such file or directory
+
+exec
+/bin/bash -lc 'cp /home/runner/.codex/generated_images/01a1e582-824e-72c3-b6b5-407f813b8765/exec-b6ed2ef1-a44f-4676-8298-63242964ef90.png /home/runner/work/youtube/youtube/tmp_art/zoom121/loop_raw_0.png
+file /home/runner/work/youtube/youtube/tmp_art/zoom121/loop_raw_0.png' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+/home/runner/work/youtube/youtube/tmp_art/zoom121/loop_raw_0.png: PNG image data, 1024 x 1536, 8-bit/color RGB, non-interlaced
+
+codex
+内蔵の画像生成機能で描き足し、1024×1536 の PNG を[指定先に保存しました](tmp_art/zoom121/loop_raw_0.png)。ほかのファイルは変更していません。
+tokens used
+14,322
+
+=====
+[loop_raw_1.png](tmp_art/zoom121/loop_raw_1.png) に1024×1536で保存しました。内蔵画像生成で灰色の帯を補完し、中央と帯の外側の画素は元のまま保持しています。他のファイルは変更していません。
+
+--- stderr ---
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc 'command -v magick || command -v convert' in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+codex
+補完画像ができました。中央と帯の外側を元画像の画素で保持し、生成した部分は灰色の帯だけに適用して保存します。
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+import numpy as np
+src=Image.open('/home/runner/work/youtube/youtube/tmp_art/zoom121/loop_canvas.png').convert('RGB')
+gen=Image.open('/home/runner/.codex/generated_images/01a1e583-8e68-71d3-9f35-11c0fc30a3ba/exec-8fd23ba4-144e-42c9-87d1-414ae6551f22.png').convert('RGB')
+assert src.size == gen.size == (1024,1536)
+a=np.array(src); b=np.array(gen)
+mask=np.all(a==[128,128,128],axis=2)
+assert mask.sum()>300000
+out=a.copy(); out[mask]=b[mask]
+assert np.array_equal(out[~mask],a[~mask])
+Image.fromarray(out).save('/home/runner/work/youtube/youtube/tmp_art/zoom121/loop_raw_1.png')
+print('Saved 1024x1536 PNG. Original pixels outside gray band preserved. Filled pixels:',mask.sum())
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 723ms:
+Saved 1024x1536 PNG. Original pixels outside gray band preserved. Filled pixels: 389981
+
+codex
+[loop_raw_1.png](tmp_art/zoom121/loop_raw_1.png) に1024×1536で保存しました。内蔵画像生成で灰色の帯を補完し、中央と帯の外側の画素は元のまま保持しています。他のファイルは変更していません。
+tokens used
+14,428
+
+=====
+[loop_raw_2.png](tmp_art/zoom121/loop_raw_2.png) に保存しました（1024×1536）。
+
+内蔵の画像生成機能で灰色の帯を補完し、中央と帯の外側は元の画素をそのまま保持しています。
+
+--- stderr ---
+ementation skills.
+- "Fix this bug" → superpowers:systematic-debugging first, then domain skills.
+
+## Red Flags
+
+These thoughts mean STOP—you're rationalizing:
+
+| Thought | Reality |
+|---------|---------|
+| "This is just a simple question" | Questions are tasks. Check for skills. |
+| "I need more context first" | Skill check comes BEFORE clarifying questions. |
+| "Let me explore the codebase first" | Skills tell you HOW to explore. Check first. |
+| "I can check git/files quickly" | Files lack conversation context. Check for skills. |
+| "Let me gather information first" | Skills tell you HOW to gather information. |
+| "This doesn't need a formal skill" | If a skill exists, use it. |
+| "I remember this skill" | Skills evolve. Read current version. |
+| "This doesn't count as a task" | Action = task. Check for skills. |
+| "The skill is overkill" | Simple things become complex. Use it. |
+| "I'll just do this one thing first" | Check BEFORE doing anything. |
+| "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
+| "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
+
+## Platform Adaptation
+
+If your harness appears here, read its reference file for special instructions:
+
+- Claude Code: `references/claude-code-tools.md`
+- Codex: `references/codex-tools.md`
+- Pi: `references/pi-tools.md`
+- Antigravity: `references/antigravity-tools.md`
+- Hermes Agent: `references/hermes-tools.md`
+- Muse: `references/muse-tools.md`
+
+## User Instructions
+
+User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+
+exec
+/bin/bash -lc 'command -v magick || command -v convert' in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+codex
+中央の朝の茶の間と、外側の夜の子ども部屋を確認しました。中央の長方形のすぐ外側に、四辺が水平・垂直の戸口の枠を置くよう指定して、灰色部分を生成しています。
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image, ImageChops
+src=Image.open('/home/runner/work/youtube/youtube/tmp_art/zoom121/loop_canvas.png').convert('RGB')
+gen=Image.open('/home/runner/.codex/generated_images/01a1e584-aa53-70b1-88a9-a7d99bbd3108/exec-54552042-accf-45c1-96c9-40768a34995a.png').convert('RGB')
+assert src.size == gen.size == (1024,1536)
+mask=src.point(lambda x:x)
+import numpy as np
+s=np.array(src)
+m=np.all(s==[128,128,128],axis=2)
+out=np.array(gen)
+out[~m]=s[~m]
+p='/home/runner/work/youtube/youtube/tmp_art/zoom121/loop_raw_2.png'
+Image.fromarray(out).save(p)
+assert np.array_equal(out[~m],s[~m])
+print('Saved 1024x1536 PNG; original pixels outside gray band preserved exactly. Gray pixels replaced:',int(m.sum()))
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 761ms:
+Saved 1024x1536 PNG; original pixels outside gray band preserved exactly. Gray pixels replaced: 389981
+
+codex
+[loop_raw_2.png](tmp_art/zoom121/loop_raw_2.png) に保存しました（1024×1536）。
+
+内蔵の画像生成機能で灰色の帯を補完し、中央と帯の外側は元の画素をそのまま保持しています。
+tokens used
+20,404
+
+=====
