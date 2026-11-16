@@ -67,6 +67,17 @@ def center_diff(img, small, x0, y0):
     return float(np.abs(a - b).mean())
 
 
+def leftover_gray(img, box, x0, y0, iw, ih):
+    """描き足すはずだった灰色が残っている割合（中央の長方形は除く）。残っていると帯のような跡になる。"""
+    a = np.asarray(img, np.int16)
+    g = (np.abs(a - 128) < 7).all(-1)
+    bx0, by0, bx1, by1 = box
+    m = np.zeros(g.shape, bool)
+    m[by0:by1, bx0:bx1] = True
+    m[y0:y0 + ih, x0:x0 + iw] = False
+    return float(g[m].mean()) if m.any() else 0.0
+
+
 FRAME_RULES = ("中央の長方形のふちに、入口の枠（ふち）の内側がちょうど重なるように、枠を長方形のすぐ外側に描いてください。"
                "枠が長方形の中にはみ出したり、長方形と枠のあいだにすき間ができたりしないようにします。"
                "入口は真正面から見た形（四辺が画面とまっすぐ平行）にし、斜めや遠近でゆがめないでください。"
@@ -96,6 +107,10 @@ def outpaint(spec, j, small, work, log, W, H, x0, y0):
             continue
         img = Image.open(got).convert("RGB").resize((W, H), Image.LANCZOS)
         fixed, diff, info = align(img, small, x0, y0)
+        gray = leftover_gray(img, (0, 0, W, H), x0, y0, iw, ih)
+        if gray > 0.01:
+            diff += 100  # 灰色が残った絵は使わない（ほかに無いときだけ使う）
+            info += f" gray={gray:.3f}"
         print(spec["id"], "layer", j, "try", attempt, "diff", round(diff, 1), info, flush=True)
         if best is None or diff < best[1]:
             best = (fixed, diff)
@@ -175,6 +190,10 @@ def close_loop(spec, out, work, log, W, H, iw, ih, x0, y0):
             continue
         img = Image.open(got).convert("RGB").resize((W, H), Image.LANCZOS)
         fixed, diff, info = align(img, first, x0, y0)
+        gray = leftover_gray(img, (bx, by, bx + bw, by + bh), x0, y0, iw, ih)
+        if gray > 0.01:
+            diff += 100
+            info += f" gray={gray:.3f}"
         print(spec["id"], "loop try", attempt, "diff", round(diff, 1), info, flush=True)
         if best is None or diff < best[1]:
             best = (fixed, diff)
