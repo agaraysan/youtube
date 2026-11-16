@@ -8,6 +8,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  actions: read
 concurrency: { group: brain-render, cancel-in-progress: false }
 jobs:
   render:
@@ -23,6 +24,11 @@ jobs:
         run: |
           mkdir -p pv/out/shorts
           if git fetch -q origin brain-previews; then git --work-tree=pv checkout FETCH_HEAD -- out 2>/dev/null || true; fi
+      # 前の回で書き出し済みなのに公開まで行かなかった分を取り込む（同じ内容なら作り直さない）
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with: { name: "part-${{ matrix.shard }}", path: reuse, run-id: 43932871797, github-token: "${{ github.token }}" }
+      - run: if [ -d reuse/out ]; then cp -r reuse/out/. pv/out/; fi
       - name: Render this shard
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
