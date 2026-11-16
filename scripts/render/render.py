@@ -216,9 +216,9 @@ def render_scene(sc, ep, size):
         if ep.get("series") and sc.get("text") != ep.get("series"):
             d.text((W / 2, H * 0.30), ep["series"], font=font(46 * u, "bold"), fill=accent(ep), anchor="mm")
         d.text((W / 2, H * 0.44), sc["text"], font=font(sc.get("size", 132) * u, "heavy"), fill=WHITE, anchor="mm")
-        d.rounded_rectangle([W / 2 - 70 * u, H * 0.44 + 100 * u, W / 2 + 70 * u, H * 0.44 + 112 * u], radius=int(6 * u), fill=accent(ep))
+        d.rounded_rectangle([W / 2 - 70 * u, H * 0.44 + 122 * u, W / 2 + 70 * u, H * 0.44 + 134 * u], radius=int(6 * u), fill=accent(ep))
         if sc.get("sub"):
-            d.text((W / 2, H * 0.44 + 190 * u), sc["sub"], font=font(54 * u, "bold"), fill=MUTED, anchor="mm")
+            d.text((W / 2, H * 0.44 + 210 * u), sc["sub"], font=font(54 * u, "bold"), fill=MUTED, anchor="mm")
 
     if kind == "match" or (kind == "think" and not pair and "puzzle" in ep):
         st = sc.get("state", "question")
