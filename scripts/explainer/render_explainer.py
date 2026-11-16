@@ -574,7 +574,7 @@ def main(spec, out_dir, fast=False):
     rng = np.random.default_rng(7)
     vdir = ROOT / "explainer" / "voice" / ep["id"]
     cast = ep.get("cast", {})
-    cap_style = ep.get("caption_style", "box" if cast else "outline")
+    cap_style = ep.get("caption_style", "box" if cast and ep.get("theme") == "pop" else "outline")
     nch = len(ep.get("chapters", {}))
     if cap_style == "news":
         L.cap_bottom = L.H
