@@ -1,0 +1,785 @@
+{
+ "id": "match11",
+ "series": "マッチ棒クイズ",
+ "style": "match",
+ "bg": "assets/generated/t002_bg_match_desk/background.png",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "マッチ棒クイズ",
+   "sub": "全10問　1本だけ動かして正しい式に",
+   "voice": "マッチ棒クイズ、全10問です。マッチ棒を1本だけ動かして、正しい式にしてください。後半ほど難しくなります。"
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "6+7=7",
+    "answer": "0+7=7",
+    "move": [
+     "0+7=7",
+     0,
+     "g",
+     0,
+     "b"
+    ]
+   },
+   "state": "question",
+   "text": "第1問",
+   "voice": "第1問。",
+   "pad": 0.4
+  },
+  {
+   "type": "think",
+   "puzzle": {
+    "question": "6+7=7",
+    "answer": "0+7=7",
+    "move": [
+     "0+7=7",
+     0,
+     "g",
+     0,
+     "b"
+    ]
+   },
+   "text": "第1問",
+   "seconds": 10
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "6+7=7",
+    "answer": "0+7=7",
+    "move": [
+     "0+7=7",
+     0,
+     "g",
+     0,
+     "b"
+    ]
+   },
+   "state": "move",
+   "text": "正解",
+   "caption": "「6」の1本を動かして「0」にする",
+   "chime": true,
+   "voice": "正解は、こちら。",
+   "voice_delay": 0.2,
+   "pad": 0.6
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "6+7=7",
+    "answer": "0+7=7",
+    "move": [
+     "0+7=7",
+     0,
+     "g",
+     0,
+     "b"
+    ]
+   },
+   "state": "move2",
+   "text": "正解",
+   "caption": "0+7=7",
+   "voice": "0たす7は7。",
+   "voice_delay": 0.1,
+   "pad": 0.8
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "3-4=6",
+    "answer": "9-4=5",
+    "move": [
+     "9-4=5",
+     4,
+     "e",
+     0,
+     "f"
+    ]
+   },
+   "state": "question",
+   "text": "第2問",
+   "voice": "第2問。",
+   "pad": 0.4
+  },
+  {
+   "type": "think",
+   "puzzle": {
+    "question": "3-4=6",
+    "answer": "9-4=5",
+    "move": [
+     "9-4=5",
+     4,
+     "e",
+     0,
+     "f"
+    ]
+   },
+   "text": "第2問",
+   "seconds": 10
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "3-4=6",
+    "answer": "9-4=5",
+    "move": [
+     "9-4=5",
+     4,
+     "e",
+     0,
+     "f"
+    ]
+   },
+   "state": "move",
+   "text": "正解",
+   "caption": "「6」から1本とって「5」、「3」に足して「9」",
+   "chime": true,
+   "voice": "正解は、こちら。",
+   "voice_delay": 0.2,
+   "pad": 0.6
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "3-4=6",
+    "answer": "9-4=5",
+    "move": [
+     "9-4=5",
+     4,
+     "e",
+     0,
+     "f"
+    ]
+   },
+   "state": "move2",
+   "text": "正解",
+   "caption": "9−4=5",
+   "voice": "9ひく4は5。",
+   "voice_delay": 0.1,
+   "pad": 0.8
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "5-9=8",
+    "answer": "9-9=0",
+    "move": [
+     "9-9=0",
+     4,
+     "g",
+     0,
+     "b"
+    ]
+   },
+   "state": "question",
+   "text": "第3問",
+   "voice": "第3問。",
+   "pad": 0.4
+  },
+  {
+   "type": "think",
+   "puzzle": {
+    "question": "5-9=8",
+    "answer": "9-9=0",
+    "move": [
+     "9-9=0",
+     4,
+     "g",
+     0,
+     "b"
+    ]
+   },
+   "text": "第3問",
+   "seconds": 10
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "5-9=8",
+    "answer": "9-9=0",
+    "move": [
+     "9-9=0",
+     4,
+     "g",
+     0,
+     "b"
+    ]
+   },
+   "state": "move",
+   "text": "正解",
+   "caption": "「8」から1本とって「0」、「5」に足して「9」",
+   "chime": true,
+   "voice": "正解は、こちら。",
+   "voice_delay": 0.2,
+   "pad": 0.6
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "5-9=8",
+    "answer": "9-9=0",
+    "move": [
+     "9-9=0",
+     4,
+     "g",
+     0,
+     "b"
+    ]
+   },
+   "state": "move2",
+   "text": "正解",
+   "caption": "9−9=0",
+   "voice": "9ひく9は0。",
+   "voice_delay": 0.1,
+   "pad": 0.8
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "1+2=2",
+    "answer": "1+2=3",
+    "move": [
+     "1+2=3",
+     4,
+     "e",
+     4,
+     "c"
+    ]
+   },
+   "state": "question",
+   "text": "第4問",
+   "voice": "第4問。",
+   "pad": 0.4
+  },
+  {
+   "type": "think",
+   "puzzle": {
+    "question": "1+2=2",
+    "answer": "1+2=3",
+    "move": [
+     "1+2=3",
+     4,
+     "e",
+     4,
+     "c"
+    ]
+   },
+   "text": "第4問",
+   "seconds": 10
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "1+2=2",
+    "answer": "1+2=3",
+    "move": [
+     "1+2=3",
+     4,
+     "e",
+     4,
+     "c"
+    ]
+   },
+   "state": "move",
+   "text": "正解",
+   "caption": "「2」の1本を動かして「3」にする",
+   "chime": true,
+   "voice": "正解は、こちら。",
+   "voice_delay": 0.2,
+   "pad": 0.6
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "1+2=2",
+    "answer": "1+2=3",
+    "move": [
+     "1+2=3",
+     4,
+     "e",
+     4,
+     "c"
+    ]
+   },
+   "state": "move2",
+   "text": "正解",
+   "caption": "1+2=3",
+   "voice": "1たす2は3。",
+   "voice_delay": 0.1,
+   "pad": 0.8
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "5+4=6",
+    "answer": "5+4=9",
+    "move": [
+     "5+4=9",
+     4,
+     "e",
+     4,
+     "b"
+    ]
+   },
+   "state": "question",
+   "text": "第5問",
+   "voice": "第5問。",
+   "pad": 0.4
+  },
+  {
+   "type": "think",
+   "puzzle": {
+    "question": "5+4=6",
+    "answer": "5+4=9",
+    "move": [
+     "5+4=9",
+     4,
+     "e",
+     4,
+     "b"
+    ]
+   },
+   "text": "第5問",
+   "seconds": 10
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "5+4=6",
+    "answer": "5+4=9",
+    "move": [
+     "5+4=9",
+     4,
+     "e",
+     4,
+     "b"
+    ]
+   },
+   "state": "move",
+   "text": "正解",
+   "caption": "「6」の1本を動かして「9」にする",
+   "chime": true,
+   "voice": "正解は、こちら。",
+   "voice_delay": 0.2,
+   "pad": 0.6
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "5+4=6",
+    "answer": "5+4=9",
+    "move": [
+     "5+4=9",
+     4,
+     "e",
+     4,
+     "b"
+    ]
+   },
+   "state": "move2",
+   "text": "正解",
+   "caption": "5+4=9",
+   "voice": "5たす4は9。",
+   "voice_delay": 0.1,
+   "pad": 0.8
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "5-9=6",
+    "answer": "9-3=6",
+    "move": [
+     "9-3=6",
+     2,
+     "f",
+     0,
+     "b"
+    ]
+   },
+   "state": "question",
+   "text": "第6問",
+   "voice": "第6問。",
+   "pad": 0.4
+  },
+  {
+   "type": "think",
+   "puzzle": {
+    "question": "5-9=6",
+    "answer": "9-3=6",
+    "move": [
+     "9-3=6",
+     2,
+     "f",
+     0,
+     "b"
+    ]
+   },
+   "text": "第6問",
+   "seconds": 10
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "5-9=6",
+    "answer": "9-3=6",
+    "move": [
+     "9-3=6",
+     2,
+     "f",
+     0,
+     "b"
+    ]
+   },
+   "state": "move",
+   "text": "正解",
+   "caption": "「9」から1本とって「3」、「5」に足して「9」",
+   "chime": true,
+   "voice": "正解は、こちら。",
+   "voice_delay": 0.2,
+   "pad": 0.6
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "5-9=6",
+    "answer": "9-3=6",
+    "move": [
+     "9-3=6",
+     2,
+     "f",
+     0,
+     "b"
+    ]
+   },
+   "state": "move2",
+   "text": "正解",
+   "caption": "9−3=6",
+   "voice": "9ひく3は6。",
+   "voice_delay": 0.1,
+   "pad": 0.8
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "8-1=9",
+    "answer": "9-1=8",
+    "move": [
+     "9-1=8",
+     0,
+     "e",
+     4,
+     "e"
+    ]
+   },
+   "state": "question",
+   "text": "第7問",
+   "voice": "第7問。",
+   "pad": 0.4
+  },
+  {
+   "type": "think",
+   "puzzle": {
+    "question": "8-1=9",
+    "answer": "9-1=8",
+    "move": [
+     "9-1=8",
+     0,
+     "e",
+     4,
+     "e"
+    ]
+   },
+   "text": "第7問",
+   "seconds": 10
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "8-1=9",
+    "answer": "9-1=8",
+    "move": [
+     "9-1=8",
+     0,
+     "e",
+     4,
+     "e"
+    ]
+   },
+   "state": "move",
+   "text": "正解",
+   "caption": "「8」から1本とって「9」、「9」に足して「8」",
+   "chime": true,
+   "voice": "正解は、こちら。",
+   "voice_delay": 0.2,
+   "pad": 0.6
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "8-1=9",
+    "answer": "9-1=8",
+    "move": [
+     "9-1=8",
+     0,
+     "e",
+     4,
+     "e"
+    ]
+   },
+   "state": "move2",
+   "text": "正解",
+   "caption": "9−1=8",
+   "voice": "9ひく1は8。",
+   "voice_delay": 0.1,
+   "pad": 0.8
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "0+7=13",
+    "answer": "6+7=13",
+    "move": [
+     "6+7=13",
+     0,
+     "b",
+     0,
+     "g"
+    ]
+   },
+   "state": "question",
+   "text": "第8問",
+   "voice": "第8問。",
+   "pad": 0.4
+  },
+  {
+   "type": "think",
+   "puzzle": {
+    "question": "0+7=13",
+    "answer": "6+7=13",
+    "move": [
+     "6+7=13",
+     0,
+     "b",
+     0,
+     "g"
+    ]
+   },
+   "text": "第8問",
+   "seconds": 12
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "0+7=13",
+    "answer": "6+7=13",
+    "move": [
+     "6+7=13",
+     0,
+     "b",
+     0,
+     "g"
+    ]
+   },
+   "state": "move",
+   "text": "正解",
+   "caption": "「0」の1本を動かして「6」にする",
+   "chime": true,
+   "voice": "正解は、こちら。",
+   "voice_delay": 0.2,
+   "pad": 0.6
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "0+7=13",
+    "answer": "6+7=13",
+    "move": [
+     "6+7=13",
+     0,
+     "b",
+     0,
+     "g"
+    ]
+   },
+   "state": "move2",
+   "text": "正解",
+   "caption": "6+7=13",
+   "voice": "6たす7は13。",
+   "voice_delay": 0.1,
+   "pad": 0.8
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "3+4=19",
+    "answer": "9+4=13",
+    "move": [
+     "9+4=13",
+     5,
+     "f",
+     0,
+     "f"
+    ]
+   },
+   "state": "question",
+   "text": "第9問",
+   "voice": "第9問。",
+   "pad": 0.4
+  },
+  {
+   "type": "think",
+   "puzzle": {
+    "question": "3+4=19",
+    "answer": "9+4=13",
+    "move": [
+     "9+4=13",
+     5,
+     "f",
+     0,
+     "f"
+    ]
+   },
+   "text": "第9問",
+   "seconds": 12
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "3+4=19",
+    "answer": "9+4=13",
+    "move": [
+     "9+4=13",
+     5,
+     "f",
+     0,
+     "f"
+    ]
+   },
+   "state": "move",
+   "text": "正解",
+   "caption": "「9」から1本とって「3」、「3」に足して「9」",
+   "chime": true,
+   "voice": "正解は、こちら。",
+   "voice_delay": 0.2,
+   "pad": 0.6
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "3+4=19",
+    "answer": "9+4=13",
+    "move": [
+     "9+4=13",
+     5,
+     "f",
+     0,
+     "f"
+    ]
+   },
+   "state": "move2",
+   "text": "正解",
+   "caption": "9+4=13",
+   "voice": "9たす4は13。",
+   "voice_delay": 0.1,
+   "pad": 0.8
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "8+7=13",
+    "answer": "8+7=15",
+    "move": [
+     "8+7=15",
+     5,
+     "b",
+     5,
+     "f"
+    ]
+   },
+   "state": "question",
+   "text": "第10問",
+   "voice": "第10問。",
+   "pad": 0.4
+  },
+  {
+   "type": "think",
+   "puzzle": {
+    "question": "8+7=13",
+    "answer": "8+7=15",
+    "move": [
+     "8+7=15",
+     5,
+     "b",
+     5,
+     "f"
+    ]
+   },
+   "text": "第10問",
+   "seconds": 12
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "8+7=13",
+    "answer": "8+7=15",
+    "move": [
+     "8+7=15",
+     5,
+     "b",
+     5,
+     "f"
+    ]
+   },
+   "state": "move",
+   "text": "正解",
+   "caption": "「3」の1本を動かして「5」にする",
+   "chime": true,
+   "voice": "正解は、こちら。",
+   "voice_delay": 0.2,
+   "pad": 0.6
+  },
+  {
+   "type": "match",
+   "puzzle": {
+    "question": "8+7=13",
+    "answer": "8+7=15",
+    "move": [
+     "8+7=15",
+     5,
+     "b",
+     5,
+     "f"
+    ]
+   },
+   "state": "move2",
+   "text": "正解",
+   "caption": "8+7=15",
+   "voice": "8たす7は15。",
+   "voice_delay": 0.1,
+   "pad": 0.8
+  },
+  {
+   "type": "title",
+   "text": "何問解けた？",
+   "sub": "コメントで教えてください",
+   "voice": "何問解けましたか？コメントで教えてください。チャンネル登録もよろしくお願いします。"
+  }
+ ],
+ "meta": {
+  "genre": "match",
+  "questions": [
+   "6+7=7",
+   "3-4=6",
+   "5-9=8",
+   "1+2=2",
+   "5+4=6",
+   "5-9=6",
+   "8-1=9",
+   "0+7=13",
+   "3+4=19",
+   "8+7=13"
+  ]
+ }
+}

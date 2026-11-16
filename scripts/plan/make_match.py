@@ -12,7 +12,8 @@ import matchstick as M
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 USED = ROOT / "data" / "used_match.json"
 READ = {"+": "たす", "-": "ひく", "=": "は"}
-BGS = ["assets/generated/t002_bg_match_desk/background.png"]
+BGS = ["assets/generated/t002_bg_match_desk/background.png"] + sorted(
+    str(p.relative_to(ROOT)) for p in ROOT.glob("assets/generated/bg_match_*/image.png"))
 
 
 def say(expr):
