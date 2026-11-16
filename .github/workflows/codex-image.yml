@@ -32,4 +32,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets/generated
           git diff --cached --quiet || git commit -m "Add generated images from Codex"
-          git pull --rebase -q && git push
+          # 同じ枝に別の push が重なっても絵を失わないよう、数回やり直す
+          for i in 1 2 3 4 5; do git pull --rebase -q && git push && break; sleep $((i * 7)); done
