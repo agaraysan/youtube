@@ -93,9 +93,10 @@ def render_loop(spec, out_mp4, layers, d, r):
     ambient.save(str(wav), ambient.make_loop(total, spec.get("mood", "dream"), seed=7))
     w = Writer(out_mp4, wav)
     nf = int(round(total * FPS))
+    start = spec.get("start", 0)  # 一番目を引く場面から始める（ループなので途中から始めても切れ目はない）
     for i in range(nf):  # 最後の1コマは最初のコマと同じなので出さない
         t = i / FPS
-        frame = render_at(layers, mask, n * i / nf, base_k, r)
+        frame = render_at(layers, mask, (start + n * i / nf) % n, base_k, r)
         if cap is not None and t < 3.0:
             frame = over(frame, cap, min(1.0, (3.0 - t) / 0.5))
         w.write(frame)

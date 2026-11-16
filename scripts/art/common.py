@@ -120,7 +120,7 @@ class Grade:
     """プロの映像らしい仕上げ。色を少し抑えてそろえ、明るすぎる所をなだらかにし、
     四隅をわずかに暗くし、細かいフィルムの粒子を足す（AIっぽいギラつきを抑える）。"""
 
-    def __init__(self, sat=0.86, warm=0.03, vignette=0.22, grain=3.2, seed=0):
+    def __init__(self, sat=0.86, warm=0.03, vignette=0.22, grain=2.0, seed=0):
         yy, xx = np.mgrid[0:OH, 0:OW].astype(np.float32)
         r = np.sqrt(((xx - OW / 2) / (OW / 2)) ** 2 * 0.8 + ((yy - OH / 2) / (OH / 2)) ** 2 * 0.6)
         self.vig = (1 - vignette * np.clip(r - 0.35, 0, None) ** 1.6)[..., None].astype(np.float32)
@@ -148,7 +148,7 @@ class Writer:
         self.i = 0
         self.p = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{OW}x{OH}",
                                    "-r", str(FPS), "-i", "-", "-i", str(audio_wav), "-c:v", "libx264", "-preset", "medium",
-                                   "-crf", "19", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-shortest",
+                                   "-crf", "20", "-maxrate", "9M", "-bufsize", "18M", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-shortest",
                                    "-movflags", "+faststart", str(out_mp4)], stdin=subprocess.PIPE)
 
     def write(self, frame):

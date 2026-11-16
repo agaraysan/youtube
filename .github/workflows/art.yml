@@ -41,6 +41,8 @@ jobs:
     if: needs.list.outputs.ids != '[]'
     runs-on: ubuntu-latest
     timeout-minutes: 300
+    # 同じ試作を2つの実行が同時に作らないよう、id ごとに1列に並べる（後の方は前の素材を使って描き直すだけになる）
+    concurrency: { group: "art-${{ matrix.id }}", cancel-in-progress: false }
     strategy:
       fail-fast: false
       max-parallel: 4
@@ -62,7 +64,9 @@ jobs:
         env: { CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}" }
         run: mkdir -p ~/.codex && printenv CODEX_AUTH_JSON > ~/.codex/auth.json && chmod 600 ~/.codex/auth.json
       - name: Make
-        run: python3 scripts/art/run.py art/${{ matrix.id }}.json out
+        run: |
+          git pull -q --rebase origin "${GITHUB_REF_NAME}" || true   # 先に終わった実行の素材を取り込む
+          python3 scripts/art/run.py art/${{ matrix.id }}.json out
       - name: Save materials
         if: always()
         run: |
