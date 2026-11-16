@@ -1,0 +1,272 @@
+{
+ "id": "brain_trivia_winter_001",
+ "series": "頭の体操",
+ "style": "trivia",
+ "bg": "assets/generated/br_tv00_winter",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "冬の暮らしの雑学クイズ",
+   "size": 110,
+   "sub": "11月・12月の言葉と行事 10問",
+   "voice": "冬の暮らしの雑学クイズです。11月と12月の、言葉や行事にまつわる問題を10問用意しました。いくつ知っているか、ためしてみてください。"
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv01_koharu",
+   "q": "「小春日和」は、どの季節のおだやかな晴れの日のこと？",
+   "text": "第1問",
+   "voice": "第1問。小春日和は、どの季節のおだやかな晴れの日のこと？"
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv01_koharu",
+   "q": "「小春日和」は、どの季節のおだやかな晴れの日のこと？",
+   "text": "第1問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv01_koharu",
+   "answer": "晩秋から初冬",
+   "caption": "春ではなく、昔のこよみの10月、今の11月ごろの暖かい日です",
+   "text": "第1問 答え",
+   "chime": true,
+   "voice": "答えは、晩秋から初冬。春ではなく、昔のこよみの10月、いまの11月ごろの、春のように暖かい晴れの日のことです。",
+   "pad": 1.2
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv02_torinoichi",
+   "q": "11月の「酉の市」で売られる縁起物といえば？",
+   "text": "第2問",
+   "voice": "第2問。11月の酉の市で売られる縁起物といえば？"
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv02_torinoichi",
+   "q": "11月の「酉の市」で売られる縁起物といえば？",
+   "text": "第2問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv02_torinoichi",
+   "answer": "熊手",
+   "caption": "福をかき集めるという意味の縁起物です",
+   "text": "第2問 答え",
+   "chime": true,
+   "voice": "答えは、くまで。11月のとりの日に開かれる市で、福をかき集める縁起物として売られます。",
+   "pad": 1.2
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv03_niiname",
+   "q": "11月23日の「勤労感謝の日」。昔はなんという祝日だった？",
+   "text": "第3問",
+   "voice": "第3問。11月23日の勤労感謝の日。昔はなんという祝日だった？"
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv03_niiname",
+   "q": "11月23日の「勤労感謝の日」。昔はなんという祝日だった？",
+   "text": "第3問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv03_niiname",
+   "answer": "新嘗祭（にいなめさい）",
+   "caption": "その年に実った新しいお米などの収穫に感謝するお祭りです",
+   "text": "第3問 答え",
+   "chime": true,
+   "voice": "答えは、にいなめさい。その年に実った新しいお米などの、収穫に感謝するお祭りの日でした。",
+   "pad": 1.2
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv04_chitose",
+   "q": "七五三の「千歳飴」は、なぜ細長い？",
+   "text": "第4問",
+   "voice": "第4問。七五三の千歳飴は、なぜ細長い？"
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv04_chitose",
+   "q": "七五三の「千歳飴」は、なぜ細長い？",
+   "text": "第4問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv04_chitose",
+   "answer": "長生きの願い",
+   "caption": "細く長くのびる飴に、子どもの長生きの願いをこめています",
+   "text": "第4問 答え",
+   "chime": true,
+   "voice": "答えは、長生きの願い。細く長くのびる飴に、子どもが長生きするようにという願いがこめられています。",
+   "pad": 1.2
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv05_shiwasu",
+   "q": "12月の「師走」。走り回る「師」は、だれのこと？",
+   "text": "第5問",
+   "voice": "第5問。12月の師走。走り回る師は、だれのこと？"
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv05_shiwasu",
+   "q": "12月の「師走」。走り回る「師」は、だれのこと？",
+   "text": "第5問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv05_shiwasu",
+   "answer": "お坊さん",
+   "caption": "年末はお経をあげに回るお坊さんも走るほど忙しい、という説が有名です（諸説あり）",
+   "text": "第5問 答え",
+   "chime": true,
+   "voice": "答えは、お坊さん、という説が有名です。年末はお経をあげに回るお坊さんも走るほど忙しい、という意味だといわれています。ほかにも説があります。",
+   "pad": 1.2
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv06_susuharai",
+   "q": "お正月の準備を始める「正月事始め」は、12月の何日？",
+   "text": "第6問",
+   "voice": "第6問。お正月の準備を始める正月事始めは、12月の何日？"
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv06_susuharai",
+   "q": "お正月の準備を始める「正月事始め」は、12月の何日？",
+   "text": "第6問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv06_susuharai",
+   "answer": "12月13日",
+   "caption": "江戸時代、江戸城ではこの日にすす払い（大掃除）をしていました",
+   "text": "第6問 答え",
+   "chime": true,
+   "voice": "答えは、12月13日。江戸時代、江戸城ではこの日に、すす払い、つまり大掃除をしていました。",
+   "pad": 1.2
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv07_yuzuyu",
+   "q": "冬至の日に、お風呂に入れるものといえば？",
+   "text": "第7問",
+   "voice": "第7問。冬至の日に、お風呂に入れるものといえば？"
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv07_yuzuyu",
+   "q": "冬至の日に、お風呂に入れるものといえば？",
+   "text": "第7問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv07_yuzuyu",
+   "answer": "ゆず",
+   "caption": "ゆず湯に入ると、かぜをひかないといわれています",
+   "text": "第7問 答え",
+   "chime": true,
+   "voice": "答えは、ゆず。冬至の日にゆず湯に入ると、かぜをひかないといわれています。",
+   "pad": 1.2
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv08_unmori",
+   "q": "冬至に食べる「ん」のつく食べ物。「なんきん」とは何のこと？",
+   "text": "第8問",
+   "voice": "第8問。冬至に食べるんのつく食べ物。なんきんとは何のこと？"
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv08_unmori",
+   "q": "冬至に食べる「ん」のつく食べ物。「なんきん」とは何のこと？",
+   "text": "第8問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv08_unmori",
+   "answer": "かぼちゃ",
+   "caption": "「ん」がつく食べ物で運を呼びこむ「運盛り」という習わしです",
+   "text": "第8問 答え",
+   "chime": true,
+   "voice": "答えは、かぼちゃ。れんこん、にんじん、ぎんなんなど、んのつく食べ物で運を呼びこむ、運盛りという習わしです。",
+   "pad": 1.2
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv09_soba",
+   "q": "大みそかに年越しそばを食べるのは、なぜ？",
+   "text": "第9問",
+   "voice": "第9問。大みそかに年越しそばを食べるのは、なぜ？"
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv09_soba",
+   "q": "大みそかに年越しそばを食べるのは、なぜ？",
+   "text": "第9問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv09_soba",
+   "answer": "細く長く、長生きの願い",
+   "caption": "切れやすいので、一年の苦労を断ち切るという説もあります",
+   "text": "第9問 答え",
+   "chime": true,
+   "voice": "答えは、細く長く、長生きできるようにという願い。切れやすいので、一年の苦労を断ち切る、という説もあります。",
+   "pad": 1.2
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv10_joya",
+   "q": "大みそかの「除夜の鐘」。ふつう何回つく？",
+   "text": "第10問",
+   "voice": "第10問。大みそかの除夜の鐘。ふつう何回つく？"
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv10_joya",
+   "q": "大みそかの「除夜の鐘」。ふつう何回つく？",
+   "text": "第10問",
+   "think": true,
+   "seconds": 10
+  },
+  {
+   "type": "fact",
+   "image": "assets/generated/br_tv10_joya",
+   "answer": "108回",
+   "caption": "人の心をまよわせる「煩悩」の数だといわれています",
+   "text": "第10問 答え",
+   "chime": true,
+   "voice": "答えは、108回。人の心をまよわせる、ぼんのうの数だといわれています。",
+   "pad": 1.2
+  },
+  {
+   "type": "title",
+   "text": "いくつ知っていましたか？",
+   "size": 96,
+   "sub": "コメントで教えてください",
+   "voice": "いくつ知っていましたか？コメントで教えてください。季節の雑学を、これからもお届けします。チャンネル登録もよろしくお願いします。"
+  }
+ ]
+}

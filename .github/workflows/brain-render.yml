@@ -1,0 +1,43 @@
+name: brain-render
+# 頭の体操・雑学シリーズの試作。brain/episodes/*.json を push すると声つきで描画し、
+# brain-previews 枝に最新分だけ置く（履歴は持たない。投稿はしない）。
+on:
+  push:
+    paths: ["brain/episodes/*.json", "scripts/brain/**", ".github/workflows/brain-render.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: { group: brain-render, cancel-in-progress: false }
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji && pip install -q pillow numpy
+      - name: Fetch brain-previews
+        run: |
+          mkdir -p pv/out
+          if git fetch -q origin brain-previews; then git --work-tree=pv checkout FETCH_HEAD -- out 2>/dev/null || true; fi
+      - name: Render new or changed episodes
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          for f in brain/episodes/*.json; do
+            id=$(basename "$f" .json)
+            # 台本・描画コード・使う絵が変わったときだけ作り直す（声のAPI代の節約）
+            imgs=$(python3 scripts/brain/assets_of.py "$f")
+            h=$( (cat "$f" scripts/brain/*.py scripts/render/*.py; echo "$imgs") | sha1sum | cut -c1-12)
+            if [ -f "pv/out/$id.hash" ] && [ "$(cat pv/out/$id.hash)" = "$h" ]; then echo "skip $id"; continue; fi
+            python3 scripts/brain/brain.py "$f" pv/out && echo "$h" > "pv/out/$id.hash" || echo "FAILED $id"
+          done
+          # もう台本がない動画は消す
+          for m in pv/out/*.mp4; do id=$(basename "$m" .mp4); [ -f "brain/episodes/$id.json" ] || rm -f pv/out/$id.*  pv/out/${id}_sheet.jpg; done
+          ls -la pv/out
+      - name: Push brain-previews (latest only)
+        run: |
+          cd pv
+          git init -q && git checkout -q -b brain-previews
+          git config user.name "render-bot"; git config user.email "render-bot@users.noreply.github.com"
+          git add -A out && git commit -qm "brain previews (latest only)"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:brain-previews

@@ -1,0 +1,413 @@
+{
+ "id": "brain_kanji_odd_001",
+ "series": "頭の体操",
+ "style": "kanji",
+ "bg": "assets/generated/br_bg_washi",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "漢字の仲間はずれ探し",
+   "size": 110,
+   "sub": "1つだけちがう漢字をさがそう",
+   "voice": "頭の体操、漢字の仲間はずれ探しです。同じ漢字がならぶ中に、1つだけちがう漢字がまじっています。全部で12問。後半ほど、むずかしくなります。"
+  },
+  {
+   "type": "grid",
+   "base": "大",
+   "odd": "犬",
+   "rows": 5,
+   "cols": 9,
+   "text": "第1問",
+   "voice": "第1問。この中に、1つだけちがう漢字があります。さがしてみてください。"
+  },
+  {
+   "type": "grid",
+   "base": "大",
+   "odd": "犬",
+   "rows": 5,
+   "cols": 9,
+   "text": "第1問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "grid",
+   "base": "大",
+   "odd": "犬",
+   "rows": 5,
+   "cols": 9,
+   "text": "第1問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「犬」は、右上に点があります",
+   "voice": "ここでした。犬は、右上に点があります。",
+   "pad": 1.6
+  },
+  {
+   "type": "grid",
+   "base": "人",
+   "odd": "入",
+   "rows": 5,
+   "cols": 10,
+   "text": "第2問",
+   "voice": "第2問。どこにちがう漢字があるでしょう。"
+  },
+  {
+   "type": "grid",
+   "base": "人",
+   "odd": "入",
+   "rows": 5,
+   "cols": 10,
+   "text": "第2問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "grid",
+   "base": "人",
+   "odd": "入",
+   "rows": 5,
+   "cols": 10,
+   "text": "第2問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「人」と「入」は、上で飛び出す線が左右逆です",
+   "voice": "ここでした。人と入は、上で飛び出す線が左右逆です。",
+   "pad": 1.6
+  },
+  {
+   "type": "grid",
+   "base": "王",
+   "odd": "玉",
+   "rows": 6,
+   "cols": 10,
+   "text": "第3問",
+   "voice": "第3問。1つだけ、ちがう漢字がまじっています。"
+  },
+  {
+   "type": "grid",
+   "base": "王",
+   "odd": "玉",
+   "rows": 6,
+   "cols": 10,
+   "text": "第3問",
+   "think": true,
+   "seconds": 18
+  },
+  {
+   "type": "grid",
+   "base": "王",
+   "odd": "玉",
+   "rows": 6,
+   "cols": 10,
+   "text": "第3問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「玉」は、右下に点があります",
+   "voice": "ここでした。玉は、右下に点があります。",
+   "pad": 1.6
+  },
+  {
+   "type": "grid",
+   "base": "白",
+   "odd": "自",
+   "rows": 6,
+   "cols": 11,
+   "text": "第4問",
+   "voice": "第4問。さあ、見つけられるかな。"
+  },
+  {
+   "type": "grid",
+   "base": "白",
+   "odd": "自",
+   "rows": 6,
+   "cols": 11,
+   "text": "第4問",
+   "think": true,
+   "seconds": 18
+  },
+  {
+   "type": "grid",
+   "base": "白",
+   "odd": "自",
+   "rows": 6,
+   "cols": 11,
+   "text": "第4問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「自」は、中の横線が2本です",
+   "voice": "ここでした。自は、中の横線が2本です。",
+   "pad": 1.6
+  },
+  {
+   "type": "grid",
+   "base": "千",
+   "odd": "干",
+   "rows": 6,
+   "cols": 12,
+   "text": "第5問",
+   "voice": "第5問。この中に、1つだけちがう漢字があります。さがしてみてください。"
+  },
+  {
+   "type": "grid",
+   "base": "千",
+   "odd": "干",
+   "rows": 6,
+   "cols": 12,
+   "text": "第5問",
+   "think": true,
+   "seconds": 20
+  },
+  {
+   "type": "grid",
+   "base": "千",
+   "odd": "干",
+   "rows": 6,
+   "cols": 12,
+   "text": "第5問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「千」の一画目はななめ、「干」はまっすぐな横線",
+   "voice": "ここでした。千の一画目はななめ、干はまっすぐな横線。",
+   "pad": 1.6
+  },
+  {
+   "type": "grid",
+   "base": "土",
+   "odd": "士",
+   "rows": 7,
+   "cols": 12,
+   "text": "第6問",
+   "voice": "第6問。どこにちがう漢字があるでしょう。"
+  },
+  {
+   "type": "grid",
+   "base": "土",
+   "odd": "士",
+   "rows": 7,
+   "cols": 12,
+   "text": "第6問",
+   "think": true,
+   "seconds": 20
+  },
+  {
+   "type": "grid",
+   "base": "土",
+   "odd": "士",
+   "rows": 7,
+   "cols": 12,
+   "text": "第6問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「土」は下の横線が長く、「士」は上の横線が長い",
+   "voice": "ここでした。土は下の横線が長く、士は上の横線が長い。",
+   "pad": 1.6
+  },
+  {
+   "type": "title",
+   "text": "ここから後半",
+   "size": 110,
+   "sub": "よく似た漢字が出てきます",
+   "voice": "ここから後半です。もっとよく似た漢字が出てきますよ。"
+  },
+  {
+   "type": "grid",
+   "base": "末",
+   "odd": "未",
+   "rows": 7,
+   "cols": 13,
+   "text": "第7問",
+   "voice": "第7問。1つだけ、ちがう漢字がまじっています。"
+  },
+  {
+   "type": "grid",
+   "base": "末",
+   "odd": "未",
+   "rows": 7,
+   "cols": 13,
+   "text": "第7問",
+   "think": true,
+   "seconds": 22
+  },
+  {
+   "type": "grid",
+   "base": "末",
+   "odd": "未",
+   "rows": 7,
+   "cols": 13,
+   "text": "第7問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「末」は上の線が長く、「未」は下の線が長い",
+   "voice": "ここでした。末は上の線が長く、未は下の線が長い。",
+   "pad": 1.6
+  },
+  {
+   "type": "grid",
+   "base": "斤",
+   "odd": "斥",
+   "rows": 7,
+   "cols": 13,
+   "text": "第8問",
+   "voice": "第8問。さあ、見つけられるかな。"
+  },
+  {
+   "type": "grid",
+   "base": "斤",
+   "odd": "斥",
+   "rows": 7,
+   "cols": 13,
+   "text": "第8問",
+   "think": true,
+   "seconds": 22
+  },
+  {
+   "type": "grid",
+   "base": "斤",
+   "odd": "斥",
+   "rows": 7,
+   "cols": 13,
+   "text": "第8問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「斥」は、右下に小さな点があります",
+   "voice": "ここでした。斥は、右下に小さな点があります。",
+   "pad": 1.6
+  },
+  {
+   "type": "grid",
+   "base": "問",
+   "odd": "間",
+   "rows": 7,
+   "cols": 14,
+   "text": "第9問",
+   "voice": "第9問。この中に、1つだけちがう漢字があります。さがしてみてください。"
+  },
+  {
+   "type": "grid",
+   "base": "問",
+   "odd": "間",
+   "rows": 7,
+   "cols": 14,
+   "text": "第9問",
+   "think": true,
+   "seconds": 25
+  },
+  {
+   "type": "grid",
+   "base": "問",
+   "odd": "間",
+   "rows": 7,
+   "cols": 14,
+   "text": "第9問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「間」は、門の中が「日」です",
+   "voice": "ここでした。間は、門の中が日です。",
+   "pad": 1.6
+  },
+  {
+   "type": "grid",
+   "base": "鳥",
+   "odd": "烏",
+   "rows": 8,
+   "cols": 14,
+   "text": "第10問",
+   "voice": "第10問。どこにちがう漢字があるでしょう。"
+  },
+  {
+   "type": "grid",
+   "base": "鳥",
+   "odd": "烏",
+   "rows": 8,
+   "cols": 14,
+   "text": "第10問",
+   "think": true,
+   "seconds": 25
+  },
+  {
+   "type": "grid",
+   "base": "鳥",
+   "odd": "烏",
+   "rows": 8,
+   "cols": 14,
+   "text": "第10問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「烏（からす）」は「鳥」より横線が1本少ない",
+   "voice": "ここでした。烏（からす）は鳥より横線が1本少ない。",
+   "pad": 1.6
+  },
+  {
+   "type": "grid",
+   "base": "己",
+   "odd": "已",
+   "rows": 8,
+   "cols": 15,
+   "text": "第11問",
+   "voice": "第11問。1つだけ、ちがう漢字がまじっています。"
+  },
+  {
+   "type": "grid",
+   "base": "己",
+   "odd": "已",
+   "rows": 8,
+   "cols": 15,
+   "text": "第11問",
+   "think": true,
+   "seconds": 30
+  },
+  {
+   "type": "grid",
+   "base": "己",
+   "odd": "已",
+   "rows": 8,
+   "cols": 15,
+   "text": "第11問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「己（おのれ）」と「已（すでに）」は、左上のすき間で見分けます",
+   "voice": "ここでした。己（おのれ）と已（すでに）は、左上のすき間で見分けます。",
+   "pad": 1.6
+  },
+  {
+   "type": "grid",
+   "base": "微",
+   "odd": "徴",
+   "rows": 8,
+   "cols": 15,
+   "text": "第12問",
+   "voice": "第12問。さあ、見つけられるかな。"
+  },
+  {
+   "type": "grid",
+   "base": "微",
+   "odd": "徴",
+   "rows": 8,
+   "cols": 15,
+   "text": "第12問",
+   "think": true,
+   "seconds": 30
+  },
+  {
+   "type": "grid",
+   "base": "微",
+   "odd": "徴",
+   "rows": 8,
+   "cols": 15,
+   "text": "第12問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「徴」は、まん中の下が「王」です",
+   "voice": "ここでした。徴は、まん中の下が王です。",
+   "pad": 1.6
+  },
+  {
+   "type": "title",
+   "text": "何問わかりましたか？",
+   "size": 100,
+   "sub": "コメントで教えてください",
+   "voice": "何問わかりましたか？よかったらコメントで教えてください。毎日の頭の体操に、チャンネル登録もしていただけるとうれしいです。"
+  }
+ ]
+}
