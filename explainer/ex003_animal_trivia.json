@@ -1,6 +1,7 @@
 {
  "id": "ex003_animal_trivia",
  "title": "誰かに話したくなる動物の雑学",
+ "bgm_track": "little_fish",
  "size": [
   1080,
   1920

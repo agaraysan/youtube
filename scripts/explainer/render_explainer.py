@@ -3,7 +3,7 @@
 
 explainer/<id>.json の形
   id, title, size（[1920,1080] か [1080,1920]）, chapters（{"1": "写真で質問", ...}）, chapter_label（"STEP" など）
-  bgm_style（match / riddle / spot）, bgm_volume, transition（fade / slide）, caption_style（outline / box）
+  bgm_track（assets/bgm/<名前>.mp3 の曲。あればこちらを使う）, bgm_track_volume（既定0.22）, bgm_style（自作曲 match / riddle / spot）, bgm_volume, transition（fade / slide）, caption_style（outline / box）
   voice（既定の声、nova）, voice_instructions（読み方の指示）
   cast（掛け合い用 {"key": {"name","voice","color":[r,g,b],"side":"left|right","instructions"}}）
   scenes: [{image（assets/generated/<依頼id> か画像のパス）, voice（読み上げ文）か lines（[{who,text}]、掛け合い）,
@@ -507,8 +507,15 @@ def main(spec, out_dir, fast=False):
     vw, sw_ = tmp / "voice.wav", tmp / "sfx.wav"
     write_wav(vw, voice[:n_s]); write_wav(sw_, sfx[:n_s])
     music = tmp / "bgm.wav"
-    BGM.save(str(music), BGM.make(total, ep.get("bgm_style", "spot"), seed=sum(map(ord, ep["id"]))))
-    vol = ep.get("bgm_volume", 0.14)
+    track = ROOT / "assets" / "bgm" / f"{ep.get('bgm_track', '')}.mp3"
+    if ep.get("bgm_track") and track.exists():  # YouTube オーディオライブラリの曲（あがさん提供）。-20 LUFS にそろえて小さめに入れる
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-stream_loop", "-1", "-i", str(track), "-af",
+                        f"loudnorm=I=-20:TP=-2,atrim=0:{total:.3f},afade=t=in:d=1.5,afade=t=out:st={max(0, total - 3):.3f}:d=3",
+                        "-ar", str(SR), "-ac", "2", str(music)], check=True)
+        vol = ep.get("bgm_track_volume", 0.22)
+    else:
+        BGM.save(str(music), BGM.make(total, ep.get("bgm_style", "spot"), seed=sum(map(ord, ep["id"]))))
+        vol = ep.get("bgm_volume", 0.14)
     audio = tmp / "audio.wav"
     fc = (f"[1:a]volume={vol}[m];[0:a]asplit=2[v1][v2];[m][v2]sidechaincompress=threshold=0.02:ratio=5:attack=20:release=450[md];"
           f"[v1][md][2:a]amix=inputs=3:normalize=0[o]")

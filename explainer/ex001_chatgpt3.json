@@ -1,6 +1,7 @@
 {
  "id": "ex001_chatgpt3",
  "title": "知らないと損！ChatGPTの便利な使い方3選",
+ "bgm_track": "little_fish",
  "chapters": {
   "1": "写真で質問",
   "2": "声で会話",
@@ -8,75 +9,75 @@
  },
  "scenes": [
   {
-   "image": "assets/generated/ex001_01_hook",
+   "image": "assets/generated/ex001p_01_hook",
    "voice": "ChatGPT、文章を作るだけだと思っていませんか？　実は、もっと便利な使い方があるんです。",
    "telop": "まだ文章だけ？"
   },
   {
-   "image": "assets/generated/ex001_02_three",
+   "image": "assets/generated/ex001p_02_three",
    "voice": "今日は、知らないと損する使い方を、3つ紹介します。",
    "telop": "知らないと損する 3つの使い方"
   },
   {
-   "image": "assets/generated/ex001_03_photo",
+   "image": "assets/generated/ex001p_03_photo",
    "voice": "1つ目は、写真を見せて質問すること。",
    "telop": "写真で質問",
    "chapter": "1"
   },
   {
-   "image": "assets/generated/ex001_04_fridge",
+   "image": "assets/generated/ex001p_04_fridge",
    "voice": "例えば、冷蔵庫の中を撮って、これで何が作れる？と聞くと、献立を考えてくれます。",
    "telop": "冷蔵庫の写真 → 献立",
    "chapter": "1"
   },
   {
-   "image": "assets/generated/ex001_05_menu",
+   "image": "assets/generated/ex001p_05_menu",
    "voice": "読めない説明書や、外国語のメニューも、撮るだけで説明してくれます。",
    "telop": "説明書・メニューもOK",
    "chapter": "1"
   },
   {
-   "image": "assets/generated/ex001_06_voice",
+   "image": "assets/generated/ex001p_06_voice",
    "voice": "2つ目は、声でそのまま話しかけること。",
    "telop": "声で会話",
    "chapter": "2"
   },
   {
-   "image": "assets/generated/ex001_07_cooking",
+   "image": "assets/generated/ex001p_07_cooking",
    "voice": "料理中で手がふさがっていても、話すだけで、次の手順を教えてくれます。",
    "telop": "手がふさがっていても",
    "chapter": "2"
   },
   {
-   "image": "assets/generated/ex001_08_english",
+   "image": "assets/generated/ex001p_08_english",
    "voice": "英会話の練習相手にもなるので、恥ずかしがらずに、何度でも話せます。",
    "telop": "英会話の練習にも",
    "chapter": "2"
   },
   {
-   "image": "assets/generated/ex001_09_documents",
+   "image": "assets/generated/ex001p_09_documents",
    "voice": "3つ目は、長い文章をまとめてもらうこと。",
    "telop": "長文を要約",
    "chapter": "3"
   },
   {
-   "image": "assets/generated/ex001_10_summary",
+   "image": "assets/generated/ex001p_10_summary",
    "voice": "長いメールや資料を貼りつけて、3行でまとめて、と頼むと、大事なところだけ教えてくれます。",
    "telop": "「3行でまとめて」",
    "chapter": "3"
   },
   {
-   "image": "assets/generated/ex001_11_check",
+   "image": "assets/generated/ex001p_11_check",
    "voice": "ただし、答えがいつも正しいとは限りません。大事なことは、自分でも確かめましょう。",
    "telop": "大事なことは自分でも確認"
   },
   {
-   "image": "assets/generated/ex001_12_recap",
+   "image": "assets/generated/ex001p_12_recap",
    "voice": "写真で質問、声で会話、長文の要約。どれも今日から、すぐに使えます。",
    "telop": "今日からすぐ使える"
   },
   {
-   "image": "assets/generated/ex001_13_outro",
+   "image": "assets/generated/ex001p_13_outro",
    "voice": "役に立ったら、チャンネル登録と高評価をお願いします。それでは、また次の動画で。",
    "telop": "チャンネル登録お願いします"
   }
