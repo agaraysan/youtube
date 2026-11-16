@@ -1,0 +1,54 @@
+{
+ "id": "ex012_space_trivia",
+ "title": "誰かに話したくなる宇宙の雑学",
+ "bgm_track": "estela",
+ "size": [
+  1080,
+  1920
+ ],
+ "chapters": {
+  "1": "金星",
+  "2": "月",
+  "3": "宇宙の音"
+ },
+ "chapter_label": "雑学",
+ "meta": {
+  "title": "誰かに話したくなる宇宙の雑学3選 #Shorts",
+  "tags": [
+   "雑学",
+   "宇宙",
+   "豆知識",
+   "Shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex012_00_hook",
+   "telop": "誰かに話したくなる\n宇宙の雑学",
+   "voice": "知ると誰かに話したくなる、宇宙の雑学を、3つ紹介します。"
+  },
+  {
+   "image": "assets/generated/ex012_01_venus",
+   "chapter": "1",
+   "telop": "金星は1日が\n1年より長い",
+   "voice": "金星は、自転がとてもゆっくり。1回まわるのにかかる時間が、太陽のまわりを1周する時間より長いんです。"
+  },
+  {
+   "image": "assets/generated/ex012_02_moon",
+   "chapter": "2",
+   "telop": "月は少しずつ\n遠ざかっている",
+   "voice": "月は、毎年およそ3.8センチずつ、地球から遠ざかっています。"
+  },
+  {
+   "image": "assets/generated/ex012_03_space",
+   "chapter": "3",
+   "telop": "宇宙では\n音が伝わらない",
+   "voice": "宇宙には、音を伝える空気がほとんどありません。だから、すぐ近くで大きな音がしても、聞こえないんです。"
+  },
+  {
+   "image": "assets/generated/ex012_04_outro",
+   "telop": "どれが一番\n驚いた？",
+   "voice": "どれが一番、驚きましたか？ ほかの雑学も、チェックしてみてね。"
+  }
+ ]
+}

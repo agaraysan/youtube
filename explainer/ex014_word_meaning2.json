@@ -1,0 +1,71 @@
+{
+ "id": "ex014_word_meaning2",
+ "title": "実は意味を間違えやすい言葉3選 その2",
+ "bgm_track": "you_are_the_only",
+ "size": [
+  1080,
+  1920
+ ],
+ "chapters": {
+  "1": "確信犯",
+  "2": "姑息",
+  "3": "煮詰まる"
+ },
+ "chapter_label": "",
+ "meta": {
+  "title": "実は意味を間違えやすい言葉3選 その2 #Shorts",
+  "tags": [
+   "日本語",
+   "言葉の意味",
+   "雑学",
+   "誤用",
+   "Shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex014_00_desk",
+   "telop": "意味を間違えやすい\n言葉3選 その2",
+   "voice": "実は、意味を間違えて使われやすい言葉。その2です。"
+  },
+  {
+   "image": "assets/generated/ex014_01_belief",
+   "chapter": "1",
+   "telop": "確信犯",
+   "choices": [
+    "× 悪いと分かっていてやる",
+    "○ 正しいと信じてやる"
+   ],
+   "reveal": 1,
+   "voice": "確信犯。もともとは、悪いと分かっていてやることではなく、自分は正しいと信じて行う犯罪のことです。"
+  },
+  {
+   "image": "assets/generated/ex014_02_patch",
+   "chapter": "2",
+   "telop": "姑息",
+   "choices": [
+    "× ひきょう",
+    "○ その場しのぎ"
+   ],
+   "reveal": 1,
+   "voice": "姑息。ひきょうという意味ではなく、一時しのぎ、その場しのぎ、という意味です。"
+  },
+  {
+   "image": "assets/generated/ex014_03_meeting",
+   "chapter": "3",
+   "telop": "煮詰まる",
+   "choices": [
+    "× 行きづまる",
+    "○ 結論が出そうになる"
+   ],
+   "reveal": 1,
+   "voice": "煮詰まる。行きづまることではなく、話し合いが進んで、結論が出る段階に近づくことです。"
+  },
+  {
+   "image": "assets/generated/ex014_00_desk",
+   "telop": "いくつ\n知ってた？",
+   "move": "out",
+   "voice": "いくつ、知っていましたか？ 誰かに話したくなったら、シェアしてね。"
+  }
+ ]
+}

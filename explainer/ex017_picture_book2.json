@@ -1,0 +1,55 @@
+{
+ "id": "ex017_picture_book2",
+ "title": "こぐまのポロと はじめての雪（読み聞かせ）",
+ "bgm_track": "you_are_the_only",
+ "size": [
+  1920,
+  1080
+ ],
+ "transition": "slide",
+ "caption_style": "box",
+ "voice_instructions": "やさしく、ゆっくり、子どもに絵本を読み聞かせるように話してください。",
+ "meta": {
+  "title": "【絵本 読み聞かせ】こぐまのポロと はじめての雪",
+  "tags": [
+   "絵本",
+   "読み聞かせ",
+   "寝かしつけ",
+   "オリジナル絵本",
+   "冬のおはなし"
+  ]
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex017_00_title",
+   "telop": "こぐまのポロと\nはじめての雪",
+   "move": "in_up",
+   "voice": "こぐまのポロと、はじめての雪。"
+  },
+  {
+   "image": "assets/generated/ex017_01_wake",
+   "voice": "ある朝、こぐまのポロが目をさますと、森は、まっ白になっていました。"
+  },
+  {
+   "image": "assets/generated/ex017_02_touch",
+   "voice": "つめたい！ ポロは、はじめての雪に、目をまるくしました。"
+  },
+  {
+   "image": "assets/generated/ex017_03_rabbit",
+   "voice": "そこへ、白いうさぎがやってきて、言いました。いっしょに、雪だるまを作ろうよ。"
+  },
+  {
+   "image": "assets/generated/ex017_04_snowman",
+   "voice": "ふたりは、ころころ、ころころ。大きな雪玉を、ふたつ作りました。"
+  },
+  {
+   "image": "assets/generated/ex017_05_done",
+   "voice": "できあがった雪だるまに、ポロは、自分の赤い手袋を、そっとつけてあげました。"
+  },
+  {
+   "image": "assets/generated/ex017_06_night",
+   "telop": "おしまい",
+   "voice": "その夜、ポロは、ほかほかの気持ちで、ぐっすり眠りました。おしまい。"
+  }
+ ]
+}

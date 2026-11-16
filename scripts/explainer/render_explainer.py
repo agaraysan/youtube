@@ -490,16 +490,17 @@ def pro_progress(n, current):
 def draw_pro(s, lt, ep, im):
     W, H, u = L.W, L.H, L.u
     if s.get("telop_l") is not None and (s["n"] == 0 or ep.get("transition") == "slide"):  # 冒頭のタイトル：少し暗くして中央に
-        a = ease(lt / 0.8)
+        first = L.vertical and s["n"] == 0  # ショートは1コマ目から本題（タイトル）を見せる
+        a = 1.0 if first else ease(lt / 0.8)
         im.alpha_composite(Image.new("RGBA", (W, H), NAVY + (int(110 * a),)))
         tl = s["telop_l"]
-        b = ease((lt - 0.2) / 0.7)
+        b = 1.0 if first else ease((lt - 0.2) / 0.7)
         if b > 0:
             t2 = tl.copy()
             t2.putalpha(t2.getchannel("A").point(lambda v: int(v * b)))
             im.alpha_composite(t2, (0, int(H * (0.36 if L.vertical else 0.42) - tl.height / 2 + 24 * u * (1 - b))))
     elif s.get("telop_l") is not None:
-        t0 = 1.0 if s.get("rank") else 0.15
+        t0 = 0.15
         a = ease((lt - t0) / 0.5)
         if a > 0:
             tl = s["telop_l"]
@@ -585,7 +586,7 @@ def main(spec, out_dir, fast=False):
     scenes, t, missing = [], 0.0, 0
     for n, sc in enumerate(ep["scenes"]):
         lines = sc.get("lines") or [{"text": sc["voice"]}]
-        acc, parts = LEAD + (1.0 if sc.get("rank") else 0), []  # 順位発表はドラムロールの分だけ遅らせる
+        acc, parts = LEAD + (1.0 if sc.get("rank") and ep.get("theme") == "pop" else 0), []  # 派手なデザインは順位発表のドラムロール分だけ遅らせる
         for j, ln in enumerate(lines):
             who = cast.get(ln.get("who"), {})
             voice = who.get("voice", ep.get("voice", "nova"))
@@ -702,7 +703,7 @@ def main(spec, out_dir, fast=False):
                 put(sfx, sfx_pop(), s["start"] + s["voice_end"] + 0.3 + i, 0.5 * g)
         if s.get("reveal") is not None:
             put(sfx, drum[-int(0.8 * SR):], s["start"] + 0.05, 0.4 * g)
-        if s.get("rank"):
+        if s.get("rank") and not PRO:  # 落ち着いたデザインでは順位発表の音を入れない（あがさんの希望）
             put(sfx, drum, s["start"] + 0.05, 0.35 * g)
         elif s["telop_l"] is not None and not PRO:
             put(sfx, pop, s["start"] + 0.05, 0.35)

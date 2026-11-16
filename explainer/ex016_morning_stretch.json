@@ -1,0 +1,54 @@
+{
+ "id": "ex016_morning_stretch",
+ "title": "朝の1分ストレッチ 3ステップ",
+ "bgm_track": "wager_with_angels",
+ "size": [
+  1080,
+  1920
+ ],
+ "chapters": {
+  "1": "首をゆっくり回す",
+  "2": "肩を上げて下ろす",
+  "3": "大きく背伸び"
+ },
+ "chapter_label": "STEP",
+ "meta": {
+  "title": "朝の1分ストレッチ 3ステップでスッキリ #Shorts",
+  "tags": [
+   "ストレッチ",
+   "朝活",
+   "健康習慣",
+   "Shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex016_00_hook",
+   "telop": "朝の1分ストレッチ",
+   "voice": "朝、なんだか体が重い。そんなときに、1分でできるストレッチを、3ステップで紹介します。"
+  },
+  {
+   "image": "assets/generated/ex016_01_neck",
+   "chapter": "1",
+   "telop": "首をゆっくり回す",
+   "voice": "ステップ1。首を、ゆっくり左右に倒して、大きく回します。無理のない範囲で、ゆっくりと。"
+  },
+  {
+   "image": "assets/generated/ex016_02_shoulder",
+   "chapter": "2",
+   "telop": "肩を上げて下ろす",
+   "voice": "ステップ2。両肩を、ぎゅっと耳のほうへ上げて、ストンと力を抜いて下ろします。これを、3回。"
+  },
+  {
+   "image": "assets/generated/ex016_03_reach",
+   "chapter": "3",
+   "telop": "大きく背伸び",
+   "voice": "ステップ3。両手を組んで、頭の上へ。息をはきながら、大きく背伸びをしましょう。"
+  },
+  {
+   "image": "assets/generated/ex016_04_outro",
+   "telop": "毎朝の習慣に",
+   "voice": "たった1分で、体も気分もすっきり。痛みがあるときは、無理をしないでくださいね。"
+  }
+ ]
+}

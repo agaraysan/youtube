@@ -1,0 +1,57 @@
+{
+ "id": "ex015_psych_test2",
+ "title": "心理テスト 海辺で拾ったものは？",
+ "bgm_track": "valley_drive",
+ "size": [
+  1080,
+  1920
+ ],
+ "meta": {
+  "title": "【心理テスト】海辺で最初に拾ったものでわかる、あなたの今の気持ち #Shorts",
+  "tags": [
+   "心理テスト",
+   "占い",
+   "Shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex015_00_beach",
+   "telop": "心理テスト",
+   "voice": "ちょっとした心理テストです。直感で答えてください。"
+  },
+  {
+   "image": "assets/generated/ex015_00_beach",
+   "telop": "海辺で最初に\n拾ったのは？",
+   "choices": [
+    "A 貝がら",
+    "B ガラスの瓶",
+    "C きれいな石"
+   ],
+   "countdown": 3,
+   "move": "in",
+   "voice": "あなたは、夕方の海辺を歩いています。最初に拾ったのは、どれ？"
+  },
+  {
+   "image": "assets/generated/ex015_01_shell",
+   "telop": "A 貝がら",
+   "voice": "Aの貝がらを選んだあなたは、思い出を大切にするタイプ。昔の友だちに、連絡してみるといいことがありそう。"
+  },
+  {
+   "image": "assets/generated/ex015_02_bottle",
+   "telop": "B ガラスの瓶",
+   "voice": "Bの瓶を選んだあなたは、新しい出会いを待っているタイプ。いつもと違う場所に、出かけてみましょう。"
+  },
+  {
+   "image": "assets/generated/ex015_03_stone",
+   "telop": "C きれいな石",
+   "voice": "Cの石を選んだあなたは、こつこつ努力するタイプ。今がんばっていることが、もうすぐ実を結びそう。"
+  },
+  {
+   "image": "assets/generated/ex015_00_beach",
+   "telop": "あなたは\nどれだった？",
+   "move": "out",
+   "voice": "あなたは、どれでしたか？ あくまで、お遊びとして楽しんでくださいね。"
+  }
+ ]
+}

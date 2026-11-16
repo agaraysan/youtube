@@ -1,0 +1,61 @@
+{
+ "id": "ex019_ai_helpful",
+ "title": "AIに頼むと便利なこと3選",
+ "bgm_track": "little_fish",
+ "size": [
+  1920,
+  1080
+ ],
+ "chapters": {
+  "1": "献立を考える",
+  "2": "旅行の計画",
+  "3": "メールの下書き"
+ },
+ "meta": {
+  "title": "知らないと損！AIに頼むと便利なこと3選【ChatGPT活用】",
+  "tags": [
+   "ChatGPT",
+   "AI",
+   "生成AI",
+   "使い方",
+   "時短",
+   "便利"
+  ]
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex019_00_hook",
+   "telop": "AIに頼むと\n便利なこと3選",
+   "voice": "AIに、何を頼めばいいのか分からない。そんな人のために、頼むと便利なことを、3つ紹介します。"
+  },
+  {
+   "image": "assets/generated/ex019_01_menu",
+   "chapter": "1",
+   "telop": "1週間の献立",
+   "voice": "1つ目は、献立づくり。冷蔵庫にあるものと、家族の人数を伝えて、1週間の献立を考えて、と頼むと、買い物リストまで作ってくれます。"
+  },
+  {
+   "image": "assets/generated/ex019_02_trip",
+   "chapter": "2",
+   "telop": "旅行の計画",
+   "voice": "2つ目は、旅行の計画。行き先と日数、予算を伝えると、回る順番や、移動の目安を考えてくれます。"
+  },
+  {
+   "image": "assets/generated/ex019_03_check",
+   "chapter": "2",
+   "telop": "営業時間は公式で確認",
+   "voice": "ただし、お店の営業時間や料金は変わることがあるので、最後は、公式のサイトで確認しましょう。"
+  },
+  {
+   "image": "assets/generated/ex019_04_mail",
+   "chapter": "3",
+   "telop": "メールの下書き",
+   "voice": "3つ目は、メールの下書き。伝えたいことを箇条書きで渡すと、ていねいな文章に整えてくれます。"
+  },
+  {
+   "image": "assets/generated/ex019_05_outro",
+   "telop": "今日から試してみよう",
+   "voice": "献立、旅行、メール。どれも、今日から試せます。役に立ったら、チャンネル登録をお願いします。"
+  }
+ ]
+}
