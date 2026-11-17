@@ -30,5 +30,29 @@
  "zoom128": {
   "song": "cruise",
   "start": 60
+ },
+ "zoom129": {
+  "song": "little_fish",
+  "start": 15
+ },
+ "zoom130": {
+  "song": "valley_drive",
+  "start": 15
+ },
+ "zoom131": {
+  "song": "you_are_the_only",
+  "start": 10
+ },
+ "zoom132": {
+  "song": "cruise",
+  "start": 90
+ },
+ "zoom133": {
+  "song": "estela",
+  "start": 15
+ },
+ "zoom134": {
+  "song": "wager_with_angels",
+  "start": 90
  }
 }
