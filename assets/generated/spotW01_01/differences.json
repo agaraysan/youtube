@@ -1,0 +1,44 @@
+{
+  "differences": [
+    {
+      "description": "左上のちょうちんが四角い形になっている",
+      "type": "shape",
+      "x": 81,
+      "y": 114,
+      "width": 117,
+      "height": 132
+    },
+    {
+      "description": "女の子の帽子のぽんぽんが消えている",
+      "type": "disappearance",
+      "x": 539,
+      "y": 447,
+      "width": 69,
+      "height": 79
+    },
+    {
+      "description": "八百屋の白菜が丸いキャベツに変わっている",
+      "type": "replacement",
+      "x": 744,
+      "y": 414,
+      "width": 122,
+      "height": 94
+    },
+    {
+      "description": "自転車のかごが浅くなっている",
+      "type": "size",
+      "x": 665,
+      "y": 663,
+      "width": 105,
+      "height": 79
+    },
+    {
+      "description": "雪だるまの胴のボタンが3個になっている",
+      "type": "count",
+      "x": 196,
+      "y": 853,
+      "width": 42,
+      "height": 93
+    }
+  ]
+}

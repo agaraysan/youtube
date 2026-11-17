@@ -1,0 +1,12 @@
+{
+ "id": "spotW01_06",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "a.png",
+  "b.png"
+ ],
+ "check": "OK 5 か所",
+ "at_utc": "2026-11-17T15:00:11.670171Z"
+}
