@@ -356,7 +356,7 @@ def render(ep, out_dir, no_voice=False):
 
     ff_out = tmp / "video.mp4"
     ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS),
-                           "-i", "-", "-c:v", "libx264", "-crf", "20", "-preset", "medium", "-maxrate", "6M", "-bufsize", "12M",
+                           "-i", "-", "-c:v", "libx264", "-crf", "21", "-preset", "slow", "-maxrate", "4500k", "-bufsize", "9M",
                            "-pix_fmt", "yuv420p", str(ff_out)], stdin=subprocess.PIPE)
     state = {"frames": 0, "last": None, "fade": 0}
     audio, sheet = [], []
@@ -491,8 +491,18 @@ def render(ep, out_dir, no_voice=False):
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", vw, "-i", mw, "-i", sw, "-filter_complex", fc, "-map", "[o]", "-ar", str(R.SR), str(aw)],
                    check=True)
     out = out_dir / f"{ep['id']}.mp4"
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(ff_out), "-i", str(aw), "-c:v", "copy", "-c:a", "aac", "-b:a", "160k",
-                    "-af", f"loudnorm=I={LOUDNESS}:TP=-2:LRA=11", "-ar", str(R.SR), "-movflags", "+faststart", "-shortest", str(out)], check=True)
+    vsrc, crf = ff_out, 21
+    while True:  # GitHub の枝に置ける大きさ（100MB未満）に収める
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(vsrc), "-i", str(aw), "-c:v", "copy", "-c:a", "aac", "-b:a", "160k",
+                        "-af", f"loudnorm=I={LOUDNESS}:TP=-2:LRA=11", "-ar", str(R.SR), "-movflags", "+faststart", "-shortest", str(out)], check=True)
+        mb = out.stat().st_size / 1e6
+        print("size", f"{mb:.1f}MB", "crf", crf)
+        if mb < 90 or crf >= 30:
+            break
+        crf += 3
+        vsrc = tmp / f"video_{crf}.mp4"
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(ff_out), "-c:v", "libx264", "-crf", str(crf), "-preset", "slow",
+                        "-maxrate", "3M", "-bufsize", "6M", "-pix_fmt", "yuv420p", str(vsrc)], check=True)
     # 確認用の一覧、サムネイル、投稿用の文
     th = [s.resize((480, 270)) for s in sheet[:15]]
     S = Image.new("RGB", (480 * 3, 270 * math.ceil(len(th) / 3)))
