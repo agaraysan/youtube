@@ -45,7 +45,7 @@ LIVELY = ["little_fish", "estela", "wager_with_angels"]
 BGM_FIRST = {"kanji": "valley_drive", "proverb": "you_are_the_only", "yoji": "cruise", "fish": "valley_drive",
              "veg": "you_are_the_only", "antonym": "cruise", "pref": "cruise", "showa": "valley_drive", "trivia": "you_are_the_only",
              "calc": "little_fish", "mushikui": "estela", "count": "little_fish", "memory": "estela", "shadow": "wager_with_angels",
-             "color": "wager_with_angels", "number": "estela"}
+             "color": "wager_with_angels", "number": "estela", "wordsearch": "you_are_the_only"}
 LOUDNESS = -18  # 動画全体の大きさ（LUFS）。render.py の -16 より少し控えめ
 BGM_VOLUME = 0.22  # 曲は -20 LUFS にそろえてから、この倍率で小さめに入れる（声の間はさらに下がる）
 _make, _save = R.BGM.make, R.BGM.save
@@ -615,6 +615,65 @@ def scene_endcard(sc, ep, size):
     return im.convert("RGB")
 
 
+WS_COLORS = [(232, 93, 117), (66, 133, 244), (52, 168, 83), (245, 166, 35), (142, 68, 173), (0, 150, 160)]
+
+
+def scene_words(sc, ep, size):
+    """ことば探し：左にひらがなの表、右に「さがす言葉」。答えでは見つけた言葉に色の帯を引く。
+    sc: cells（行ごとの文字列のリスト）, words（[{"w": 言葉, "r": 行, "c": 列, "d": "h"|"v"}]）, theme"""
+    W, H = size
+    u = H / 1080
+    im = paper(size)
+    rows = sc["cells"]
+    nr, nc = len(rows), len(rows[0])
+    top, bottom = 150 * u, 60 * u
+    cell = min((H - top - bottom) / nr, W * 0.52 / nc)
+    x0 = 110 * u
+    y0 = top + (H - top - bottom - cell * nr) / 2
+    R.shadow_box(im, (x0 - 26 * u, y0 - 26 * u, x0 + cell * nc + 26 * u, y0 + cell * nr + 26 * u), int(24 * u), (255, 255, 255, 250))
+    reveal = sc.get("reveal")
+    if reveal:  # 色の帯（文字の下に敷く）
+        ov = Image.new("RGBA", size, (0, 0, 0, 0))
+        od = ImageDraw.Draw(ov)
+        for k, wd in enumerate(sc["words"]):
+            col = WS_COLORS[k % len(WS_COLORS)]
+            n = len(wd["w"])
+            ax, ay = x0 + cell * wd["c"], y0 + cell * wd["r"]
+            bx, by = (ax + cell * n, ay + cell) if wd["d"] == "h" else (ax + cell, ay + cell * n)
+            pad = cell * 0.08
+            od.rounded_rectangle([ax + pad, ay + pad, bx - pad, by - pad], radius=int(cell * 0.42), fill=col + (95,), outline=col + (230,), width=max(3, int(cell * 0.05)))
+        im = Image.alpha_composite(im, ov)
+    d = ImageDraw.Draw(im)
+    f = R.font(cell * 0.62, "bold")
+    for r, line in enumerate(rows):
+        for c, ch in enumerate(line):
+            d.text((x0 + cell * (c + 0.5), y0 + cell * (r + 0.5)), ch, font=f, fill=INK, anchor="mm")
+    # 右の札：テーマと、さがす言葉
+    px0, px1 = x0 + cell * nc + 90 * u, W - 90 * u
+    py0, py1 = y0 - 26 * u, y0 + cell * nr + 26 * u
+    R.shadow_box(im, (px0, py0, px1, py1), int(24 * u), (255, 255, 255, 250))
+    d = ImageDraw.Draw(im)
+    acc = R.accent(ep)
+    d.rounded_rectangle([px0, py0, px1, py0 + 120 * u], radius=int(24 * u), fill=acc)
+    d.rectangle([px0, py0 + 60 * u, px1, py0 + 120 * u], fill=acc)
+    d.text(((px0 + px1) / 2, py0 + 60 * u), sc.get("theme", "さがす言葉"), font=R.font(56 * u, "heavy"), fill=(255, 255, 255), anchor="mm")
+    words = sc["words"]
+    lh = min(110 * u, (py1 - py0 - 170 * u) / max(1, len(words)))
+    fw = R.font(min(64 * u, lh * 0.62), "bold")
+    for k, wd in enumerate(words):
+        cy = py0 + 150 * u + lh * (k + 0.5)
+        bx = px0 + 70 * u
+        col = WS_COLORS[k % len(WS_COLORS)]
+        d.rounded_rectangle([bx - 22 * u, cy - 22 * u, bx + 22 * u, cy + 22 * u], radius=int(8 * u), outline=(150, 150, 160) if not reveal else col, width=int(4 * u), fill=col if reveal else None)
+        if reveal:
+            d.line([(bx - 11 * u, cy), (bx - 2 * u, cy + 10 * u), (bx + 13 * u, cy - 12 * u)], fill=(255, 255, 255), width=int(6 * u), joint="curve")
+        d.text((bx + 50 * u, cy), wd["w"], font=fw, fill=INK, anchor="lm")
+    R.header(im, ep, sc, H)
+    if sc.get("caption"):
+        caption(im, ep, sc["caption"], H)
+    return think_frames(im, ep, sc, H) if sc.get("think") else im.convert("RGB")
+
+
 _orig = R.render_scene
 
 
@@ -636,6 +695,8 @@ def render_scene(sc, ep, size):
         return scene_memo(sc, ep, size)
     if t == "count":
         return scene_count(sc, ep, size)
+    if t == "words":
+        return scene_words(sc, ep, size)
     return _orig(sc, ep, size)
 
 

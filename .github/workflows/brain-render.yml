@@ -4,11 +4,10 @@ name: brain-render
 # 6台に分けて同時に作る。1台が止まっても、ほかの台の分は残る。
 on:
   push:
-    paths: ["brain/episodes/*.json", "brain/shorts/*.json", "scripts/brain/**", ".github/workflows/brain-render.yml"]
+    paths: ["brain/episodes/*.json", "brain/shorts/*.json", "scripts/brain/RENDER_VERSION", "scripts/brain/*.sh", ".github/workflows/brain-render.yml"]
   workflow_dispatch:
 permissions:
   contents: write
-  actions: read
 concurrency: { group: brain-render, cancel-in-progress: false }
 jobs:
   render:
@@ -19,16 +18,12 @@ jobs:
       matrix: { shard: [0, 1, 2, 3, 4, 5] }
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
       - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji && pip install -q pillow numpy
       - name: Fetch brain-previews
         run: |
           mkdir -p pv/out/shorts
           if git fetch -q origin brain-previews; then git --work-tree=pv checkout FETCH_HEAD -- out 2>/dev/null || true; fi
-      # 前の回で書き出し済みなのに公開まで行かなかった分を取り込む（同じ内容なら作り直さない）
-      - uses: actions/download-artifact@v4
-        continue-on-error: true
-        with: { name: "part-${{ matrix.shard }}", path: reuse, run-id: 43932871797, github-token: "${{ github.token }}" }
-      - run: if [ -d reuse/out ]; then cp -r reuse/out/. pv/out/; fi
       - name: Render this shard
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
