@@ -11,6 +11,8 @@ import codex_image as C  # noqa: E402
 
 C.REQ = ROOT / "requests" / "explainer_images"
 LOCK = __import__("threading").Lock()
+AUTH_BROKEN = __import__("threading").Event()
+AUTH_ERR = "Please log out and sign in again"
 
 
 def save(msg):
@@ -29,9 +31,18 @@ def save(msg):
 def one(r):
     out = C.OUT / r["id"]
     out.mkdir(parents=True, exist_ok=True)
+    if AUTH_BROKEN.is_set():
+        return
     rc = C.run_codex(r, out)
     files = sorted(f.name for f in out.iterdir() if f.suffix.lower() in C.MEDIA)
     status = "ok" if files else "failed"
+    log = out / "codex.log"
+    if not files and log.exists() and AUTH_ERR in log.read_text(encoding="utf-8", errors="ignore"):
+        # ログイン切れ：結果を書かずに止める（入れ直したあと、もう一度動かせば続きから描く）
+        AUTH_BROKEN.set()
+        log.unlink()
+        print("Codex のログインが切れています。CODEX_AUTH_JSON を入れ直してください。", flush=True)
+        return
     (out / "result.json").write_text(json.dumps({"id": r["id"], "status": status, "via": "codex", "codex_returncode": rc, "files": files,
                                                  "at_utc": datetime.datetime.utcnow().isoformat() + "Z"}, ensure_ascii=False, indent=1), encoding="utf-8")
     print(r["id"], status, files, flush=True)
@@ -43,6 +54,8 @@ def main():
     print("pending", len(todo), flush=True)
     with ThreadPoolExecutor(2) as ex:
         list(ex.map(one, todo))
+    if AUTH_BROKEN.is_set():
+        sys.exit(1)
 
 
 if __name__ == "__main__":
