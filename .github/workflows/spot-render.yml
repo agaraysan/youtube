@@ -1,0 +1,35 @@
+name: spot-render
+# 間違い探し（新デザイン）。spot/episodes/*.json を push すると声つきで描画し、spot-previews 枝に最新分だけ置く（投稿はしない）。
+# 台本・描画コード・使う絵が変わった回だけ作り直す（声のAPI代とActionsの時間の節約）。
+on:
+  push:
+    paths: ["spot/episodes/*.json", "scripts/spot/**", ".github/workflows/spot-render.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: { group: spot-render, cancel-in-progress: false }
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk fonts-noto-cjk-extra && pip install -q pillow numpy
+      - name: Fetch spot-previews
+        run: |
+          mkdir -p pv/out
+          if git fetch -q origin spot-previews; then git --work-tree=pv checkout FETCH_HEAD -- out 2>/dev/null || true; fi
+      - name: Render
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: ls spot/episodes/*.json | xargs -P 2 -n 1 bash scripts/spot/render_one.sh
+      - name: Push spot-previews (latest only)
+        if: always()
+        run: |
+          for m in pv/out/*.mp4; do [ -e "$m" ] || continue; id=$(basename "$m" .mp4); [ -f "spot/episodes/$id.json" ] || rm -f pv/out/$id.* pv/out/${id}_*; done
+          ls -la pv/out
+          cd pv
+          git init -q && git checkout -q -b spot-previews
+          git config user.name "render-bot"; git config user.email "render-bot@users.noreply.github.com"
+          git add -A . && git commit -qm "spot previews (latest only)"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:spot-previews
