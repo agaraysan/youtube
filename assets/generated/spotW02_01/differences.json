@@ -1,0 +1,44 @@
+{
+  "differences": [
+    {
+      "description": "左上の星飾りが五角から六角になっている",
+      "type": "shape",
+      "x": 31,
+      "y": 51,
+      "width": 209,
+      "height": 221
+    },
+    {
+      "description": "ツリーの大きな赤い玉飾りが1個減っている",
+      "type": "count",
+      "x": 861,
+      "y": 125,
+      "width": 103,
+      "height": 105
+    },
+    {
+      "description": "くるみ割り人形の帽子の飾りが三日月になっている",
+      "type": "replacement",
+      "x": 73,
+      "y": 363,
+      "width": 64,
+      "height": 60
+    },
+    {
+      "description": "マグカップのトナカイ模様が雪の結晶になっている",
+      "type": "pattern",
+      "x": 473,
+      "y": 694,
+      "width": 55,
+      "height": 54
+    },
+    {
+      "description": "プレゼントの赤いリボンが消えている",
+      "type": "disappearance",
+      "x": 737,
+      "y": 754,
+      "width": 227,
+      "height": 161
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "differences": [
+    {
+      "description": "風車の羽根が4枚から3枚に減っている",
+      "type": "count",
+      "x": 106,
+      "y": 106,
+      "width": 121,
+      "height": 126
+    },
+    {
+      "description": "青い魚のおもちゃの尾が丸い扇形になっている",
+      "type": "shape",
+      "x": 916,
+      "y": 104,
+      "width": 61,
+      "height": 81
+    },
+    {
+      "description": "瓶の中の丸い飴が包み紙付きの四角いお菓子に替わっている",
+      "type": "replacement",
+      "x": 415,
+      "y": 326,
+      "width": 115,
+      "height": 121
+    },
+    {
+      "description": "地面に置かれたこまが消えている",
+      "type": "removal",
+      "x": 113,
+      "y": 845,
+      "width": 112,
+      "height": 123
+    },
+    {
+      "description": "自転車のかごに茶色いジグザグの編み模様が加わっている",
+      "type": "pattern",
+      "x": 735,
+      "y": 634,
+      "width": 127,
+      "height": 97
+    }
+  ]
+}

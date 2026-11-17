@@ -1,0 +1,44 @@
+{
+  "differences": [
+    {
+      "description": "壁の丸いざるが四角いざるになっている",
+      "type": "shape",
+      "x": 63,
+      "y": 158,
+      "width": 104,
+      "height": 127
+    },
+    {
+      "description": "金魚が1匹から2匹に増えている",
+      "type": "count",
+      "x": 877,
+      "y": 198,
+      "width": 64,
+      "height": 55
+    },
+    {
+      "description": "魔法びんに青い花模様が付いている",
+      "type": "pattern",
+      "x": 854,
+      "y": 389,
+      "width": 47,
+      "height": 71
+    },
+    {
+      "description": "皿のトマトが柿に替わっている",
+      "type": "replacement",
+      "x": 150,
+      "y": 732,
+      "width": 75,
+      "height": 63
+    },
+    {
+      "description": "米びつのふたのつまみが消えている",
+      "type": "disappearance",
+      "x": 590,
+      "y": 695,
+      "width": 78,
+      "height": 67
+    }
+  ]
+}

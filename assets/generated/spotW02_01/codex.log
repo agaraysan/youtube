@@ -1,0 +1,351 @@
+[保存先](/home/runner/work/youtube/youtube/assets/generated/spotW02_01)に `a.png`、`b.png`、`differences.json`、`result.json` を作成しました。
+
+内蔵画像生成で夜のクリスマスマーケットを生成し、5か所を編集しました。両画像は1024×1024で、編集範囲外の画素一致を確認済みです。
+
+GitHubへの送信は完了できませんでした。`.git` が読み取り専用でコミット・fetchに失敗し、`GH_PUSH_TOKEN` も空でした。
+
+--- stderr ---
+HTML/CSS, or canvas
+- Making a small project-local asset edit when the source file already exists in an editable native format
+- Any task where the user clearly wants deterministic code-native output instead of a generated bitmap
+
+## Decision tree
+
+Think about two separate questions:
+
+1. **Intent:** is this a new image or an edit of an existing image?
+2. **Execution strategy:** is this one asset or many assets/variants?
+
+Intent:
+- If the user wants to modify an existing image while preserving parts of it, treat the request as **edit**.
+- If the user provides images only as references for style, composition, mood, or subject guidance, treat the request as **generate**.
+- If the user provides no images, treat the request as **generate**.
+
+Built-in edit semantics:
+- Built-in edit mode is for images already visible in the conversation context, such as attached images or images generated earlier in the thread.
+- If the user wants to edit a local image file with the built-in tool, first load it with built-in `view_image` tool so the image is visible in the conversation context, then proceed with the built-in edit flow.
+- Do not promise arbitrary filesystem-path editing through the built-in tool.
+- If a local file still needs direct file-path control, masks, or other explicit CLI-only parameters, use the explicit CLI fallback only when the user asks for it.
+- For edits, preserve invariants aggressively and save non-destructively by default.
+
+Execution strategy:
+- In the built-in default path, produce many assets or variants by issuing one `image_gen` call per requested asset or variant.
+- In the CLI fallback path, use the CLI `generate-batch` subcommand only when the user explicitly chose CLI mode and needs many prompts/assets.
+- For many distinct assets, do not use `n` as a substitute for separate prompts. `n` is for variants of one prompt; distinct assets need distinct built-in calls or distinct CLI `generate-batch` jobs.
+
+Assume the user wants a new image unless they clearly ask to change an existing one.
+
+## Workflow
+1. Decide the top-level mode: built-in by default, including transparent-output requests; fallback CLI only if explicitly requested or confirmed.
+2. Decide the intent: `generate` or `edit`.
+3. Decide whether the output is preview-only or meant to be consumed by the current project.
+4. Decide the execution strategy: single asset vs repeated built-in calls vs CLI `generate-batch`.
+5. Collect inputs up front: prompt(s), exact text (verbatim), constraints/avoid list, and any input images.
+6. For every input image, label its role explicitly:
+   - reference image
+   - edit target
+   - supporting insert/style/compositing input
+7. If the edit target is only on the local filesystem and you are staying on the built-in path, inspect it with `view_image` first so the image is available in conversation context.
+8. If the user asked for a photo, illustration, sprite, product image, banner, or other explicitly raster-style asset, use `image_gen` rather than substituting SVG/HTML/CSS placeholders. If the request is for an icon, logo, or UI graphic that should match existing repo-native SVG/vector/code assets, prefer editing those directly instead.
+9. Augment the prompt based on specificity:
+   - If the user's prompt is already specific and detailed, normalize it into a clear spec without adding creative requirements.
+   - If the user's prompt is generic, add tasteful augmentation only when it materially improves output quality.
+10. Use the built-in `image_gen` tool by default.
+11. For transparent-output requests, ask built-in `image_gen` for a transparent background and preserve the generated alpha channel.
+12. Inspect outputs and validate: subject, style, composition, text accuracy, and invariants/avoid items.
+13. Iterate with a single targeted change, then re-check.
+14. For preview-only work, render the image inline; the underlying file may remain at the default `$CODEX_HOME/generated_images/...` path.
+15. For project-bound work, move or copy the selected artifact into the workspace and update any consuming code or references. Never leave a project-referenced asset only at the default `$CODEX_HOME/generated_images/...` path.
+16. For batches or multi-asset requests, persist every requested deliverable final in the workspace unless the user explicitly asked to keep outputs preview-only. Discarded variants do not need to be kept unless requested.
+17. If the user explicitly chooses or confirms the CLI fallback, then use the fallback-only docs for model, quality, size, `input_fidelity`, masks, output format, output paths, and network setup.
+18. Always report the final saved path(s) for any workspace-bound asset(s), plus the final prompt or prompt set and whether the built-in tool or fallback CLI mode was used.
+
+## Transparent image requests
+
+Ask built-in `image_gen` for a genuinely transparent background and preserve its alpha.
+
+## Prompt augmentation
+
+Reformat user prompts into a structured, production-oriented spec. Make the user's goal clearer and more actionable, but do not blindly add detail.
+
+Treat this as prompt-shaping guidance, not a closed schema. Use only the lines that help, and add a short extra labeled line when it materially improves clarity.
+
+### Specificity policy
+
+Use the user's prompt specificity to decide how much augmentation is appropriate:
+
+- If the prompt is already specific and detailed, preserve that specificity and only normalize/structure it.
+- If the prompt is generic, you may add tasteful augmentation when it will materially improve the result.
+
+Allowed augmentations:
+- composition or framing hints
+- polish level or intended-use hints
+- practical layout guidance
+- reasonable scene concreteness that supports the stated request
+
+Not allowed augmentations:
+- extra characters or objects that are not implied by the request
+- brand names, slogans, palettes, or narrative beats that are not implied
+- arbitrary side-specific placement unless the surrounding layout supports it
+
+## Use-case taxonomy (exact slugs)
+
+Classify each request into one of these buckets and keep the slug consistent across prompts and references.
+
+Generate:
+- photorealistic-natural — candid/editorial lifestyle scenes with real texture and natural lighting.
+- product-mockup — product/packaging shots, catalog imagery, merch concepts.
+- ui-mockup — app/web interface mockups and wireframes; specify the desired fidelity.
+- infographic-diagram — diagrams/infographics with structured layout and text.
+- scientific-educational — classroom explainers, scientific diagrams, and learning visuals with required labels and accuracy constraints.
+- ads-marketing — campaign concepts and ad creatives with audience, brand position, scene, and exact tagline/copy.
+- productivity-visual — slide, chart, workflow, and data-heavy business visuals.
+- logo-brand — logo/mark exploration, vector-friendly.
+- illustration-story — comics, children’s book art, narrative scenes.
+- stylized-concept — style-driven concept art, 3D/stylized renders.
+- historical-scene — period-accurate/world-knowledge scenes.
+
+Edit:
+- text-localization — translate/replace in-image text, preserve layout.
+- identity-preserve — try-on, person-in-scene; lock face/body/pose.
+- precise-object-edit — remove/replace a specific element (including interior swaps).
+- lighting-weather — time-of-day/season/atmosphere changes only.
+- background-extraction — transparent background / clean cutout. Ask built-in `image_gen` for actual transparency.
+- style-transfer — apply reference style while changing subject/scene.
+- compositing — multi-image insert/merge with matched lighting/perspective.
+- sketch-to-render — drawing/line art to photoreal render.
+
+## Shared prompt schema
+
+Use the following labeled spec as shared prompt scaffolding for both top-level modes:
+
+```text
+Use case: <taxonomy slug>
+Asset type: <where the asset will be used>
+Primary request: <user's main prompt>
+Input images: <Image 1: role; Image 2: role> (optional)
+Scene/backdrop: <environment>
+Subject: <main subject>
+Style/medium: <photo/illustration/3D/etc>
+Composition/framing: <wide/close/top-down; placement>
+Lighting/mood: <lighting + mood>
+Color palette: <palette notes>
+Materials/textures: <surface details>
+Text (verbatim): "<exact text>"
+Constraints: <must keep/must avoid>
+Avoid: <negative constraints>
+```
+
+Notes:
+- `Asset type` and `Input images` are prompt scaffolding, not dedicated CLI flags.
+- `Scene/backdrop` refers to the visual setting. It is not the same as the fallback CLI `background` parameter, which controls output transparency behavior.
+- Fallback-only execution notes such as `Quality:`, `Input fidelity:`, masks, output format, and output paths belong in the CLI path only. Do not treat them as built-in `image_gen` tool arguments.
+
+Augmentation rules:
+- Keep it short.
+- Add only the details needed to improve the prompt materially.
+- For edits, explicitly list invariants (`change only X; keep Y unchanged`).
+- If any critical detail is missing and blocks success, ask a question; otherwise proceed.
+
+## Examples
+
+### Generation example (hero image)
+```text
+Use case: product-mockup
+Asset type: landing page hero
+Primary request: a minimal hero image of a ceramic coffee mug
+Style/medium: clean product photography
+Composition/framing: wide composition with usable negative space for page copy if needed
+Lighting/mood: soft studio lighting
+Constraints: no logos, no text, no watermark
+```
+
+### Edit example (invariants)
+```text
+Use case: precise-object-edit
+Asset type: product photo background replacement
+Primary request: replace only the background with a warm sunset gradient
+Constraints: change only the background; keep the product and its edges unchanged; no text; no watermark
+```
+
+## Prompting best practices
+- Structure prompt as scene/backdrop -> subject -> details -> constraints.
+- Include intended use (ad, UI mock, infographic) to set the mode and polish level.
+- Use camera/composition language for photorealism.
+- Only use SVG/vector stand-ins when the user explicitly asked for vector output or a non-image placeholder.
+- Quote exact text and specify typography + placement.
+- For tricky words, spell them letter-by-letter and require verbatim rendering.
+- For multi-image inputs, reference images by index and describe how they should be used.
+- For edits, repeat invariants every iteration to reduce drift.
+- Iterate with single-change follow-ups.
+- If the prompt is generic, add only the extra detail that will materially help.
+- If the prompt is already detailed, normalize it instead of expanding it.
+- For CLI fallback only, see `references/cli.md` and `references/image-api.md` for model, `quality`, `input_fidelity`, masks, output format, and output-path guidance.
+- For transparent images, ask built-in `image_gen` for actual transparency and preserve its alpha.
+
+More principles shared by both modes: `references/prompting.md`.
+Copy/paste specs shared by both modes: `references/sample-prompts.md`.
+
+## Guidance by asset type
+Asset-type templates (website assets, game assets, wireframes, logo) are consolidated in `references/sample-prompts.md`.
+
+## gpt-image-2 guidance for CLI fallback
+
+The fallback CLI defaults to `gpt-image-2`.
+
+- Use `gpt-image-2` for new CLI/API workflows unless the user confirms a different model.
+- CLI `gpt-image-2` does not support `background=transparent`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- `gpt-image-2` always uses high fidelity for image inputs; do not set `input_fidelity` with this model.
+- `gpt-image-2` supports `quality` values `low`, `medium`, `high`, and `auto`.
+- Use `quality low` for fast drafts, thumbnails, and quick iterations. Use `medium`, `high`, or `auto` for final assets, dense text, diagrams, identity-sensitive edits, or high-resolution outputs.
+- Square images are typically fastest to generate. Use `1024x1024` for fast square drafts.
+- If the user asks for 4K-style output, use `3840x2160` for landscape or `2160x3840` for portrait.
+- `gpt-image-2` size may be `auto` or `WIDTHxHEIGHT` if all constraints hold: max edge `<= 3840px`, both edges multiples of `16px`, long-to-short ratio `<= 3:1`, total pixels between `655,360` and `8,294,400`.
+
+Popular `gpt-image-2` sizes:
+- `1024x1024` square
+- `1536x1024` landscape
+- `1024x1536` portrait
+- `2048x2048` 2K square
+- `2048x1152` 2K landscape
+- `3840x2160` 4K landscape
+- `2160x3840` 4K portrait
+- `auto`
+
+## Fallback CLI mode only
+
+### Temp and output conventions
+These conventions apply only to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc 'git status --short; pwd' in /home/runner/work/youtube/youtube
+ succeeded in 180ms:
+/home/runner/work/youtube/youtube
+
+codex
+元画像ができました。星の飾り、ツリーの玉飾り、くるみ割り人形の帽子、マグカップ、プレゼントの5か所を編集し、その範囲だけを元画像に合成します。
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+from pathlib import Path
+for p in Path('/home/runner/.codex/generated_images/01a1ea0c-d5cd-7c00-8ba8-faf3757f2a8c').glob('*.png'):
+ print(p.name,Image.open(p).size)
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+exec-f557bccb-a348-45df-84bb-eb0db50b7f9e.png (1254, 1254)
+exec-6ea3e9b9-e73f-419f-8b20-335dd7929757.png (1254, 1254)
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image,ImageDraw,ImageFilter
+from pathlib import Path
+import json,numpy as np
+src=Path('/home/runner/.codex/generated_images/01a1ea0c-d5cd-7c00-8ba8-faf3757f2a8c')
+out=Path('assets/generated/spotW02_01');out.mkdir(parents=True,exist_ok=True)
+a=Image.open(src/'exec-6ea3e9b9-e73f-419f-8b20-335dd7929757.png').convert('RGB').resize((1024,1024),Image.Resampling.LANCZOS)
+e=Image.open(src/'exec-f557bccb-a348-45df-84bb-eb0db50b7f9e.png').convert('RGB').resize((1024,1024),Image.Resampling.LANCZOS)
+items=[((38,62,294,333),'左上の星飾りが五角から六角になっている','shape'),((1055,153,1181,282),'ツリーの大きな赤い玉飾りが1個減っている','count'),((89,445,168,518),'くるみ割り人形の帽子の飾りが三日月になっている','replacement'),((579,850,647,916),'マグカップのトナカイ模様が雪の結晶になっている','pattern'),((902,923,1180,1120),'プレゼントの赤いリボンが消えている','disappearance')]
+b=a.copy();dif=[];union=np.zeros((1024,1024),bool)
+for box,desc,typ in items:
+ x0,y0,x1,y1=[round(v*1024/1254) for v in box]
+ mask=Image.new('L',(x1-x0,y1-y0));d=ImageDraw.Draw(mask);d.rectangle((7,7,mask.width-8,mask.height-8),fill=255);mask=mask.filter(ImageFilter.GaussianBlur(2))
+ b.paste(e.crop((x0,y0,x1,y1)),(x0,y0),mask)
+ union[y0:y1,x0:x1]=True
+ dif.append(dict(description=desc,type=typ,x=x0,y=y0,width=x1-x0,height=y1-y0))
+a.save(out/'a.png');b.save(out/'b.png')
+(out/'differences.json').write_text(json.dumps({'differences':dif},ensure_ascii=False,indent=2)+'\\n')
+(out/'result.json').write_text(json.dumps({'id':'spotW02_01','status':'ok','via':'codex-cloud','files':['a.png','b.png','differences.json']},ensure_ascii=False,indent=2)+'\\n')
+changed=np.any(np.array(a)"'!=np.array(b),axis=2)
+assert not np.any(changed & ~union)
+assert all(max(d['"'width'],d['height'])>=50 for d in dif)
+print('Validated: 1024x1024 PNG pair; exactly five edit regions; all outside pixels identical.')
+print(json.dumps(dif,ensure_ascii=False))
+PY" in /home/runner/work/youtube/youtube
+ exited 1 in 109ms:
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+ModuleNotFoundError: No module named 'numpy'
+
+2026-11-17T15:10:16.498244Z ERROR codex_core::tools::router: error=unable to locate image at `/home/runner/work/youtube/youtube/assets/generated/spotW02_01/b.png`: No such file or directory (os error 2)
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image,ImageDraw,ImageFilter,ImageChops
+from pathlib import Path
+import json
+src=Path('/home/runner/.codex/generated_images/01a1ea0c-d5cd-7c00-8ba8-faf3757f2a8c');out=Path('assets/generated/spotW02_01');out.mkdir(parents=True,exist_ok=True)
+a=Image.open(src/'exec-6ea3e9b9-e73f-419f-8b20-335dd7929757.png').convert('RGB').resize((1024,1024),Image.Resampling.LANCZOS)
+e=Image.open(src/'exec-f557bccb-a348-45df-84bb-eb0db50b7f9e.png').convert('RGB').resize((1024,1024),Image.Resampling.LANCZOS)
+items=[((38,62,294,333),'左上の星飾りが五角から六角になっている','shape'),((1055,153,1181,282),'ツリーの大きな赤い玉飾りが1個減っている','count'),((89,445,168,518),'くるみ割り人形の帽子の飾りが三日月になっている','replacement'),((579,850,647,916),'マグカップのトナカイ模様が雪の結晶になっている','pattern'),((902,923,1180,1120),'プレゼントの赤いリボンが消えている','disappearance')]
+b=a.copy();dif=[];outside=Image.new('L',a.size,255);draw=ImageDraw.Draw(outside)
+for box,desc,typ in items:
+ x0,y0,x1,y1=[round(v*1024/1254) for v in box]
+ mask=Image.new('L',(x1-x0,y1-y0));d=ImageDraw.Draw(mask);d.rectangle((7,7,mask.width-8,mask.height-8),fill=255);mask=mask.filter(ImageFilter.GaussianBlur(2))
+ b.paste(e.crop((x0,y0,x1,y1)),(x0,y0),mask);draw.rectangle((x0,y0,x1-1,y1-1),fill=0)
+ dif.append(dict(description=desc,type=typ,x=x0,y=y0,width=x1-x0,height=y1-y0))
+a.save(out/'a.png');b.save(out/'b.png')
+(out/'differences.json').write_text(json.dumps({'differences':dif},ensure_ascii=False,indent=2)+'\\n')
+(out/'result.json').write_text(json.dumps({'id':'spotW02_01','status':'ok','via':'codex-cloud','files':['a.png','b.png','differences.json']},ensure_ascii=False,indent=2)+'\\n')
+assert ImageChops.multiply(ImageChops.difference(a,b).convert('L'),outside).getbbox() is None
+assert all(max(d['width'],d['height'])>=50 for d in dif)
+print('Validated 1024x1024 PNGs, five regions, all outside pixels identical.')
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 521ms:
+Validated 1024x1024 PNGs, five regions, all outside pixels identical.
+
+codex
+指定の4ファイルを保存しました。画像は両方とも1024×1024で、5つの編集範囲の外側は画素単位で一致しています。続けて `codex-inbox` 枝への送信を試みます。
+
+codex
+[保存先](/home/runner/work/youtube/youtube/assets/generated/spotW02_01)に `a.png`、`b.png`、`differences.json`、`result.json` を作成しました。
+
+内蔵画像生成で夜のクリスマスマーケットを生成し、5か所を編集しました。両画像は1024×1024で、編集範囲外の画素一致を確認済みです。
+
+GitHubへの送信は完了できませんでした。`.git` が読み取り専用でコミット・fetchに失敗し、`GH_PUSH_TOKEN` も空でした。
+tokens used
+18,725

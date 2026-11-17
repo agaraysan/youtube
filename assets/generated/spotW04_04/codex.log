@@ -1,0 +1,423 @@
+指定フォルダーに [a.png](assets/generated/spotW04_04/a.png)、[b.png](assets/generated/spotW04_04/b.png)、`differences.json`、`result.json` を保存しました。内蔵画像生成機能を使用し、1024×1024・差分5か所・差分領域外の画素完全一致を確認済みです。
+
+GitHub送信は未完了です。`.git` が読み取り専用で、代替送信も `github.com` の名前解決に失敗しました。`GH_PUSH_TOKEN` は空です。
+
+--- stderr ---
+duct and its edges unchanged; no text; no watermark
+```
+
+## Prompting best practices
+- Structure prompt as scene/backdrop -> subject -> details -> constraints.
+- Include intended use (ad, UI mock, infographic) to set the mode and polish level.
+- Use camera/composition language for photorealism.
+- Only use SVG/vector stand-ins when the user explicitly asked for vector output or a non-image placeholder.
+- Quote exact text and specify typography + placement.
+- For tricky words, spell them letter-by-letter and require verbatim rendering.
+- For multi-image inputs, reference images by index and describe how they should be used.
+- For edits, repeat invariants every iteration to reduce drift.
+- Iterate with single-change follow-ups.
+- If the prompt is generic, add only the extra detail that will materially help.
+- If the prompt is already detailed, normalize it instead of expanding it.
+- For CLI fallback only, see `references/cli.md` and `references/image-api.md` for model, `quality`, `input_fidelity`, masks, output format, and output-path guidance.
+- For transparent images, ask built-in `image_gen` for actual transparency and preserve its alpha.
+
+More principles shared by both modes: `references/prompting.md`.
+Copy/paste specs shared by both modes: `references/sample-prompts.md`.
+
+## Guidance by asset type
+Asset-type templates (website assets, game assets, wireframes, logo) are consolidated in `references/sample-prompts.md`.
+
+## gpt-image-2 guidance for CLI fallback
+
+The fallback CLI defaults to `gpt-image-2`.
+
+- Use `gpt-image-2` for new CLI/API workflows unless the user confirms a different model.
+- CLI `gpt-image-2` does not support `background=transparent`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- `gpt-image-2` always uses high fidelity for image inputs; do not set `input_fidelity` with this model.
+- `gpt-image-2` supports `quality` values `low`, `medium`, `high`, and `auto`.
+- Use `quality low` for fast drafts, thumbnails, and quick iterations. Use `medium`, `high`, or `auto` for final assets, dense text, diagrams, identity-sensitive edits, or high-resolution outputs.
+- Square images are typically fastest to generate. Use `1024x1024` for fast square drafts.
+- If the user asks for 4K-style output, use `3840x2160` for landscape or `2160x3840` for portrait.
+- `gpt-image-2` size may be `auto` or `WIDTHxHEIGHT` if all constraints hold: max edge `<= 3840px`, both edges multiples of `16px`, long-to-short ratio `<= 3:1`, total pixels between `655,360` and `8,294,400`.
+
+Popular `gpt-image-2` sizes:
+- `1024x1024` square
+- `1536x1024` landscape
+- `1024x1536` portrait
+- `2048x2048` 2K square
+- `2048x1152` 2K landscape
+- `3840x2160` 4K landscape
+- `2160x3840` 4K portrait
+- `auto`
+
+## Fallback CLI mode only
+
+### Temp and output conventions
+These conventions apply only to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+---
+name: using-superpowers
+description: Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions
+---
+
+<SUBAGENT-STOP>
+If you were dispatched as a subagent to execute a specific task, ignore this skill.
+</SUBAGENT-STOP>
+
+<EXTREMELY-IMPORTANT>
+If you think there is even a 1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST invoke the skill.
+
+IF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.
+
+This is not negotiable. You cannot rationalize your way out of this.
+</EXTREMELY-IMPORTANT>
+
+## The Rule
+
+**Invoke relevant or requested skills BEFORE any response or action** — including clarifying questions, exploring the codebase, or checking files. If it turns out wrong for the situation, you don't have to use it.
+
+**Before entering plan mode:** if you haven't already brainstormed, invoke the brainstorming skill first.
+
+Then announce "Using [skill] to [purpose]" and follow the skill exactly. If it has a checklist, create a todo per item.
+
+## Skill Priority
+
+When multiple skills apply, process skills come first — they set the approach, then implementation skills (frontend-design, etc.) carry it out. Brainstorming and systematic-debugging are Superpowers' most common process skills, but the rule holds for any of them.
+
+- "Let's build X" → superpowers:brainstorming first, then implementation skills.
+- "Fix this bug" → superpowers:systematic-debugging first, then domain skills.
+
+## Red Flags
+
+These thoughts mean STOP—you're rationalizing:
+
+| Thought | Reality |
+|---------|---------|
+| "This is just a simple question" | Questions are tasks. Check for skills. |
+| "I need more context first" | Skill check comes BEFORE clarifying questions. |
+| "Let me explore the codebase first" | Skills tell you HOW to explore. Check first. |
+| "I can check git/files quickly" | Files lack conversation context. Check for skills. |
+| "Let me gather information first" | Skills tell you HOW to gather information. |
+| "This doesn't need a formal skill" | If a skill exists, use it. |
+| "I remember this skill" | Skills evolve. Read current version. |
+| "This doesn't count as a task" | Action = task. Check for skills. |
+| "The skill is overkill" | Simple things become complex. Use it. |
+| "I'll just do this one thing first" | Check BEFORE doing anything. |
+| "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
+| "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
+
+## Platform Adaptation
+
+If your harness appears here, read its reference file for special instructions:
+
+- Claude Code: `references/claude-code-tools.md`
+- Codex: `references/codex-tools.md`
+- Pi: `references/pi-tools.md`
+- Antigravity: `references/antigravity-tools.md`
+- Hermes Agent: `references/hermes-tools.md`
+- Muse: `references/muse-tools.md`
+
+## User Instructions
+
+User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+
+codex
+imagegen スキルを使い、写真風の元画像と、指定の5か所だけを変更した画像を作成します。指定フォルダーに保存し、差分の位置と画像サイズを確認してから `codex-inbox` 枝へ送ります。
+
+exec
+/bin/bash -lc 'pwd && git status --short && ls requests/images/spotW04_04.json && cat requests/images/spotW04_04.json' in /home/runner/work/youtube/youtube
+ succeeded in 175ms:
+/home/runner/work/youtube/youtube
+?? assets/generated/spotW02_01/
+?? assets/generated/spotW02_02/
+?? assets/generated/spotW02_03/
+?? assets/generated/spotW02_04/
+?? assets/generated/spotW02_05/
+?? assets/generated/spotW02_06/
+?? assets/generated/spotW03_01/
+?? assets/generated/spotW03_02/
+?? assets/generated/spotW03_03/
+?? assets/generated/spotW03_04/
+?? assets/generated/spotW03_05/
+?? assets/generated/spotW03_06/
+?? assets/generated/spotW04_01/
+?? assets/generated/spotW04_02/
+?? assets/generated/spotW04_03/
+requests/images/spotW04_04.json
+{
+ "id": "spotW04_04",
+ "kind": "image",
+ "pair": true,
+ "size": "1024x1024",
+ "count": 1,
+ "prompt": "間違い探し用の絵を2枚作ってください。1枚目 a.png：正方形（1024x1024）。プロのカメラマンが撮ったような、本物の写真にしか見えないフォトリアルな画像（自然な光と影、高精細）。人物の顔・手・指・服のしわが自然で、CGっぽさや作り物っぽさがないこと。実在の人物や商標は使わない。場面：昭和の商店街の八百屋と魚屋の店先。ざるに盛った野菜、天井から下がるざる、前かけ姿の店主、買い物かごを持った主婦たち、三輪の配達自転車。人物や小物をたくさん（30個以上の物が見えるように）入れて、見るところが多いにぎやかな絵にする。絵の中に文字・数字・ロゴ・看板の字は入れない（字がにじんだ看板も入れない）。2枚目 b.png：a.png をコピーして、違いを5か所だけ描き変える。違いの部分だけを描き変えて元の絵に貼り合わせ、違い以外は a.png と画素単位で完全に同じにする（構図・色・人物・位置・明るさ・画質を変えない。全体を描き直さない）。違いの種類は混ぜる：①ある物が消えている ②物の数が変わっている ③物の形が変わっている ④別の物に入れ替わっている ⑤大きさが変わっている ⑥向きや位置が少し変わっている ⑦服や物の模様が変わっている。色だけを変える違いは多くても1か所まで。簡単すぎないように、すぐ目に入る大きな物ばかりにはせず、中くらいの物や細かい所も混ぜる。ただしスマホの画面で見て気づける大きさにする（どの違いも幅か高さが50画素以上）。描き変えた部分は周りになじませ、継ぎ目や四角い跡が見えないようにする。5か所は絵の中で離れた場所に散らし（おたがい200画素以上はなす）、絵の端ぎりぎりには置かない。",
+ "notes": "出力は a.png と b.png（どちらも 1024x1024）。あわせて differences.json に {\"differences\": [{\"description\": 日本語の短い説明（例：『女の子の帽子のぽんぽんが消えている』）, \"type\": 種類, \"x\", \"y\", \"width\", \"height\"}]} の形で、5か所の位置（1024x1024の座標）を書いてください。説明は、b.png（右の絵）で何がどう変わったかを書く。"
+}
+exec
+/bin/bash -lc "git remote -v | sed -E 's#https://["'^@]+@#https://***@#g'"'; printenv GH_PUSH_TOKEN >/dev/null && test -n \""'$GH_PUSH_TOKEN" && echo GH_PUSH_TOKEN_nonempty || echo GH_PUSH_TOKEN_empty' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+origin	https://github.com/agaraysan/youtube (fetch)
+origin	https://github.com/agaraysan/youtube (push)
+GH_PUSH_TOKEN_empty
+
+exec
+/bin/bash -lc "ls -ld assets/generated/spotW04_04; python -c 'import PIL; print(PIL.__version__)' " in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+drwxr-xr-x 2 runner runner 4096 Nov 17 16:20 assets/generated/spotW04_04
+13.0.0
+
+codex
+元画像ができました。吊りざる、はかり、買い物かご、野菜、自転車のサドルに5種類の違いを作り、その部分だけを元画像へ貼り合わせます。
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+p='/home/runner/work/youtube/youtube/assets/generated/spotW04_04/a.png'
+Image.open('/home/runner/.codex/generated_images/01a1ea4f-aeea-7ec3-8135-60dd411d2c49/exec-941d577b-7dec-487c-828b-cc317c2f2878.png').convert('RGB').resize((1024,1024),Image.Resampling.LANCZOS).save(p)
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 164ms:
+codex
+5か所の部分編集を生成中です。完成後、指定した差分領域の外がすべて元画像と同じ画素か検証します。
+
+exec
+/bin/bash -lc 'cat /home/runner/.codex/plugins/cache/openai-curated-remote/superpowers/7.0.1/skills/verification-before-completion/SKILL.md' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+---
+name: verification-before-completion
+description: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always
+---
+
+# Verification Before Completion
+
+## Overview
+
+**Core principle:** Evidence before claims, always.
+
+**Violating the letter of this rule is violating the spirit of this rule.**
+
+## The Iron Law
+
+```
+NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE
+```
+
+If you haven't run the verification command in this message, you cannot claim it passes.
+
+## The Gate Function
+
+```
+BEFORE claiming any status or expressing satisfaction:
+
+1. IDENTIFY: What command proves this claim?
+2. RUN: Execute the FULL command (fresh, complete)
+3. READ: Full output, check exit code, count failures
+4. VERIFY: Does output confirm the claim?
+   - If NO: State actual status with evidence
+   - If YES: State claim WITH evidence
+5. ONLY THEN: Make the claim
+
+Skip any step = lying, not verifying
+```
+
+## Common Failures
+
+| Claim | Requires | Not Sufficient |
+|-------|----------|----------------|
+| Tests pass | Test command output: 0 failures | Previous run, "should pass" |
+| Linter clean | Linter output: 0 errors | Partial check, extrapolation |
+| Build succeeds | Build command: exit 0 | Linter passing, logs look good |
+| Bug fixed | Test original symptom: passes | Code changed, assumed fixed |
+| Regression test works | Red-green cycle verified | Test passes once |
+| Agent completed | VCS diff shows changes | Agent reports "success" |
+| Requirements met | Line-by-line checklist | Tests passing |
+
+## Red Flags - STOP
+
+- Using "should", "probably", "seems to"
+- Expressing satisfaction before verification ("Great!", "Perfect!", "Done!", etc.)
+- About to commit/push/PR without verification
+- Trusting agent success reports
+- Relying on partial verification
+- Thinking "just this once"
+- Tired and wanting work over
+- **ANY wording implying success without having run verification**
+
+## Rationalization Prevention
+
+| Excuse | Reality |
+|--------|---------|
+| "Should work now" | RUN the verification |
+| "I'm confident" | Confidence ≠ evidence |
+| "Just this once" | No exceptions |
+| "Linter passed" | Linter ≠ compiler |
+| "Agent said success" | Verify independently |
+| "I'm tired" | Exhaustion ≠ excuse |
+| "Partial check is enough" | Partial proves nothing |
+| "Different words so rule doesn't apply" | Spirit over letter |
+
+## Key Patterns
+
+**Tests:**
+```
+✅ [Run test command] [See: 34/34 pass] "All tests pass"
+❌ "Should pass now" / "Looks correct"
+```
+
+**Regression tests (TDD Red-Green):**
+```
+✅ Write → Run (pass) → Revert fix → Run (MUST FAIL) → Restore → Run (pass)
+❌ "I've written a regression test" (without red-green verification)
+```
+
+**Build:**
+```
+✅ [Run build] [See: exit 0] "Build passes"
+❌ "Linter passed" (linter doesn't check compilation)
+```
+
+**Requirements:**
+```
+✅ Re-read plan → Create checklist → Verify each → Report gaps or completion
+❌ "Tests pass, phase complete"
+```
+
+**Agent delegation:**
+```
+✅ Agent reports success → Check VCS diff → Verify changes → Report actual state
+❌ Trust agent report
+```
+
+## When To Apply
+
+**ALWAYS before:**
+- ANY variation of success/completion claims
+- ANY expression of satisfaction
+- ANY positive statement about work state
+- Committing, PR creation, task completion
+- Moving to next task
+- Delegating to agents
+
+**Rule applies to:**
+- Exact phrases
+- Paraphrases and synonyms
+- Implications of success
+- ANY communication suggesting completion/correctness
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image,ImageFilter,ImageDraw
+import json, numpy as np, math
+from pathlib import Path
+p=Path('assets/generated/spotW04_04')
+a=Image.open(p/'a.png').convert('RGB')
+e=Image.open('/home/runner/.codex/generated_images/01a1ea4f-aeea-7ec3-8135-60dd411d2c49/exec-59b05747-9023-4a80-97e6-f2ac08e60a51.png').convert('RGB').resize(a.size,Image.Resampling.LANCZOS)
+regions=[(190,17,151,180,'上の丸い吊りざるが角の丸い四角形になっている','形の変更'),(719,269,84,43,'魚屋のはかりの金属製の皿が消えている','消失'),(473,503,124,70,'中央の女性の買い物かごに茶色の横縞が2本増えている','模様の変更'),(251,638,193,108,'手前のざるのニンジンが白い大根に替わっている','入れ替え'),(785,565,103,62,'配達自転車のサドルが小さくなっている','大きさの変更')]
+b=a.copy(); union=np.zeros((1024,1024),dtype=bool); ds=[]
+for x,y,w,h,desc,typ in regions:
+ m=Image.new('L',(w,h),0); d=ImageDraw.Draw(m);d.rectangle((6,6,w-7,h-7),fill=255);m=m.filter(ImageFilter.GaussianBlur(2))
+ b.paste(e.crop((x,y,x+w,y+h)),(x,y),m)
+ union[y:y+h,x:x+w]=True
+ ds.append(dict(description=desc,type=typ,x=x,y=y,width=w,height=h))
+b.save(p/'b.png')
+(p/'differences.json').write_text(json.dumps({'differences':ds},ensure_ascii=False,indent=2)+'\\n')
+(p/'result.json').write_text(json.dumps({'id':'spotW04_04','status':'ok','via':'codex-cloud','files':['a.png','b.png','differences.json']},ensure_ascii=False,indent=2)+'\\n')
+changed=np.any(np.array(a)"'!=np.array(b),axis=2)
+assert not changed[~union].any()
+for x,y,w,h,_,_ in regions: assert changed[y:y+h,x:x+w].any() and max(w,h)>=50
+for i,r in enumerate(regions):
+ for s in regions[i+1:]: assert math.hypot(r[0]+r[2]/2-s[0]-s[2]/2,r[1]+r[3]/2-s[1]-s[3]/2)>=200
+print('"'PASS: both PNGs 1024x1024; five separated regions; all pixels outside regions identical.')
+print('Changed pixels:',int(changed.sum()))
+PY" in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+ModuleNotFoundError: No module named 'numpy'
+
+2026-11-17T16:24:50.896896Z ERROR codex_core::tools::router: error=unable to locate image at `/home/runner/work/youtube/youtube/assets/generated/spotW04_04/b.png`: No such file or directory (os error 2)
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image,ImageFilter,ImageDraw,ImageChops
+import json, math
+from pathlib import Path
+p=Path('assets/generated/spotW04_04'); a=Image.open(p/'a.png').convert('RGB')
+e=Image.open('/home/runner/.codex/generated_images/01a1ea4f-aeea-7ec3-8135-60dd411d2c49/exec-59b05747-9023-4a80-97e6-f2ac08e60a51.png').convert('RGB').resize(a.size,Image.Resampling.LANCZOS)
+regions=[(190,17,151,180,'上の丸い吊りざるが角の丸い四角形になっている','形の変更'),(719,269,84,43,'魚屋のはかりの金属製の皿が消えている','消失'),(473,503,124,70,'中央の女性の買い物かごに茶色の横縞が2本増えている','模様の変更'),(251,638,193,108,'手前のざるのニンジンが白い大根に替わっている','入れ替え'),(785,565,103,62,'配達自転車のサドルが小さくなっている','大きさの変更')]
+b=a.copy(); outside=Image.new('L',a.size,255); ds=[]
+for x,y,w,h,desc,typ in regions:
+ m=Image.new('L',(w,h),0);ImageDraw.Draw(m).rectangle((6,6,w-7,h-7),fill=255);m=m.filter(ImageFilter.GaussianBlur(2))
+ b.paste(e.crop((x,y,x+w,y+h)),(x,y),m)
+ ImageDraw.Draw(outside).rectangle((x,y,x+w-1,y+h-1),fill=0)
+ ds.append(dict(description=desc,type=typ,x=x,y=y,width=w,height=h))
+b.save(p/'b.png')
+(p/'differences.json').write_text(json.dumps({'differences':ds},ensure_ascii=False,indent=2)+'\\n')
+(p/'result.json').write_text(json.dumps({'id':'spotW04_04','status':'ok','via':'codex-cloud','files':['a.png','b.png','differences.json']},ensure_ascii=False,indent=2)+'\\n')
+diff=ImageChops.difference(a,b); assert ImageChops.multiply(diff,Image.merge('RGB',(outside,)*3)).getbbox() is None
+for x,y,w,h,_,_ in regions: assert diff.crop((x,y,x+w,y+h)).getbbox() and max(w,h)>=50
+for i,r in enumerate(regions):
+ for s in regions[i+1:]: assert math.hypot(r[0]+r[2]/2-s[0]-s[2]/2,r[1]+r[3]/2-s[1]-s[3]/2)>=200
+assert a.size==b.size==(1024,1024)
+print('PASS: both PNGs 1024x1024; five separated regions; all pixels outside regions identical.')
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 220ms:
+PASS: both PNGs 1024x1024; five separated regions; all pixels outside regions identical.
+
+codex
+4ファイルを保存しました。両画像は1024×1024で、5つの差分領域の外は画素単位で完全一致しています。続けて GitHub への送信を試みます。
+
+exec
+/bin/bash -lc 'git clone --shared --no-checkout /home/runner/work/youtube/youtube /tmp/spotW04_04-publish && git -C /tmp/spotW04_04-publish remote set-url origin https://github.com/agaraysan/youtube.git && git -C /tmp/spotW04_04-publish fetch origin codex-inbox' in /home/runner/work/youtube/youtube
+ exited 128 in 811ms:
+Cloning into '/tmp/spotW04_04-publish'...
+fatal: unable to access 'https://github.com/agaraysan/youtube.git/': Could not resolve host: github.com
+
+codex
+指定フォルダーに [a.png](assets/generated/spotW04_04/a.png)、[b.png](assets/generated/spotW04_04/b.png)、`differences.json`、`result.json` を保存しました。内蔵画像生成機能を使用し、1024×1024・差分5か所・差分領域外の画素完全一致を確認済みです。
+
+GitHub送信は未完了です。`.git` が読み取り専用で、代替送信も `github.com` の名前解決に失敗しました。`GH_PUSH_TOKEN` は空です。
+tokens used
+68,088
