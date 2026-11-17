@@ -1,0 +1,53 @@
+
+--- stderr ---
+Reading additional input from stdin...
+2026-11-17T17:00:19.556140Z ERROR codex_login::auth::manager: Failed to refresh token status=401 Unauthorized
+2026-11-17T17:00:19.556197Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:19.681333Z ERROR codex_login::auth::manager: Failed to refresh token status=401 Unauthorized
+2026-11-17T17:00:19.681374Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:19.687496Z ERROR codex_login::auth::manager: Failed to refresh token status=401 Unauthorized
+2026-11-17T17:00:19.687524Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:19.688062Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:19.688386Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:19.691672Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:19.691996Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:19.817704Z ERROR codex_models_manager::manager: failed to refresh available models: unexpected status 401 Unauthorized: Provided authentication token is expired. Please try signing in again., url: https://chatgpt.com/backend-api/codex/models?client_version=0.169.0, cf-ray: a5c04a7f5b13d635-IAD, request id: req_3adf03467e0d4c0eb8fce5a875ccbd53, auth error: 401, auth error code: token_expired
+2026-11-17T17:00:19.818503Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:19.818825Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:19.840499Z ERROR codex_models_manager::manager: failed to refresh available models: unexpected status 401 Unauthorized: Provided authentication token is expired. Please try signing in again., url: https://chatgpt.com/backend-api/codex/models?client_version=0.169.0, cf-ray: a5c04a7f5c9d11d6-IAD, request id: req_1c8079f4b3fd4e5abf55e05a3d633c89, auth error: 401, auth error code: token_expired
+2026-11-17T17:00:19.923355Z ERROR codex_models_manager::manager: failed to refresh available models: unexpected status 401 Unauthorized: Provided authentication token is expired. Please try signing in again., url: https://chatgpt.com/backend-api/codex/models?client_version=0.169.0, cf-ray: a5c04a800ba4d143-IAD, request id: req_b260f0ecc29240649a9e6ca06a0f91d2, auth error: 401, auth error code: token_expired
+2026-11-17T17:00:19.924482Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:19.934850Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:19.936043Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:19.937671Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:19.938260Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+OpenAI Codex v0.169.0
+--------
+2026-11-17T17:00:19.939964Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+workdir: /home/runner/work/youtube/youtube
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: none
+reasoning summaries: none
+session id: 01a1ea73-cb6a-7292-b7d2-d7f6ec8b98a8
+--------
+user
+次の依頼どおりに画像を作成し、ファイルを /home/runner/work/youtube/youtube/assets/generated/ex042_05_outro に保存してください。ほかのファイルは変更しないでください。
+依頼: {"id": "ex042_05_outro", "kind": "image", "prompt": "秋の公園の並木道を、スマホを手に散歩する夫婦。 フォトリアルな写真（実写のような質感）。自然光、浅い被写界深度、プロのカメラマンが撮ったような明るく鮮やかな色。横長16:9。", "size": "1920x1080", "count": 1, "notes": "イラストではなく写真のような実写風にする。画像の中に読める文字やロゴは入れない。実在のアプリ画面や商品ロゴは描かない。スマホやパソコンの画面は明るくぼかし、文字は読めないようにする。"}
+2026-11-17T17:00:19.997295Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:19.997784Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:20.098021Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when UnexpectedServerResponse("HTTP 401: {\n  \"error\": {\n    \"message\": \"Provided authentication token is expired. Please try signing in again.\",\n    \"type\": \"invalid_request_error\",\n    \"code\": \"token_expired\",\n    \"param\": null\n  },\n  \"status\": 401,\n  \"detail\": {\n    \"code\": \"token_expired\",\n    \"message\": \"Provided authentication token is expired. Please try signing in again.\"\n  }\n}")
+2026-11-17T17:00:20.098718Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:20.103667Z ERROR codex_models_manager::manager: failed to refresh available models: unexpected status 401 Unauthorized: Provided authentication token is expired. Please try signing in again., url: https://chatgpt.com/backend-api/codex/models?client_version=0.169.0, cf-ray: a5c04a812bd24e70-IAD, request id: req_7388cf26d97a4d26b9d7d69e3effa7c7, auth error: 401, auth error code: token_expired
+2026-11-17T17:00:20.105740Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:20.184456Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:20.213654Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when UnexpectedServerResponse("HTTP 401: {\n  \"error\": {\n    \"message\": \"Provided authentication token is expired. Please try signing in again.\",\n    \"type\": \"invalid_request_error\",\n    \"code\": \"token_expired\",\n    \"param\": null\n  },\n  \"status\": 401,\n  \"detail\": {\n    \"code\": \"token_expired\",\n    \"message\": \"Provided authentication token is expired. Please try signing in again.\"\n  }\n}")
+2026-11-17T17:00:20.304951Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:20.433765Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:20.543592Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:20.695355Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+ERROR: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:20.877792Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+ERROR: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
