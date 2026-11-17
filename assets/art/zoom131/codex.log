@@ -1,0 +1,34 @@
+
+--- stderr ---
+ken_expired
+2026-11-17T17:00:11.961550Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:11.975083Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when UnexpectedServerResponse("HTTP 401: {\n  \"error\": {\n    \"message\": \"Provided authentication token is expired. Please try signing in again.\",\n    \"type\": \"invalid_request_error\",\n    \"code\": \"token_expired\",\n    \"param\": null\n  },\n  \"status\": 401,\n  \"detail\": {\n    \"code\": \"token_expired\",\n    \"message\": \"Provided authentication token is expired. Please try signing in again.\"\n  }\n}")
+2026-11-17T17:00:11.977935Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:12.068476Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when UnexpectedServerResponse("HTTP 401: {\n  \"error\": {\n    \"message\": \"Provided authentication token is expired. Please try signing in again.\",\n    \"type\": \"invalid_request_error\",\n    \"code\": \"token_expired\",\n    \"param\": null\n  },\n  \"status\": 401,\n  \"detail\": {\n    \"code\": \"token_expired\",\n    \"message\": \"Provided authentication token is expired. Please try signing in again.\"\n  }\n}")
+2026-11-17T17:00:12.100429Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:12.239247Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:12.327829Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:12.412228Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:12.562938Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+ERROR: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:12.808678Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+ERROR: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+
+=====
+
+--- stderr ---
+ {\n    \"code\": \"token_expired\",\n    \"message\": \"Provided authentication token is expired. Please try signing in again.\"\n  }\n}")
+2026-11-17T17:00:14.328962Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:14.370790Z ERROR codex_models_manager::manager: failed to refresh available models: unexpected status 401 Unauthorized: Provided authentication token is expired. Please try signing in again., url: https://chatgpt.com/backend-api/codex/models?client_version=0.169.0, cf-ray: a5c04a5d3b98d009-SJC, request id: req_2426198f5ec24794b636f57163f8193c, auth error: 401, auth error code: token_expired
+2026-11-17T17:00:14.372777Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:14.400568Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when UnexpectedServerResponse("HTTP 401: {\n  \"error\": {\n    \"message\": \"Provided authentication token is expired. Please try signing in again.\",\n    \"type\": \"invalid_request_error\",\n    \"code\": \"token_expired\",\n    \"param\": null\n  },\n  \"status\": 401,\n  \"detail\": {\n    \"code\": \"token_expired\",\n    \"message\": \"Provided authentication token is expired. Please try signing in again.\"\n  }\n}")
+2026-11-17T17:00:14.433375Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:14.586893Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:14.757694Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:14.863736Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:14.975778Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+ERROR: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+2026-11-17T17:00:15.171283Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+ERROR: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
+
+=====
