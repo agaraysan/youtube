@@ -17,11 +17,13 @@ jobs:
       - name: Install Codex CLI
         run: npm install -g @openai/codex && pip install -q pillow
       # Codex は ChatGPT のログイン（PCの ~/.codex/auth.json）で動かす。APIキーは音声専用なので使わない。
-      - name: Sign in to Codex (ChatGPT login)
-        env: { CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}" }
+      - name: Sign in to Codex (ChatGPT login, shared key)
+        # 鍵は codex-auth ブランチに暗号化して共有する（scripts/codex_auth.py の説明を参照）。Secret の写しをそのまま使うと、どれかが更新した時点でほかが全部はじかれる。
+        env: { CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}", CODEX_AUTH_KEY: "${{ secrets.OPENAI_API_KEY }}" }
         run: |
           if [ -z "$CODEX_AUTH_JSON" ]; then echo "CODEX_AUTH_JSON がまだありません"; echo "SKIP=1" >> $GITHUB_ENV; exit 0; fi
-          mkdir -p ~/.codex && printenv CODEX_AUTH_JSON > ~/.codex/auth.json && chmod 600 ~/.codex/auth.json
+          python3 scripts/codex_auth.py load
+          python3 scripts/codex_auth.py refresh
       - name: Generate
         if: env.SKIP != '1'
         run: python3 scripts/codex_image.py
@@ -34,3 +36,7 @@ jobs:
           git diff --cached --quiet || git commit -m "Add generated images from Codex"
           # 同じ枝に別の push が重なっても絵を失わないよう、数回やり直す
           for i in 1 2 3 4 5; do git pull --rebase -q && git push && break; sleep $((i * 7)); done
+      - name: Save the Codex key back
+        if: always() && env.SKIP != '1'
+        env: { CODEX_AUTH_KEY: "${{ secrets.OPENAI_API_KEY }}" }
+        run: python3 scripts/codex_auth.py save
