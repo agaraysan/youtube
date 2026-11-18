@@ -45,7 +45,7 @@ LIVELY = ["little_fish", "estela", "wager_with_angels"]
 BGM_FIRST = {"kanji": "valley_drive", "proverb": "you_are_the_only", "yoji": "cruise", "fish": "valley_drive",
              "veg": "you_are_the_only", "antonym": "cruise", "pref": "cruise", "showa": "valley_drive", "trivia": "you_are_the_only",
              "calc": "little_fish", "mushikui": "estela", "count": "little_fish", "memory": "estela", "shadow": "wager_with_angels",
-             "color": "wager_with_angels", "number": "estela", "wordsearch": "you_are_the_only"}
+             "color": "wager_with_angels", "number": "estela", "wordsearch": "you_are_the_only", "kotoba_ate": "cruise"}
 LOUDNESS = -18  # 動画全体の大きさ（LUFS）。render.py の -16 より少し控えめ
 BGM_VOLUME = 0.22  # 曲は -20 LUFS にそろえてから、この倍率で小さめに入れる（声の間はさらに下がる）
 _make, _save = R.BGM.make, R.BGM.save
@@ -637,6 +637,13 @@ def scene_words(sc, ep, size):
         od = ImageDraw.Draw(ov)
         for k, wd in enumerate(sc["words"]):
             col = WS_COLORS[k % len(WS_COLORS)]
+            if wd.get("path"):  # 曲がる道すじ：マスの中心を太い線でつなぐ
+                pts = [(x0 + cell * (c + 0.5), y0 + cell * (r + 0.5)) for r, c in wd["path"]]
+                wdt = int(cell * 0.78)
+                od.line(pts, fill=col + (110,), width=wdt, joint="curve")
+                for px, py in pts:
+                    od.ellipse([px - wdt / 2, py - wdt / 2, px + wdt / 2, py + wdt / 2], fill=col + (110,))
+                continue
             n = len(wd["w"])
             ax, ay = x0 + cell * wd["c"], y0 + cell * wd["r"]
             bx, by = (ax + cell * n, ay + cell) if wd["d"] == "h" else (ax + cell, ay + cell * n)
@@ -658,6 +665,29 @@ def scene_words(sc, ep, size):
     d.rectangle([px0, py0 + 60 * u, px1, py0 + 120 * u], fill=acc)
     d.text(((px0 + px1) / 2, py0 + 60 * u), sc.get("theme", "さがす言葉"), font=R.font(56 * u, "heavy"), fill=(255, 255, 255), anchor="mm")
     words = sc["words"]
+    if sc.get("hide"):  # 一覧は見せず、文字数の枠と点数だけ（答えで字が入る）。長い言葉ほど点が高い
+        d.text(((px0 + px1) / 2, py0 + 200 * u), "かくれている言葉は？", font=R.font(56 * u, "heavy"), fill=INK, anchor="mm")
+        n_max = max(len(wd["w"]) for wd in words)
+        bs = min(100 * u, (px1 - px0 - 290 * u) / n_max - 12 * u)
+        gap_y = min(150 * u, (py1 - py0 - 300 * u) / len(words))
+        for k, wd in enumerate(words):
+            w0, n = wd["w"], len(wd["w"])
+            col = WS_COLORS[k % len(WS_COLORS)]
+            cy = py0 + 300 * u + gap_y * (k + 0.5)
+            bx0 = px0 + 50 * u
+            for i in range(n):
+                x = bx0 + i * (bs + 12 * u)
+                d.rounded_rectangle([x, cy - bs / 2, x + bs, cy + bs / 2], radius=int(12 * u), outline=col if reveal else (150, 150, 160), width=int(4 * u), fill=col if reveal else (255, 255, 255))
+                if reveal:
+                    d.text((x + bs / 2, cy), w0[i], font=R.font(bs * 0.62, "heavy"), fill=(255, 255, 255), anchor="mm")
+            pt = f"{n}点"
+            fp = R.font(46 * u, "heavy")
+            tw = d.textlength(pt, font=fp)
+            bx1 = px1 - 40 * u
+            d.rounded_rectangle([bx1 - tw - 50 * u, cy - 36 * u, bx1, cy + 36 * u], radius=int(36 * u), fill=R.NAVY)
+            d.text((bx1 - tw / 2 - 25 * u, cy), pt, font=fp, fill=(255, 214, 90), anchor="mm")
+        R.header(im, ep, sc, H)
+        return think_frames(im, ep, sc, H) if sc.get("think") else im.convert("RGB")
     lh = min(110 * u, (py1 - py0 - 170 * u) / max(1, len(words)))
     fw = R.font(min(64 * u, lh * 0.62), "bold")
     for k, wd in enumerate(words):

@@ -41,7 +41,7 @@ def build(words, size, seed):
             continue
         # たて・よこ半々くらいに
         nh = sum(p["d"] == "h" for p in place)
-        if not (1 <= nh <= len(words) - 1):
+        if len(words) > 1 and not (1 <= nh <= len(words) - 1):
             continue
         for r in range(size):
             for c in range(size):
@@ -66,8 +66,153 @@ THEMES = {
 }
 
 
+def paths_of(rows, w):
+    """表の中で、たて・よこにとなり合うマスをたどって w が読める道すじの数（曲がってもよい、同じマスは2回使わない）。"""
+    R, C = len(rows), len(rows[0])
+    cnt = 0
+
+    def go(r, c, k, seen):
+        nonlocal cnt
+        if rows[r][c] != w[k]:
+            return
+        if k == len(w) - 1:
+            cnt += 1
+            return
+        for dr, dc in ((0, 1), (1, 0), (0, -1), (-1, 0)):
+            a, b = r + dr, c + dc
+            if 0 <= a < R and 0 <= b < C and (a, b) not in seen:
+                go(a, b, k + 1, seen | {(a, b)})
+    for r in range(R):
+        for c in range(C):
+            go(r, c, 0, {(r, c)})
+    return cnt
+
+
+COMMON = set(w for line in (pathlib.Path(__file__).with_name("common_words.txt")).read_text(encoding="utf-8").splitlines()
+             if not line.startswith("#") for w in line.split())
+
+
+def stray_words(rows, place):
+    """答えの道すじ以外で、右か下にたどって読める「よく使う言葉」を返す（たまたま別の言葉ができていないかの確認）。"""
+    R, C = len(rows), len(rows[0])
+    answer = {tuple(map(tuple, p["path"])) for p in place}
+    inside = set()
+    for p in place:  # 答えの一部（例：さくらんぼ の中の さくら）は数えない
+        pts = list(map(tuple, p["path"]))
+        for a in range(len(pts)):
+            for b in range(a + 2, len(pts) + 1):
+                inside.add(tuple(pts[a:b]))
+    found = []
+
+    def go(path, text):
+        if len(text) >= 2 and text in COMMON and tuple(path) not in answer and tuple(path) not in inside:
+            found.append(text)
+        if len(text) >= 4:
+            return
+        r, c = path[-1]
+        for a, b in ((r, c + 1), (r + 1, c)):
+            if a < R and b < C:
+                go(path + [(a, b)], text + rows[a][b])
+    for r in range(R):
+        for c in range(C):
+            go([(r, c)], rows[r][c])
+    return found
+
+
+def build_bent(words, size, seed):
+    """言葉を、右か下にだけ進み、とちゅうで1回以上曲がる道すじで、重ならないように置く。
+    残りをうめたあと、どの言葉もほかの道すじで読めない（ちょうど1通り）ことを確かめる。"""
+    rnd = random.Random(seed)
+    for _ in range(20000):
+        used, place, ok = set(), [], True
+        for w in sorted(words, key=len, reverse=True):
+            for _ in range(200):
+                r, c = rnd.randrange(size), rnd.randrange(size)
+                path = [(r, c)]
+                while len(path) < len(w):
+                    opts = [(path[-1][0] + dr, path[-1][1] + dc) for dr, dc in ((0, 1), (1, 0))]
+                    opts = [p for p in opts if p[0] < size and p[1] < size]
+                    if not opts:
+                        break
+                    path.append(rnd.choice(opts))
+                if len(path) < len(w) or used & set(path):
+                    continue
+                turns = sum(1 for i in range(1, len(path) - 1)
+                            if (path[i][0] - path[i - 1][0], path[i][1] - path[i - 1][1]) != (path[i + 1][0] - path[i][0], path[i + 1][1] - path[i][1]))
+                if len(w) >= 3 and turns < 1:
+                    continue
+                used |= set(path)
+                place.append({"w": w, "path": [list(p) for p in path]})
+                break
+            else:
+                ok = False
+                break
+        if not ok:
+            continue
+        # まわりのマスには、答えの言葉と同じ文字をなるべく使わない
+        filler = [k for k in KANA if k not in "".join(words)]
+        g = [[rnd.choice(filler) for _ in range(size)] for _ in range(size)]
+        for pl in place:
+            for i, (a, b) in enumerate(pl["path"]):
+                g[a][b] = pl["w"][i]
+        rows = ["".join(x) for x in g]
+        if all(paths_of(rows, w) == 1 for w in words) and not stray_words(rows, place):
+            order = {w: i for i, w in enumerate(words)}
+            place.sort(key=lambda p: order[p["w"]])
+            return rows, place
+    raise SystemExit(f"置けませんでした: {words}")
+
+
+# 隠れた言葉あて：一覧を見せず、テーマと文字数だけをヒントに1つの言葉を当てる（5×5、1問20秒）
+HIDDEN = {  # (テーマ, 声で読むテーマ, 言葉)。短い順に並べる。前半は2つ（4×4）、後半は3つ（5×5）
+    1: [("冬の食べもの", "ふゆの、たべもの", ["みかん", "やきいも"]), ("春の花", "はるの、はな", ["うめ", "たんぽぽ"]),
+        ("台所の道具", "だいどころの、どうぐ", ["なべ", "やかん"]), ("野菜", "やさい", ["ねぎ", "だいこん"]),
+        ("山の動物", "やまの、どうぶつ", ["くま", "たぬき"]), ("お正月", "おしょうがつ", ["こま", "おせち", "かどまつ"]),
+        ("くだもの", "くだもの", ["かき", "りんご", "さくらんぼ"]), ("魚", "さかな", ["さけ", "さんま", "かつお"]),
+        ("乗りもの", "のりもの", ["ふね", "でんしゃ", "ひこうき"]), ("昭和の茶の間", "しょうわの、ちゃのま", ["こたつ", "てれび", "ちゃぶだい"])],
+}
+
+
+def hidden(epid, n):
+    items = HIDDEN[n]
+    sc = [{"type": "title", "text": "かくれた言葉あて", "size": 120, "sub": "ヒントをたよりに、表の中の言葉をさがそう",
+           "voice": f"頭の体操、かくれた言葉あてです。ひらがなの表の中に、テーマの言葉が、かくれています。ひだりから右、上から下へ、となりのマスをたどって読みます。とちゅうで、まがります。見つけた言葉の、文字の数が、そのまま点数。長い言葉ほど、高い点です。全部で{len(items)}問。後半は、表が大きくなります。"}]
+    for i, (theme, theme_kana, ws) in enumerate(items, 1):
+        size = 4 if len(ws) <= 2 else 5
+        assert max(map(len, ws)) <= size + 1, ws
+        rows, place = build_bent(ws, size, f"{epid}:{i}")
+        base = {"type": "words", "hide": True, "cells": rows, "words": place, "theme": theme, "text": f"第{i}問"}
+        lens = "と、".join(f"{len(w)}文字" for w in ws)
+        sc.append({**base, "voice": f"第{i}問。テーマは、{theme_kana}。{lens}の、{len(ws)}つの言葉が、かくれています。"})
+        sc.append({**base, "think": True, "seconds": 20 if len(ws) <= 2 else 30})
+        sc.append({**base, "text": f"第{i}問 答え", "reveal": True, "chime": True,
+                   "voice": "答えは、" + "、".join(ws) + "。", "pad": 1.0})
+    total = sum(len(w) for _, _, ws in items for w in ws)
+    sc.append({"type": "title", "text": f"{total}点満点で何点？", "size": 100, "sub": "コメントで教えてください",
+               "voice": f"全部で、{total}点満点です。何点、とれましたか？コメントで教えてください。"})
+    return {"id": epid, "series": "頭の体操", "style": "kotoba_ate", "scenes": sc}
+
+
 def main():
     epid, n = sys.argv[1], int(sys.argv[2])
+    if "--short" in sys.argv:  # make_wordsearch.py <id> <型> --short <問題番号>：1問だけの縦ショート
+        k = int(sys.argv[sys.argv.index("--short") + 1])
+        theme, theme_kana, ws = HIDDEN[n][k - 1]
+        rows, place = build_bent(ws, 4 if len(ws) <= 2 else 5, f"{epid}:short")
+        ep = {"id": epid, "series": "頭の体操", "style": "kotoba_ate", "kind": "words", "cells": rows, "words": place,
+              "theme": theme, "think": 10 if len(ws) <= 2 else 15, "q": "かくれている言葉は？",
+              "voice_q": f"かくれている言葉は、なんでしょう？テーマは、{theme_kana}。",
+              "voice_a": "正解は、" + "、".join(ws) + "！", "answer_note": "正解は「" + "」「".join(ws) + "」"}
+        out = pathlib.Path("brain/shorts") / f"{epid}.json"
+        out.write_text(json.dumps(ep, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(out)
+        return
+    if "--hidden" in sys.argv:
+        ep = hidden(epid, n)
+        out = pathlib.Path("brain/episodes") / f"{epid}.json"
+        out.write_text(json.dumps(ep, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(out)
+        return
     themes = THEMES[n]
     sc = [{"type": "title", "text": "ことば探し", "size": 130, "sub": "ひらがなの中にかくれた言葉をさがそう",
            "voice": f"頭の体操、ことば探しです。ひらがなの表の中に、テーマにそった言葉が、たてか、よこに、かくれています。右に書いてある言葉を、全部さがしてみてください。全部で{len(themes)}問です。"}]

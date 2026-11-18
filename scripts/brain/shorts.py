@@ -91,6 +91,45 @@ def base_frame(ep, reveal):
     for k, ln in enumerate(lines[:2]):
         d.text((SAFE_L, 290 + k * 86), ln, font=f, fill=acc if reveal else B.INK, anchor="lm")
     kind = ep["kind"]
+    if kind == "words":  # かくれた言葉あて（5×5か4×4、右か下にたどる。答えは色の帯）
+        rows = ep["cells"]
+        n = len(rows)
+        top = 470
+        cell = (SAFE_R - SAFE_L - 40) / n
+        x0, y0 = SAFE_L + 20, top
+        R.shadow_box(im, (x0 - 20, y0 - 20, x0 + cell * n + 20, y0 + cell * n + 20), 30, (255, 255, 255, 250))
+        if reveal:
+            ov = Image.new("RGBA", im.size, (0, 0, 0, 0))
+            od = ImageDraw.Draw(ov)
+            for k, wd in enumerate(ep["words"]):
+                col = B.WS_COLORS[k % len(B.WS_COLORS)]
+                pts = [(x0 + cell * (c + 0.5), y0 + cell * (r + 0.5)) for r, c in wd["path"]]
+                wdt = int(cell * 0.78)
+                od.line(pts, fill=col + (110,), width=wdt, joint="curve")
+                for px, py in pts:
+                    od.ellipse([px - wdt / 2, py - wdt / 2, px + wdt / 2, py + wdt / 2], fill=col + (110,))
+            im.alpha_composite(ov)
+        d = ImageDraw.Draw(im)
+        f = R.font(cell * 0.6, "bold")
+        for r, line in enumerate(rows):
+            for c, ch in enumerate(line):
+                d.text((x0 + cell * (c + 0.5), y0 + cell * (r + 0.5)), ch, font=f, fill=B.INK, anchor="mm")
+        # 下：テーマと文字数の枠
+        yb = y0 + cell * n + 70
+        d.rounded_rectangle([SAFE_L, yb, SAFE_R, yb + 90], radius=45, fill=acc)
+        d.text(((SAFE_L + SAFE_R) / 2, yb + 45), "テーマ：" + ep["theme"], font=R.font(52, "heavy"), fill=(255, 255, 255), anchor="mm")
+        for k, wd in enumerate(ep["words"]):
+            w0, m = wd["w"], len(wd["w"])
+            col = B.WS_COLORS[k % len(B.WS_COLORS)]
+            bs, gp = 96, 14
+            cy = yb + 170 + k * 120
+            bx0 = (SAFE_L + SAFE_R) / 2 - (bs * m + gp * (m - 1)) / 2
+            for i in range(m):
+                x = bx0 + i * (bs + gp)
+                d.rounded_rectangle([x, cy - bs / 2, x + bs, cy + bs / 2], radius=12, outline=col if reveal else (150, 150, 160), width=4, fill=col if reveal else (255, 255, 255))
+                if reveal:
+                    d.text((x + bs / 2, cy), w0[i], font=R.font(60, "heavy"), fill=(255, 255, 255), anchor="mm")
+        return im
     if kind == "grid":
         rows, cols = ep["rows"], ep["cols"]
         top, bottom = 480, 1500
