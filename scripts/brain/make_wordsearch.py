@@ -72,9 +72,9 @@ def main():
     sc = [{"type": "title", "text": "ことば探し", "size": 130, "sub": "ひらがなの中にかくれた言葉をさがそう",
            "voice": f"頭の体操、ことば探しです。ひらがなの表の中に、テーマにそった言葉が、たてか、よこに、かくれています。右に書いてある言葉を、全部さがしてみてください。全部で{len(themes)}問です。"}]
     for i, (theme, theme_kana, words, note) in enumerate(themes, 1):
-        rows, place = build(words, 9 if max(map(len, words)) >= 5 else 8, f"{epid}:{i}")
+        rows, place = build(words, 7 if max(map(len, words)) >= 5 else 6, f"{epid}:{i}")
         base = {"type": "words", "cells": rows, "words": place, "theme": theme, "text": f"第{i}問"}
-        sec = 40 + 5 * (len(words) - 5)
+        sec = 30 + 5 * (len(words) - 5)
         sc.append({**base, "voice": f"第{i}問。テーマは、{theme_kana}。{len(words)}つの言葉が、かくれています。"})
         sc.append({**base, "think": True, "seconds": sec})
         sc.append({**base, "text": f"第{i}問 答え", "reveal": True, "chime": True,
