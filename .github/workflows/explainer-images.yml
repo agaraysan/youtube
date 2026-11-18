@@ -18,13 +18,18 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
       - run: npm install -g @openai/codex && pip install -q pillow
-      - name: Sign in to Codex (ChatGPT login)
-        env: { CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}" }
+      - name: Sign in to Codex (ChatGPT login, shared key)
+        # 鍵は codex-auth ブランチに暗号化して共有する（scripts/codex_auth.py の説明を参照）
+        env: { CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}", CODEX_AUTH_KEY: "${{ secrets.OPENAI_API_KEY }}" }
         run: |
-          if [ -z "$CODEX_AUTH_JSON" ]; then echo "CODEX_AUTH_JSON がまだありません"; exit 1; fi
-          mkdir -p ~/.codex && printenv CODEX_AUTH_JSON > ~/.codex/auth.json && chmod 600 ~/.codex/auth.json
+          python3 scripts/codex_auth.py load
+          python3 scripts/codex_auth.py refresh
       - name: Generate
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           python3 scripts/explainer/codex_images.py
+      - name: Save the Codex key back
+        if: always()
+        env: { CODEX_AUTH_KEY: "${{ secrets.OPENAI_API_KEY }}" }
+        run: python3 scripts/codex_auth.py save
