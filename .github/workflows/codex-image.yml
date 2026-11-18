@@ -16,12 +16,15 @@ jobs:
         with: { node-version: 22 }
       - name: Install Codex CLI
         run: npm install -g @openai/codex && pip install -q pillow
-      # Codex は ChatGPT のログイン（PCの ~/.codex/auth.json）で動かす。APIキーは音声専用なので使わない。
-      - name: Sign in to Codex (ChatGPT login)
-        env: { CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}" }
+      # Codex は ChatGPT のログインで動かす。鍵は全ジョブで1つを共有する（使うと変わるため。scripts/codex_auth.py）
+      - name: Sign in to Codex (shared ChatGPT login)
+        env:
+          CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}"
+          CODEX_AUTH_KEY: "${{ secrets.OPENAI_API_KEY }}"
         run: |
           if [ -z "$CODEX_AUTH_JSON" ]; then echo "CODEX_AUTH_JSON がまだありません"; echo "SKIP=1" >> $GITHUB_ENV; exit 0; fi
-          mkdir -p ~/.codex && printenv CODEX_AUTH_JSON > ~/.codex/auth.json && chmod 600 ~/.codex/auth.json
+          python3 scripts/codex_auth.py load
+          python3 scripts/codex_auth.py refresh
       - name: Generate
         if: env.SKIP != '1'
         run: python3 scripts/codex_image.py
@@ -33,3 +36,8 @@ jobs:
           git add assets/generated
           git diff --cached --quiet || git commit -m "Add generated images from Codex"
           git pull --rebase -q && git push
+      - name: Save Codex login (shared)
+        if: always() && env.SKIP != '1'
+        env:
+          CODEX_AUTH_KEY: "${{ secrets.OPENAI_API_KEY }}"
+        run: python3 scripts/codex_auth.py save
