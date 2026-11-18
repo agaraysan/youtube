@@ -1,1 +1,10 @@
-{"id": "ex042_02_manual", "status": "ok", "via": "codex-cloud", "files": ["image.png"]}
+{
+ "id": "ex042_02_manual",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "image.png"
+ ],
+ "at_utc": "2026-11-18T09:59:53.526856Z"
+}
