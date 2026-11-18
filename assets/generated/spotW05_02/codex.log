@@ -1,0 +1,396 @@
+森の動物たちの冬じたくを、Codexの画像生成機能で間違い探し用の2枚に仕上げ、[指定フォルダー](/home/runner/work/youtube/youtube/assets/generated/spotW05_02)に `a.png`、`b.png`、`differences.json`、`result.json` を保存しました。
+
+両方とも1024×1024のPNGです。差分は5か所で、差分枠の間隔は最短201ピクセルです。枠の外は全画素が一致し、リポジトリの検査も通過しました。
+
+GitHubの `codex-inbox` への送信はできませんでした。`github.com` の名前解決に失敗し、作業環境の `.git` は読み取り専用でした。`GH_PUSH_TOKEN` は空でした。
+
+--- stderr ---
+ted]@#g'"' /tmp/spotW05_02-git-error; git status --porcelain=v1 --untracked-files=all | head -20" in /home/runner/work/youtube/youtube
+ succeeded in 270ms:
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+?? assets/generated/spotW05_01/a.png
+?? assets/generated/spotW05_01/b.png
+?? assets/generated/spotW05_01/codex.log
+?? assets/generated/spotW05_01/differences.json
+?? assets/generated/spotW05_01/result.json
+
+exec
+/bin/bash -lc "python -c 'import PIL,numpy,cv2; print(PIL.__version__)'; git show-ref --verify refs/remotes/origin/codex-inbox; git config --get user.email >/dev/null && echo GIT_IDENTITY_PRESENT; rg --files assets/generated -g differences.json | head" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import PIL,numpy,cv2; print(PIL.__version__)
+    ^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'numpy'
+fatal: 'refs/remotes/origin/codex-inbox' - not a valid ref
+assets/generated/spotW03_05/differences.json
+assets/generated/spotS01_04/differences.json
+assets/generated/spot001_market_b/differences.json
+assets/generated/spotW02_06/differences.json
+assets/generated/spotW04_04/differences.json
+assets/generated/spotW03_04/differences.json
+assets/generated/spotA01_04/differences.json
+assets/generated/spotW01_01/differences.json
+assets/generated/spotW01_03/differences.json
+assets/generated/spotS01_05/differences.json
+
+exec
+/bin/bash -lc 'cat assets/generated/spotW05_01/{differences,result}.json; ls -ld /tmp /home/runner/.codex/generated_images; git rev-parse --git-dir' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+{
+  "differences": [
+    {
+      "description": "木の巣箱が樽の形になっている",
+      "type": "形",
+      "x": 220,
+      "y": 97,
+      "width": 88,
+      "height": 103
+    },
+    {
+      "description": "枝からつるされた編みかごのボールが消えている",
+      "type": "消失",
+      "x": 904,
+      "y": 162,
+      "width": 85,
+      "height": 143
+    },
+    {
+      "description": "ベンチのリュックが野菜とパンの入った紙袋に替わっている",
+      "type": "入れ替え",
+      "x": 504,
+      "y": 390,
+      "width": 93,
+      "height": 101
+    },
+    {
+      "description": "赤いマグの横の銀色の水筒が短くなっている",
+      "type": "大きさ",
+      "x": 57,
+      "y": 694,
+      "width": 69,
+      "height": 171
+    },
+    {
+      "description": "プールの黄色いアヒルのおもちゃが1羽増えている",
+      "type": "数",
+      "x": 833,
+      "y": 689,
+      "width": 64,
+      "height": 74
+    }
+  ]
+}
+{
+ "id": "spotW05_01",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "a.png",
+  "b.png"
+ ],
+ "check": "OK 5 か所",
+ "at_utc": "2026-11-18T08:57:39.908314Z"
+}drwxr-xr-x  3 runner runner  4096 Nov 18 08:54 /home/runner/.codex/generated_images
+drwxrwxrwt 20 nobody nogroup 4096 Nov 18 08:58 /tmp
+.git
+
+exec
+/bin/bash -lc 'ls -lt /home/runner/.codex/generated_images/* | head; git status --short -- assets/generated/spotW05_02; command -v magick; command -v convert' in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+total 10712
+-rw-r--r-- 1 runner runner 3541465 Nov 18 08:56 exec-2dd36d8b-81ec-4af4-839d-b24848c9af63.png
+-rw-r--r-- 1 runner runner 3565026 Nov 18 08:55 exec-479ccb29-bb4e-4b88-b825-19f6fad4c1b8.png
+-rw-r--r-- 1 runner runner 3855725 Nov 18 08:54 exec-bd21399c-20d6-48c0-ba8d-7362f1dd5021.png
+
+exec
+/bin/bash -lc "python - 'undefined' <<'PY'
+from PIL import Image
+from pathlib import Path
+import sys
+im=Image.open(sys.argv[1]).convert('RGB')
+print(im.size)
+im.resize((1024,1024), Image.Resampling.LANCZOS).save(Path('assets/generated/spotW05_02/a.png'))
+PY
+git fetch origin codex-inbox 2>/tmp/spotW05_02-git-fetch
+sed -E 's#https://["'^ ]*@#https://[redacted]@#g'"' /tmp/spotW05_02-git-fetch" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+Traceback (most recent call last):
+  File "<stdin>", line 4, in <module>
+  File "/home/runner/.local/lib/python3.14/site-packages/PIL/Image.py", line 3654, in open
+    fp = builtins.open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: 'undefined'
+error: cannot open '.git/FETCH_HEAD': Read-only file system
+
+exec
+/bin/bash -lc "python - '/home/runner/.codex/generated_images/01a1ede0-43a6-7271-8086-a4f45398f767/exec-95841eb6-3d08-429d-9173-cecdc4bde771.png' <<'PY'
+from PIL import Image
+import sys
+im=Image.open(sys.argv[1]).convert('RGB')
+print(im.size)
+im.resize((1024,1024), Image.Resampling.LANCZOS).save('assets/generated/spotW05_02/a.png')
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 113ms:
+(1254, 1254)
+
+codex
+原画ができました。木の節、家の小窓、きつねのマフラー、きのこ、足元の羽を差分の候補に選び、各部分を原画に合わせて合成します。
+exec
+/bin/bash -lc "ls /usr/bin/python*; /usr/bin/python3 -c 'import numpy, PIL; print(numpy.__version__)'; rg -n 'differences|200' scripts --glob '*.py' | head -35; git config --get user.name" in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+/usr/bin/python
+/usr/bin/python3
+/usr/bin/python3-config
+/usr/bin/python3.14
+/usr/bin/python3.14-config
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import numpy, PIL; print(numpy.__version__)
+    ^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'numpy'
+scripts/render/spotcheck.py:4:使い方: spotcheck.py 元の絵.png 違いの絵.png differences.json [出力.json]
+scripts/render/spotcheck.py:6:- Codex の一覧（differences.json）と数・位置が合うかを確かめる。
+scripts/render/spotcheck.py:58:    listed = json.load(open(diff_path, encoding="utf-8"))["differences"]
+scripts/render/spotcheck.py:86:        json.dump({"differences": res}, open(sys.argv[4], "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+scripts/render/render.py:242:    return ep["differences"]
+scripts/render/render.py:376:        ep["differences"] = res
+scripts/render/render.py:470:        kbps = int(85e6 * 8 / t / 1000) - 200
+scripts/codex_auth.py:37:    args = ["openssl", "enc", "-aes-256-cbc", "-pbkdf2", "-iter", "200000", "-salt", "-pass", "env:_K"]
+scripts/plan/make_spot.py:5:絵のid は assets/generated/<絵のid>/（a.png, b.png, differences.json, result.json が ok のもの）。
+scripts/plan/make_spot.py:28:        ok, msg, diffs = spotcheck.check(g / "a.png", g / "b.png", g / "differences.json")
+scripts/plan/make_spot.py:51:                          "list": f"assets/generated/{gid}/differences.json"} for gid, _ in used},
+scripts/plan/spot_requests.py:5:各場面について、正方形の2枚組（a.png / b.png）と differences.json（違い5か所）を Codex に頼む。
+scripts/plan/spot_requests.py:28:        "notes": ("出力は a.png と b.png（どちらも 1024x1024）。あわせて differences.json に "
+scripts/plan/spot_requests.py:29:                  "{\"differences\": [{\"description\": 日本語の短い説明, \"type\": 種類, \"x\", \"y\", \"width\", \"height\"}]} の形で、"
+scripts/codex_image.py:27:    (out / "codex.log").write_text(p.stdout[-20000:] + "\n--- stderr ---\n" + p.stderr[-20000:], encoding="utf-8")
+scripts/codex_image.py:55:                lst = out / "differences.json"
+scripts/codex_image.py:57:                    ok, check = False, "differences.json がない"
+scripts/codex_image.py:64:                                       "differences.json を実際の違いと一致させて、作り直してください。\n")
+scripts/spot/spot.py:8:  pictures : 絵のid の並び。assets/generated/<絵のid>/ に a.png・b.png・differences.json がある組
+scripts/spot/spot.py:170:        layer = Image.new("RGBA", (W, 200), (0, 0, 0, 0))
+scripts/spot/spot.py:236:            d.line([(x, y0), (min(x + 11, x1), y0)], fill=(200, 195, 185), width=4)
+scripts/spot/spot.py:237:            d.line([(x, y1), (min(x + 11, x1), y1)], fill=(200, 195, 185), width=4)
+scripts/spot/spot.py:239:            d.line([(x0, y), (x0, min(y + 11, y1))], fill=(200, 195, 185), width=4)
+scripts/spot/spot.py:240:            d.line([(x1, y), (x1, min(y + 11, y1))], fill=(200, 195, 185), width=4)
+scripts/spot/spot.py:241:    dashed((1000, 200, 1780, 640))
+scripts/spot/spot.py:242:    d.ellipse([1290, 700, 1490, 900], outline=(200, 195, 185), width=4)
+scripts/spot/spot.py:326:        ok, msg, diffs = spotcheck.check(g / "a.png", g / "b.png", g / "differences.json")
+scripts/spot/make_requests.py:6:各場面について、正方形の2枚（a.png / b.png）と differences.json（違い5か所）を Codex に頼む。
+scripts/spot/make_requests.py:35:            f"{n}か所は絵の中で離れた場所に散らし（おたがい200画素以上はなす）、絵の端ぎりぎりには置かない。"
+scripts/spot/make_requests.py:37:        "notes": ("出力は a.png と b.png（どちらも 1024x1024）。あわせて differences.json に "
+scripts/spot/make_requests.py:38:                  "{\"differences\": [{\"description\": 日本語の短い説明（例：『女の子の帽子のぽんぽんが消えている』）, \"type\": 種類, \"x\", \"y\", \"width\", \"height\"}]} の形で、"
+scripts/youtube.py:94:        print("channel: unknown", str(e)[:200], flush=True)
+scripts/youtube.py:106:                res = {"ok": False, "error": str(e)[:2000]}
+
+exec
+/bin/bash -lc 'cat scripts/render/spotcheck.py; ls -d /tmp/*venv* .venv 2>/dev/null; df -h . /tmp' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+#!/usr/bin/env python3
+"""間違い探しの2枚を画素で比べ、違いの場所を確かめる。
+
+使い方: spotcheck.py 元の絵.png 違いの絵.png differences.json [出力.json]
+- 2枚の差を取り、変わった場所のかたまりを数える。
+- Codex の一覧（differences.json）と数・位置が合うかを確かめる。
+- 合えば、画素の比較で出た正確な枠を書き出して 0 で終わる。合わなければ 1 で終わる。
+"""
+import json, sys
+from PIL import Image, ImageChops, ImageFilter
+
+
+def clusters(a, b, thr=40, grow=25, min_px=150):
+    d = ImageChops.difference(a.convert("RGB"), b.convert("RGB")).convert("L").point(lambda v: 255 if v > thr else 0)
+    m = d.filter(ImageFilter.MaxFilter(9))
+    W, H = m.size
+    px = m.load()
+    raw = d.load()
+    seen = bytearray(W * H)
+    boxes = []
+    for y in range(0, H, 3):
+        for x in range(0, W, 3):
+            if px[x, y] and not seen[y * W + x]:
+                st = [(x, y)]; seen[y * W + x] = 1
+                x0 = x1 = x; y0 = y1 = y; n = 0
+                while st:
+                    cx, cy = st.pop()
+                    if raw[cx, cy]:
+                        n += 1
+                    x0, x1, y0, y1 = min(x0, cx), max(x1, cx), min(y0, cy), max(y1, cy)
+                    for nx, ny in ((cx + 1, cy), (cx - 1, cy), (cx, cy + 1), (cx, cy - 1)):
+                        if 0 <= nx < W and 0 <= ny < H and px[nx, ny] and not seen[ny * W + nx]:
+                            seen[ny * W + nx] = 1; st.append((nx, ny))
+                if n >= min_px:
+                    boxes.append([x0, y0, x1 - x0 + 1, y1 - y0 + 1, n])
+    # 近いかたまりはまとめる
+    merged = True
+    while merged:
+        merged = False
+        for i in range(len(boxes)):
+            for j in range(i + 1, len(boxes)):
+                a_, b_ = boxes[i], boxes[j]
+                if (a_[0] - grow < b_[0] + b_[2] and b_[0] - grow < a_[0] + a_[2] and
+                        a_[1] - grow < b_[1] + b_[3] and b_[1] - grow < a_[1] + a_[3]):
+                    x0, y0 = min(a_[0], b_[0]), min(a_[1], b_[1])
+                    x1, y1 = max(a_[0] + a_[2], b_[0] + b_[2]), max(a_[1] + a_[3], b_[1] + b_[3])
+                    boxes[i] = [x0, y0, x1 - x0, y1 - y0, a_[4] + b_[4]]
+                    del boxes[j]; merged = True; break
+            if merged:
+                break
+    return boxes
+
+
+def check(a_path, b_path, diff_path):
+    a, b = Image.open(a_path), Image.open(b_path)
+    if a.size != b.size:
+        return False, f"大きさが違う {a.size} {b.size}", []
+    listed = json.load(open(diff_path, encoding="utf-8"))["differences"]
+    found = clusters(a, b)
+    out, used = [], set()
+    for L in listed:
+        lx, ly = L["x"] + L["width"] / 2, L["y"] + L["height"] / 2
+        best = None
+        for k, f in enumerate(found):
+            if k in used:
+                continue
+            fx, fy = f[0] + f[2] / 2, f[1] + f[3] / 2
+            dist = ((fx - lx) ** 2 + (fy - ly) ** 2) ** 0.5
+            if dist < max(150, L["width"], L["height"]) and (best is None or dist < best[0]):
+                best = (dist, k)
+        if best is None:
+            return False, f"一覧の違いが絵に見つからない: {L.get('description')}", found
+        used.add(best[1])
+        f = found[best[1]]
+        out.append({"box": f[:4], "note": L.get("description", "")})
+    extra = [f for k, f in enumerate(found) if k not in used]
+    if extra:
+        return False, f"一覧にない変化が {len(extra)} か所ある: {[e[:4] for e in extra]}", found
+    return True, f"OK {len(out)} か所", out
+
+
+if __name__ == "__main__":
+    ok, msg, res = check(*sys.argv[1:4])
+    print(msg)
+    if ok and len(sys.argv) > 4:
+        json.dump({"differences": res}, open(sys.argv[4], "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    sys.exit(0 if ok else 1)
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       145G   59G   86G  41% /home/runner/work/youtube/youtube
+/dev/root       145G   59G   86G  41% /tmp
+
+exec
+/bin/bash -lc "git pull --rebase origin codex-inbox 2>/tmp/spotW05_02-git-pull; sed -E 's#https://["'^ ]*@#https://[redacted]@#g'"' /tmp/spotW05_02-git-pull; git status --short" in /home/runner/work/youtube/youtube
+ succeeded in 643ms:
+error: cannot open '.git/FETCH_HEAD': Read-only file system
+?? assets/generated/spotW05_01/
+?? assets/generated/spotW05_02/
+
+exec
+/bin/bash -lc "cat > /tmp/spotW05_02-compose.py <<'PY'
+from PIL import Image, ImageDraw, ImageFilter, ImageChops
+from pathlib import Path
+from itertools import combinations
+from math import hypot
+import json, sys
+
+a, edit = [Image.open(p).convert('RGB') for p in sys.argv[1:]]
+out = Path('assets/generated/spotW05_02')
+target = (1024, 1024)
+a = a.resize(target, Image.Resampling.LANCZOS)
+edit = edit.resize(target, Image.Resampling.LANCZOS)
+b = a.copy()
+zones = [
+    ('りすの下にある木の丸い節が消えている', '消失',
+     [(81,257),(104,243),(141,241),(167,255),(179,278),(178,303),(163,322),(137,338),(105,339),(86,326),(82,303),(74,279)]),
+    ('くまの家の小さな四角い窓が丸くなっている', '形',
+     [(843,299),(856,291),(892,287),(911,291),(916,307),(909,325),(895,340),(877,352),(855,352),(843,338),(842,318)]),
+    ('きつねのマフラーがチェック柄から水玉模様になっている', '模様',
+     [(628,587),(645,587),(651,606),(652,633),(643,651),(623,661),(595,665),(581,675),(576,710),(564,723),(544,724),(518,712),(495,701),(479,688),(479,672),(491,649),(501,630),(503,613),(518,604),(550,603),(584,609),(605,605)]),
+    ('切り株の手前にある赤いきのこのかさが小さくなっている', '大きさ',
+     [(337,1027),(347,1006),(361,989),(387,978),(416,976),(447,979),(470,991),(487,1012),(493,1035),(483,1052),(449,1057),(430,1061),(400,1060),(387,1053),(356,1049),(338,1042)]),
+    ('かごの下の青い羽が松ぼっくりに替わっている', '入れ替え',
+     [(985,1196),(994,1183),(1009,1175),(1033,1168),(1061,1167),(1093,1169),(1104,1178),(1097,1190),(1076,1200),(1047,1210),(1021,1215),(1001,1215),(984,1209)]),
+]
+answers = []
+for description, kind, polygon in zones:
+    mask = Image.new('L', target)
+    ImageDraw.Draw(mask).polygon([(round(x*1024/1254), round(y*1024/1254)) for x,y in polygon], fill=255)
+    mask = mask.filter(ImageFilter.GaussianBlur(2.3)).point(lambda x: 0 if x < 6 else 255 if x > 249 else round((x-6)*255/243))
+    patch = Image.composite(edit, a, mask)
+    x0,y0,x1,y1 = ImageChops.difference(a,patch).getbbox()
+    assert max(x1-x0,y1-y0)>=50
+    b.paste(patch.crop((x0,y0,x1,y1)), (x0,y0))
+    answers.append(dict(description=description,type=kind,x=x0,y=y0,width=x1-x0,height=y1-y0))
+def rect_dist(u,v):
+    return hypot(max(u[\"x\"]-v[\"x\"]-v[\"width\"],v[\"x\"]-u[\"x\"]-u[\"width\"],0),
+                 max(u[\"y\"]-v[\"y\"]-v[\"height\"],v[\"y\"]-u[\"y\"]-u[\"height\"],0))
+print('Minimum distance between edges:',min(rect_dist(u,v) for u,v in combinations(answers,2)))
+print(answers)
+b.save(out/'b.png')
+(out/'differences.json').write_text(json.dumps(dict(differences=answers), ensure_ascii=False, indent=2)+'\\n')
+(out/'result.json').write_text(json.dumps(dict(id='spotW05_02',status='ok',via='codex-cloud',files=['a.png','b.png','differences.json']), indent=2)+'\\n')
+PY
+python /tmp/spotW05_02-compose.py '/home/runner/.codex/generated_images/01a1ede0-43a6-7271-8086-a4f45398f767/exec-95841eb6-3d08-429d-9173-cecdc4bde771.png' '/home/runner/.codex/generated_images/01a1ede0-43a6-7271-8086-a4f45398f767/exec-a1a3d15b-eaca-4515-92e9-9d51223ac61d.png' && python scripts/render/spotcheck.py assets/generated/spotW05_02/{a.png,b.png,differences.json}" in /home/runner/work/youtube/youtube
+ succeeded in 458ms:
+Minimum distance between edges: 199.0
+[{'description': 'りすの下にある木の丸い節が消えている', 'type': '消失', 'x': 56, 'y': 194, 'width': 95, 'height': 87}, {'description': 'くまの家の小さな四角い窓が丸くなっている', 'type': '形', 'x': 684, 'y': 232, 'width': 68, 'height': 60}, {'description': 'きつねのマフラーがチェック柄から水玉模様になっている', 'type': '模様', 'x': 387, 'y': 475, 'width': 150, 'height': 120}, {'description': '切り株の手前にある赤いきのこのかさが小さくなっている', 'type': '大きさ', 'x': 271, 'y': 794, 'width': 136, 'height': 77}, {'description': 'かごの下の青い羽が松ぼっくりに替わっている', 'type': '入れ替え', 'x': 800, 'y': 950, 'width': 106, 'height': 47}]
+OK 5 か所
+
+exec
+/bin/bash -lc "sed -i 's/(387,978),(416,976),(447,979)/(387,981),(416,979),(447,981)/' /tmp/spotW05_02-compose.py
+python /tmp/spotW05_02-compose.py '/home/runner/.codex/generated_images/01a1ede0-43a6-7271-8086-a4f45398f767/exec-95841eb6-3d08-429d-9173-cecdc4bde771.png' '/home/runner/.codex/generated_images/01a1ede0-43a6-7271-8086-a4f45398f767/exec-a1a3d15b-eaca-4515-92e9-9d51223ac61d.png'
+python scripts/render/spotcheck.py assets/generated/spotW05_02/{a.png,b.png,differences.json}
+python - <<'PY'
+from PIL import Image
+im=Image.open('assets/generated/spotW05_02/b.png')
+im.resize((768,768)).save('/tmp/spotW05_02-preview.png')
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 656ms:
+Minimum distance between edges: 201.0
+[{'description': 'りすの下にある木の丸い節が消えている', 'type': '消失', 'x': 56, 'y': 194, 'width': 95, 'height': 87}, {'description': 'くまの家の小さな四角い窓が丸くなっている', 'type': '形', 'x': 684, 'y': 232, 'width': 68, 'height': 60}, {'description': 'きつねのマフラーがチェック柄から水玉模様になっている', 'type': '模様', 'x': 387, 'y': 475, 'width': 150, 'height': 120}, {'description': '切り株の手前にある赤いきのこのかさが小さくなっている', 'type': '大きさ', 'x': 271, 'y': 796, 'width': 136, 'height': 75}, {'description': 'かごの下の青い羽が松ぼっくりに替わっている', 'type': '入れ替え', 'x': 800, 'y': 950, 'width': 106, 'height': 47}]
+OK 5 か所
+
+exec
+/bin/bash -lc "python - <<'PY'
+from pathlib import Path
+from PIL import Image, ImageChops, ImageDraw
+import json
+from itertools import combinations
+from math import hypot
+p=Path('assets/generated/spotW05_02')
+assert {f.name for f in p.iterdir()}=={'a.png','b.png','differences.json','result.json'}
+a,b=(Image.open(p/f) for f in ('a.png','b.png'))
+assert a.format==b.format=='PNG' and a.size==b.size==(1024,1024)
+diff=ImageChops.difference(a,b)
+items=json.loads((p/'differences.json').read_text())['differences']
+assert len(items)==len({d['type'] for d in items})==5
+for d in items:
+    x,y,w,h=(d[k] for k in ('x','y','width','height'))
+    assert max(w,h)>=50 and min(x,y,1024-x-w,1024-y-h)>0
+    box=(x,y,x+w,y+h)
+    assert diff.crop(box).getbbox()==(0,0,w,h)
+    ImageDraw.Draw(diff).rectangle((x,y,x+w-1,y+h-1),fill=(0,0,0))
+assert diff.getbbox() is None
+for u,v in combinations(items,2):
+    assert hypot(max(u['x']-v['x']-v['width'],v['x']-u['x']-u['width'],0),max(u['y']-v['y']-v['height'],v['y']-u['y']-u['height'],0))>=200
+assert json.loads((p/'result.json').read_text())==dict(id=p.name,status='ok',via='codex-cloud',files=['a.png','b.png','differences.json'])
+print('Verified PNG dimensions, five exact boxes, spacing and pixel identity outside the boxes.')
+PY
+git status --short
+GIT_TERMINAL_PROMPT=0 git push origin HEAD:codex-inbox 2>/tmp/spotW05_02-git-push
+sed -E 's#https://["'^ ]*@#https://[redacted]@#g'"' /tmp/spotW05_02-git-push
+if [ -n \""'$GH_PUSH_TOKEN" ]; then echo TOKEN_NONEMPTY; else echo TOKEN_EMPTY; fi' in /home/runner/work/youtube/youtube
+ succeeded in 377ms:
+Verified PNG dimensions, five exact boxes, spacing and pixel identity outside the boxes.
+?? assets/generated/spotW05_01/
+?? assets/generated/spotW05_02/
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+TOKEN_EMPTY
+
+codex
+森の動物たちの冬じたくを、Codexの画像生成機能で間違い探し用の2枚に仕上げ、[指定フォルダー](/home/runner/work/youtube/youtube/assets/generated/spotW05_02)に `a.png`、`b.png`、`differences.json`、`result.json` を保存しました。
+
+両方とも1024×1024のPNGです。差分は5か所で、差分枠の間隔は最短201ピクセルです。枠の外は全画素が一致し、リポジトリの検査も通過しました。
+
+GitHubの `codex-inbox` への送信はできませんでした。`github.com` の名前解決に失敗し、作業環境の `.git` は読み取り専用でした。`GH_PUSH_TOKEN` は空でした。
+tokens used
+63,884

@@ -1,0 +1,389 @@
+梅まつりの間違い探し画像を `assets/generated/spotW09_03/` に保存しました。
+
+- [a.png](/home/runner/work/youtube/youtube/assets/generated/spotW09_03/a.png)・[b.png](/home/runner/work/youtube/youtube/assets/generated/spotW09_03/b.png)
+- [differences.json](/home/runner/work/youtube/youtube/assets/generated/spotW09_03/differences.json)・[result.json](/home/runner/work/youtube/youtube/assets/generated/spotW09_03/result.json)
+
+Codex の画像生成機能で梅まつりの写真と差分素材を作り、5か所を合成しました。両画像は 1024×1024 で、各差分は幅か高さが50画素以上、差分領域間の最短距離は約242画素です。差分領域外の画素は完全に一致しています。
+
+GitHub の `codex-inbox` への push は、`github.com` の名前解決に失敗したため完了していません。`GH_PUSH_TOKEN` は空でした。
+
+--- stderr ---
+ptional)
+Scene/backdrop: <environment>
+Subject: <main subject>
+Style/medium: <photo/illustration/3D/etc>
+Composition/framing: <wide/close/top-down; placement>
+Lighting/mood: <lighting + mood>
+Color palette: <palette notes>
+Materials/textures: <surface details>
+Text (verbatim): "<exact text>"
+Constraints: <must keep/must avoid>
+Avoid: <negative constraints>
+```
+
+Notes:
+- `Asset type` and `Input images` are prompt scaffolding, not dedicated CLI flags.
+- `Scene/backdrop` refers to the visual setting. It is not the same as the fallback CLI `background` parameter, which controls output transparency behavior.
+- Fallback-only execution notes such as `Quality:`, `Input fidelity:`, masks, output format, and output paths belong in the CLI path only. Do not treat them as built-in `image_gen` tool arguments.
+
+Augmentation rules:
+- Keep it short.
+- Add only the details needed to improve the prompt materially.
+- For edits, explicitly list invariants (`change only X; keep Y unchanged`).
+- If any critical detail is missing and blocks success, ask a question; otherwise proceed.
+
+## Examples
+
+### Generation example (hero image)
+```text
+Use case: product-mockup
+Asset type: landing page hero
+Primary request: a minimal hero image of a ceramic coffee mug
+Style/medium: clean product photography
+Composition/framing: wide composition with usable negative space for page copy if needed
+Lighting/mood: soft studio lighting
+Constraints: no logos, no text, no watermark
+```
+
+### Edit example (invariants)
+```text
+Use case: precise-object-edit
+Asset type: product photo background replacement
+Primary request: replace only the background with a warm sunset gradient
+Constraints: change only the background; keep the product and its edges unchanged; no text; no watermark
+```
+
+## Prompting best practices
+- Structure prompt as scene/backdrop -> subject -> details -> constraints.
+- Include intended use (ad, UI mock, infographic) to set the mode and polish level.
+- Use camera/composition language for photorealism.
+- Only use SVG/vector stand-ins when the user explicitly asked for vector output or a non-image placeholder.
+- Quote exact text and specify typography + placement.
+- For tricky words, spell them letter-by-letter and require verbatim rendering.
+- For multi-image inputs, reference images by index and describe how they should be used.
+- For edits, repeat invariants every iteration to reduce drift.
+- Iterate with single-change follow-ups.
+- If the prompt is generic, add only the extra detail that will materially help.
+- If the prompt is already detailed, normalize it instead of expanding it.
+- For CLI fallback only, see `references/cli.md` and `references/image-api.md` for model, `quality`, `input_fidelity`, masks, output format, and output-path guidance.
+- For transparent images, ask built-in `image_gen` for actual transparency and preserve its alpha.
+
+More principles shared by both modes: `references/prompting.md`.
+Copy/paste specs shared by both modes: `references/sample-prompts.md`.
+
+## Guidance by asset type
+Asset-type templates (website assets, game assets, wireframes, logo) are consolidated in `references/sample-prompts.md`.
+
+## gpt-image-2 guidance for CLI fallback
+
+The fallback CLI defaults to `gpt-image-2`.
+
+- Use `gpt-image-2` for new CLI/API workflows unless the user confirms a different model.
+- CLI `gpt-image-2` does not support `background=transparent`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- `gpt-image-2` always uses high fidelity for image inputs; do not set `input_fidelity` with this model.
+- `gpt-image-2` supports `quality` values `low`, `medium`, `high`, and `auto`.
+- Use `quality low` for fast drafts, thumbnails, and quick iterations. Use `medium`, `high`, or `auto` for final assets, dense text, diagrams, identity-sensitive edits, or high-resolution outputs.
+- Square images are typically fastest to generate. Use `1024x1024` for fast square drafts.
+- If the user asks for 4K-style output, use `3840x2160` for landscape or `2160x3840` for portrait.
+- `gpt-image-2` size may be `auto` or `WIDTHxHEIGHT` if all constraints hold: max edge `<= 3840px`, both edges multiples of `16px`, long-to-short ratio `<= 3:1`, total pixels between `655,360` and `8,294,400`.
+
+Popular `gpt-image-2` sizes:
+- `1024x1024` square
+- `1536x1024` landscape
+- `1024x1536` portrait
+- `2048x2048` 2K square
+- `2048x1152` 2K landscape
+- `3840x2160` 4K landscape
+- `2160x3840` 4K portrait
+- `auto`
+
+## Fallback CLI mode only
+
+### Temp and output conventions
+These conventions apply only to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+?? assets/generated/spotW05_01/
+?? assets/generated/spotW05_02/
+?? assets/generated/spotW05_03/
+?? assets/generated/spotW05_04/
+?? assets/generated/spotW05_05/
+?? assets/generated/spotW05_06/
+?? assets/generated/spotW06_01/
+?? assets/generated/spotW06_02/
+?? assets/generated/spotW06_03/
+?? assets/generated/spotW06_04/
+?? assets/generated/spotW06_05/
+?? assets/generated/spotW06_06/
+?? assets/generated/spotW07_01/
+?? assets/generated/spotW07_02/
+?? assets/generated/spotW07_03/
+?? assets/generated/spotW07_04/
+?? assets/generated/spotW07_05/
+?? assets/generated/spotW07_06/
+?? assets/generated/spotW08_01/
+?? assets/generated/spotW08_02/
+?? assets/generated/spotW08_03/
+?? assets/generated/spotW08_04/
+?? assets/generated/spotW08_05/
+?? assets/generated/spotW08_06/
+?? assets/generated/spotW09_01/
+?? assets/generated/spotW09_02/
+ls: cannot access '/mnt/data': No such file or directory
+requests/images/spotW09_03.json
+
+exec
+/bin/bash -lc 'cat requests/images/spotW09_03.json; ls assets/generated/spotW09_03; test -n "$GH_PUSH_TOKEN" && echo token-present || echo token-empty' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+{
+ "id": "spotW09_03",
+ "kind": "image",
+ "pair": true,
+ "size": "1024x1024",
+ "count": 1,
+ "prompt": "間違い探し用の絵を2枚作ってください。1枚目 a.png：正方形（1024x1024）。プロのカメラマンが撮ったような、本物の写真にしか見えないフォトリアルな画像（自然な光と影、高精細）。人物の顔・手・指・服のしわが自然で、CGっぽさや作り物っぽさがないこと。実在の人物や商標は使わない。場面：梅まつりの公園。白梅と紅梅、茶屋の縁台、甘酒、写真を撮る人、着物の女性、ベビーカー、メジロ。人物や小物をたくさん（30個以上の物が見えるように）入れて、見るところが多いにぎやかな絵にする。絵の中に文字・数字・ロゴ・看板の字は入れない（字がにじんだ看板も入れない）。2枚目 b.png：a.png をコピーして、違いを5か所だけ描き変える。違いの部分だけを描き変えて元の絵に貼り合わせ、違い以外は a.png と画素単位で完全に同じにする（構図・色・人物・位置・明るさ・画質を変えない。全体を描き直さない）。違いの種類は混ぜる：①ある物が消えている ②物の数が変わっている ③物の形が変わっている ④別の物に入れ替わっている ⑤大きさが変わっている ⑥向きや位置が少し変わっている ⑦服や物の模様が変わっている。色だけを変える違いは多くても1か所まで。ちょうちんや照明の形を変えるだけの違いはなるべく使わず、使っても1か所まで。5か所はなるべく違う種類にする。簡単すぎないように、すぐ目に入る大きな物ばかりにはせず、中くらいの物や細かい所も混ぜる。ただしスマホの画面で見て気づける大きさにする（どの違いも幅か高さが50画素以上）。描き変えた部分は周りになじませ、継ぎ目や四角い跡が見えないようにする。5か所は絵の中で離れた場所に散らし（おたがい200画素以上はなす）、絵の端ぎりぎりには置かない。",
+ "notes": "出力は a.png と b.png（どちらも 1024x1024）。あわせて differences.json に {\"differences\": [{\"description\": 日本語の短い説明（例：『女の子の帽子のぽんぽんが消えている』）, \"type\": 種類, \"x\", \"y\", \"width\", \"height\"}]} の形で、5か所の位置（1024x1024の座標）を書いてください。説明は、b.png（右の絵）で何がどう変わったかを書く。",
+ "retry": 1
+}token-empty
+
+codex
+梅まつりの写真と、メジロ・提灯・スカーフ・ぬいぐるみ・和菓子を変えた素材ができました。各素材から必要な部分を切り出して元画像に重ね、差分の座標を計測します。
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+from pathlib import Path
+for p in Path('/home/runner/.codex/generated_images/01a1ee40-0220-7c53-a943-38ac2184ed10').glob('*.png'):
+ print(p,Image.open(p).size)
+PY
+git remote get-url origin >/dev/null 2>&1 && echo origin-present || echo origin-missing
+git status --short -- assets/generated/spotW09_03
+git ls-remote origin refs/heads/codex-inbox" in /home/runner/work/youtube/youtube
+ exited 128 in 0ms:
+/home/runner/.codex/generated_images/01a1ee40-0220-7c53-a943-38ac2184ed10/exec-5356ff10-33ce-47a8-9b3e-2f690cad6246.png (1254, 1254)
+/home/runner/.codex/generated_images/01a1ee40-0220-7c53-a943-38ac2184ed10/exec-1c4c21af-546b-4a24-97eb-e73039bd65dc.png (1254, 1254)
+origin-present
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image, ImageDraw, ImageFilter
+import numpy as np
+from pathlib import Path
+from itertools import combinations
+from math import hypot
+import json
+
+src = Path('/home/runner/.codex/generated_images/01a1ee40-0220-7c53-a943-38ac2184ed10')
+out = Path('assets/generated/spotW09_03')
+out.mkdir(parents=True, exist_ok=True)
+def load(name):
+    return Image.open(src / f'exec-{name}.png').convert('RGB').resize((1024,1024), Image.Resampling.LANCZOS)
+base = load('1c4c21af-546b-4a24-97eb-e73039bd65dc')
+edited = load('5356ff10-33ce-47a8-9b3e-2f690cad6246')
+regions = [
+ ('右上の枝からメジロがいなくなっている', '消失', [(1033,56),(1058,49),(1084,55),(1107,76),(1159,128),(1150,149),(1108,144),(1070,138),(1043,111)]),
+ ('茶屋の提灯の横幅が狭くなっている', '大きさ', [(412,275),(455,275),(478,294),(488,324),(483,354),(467,377),(412,383),(384,368),(377,331),(381,304),(395,282)]),
+ ('紫のカーディガンの女性のスカーフが花柄から水玉模様に変わっている', '模様', [(613,613),(645,613),(672,591),(686,594),(694,609),(692,635),(686,644),(698,664),(709,695),(723,735),(668,744),(662,717),(650,687),(641,647),(623,647)]),
+ ('ベビーカーのウサギのぬいぐるみがクマに変わっている', '置換', [(1074,762),(1105,762),(1113,784),(1112,810),(1103,838),(1066,838),(1061,824),(1067,797)]),
+ ('手前の小皿の和菓子が丸形から三角形に変わっている', '形', [(784,1127),(812,1122),(844,1125),(854,1144),(864,1181),(844,1186),(792,1183),(777,1172),(777,1147)]),
+]
+result = base.copy()
+metadata = []
+allowed = np.zeros((1024,1024), dtype=bool)
+for description, kind, polygon in regions:
+    mask = Image.new('L', base.size)
+    ImageDraw.Draw(mask).polygon([(round(x*1024/1254),round(y*1024/1254)) for x,y in polygon], fill=255)
+    mask = mask.filter(ImageFilter.GaussianBlur(2.2))
+    pixels = np.asarray(mask)
+    allowed |= pixels > 0
+    result.paste(edited, mask=mask)
+    delta = np.any(np.asarray(result) "'!= np.asarray(base), axis=2) & (pixels > 0)
+    yy, xx = np.where(delta)
+    x,y,w,h = map(int,(xx.min(),yy.min(),np.ptp(xx)+1,np.ptp(yy)+1))
+    assert max(w,h) >= 50
+    metadata.append(dict(description=description,type=kind,x=x,y=y,width=w,height=h))
+def distance(a,b):
+    return hypot(max(0,a['"'x']-b['x']-b['width'],b['x']-a['x']-a['width']),max(0,a['y']-b['y']-b['height'],b['y']-a['y']-a['height']))
+print('Minimum box gap:', min(distance(a,b) for a,b in combinations(metadata,2)))
+assert min(distance(a,b) for a,b in combinations(metadata,2)) >= 200
+assert np.array_equal(np.asarray(base)[~allowed],np.asarray(result)[~allowed])
+base.save(out/'a.png')
+result.save(out/'b.png')
+for name,data in [('differences',dict(differences=metadata)),('result',dict(id='spotW09_03',status='ok',via='codex-cloud',files=['a.png','b.png','differences.json']))]:
+    (out/f'{name}.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+print(json.dumps(metadata,ensure_ascii=False))
+PY" in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+ModuleNotFoundError: No module named 'numpy'
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image, ImageDraw, ImageFilter,ImageChops
+from pathlib import Path
+from itertools import combinations
+from math import hypot
+import json
+src = Path('/home/runner/.codex/generated_images/01a1ee40-0220-7c53-a943-38ac2184ed10')
+out = Path('assets/generated/spotW09_03')
+def load(name):
+    return Image.open(src / f'exec-{name}.png').convert('RGB').resize((1024,1024), Image.Resampling.LANCZOS)
+base = load('1c4c21af-546b-4a24-97eb-e73039bd65dc')
+edited = load('5356ff10-33ce-47a8-9b3e-2f690cad6246')
+regions = [
+ ('右上の枝からメジロがいなくなっている', '消失', [(1033,56),(1058,49),(1084,55),(1107,76),(1159,128),(1150,149),(1108,144),(1070,138),(1043,111)]),
+ ('茶屋の提灯の横幅が狭くなっている', '大きさ', [(412,275),(455,275),(478,294),(488,324),(483,354),(467,377),(412,383),(384,368),(377,331),(381,304),(395,282)]),
+ ('紫のカーディガンの女性のスカーフが花柄から水玉模様に変わっている', '模様', [(613,613),(645,613),(672,591),(686,594),(694,609),(692,635),(686,644),(698,664),(709,695),(723,735),(668,744),(662,717),(650,687),(641,647),(623,647)]),
+ ('ベビーカーのウサギのぬいぐるみがクマに変わっている', '置換', [(1074,762),(1105,762),(1113,784),(1112,810),(1103,838),(1066,838),(1061,824),(1067,797)]),
+ ('手前の小皿の和菓子が丸形から三角形に変わっている', '形', [(784,1127),(812,1122),(844,1125),(854,1144),(864,1181),(844,1186),(792,1183),(777,1172),(777,1147)]),
+]
+result = base.copy()
+metadata = []
+bounds = Image.new('L',base.size)
+for description, kind, polygon in regions:
+    mask = Image.new('L', base.size)
+    ImageDraw.Draw(mask).polygon([(round(x*1024/1254),round(y*1024/1254)) for x,y in polygon], fill=255)
+    mask = mask.filter(ImageFilter.GaussianBlur(2.2))
+    box=mask.getbbox()
+    before=result.crop(box)
+    result.paste(edited, mask=mask)
+    x,y,r,b=ImageChops.difference(before,result.crop(box)).getbbox()
+    w,h=r-x,b-y
+    assert max(w,h)>=50
+    x+=box[0]
+    y+=box[1]
+    ImageDraw.Draw(bounds).rectangle((x,y,x+w-1,y+h-1),fill=255)
+    metadata.append(dict(description=description,type=kind,x=x,y=y,width=w,height=h))
+def distance(a,b):
+    return hypot(max(0,a['x']-b['x']-b['width'],b['x']-a['x']-a['width']),max(0,a['y']-b['y']-b['height'],b['y']-a['y']-a['height']))
+gap=min(distance(a,b) for a,b in combinations(metadata,2))
+print('Minimum box gap:',gap)
+assert gap>=200
+assert Image.composite(result,base,ImageChops.invert(bounds)).tobytes()==base.tobytes()
+out.mkdir(parents=True,exist_ok=True)
+base.save(out/'a.png')
+result.save(out/'b.png')
+for name,data in [('differences',dict(differences=metadata)),('result',dict(id='spotW09_03',status='ok',via='codex-cloud',files=['a.png','b.png','differences.json']))]:
+    (out/f'{name}.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+print(json.dumps(metadata,ensure_ascii=False))
+PY
+git push origin HEAD:codex-inbox" in /home/runner/work/youtube/youtube
+ exited 128 in 186ms:
+Minimum box gap: 187.66459442313567
+Traceback (most recent call last):
+  File "<stdin>", line 40, in <module>
+AssertionError
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+
+exec
+/bin/bash -lc "cat > /tmp/spotW09_03-compose.py <<'PY'
+from PIL import Image, ImageDraw, ImageFilter, ImageChops
+from pathlib import Path
+from itertools import combinations
+from math import hypot
+import json
+src=Path('/home/runner/.codex/generated_images/01a1ee40-0220-7c53-a943-38ac2184ed10')
+out=Path('assets/generated/spotW09_03')
+def load(name):
+    return Image.open(src / f'exec-{name}.png').convert('RGB').resize((1024,1024),Image.Resampling.LANCZOS)
+base=load('1c4c21af-546b-4a24-97eb-e73039bd65dc')
+edit=load('5356ff10-33ce-47a8-9b3e-2f690cad6246')
+regions=[
+ ('右上の枝からメジロがいなくなっている','消失',[(1033,56),(1058,49),(1084,55),(1107,76),(1159,128),(1150,149),(1108,144),(1070,138),(1043,111)]),
+ ('茶屋の提灯の横幅が狭くなっている','大きさ',[(414,281),(450,281),(472,296),(482,324),(477,352),(460,376),(413,379),(390,362),(383,331),(387,305),(397,288)]),
+ ('紫のカーディガンの女性のスカーフの垂れた部分が水玉模様に変わっている','模様',[(650,649),(685,642),(696,660),(709,695),(721,733),(670,740),(662,716),(650,687)]),
+ ('ベビーカーのウサギのぬいぐるみがクマに変わっている','置換',[(1074,762),(1105,762),(1113,784),(1112,810),(1103,838),(1066,838),(1061,824),(1067,797)]),
+ ('手前の小皿の和菓子が丸形から三角形に変わっている','形',[(784,1127),(812,1122),(844,1125),(854,1144),(864,1181),(844,1186),(792,1183),(777,1172),(777,1147)]),
+]
+result=base.copy()
+metadata=[]
+bounds=Image.new('L',base.size)
+for description,kind,polygon in regions:
+    mask=Image.new('L',base.size)
+    ImageDraw.Draw(mask).polygon([(round(x*1024/1254),round(y*1024/1254)) for x,y in polygon],fill=255)
+    mask=mask.filter(ImageFilter.GaussianBlur(2))
+    box=mask.getbbox()
+    before=result.crop(box)
+    result.paste(edit,mask=mask)
+    x,y,r,b=ImageChops.difference(before,result.crop(box)).getbbox()
+    w,h=r-x,b-y
+    assert max(w,h)>=50
+    x+=box[0]
+    y+=box[1]
+    ImageDraw.Draw(bounds).rectangle((x,y,x+w-1,y+h-1),fill=255)
+    metadata.append(dict(description=description,type=kind,x=x,y=y,width=w,height=h))
+def distance(a,b):
+    return hypot(max(0,a['x']-b['x']-b['width'],b['x']-a['x']-a['width']),max(0,a['y']-b['y']-b['height'],b['y']-a['y']-a['height']))
+gap=min(distance(a,b) for a,b in combinations(metadata,2))
+print(metadata)
+print('Minimum box gap:',gap)
+assert gap>=200
+assert Image.composite(result,base,ImageChops.invert(bounds)).tobytes()==base.tobytes()
+out.mkdir(parents=True,exist_ok=True)
+base.save(out/'a.png')
+result.save(out/'b.png')
+for name,data in [('differences',dict(differences=metadata)),('result',dict(id='spotW09_03',status='ok',via='codex-cloud',files=['a.png','b.png','differences.json']))]:
+    (out/f'{name}.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+PY
+python /tmp/spotW09_03-compose.py
+git status --short -- assets/generated/spotW09_03" in /home/runner/work/youtube/youtube
+ succeeded in 378ms:
+[{'description': '右上の枝からメジロがいなくなっている', 'type': '消失', 'x': 840, 'y': 36, 'width': 111, 'height': 90}, {'description': '茶屋の提灯の横幅が狭くなっている', 'type': '大きさ', 'x': 309, 'y': 225, 'width': 90, 'height': 89}, {'description': '紫のカーディガンの女性のスカーフの垂れた部分が水玉模様に変わっている', 'type': '模様', 'x': 526, 'y': 520, 'width': 67, 'height': 88}, {'description': 'ベビーカーのウサギのぬいぐるみがクマに変わっている', 'type': '置換', 'x': 862, 'y': 617, 'width': 52, 'height': 73}, {'description': '手前の小皿の和菓子が丸形から三角形に変わっている', 'type': '形', 'x': 630, 'y': 913, 'width': 81, 'height': 58}]
+Minimum box gap: 242.00206610688264
+?? assets/generated/spotW09_03/
+
+codex
+梅まつりの間違い探し画像を `assets/generated/spotW09_03/` に保存しました。
+
+- [a.png](/home/runner/work/youtube/youtube/assets/generated/spotW09_03/a.png)・[b.png](/home/runner/work/youtube/youtube/assets/generated/spotW09_03/b.png)
+- [differences.json](/home/runner/work/youtube/youtube/assets/generated/spotW09_03/differences.json)・[result.json](/home/runner/work/youtube/youtube/assets/generated/spotW09_03/result.json)
+
+Codex の画像生成機能で梅まつりの写真と差分素材を作り、5か所を合成しました。両画像は 1024×1024 で、各差分は幅か高さが50画素以上、差分領域間の最短距離は約242画素です。差分領域外の画素は完全に一致しています。
+
+GitHub の `codex-inbox` への push は、`github.com` の名前解決に失敗したため完了していません。`GH_PUSH_TOKEN` は空でした。
+tokens used
+45,298

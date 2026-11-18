@@ -1,0 +1,417 @@
+一寸法師の間違い探しを作成し、[spotW08_06](/home/runner/work/youtube/youtube/assets/generated/spotW08_06) に `a.png`、`b.png`、`differences.json`、`result.json` を保存しました。
+
+画像はどちらも 1024×1024 です。差分は5か所で、領域間の最短距離は約367ピクセルです。記録した5領域の外側は画素単位で一致しています。
+
+GitHub の `codex-inbox` には送信できませんでした。`GH_PUSH_TOKEN` は空で、ローカルの `.git` は読み取り専用です。`github.com` の名前解決にも失敗し、GitHub 連携による書き込みは承認ポリシーで拒否されました。
+
+--- stderr ---
+as `hero-v2.png` or `item-icon-edited.png`.
+
+Shared prompt guidance for both modes lives in `references/prompting.md` and `references/sample-prompts.md`.
+
+Fallback-only docs/resources for CLI mode:
+- `references/cli.md`
+- `references/image-api.md`
+- `references/codex-network.md`
+- `scripts/image_gen.py`
+
+## When to use
+- Generate a new image (concept art, product shot, cover, website hero)
+- Generate a new image using one or more reference images for style, composition, or mood
+- Edit an existing image (inpainting, lighting or weather transformations, background replacement, object removal, compositing, transparent background)
+- Produce many assets or variants for one task
+
+## When not to use
+- Extending or matching an existing SVG/vector icon set, logo system, or illustration library inside the repo
+- Creating simple shapes, diagrams, wireframes, or icons that are better produced directly in SVG, HTML/CSS, or canvas
+- Making a small project-local asset edit when the source file already exists in an editable native format
+- Any task where the user clearly wants deterministic code-native output instead of a generated bitmap
+
+## Decision tree
+
+Think about two separate questions:
+
+1. **Intent:** is this a new image or an edit of an existing image?
+2. **Execution strategy:** is this one asset or many assets/variants?
+
+Intent:
+- If the user wants to modify an existing image while preserving parts of it, treat the request as **edit**.
+- If the user provides images only as references for style, composition, mood, or subject guidance, treat the request as **generate**.
+- If the user provides no images, treat the request as **generate**.
+
+Built-in edit semantics:
+- Built-in edit mode is for images already visible in the conversation context, such as attached images or images generated earlier in the thread.
+- If the user wants to edit a local image file with the built-in tool, first load it with built-in `view_image` tool so the image is visible in the conversation context, then proceed with the built-in edit flow.
+- Do not promise arbitrary filesystem-path editing through the built-in tool.
+- If a local file still needs direct file-path control, masks, or other explicit CLI-only parameters, use the explicit CLI fallback only when the user asks for it.
+- For edits, preserve invariants aggressively and save non-destructively by default.
+
+Execution strategy:
+- In the built-in default path, produce many assets or variants by issuing one `image_gen` call per requested asset or variant.
+- In the CLI fallback path, use the CLI `generate-batch` subcommand only when the user explicitly chose CLI mode and needs many prompts/assets.
+- For many distinct assets, do not use `n` as a substitute for separate prompts. `n` is for variants of one prompt; distinct assets need distinct built-in calls or distinct CLI `generate-batch` jobs.
+
+Assume the user wants a new image unless they clearly ask to change an existing one.
+
+## Workflow
+1. Decide the top-level mode: built-in by default, including transparent-output requests; fallback CLI only if explicitly requested or confirmed.
+2. Decide the intent: `generate` or `edit`.
+3. Decide whether the output is preview-only or meant to be consumed by the current project.
+4. Decide the execution strategy: single asset vs repeated built-in calls vs CLI `generate-batch`.
+5. Collect inputs up front: prompt(s), exact text (verbatim), constraints/avoid list, and any input images.
+6. For every input image, label its role explicitly:
+   - reference image
+   - edit target
+   - supporting insert/style/compositing input
+7. If the edit target is only on the local filesystem and you are staying on the built-in path, inspect it with `view_image` first so the image is available in conversation context.
+8. If the user asked for a photo, illustration, sprite, product image, banner, or other explicitly raster-style asset, use `image_gen` rather than substituting SVG/HTML/CSS placeholders. If the request is for an icon, logo, or UI graphic that should match existing repo-native SVG/vector/code assets, prefer editing those directly instead.
+9. Augment the prompt based on specificity:
+   - If the user's prompt is already specific and detailed, normalize it into a clear spec without adding creative requirements.
+   - If the user's prompt is generic, add tasteful augmentation only when it materially improves output quality.
+10. Use the built-in `image_gen` tool by default.
+11. For transparent-output requests, ask built-in `image_gen` for a transparent background and preserve the generated alpha channel.
+12. Inspect outputs and validate: subject, style, composition, text accuracy, and invariants/avoid items.
+13. Iterate with a single targeted change, then re-check.
+14. For preview-only work, render the image inline; the underlying file may remain at the default `$CODEX_HOME/generated_images/...` path.
+15. For project-bound work, move or copy the selected artifact into the workspace and update any consuming code or references. Never leave a project-referenced asset only at the default `$CODEX_HOME/generated_images/...` path.
+16. For batches or multi-asset requests, persist every requested deliverable final in the workspace unless the user explicitly asked to keep outputs preview-only. Discarded variants do not need to be kept unless requested.
+17. If the user explicitly chooses or confirms the CLI fallback, then use the fallback-only docs for model, quality, size, `input_fidelity`, masks, output format, output paths, and network setup.
+18. Always report the final saved path(s) for any workspace-bound asset(s), plus the final prompt or prompt set and whether the built-in tool or fallback CLI mode was used.
+
+## Transparent image requests
+
+Ask built-in `image_gen` for a genuinely transparent background and preserve its alpha.
+
+## Prompt augmentation
+
+Reformat user prompts into a structured, production-oriented spec. Make the user's goal clearer and more actionable, but do not blindly add detail.
+
+Treat this as prompt-shaping guidance, not a closed schema. Use only the lines that help, and add a short extra labeled line when it materially improves clarity.
+
+### Specificity policy
+
+Use the user's prompt specificity to decide how much augmentation is appropriate:
+
+- If the prompt is already specific and detailed, preserve that specificity and only normalize/structure it.
+- If the prompt is generic, you may add tasteful augmentation when it will materially improve the result.
+
+Allowed augmentations:
+- composition or framing hints
+- polish level or intended-use hints
+- practical layout guidance
+- reasonable scene concreteness that supports the stated request
+
+Not allowed augmentations:
+- extra characters or objects that are not implied by the request
+- brand names, slogans, palettes, or narrative beats that are not implied
+- arbitrary side-specific placement unless the surrounding layout supports it
+
+## Use-case taxonomy (exact slugs)
+
+Classify each request into one of these buckets and keep the slug consistent across prompts and references.
+
+Generate:
+- photorealistic-natural — candid/editorial lifestyle scenes with real texture and natural lighting.
+- product-mockup — product/packaging shots, catalog imagery, merch concepts.
+- ui-mockup — app/web interface mockups and wireframes; specify the desired fidelity.
+- infographic-diagram — diagrams/infographics with structured layout and text.
+- scientific-educational — classroom explainers, scientific diagrams, and learning visuals with required labels and accuracy constraints.
+- ads-marketing — campaign concepts and ad creatives with audience, brand position, scene, and exact tagline/copy.
+- productivity-visual — slide, chart, workflow, and data-heavy business visuals.
+- logo-brand — logo/mark exploration, vector-friendly.
+- illustration-story — comics, children’s book art, narrative scenes.
+- stylized-concept — style-driven concept art, 3D/stylized renders.
+- historical-scene — period-accurate/world-knowledge scenes.
+
+Edit:
+- text-localization — translate/replace in-image text, preserve layout.
+- identity-preserve — try-on, person-in-scene; lock face/body/pose.
+- precise-object-edit — remove/replace a specific element (including interior swaps).
+- lighting-weather — time-of-day/season/atmosphere changes only.
+- background-extraction — transparent background / clean cutout. Ask built-in `image_gen` for actual transparency.
+- style-transfer — apply reference style while changing subject/scene.
+- compositing — multi-image insert/merge with matched lighting/perspective.
+- sketch-to-render — drawing/line art to photoreal render.
+
+## Shared prompt schema
+
+Use the following labeled spec as shared prompt scaffolding for both top-level modes:
+
+```text
+Use case: <taxonomy slug>
+Asset type: <where the asset will be used>
+Primary request: <user's main prompt>
+Input images: <Image 1: role; Image 2: role> (optional)
+Scene/backdrop: <environment>
+Subject: <main subject>
+?? assets/generated/spotW05_01/
+?? assets/generated/spotW05_02/
+?? assets/generated/spotW05_03/
+?? assets/generated/spotW05_04/
+?? assets/generated/spotW05_05/
+?? assets/generated/spotW05_06/
+?? assets/generated/spotW06_01/
+?? assets/generated/spotW06_02/
+?? assets/generated/spotW06_03/
+?? assets/generated/spotW06_04/
+?? assets/generated/spotW06_05/
+?? assets/generated/spotW06_06/
+?? assets/generated/spotW07_01/
+?? assets/generated/spotW07_02/
+?? assets/generated/spotW07_03/
+?? assets/generated/spotW07_04/
+?? assets/generated/spotW07_05/
+?? assets/generated/spotW07_06/
+?? assets/generated/spotW08_01/
+?? assets/generated/spotW08_02/
+?? assets/generated/spotW08_03/
+?? assets/generated/spotW08_04/
+?? assets/generated/spotW08_05/
+requests/images/spotW08_06.json
+drwxr-xr-x 7 runner runner 4096 Nov 18 08:53 .git
+
+exec
+/bin/bash -lc 'cat requests/images/spotW08_06.json; ls assets/generated/spotW08_05; git remote; if [ -n "$GH_PUSH_TOKEN" ]; then echo token-present; else echo token-empty; fi; git status --short -- assets/generated/spotW08_06' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+{
+ "id": "spotW08_06",
+ "kind": "image",
+ "pair": true,
+ "size": "1024x1024",
+ "count": 1,
+ "prompt": "間違い探し用の絵を2枚作ってください。1枚目 a.png：正方形（1024x1024）。日本の雑誌やテレビの間違い探しに載るような、プロのイラストレーターが描いた丁寧なアニメ調のイラスト。線はきれいで、色はやわらかく上品。人物の顔・手・指は自然な形にする。場面：昔話の一寸法師。お椀の舟、はしのかい、川、京の都の大きな屋敷、お姫さま、鬼、打ち出の小づち。人物や小物をたくさん（30個以上の物が見えるように）入れて、見るところが多いにぎやかな絵にする。絵の中に文字・数字・ロゴ・看板の字は入れない（字がにじんだ看板も入れない）。2枚目 b.png：a.png をコピーして、違いを5か所だけ描き変える。違いの部分だけを描き変えて元の絵に貼り合わせ、違い以外は a.png と画素単位で完全に同じにする（構図・色・人物・位置・明るさ・画質を変えない。全体を描き直さない）。違いの種類は混ぜる：①ある物が消えている ②物の数が変わっている ③物の形が変わっている ④別の物に入れ替わっている ⑤大きさが変わっている ⑥向きや位置が少し変わっている ⑦服や物の模様が変わっている。色だけを変える違いは多くても1か所まで。ちょうちんや照明の形を変えるだけの違いはなるべく使わず、使っても1か所まで。5か所はなるべく違う種類にする。簡単すぎないように、すぐ目に入る大きな物ばかりにはせず、中くらいの物や細かい所も混ぜる。ただしスマホの画面で見て気づける大きさにする（どの違いも幅か高さが50画素以上）。描き変えた部分は周りになじませ、継ぎ目や四角い跡が見えないようにする。5か所は絵の中で離れた場所に散らし（おたがい200画素以上はなす）、絵の端ぎりぎりには置かない。",
+ "notes": "出力は a.png と b.png（どちらも 1024x1024）。あわせて differences.json に {\"differences\": [{\"description\": 日本語の短い説明（例：『女の子の帽子のぽんぽんが消えている』）, \"type\": 種類, \"x\", \"y\", \"width\", \"height\"}]} の形で、5か所の位置（1024x1024の座標）を書いてください。説明は、b.png（右の絵）で何がどう変わったかを書く。",
+ "retry": 1
+}a.png
+b.png
+codex.log
+differences.json
+result.json
+origin
+token-empty
+
+codex
+原画と差分用の素材ができました。鳥、屋根の飾り、花瓶、扇、川の葉の5か所だけを原画に合成します。
+exec
+/bin/bash -lc "cat assets/generated/spotW08_05/result.json
+git status --short --untracked-files=no
+git ls-remote origin refs/heads/codex-inbox 2>&1 | sed -E 's#https://["'^ ]+#[remote URL]#g'"'
+python -c 'import PIL,numpy; print(PIL.__version__)'" in /home/runner/work/youtube/youtube
+ exited 1 in 337ms:
+{
+ "id": "spotW08_05",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "a.png",
+  "b.png"
+ ],
+ "check": "OK 5 か所",
+ "at_utc": "2026-11-18T10:29:57.437756Z"
+}fatal: unable to access '[remote URL] Could not resolve host: github.com
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import PIL,numpy; print(PIL.__version__)
+    ^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'numpy'
+
+mcp: codex_apps/github.search_branches started
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image, ImageChops, ImageDraw, ImageFilter
+from pathlib import Path
+from itertools import combinations
+from math import hypot
+import json
+root=Path('/home/runner/.codex/generated_images/01a1ee34-c2a5-7e20-9c40-55fe3a07d272')
+a,edit=[Image.open(root/name).convert('RGB').resize((1024,1024),Image.Resampling.LANCZOS) for name in ['exec-2036e7c2-2317-4632-a00d-4566e3960990.png','exec-24dee0e2-de4f-4987-b997-2ce619154dd8.png']]
+specs=[
+('空を飛んでいた鳥がいなくなっている','removal',[(52,7),(98,7),(157,50),(112,85),(53,105),(48,89),(71,62),(57,39)]),
+('屋根の三角部分にある金の飾りが花の形になっている','shape',[(802,80),(843,119),(828,144),(759,137),(762,115)]),
+('川岸にある淡い緑色の花瓶が低くなっている','size',[(365,550),(384,533),(415,539),(427,562),(429,611),(415,626),(374,630),(353,606),(356,570)]),
+('開いた扇の模様が赤い花から藍色の波に変わっている','pattern',[(994,713),(1022,682),(1071,651),(1126,645),(1175,657),(1213,698),(1185,719),(1138,737),(1104,757),(1060,736)]),
+('川に浮かぶ赤いもみじの葉が黄色いイチョウの葉に変わっている','replacement',[(279,1172),(286,1149),(313,1136),(357,1136),(391,1159),(390,1186),(358,1206),(304,1206)])]
+b=a.copy()
+items=[]
+for description,kind,polygon in specs:
+    mask=Image.new('L',a.size)
+    ImageDraw.Draw(mask).polygon([(round(x*1024/1254),round(y*1024/1254)) for x,y in polygon],fill=255)
+    mask=mask.filter(ImageFilter.GaussianBlur(3))
+    b.paste(edit,(0,0),mask)
+    delta=ImageChops.difference(a,b)
+    bbox=ImageChops.lighter(ImageChops.lighter(*delta.split()[:2]),delta.split()[2])
+    bbox=ImageChops.multiply(bbox,mask.point(lambda p:255 if p else 0)).getbbox()
+    x,y,r,d=bbox
+    items.append(dict(description=description,type=kind,x=x,y=y,width=r-x,height=d-y))
+out=Path('assets/generated/spotW08_06')
+out.mkdir(exist_ok=True)
+a.save(out/'a.png')
+b.save(out/'b.png')
+for name,data in [('differences.json',dict(differences=items)),('result.json',dict(id='spotW08_06',status='ok',via='codex-cloud',files=['a.png','b.png','differences.json']))]:
+    (out/name).write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\\n')
+a,b=[Image.open(out/name) for name in ('a.png','b.png')]
+assert a.size==b.size==(1024,1024)
+delta=ImageChops.difference(a,b)
+for item in items:
+    x,y,w,h=(item[k] for k in ('x','y','width','height'))
+    assert max(w,h)>=50 and delta.crop((x,y,x+w,y+h)).tobytes().count(0)<3*w*h
+    ImageDraw.Draw(delta).rectangle((x,y,x+w-1,y+h-1),fill=(0,0,0))
+assert not any(delta.tobytes())
+for p,q in combinations(items,2):
+    gap=lambda k,s:max(0,p[k]-q[k]-q[s],q[k]-p[k]-p[s])
+    assert hypot(gap('x','width'),gap('y','height'))>=200,(p,q)
+print((out/'differences.json').read_text())
+PY
+git status --short -- assets/generated/spotW08_06" in /home/runner/work/youtube/youtube
+mcp: codex_apps/github.search_branches (completed)
+ succeeded in 435ms:
+{
+  "differences": [
+    {
+      "description": "空を飛んでいた鳥がいなくなっている",
+      "type": "removal",
+      "x": 35,
+      "y": 1,
+      "width": 96,
+      "height": 91
+    },
+    {
+      "description": "屋根の三角部分にある金の飾りが花の形になっている",
+      "type": "shape",
+      "x": 612,
+      "y": 60,
+      "width": 82,
+      "height": 64
+    },
+    {
+      "description": "川岸にある淡い緑色の花瓶が低くなっている",
+      "type": "size",
+      "x": 282,
+      "y": 430,
+      "width": 76,
+      "height": 91
+    },
+    {
+      "description": "開いた扇の模様が赤い花から藍色の波に変わっている",
+      "type": "pattern",
+      "x": 807,
+      "y": 523,
+      "width": 190,
+      "height": 101
+    },
+    {
+      "description": "川に浮かぶ赤いもみじの葉が黄色いイチョウの葉に変わっている",
+      "type": "replacement",
+      "x": 222,
+      "y": 921,
+      "width": 104,
+      "height": 72
+    }
+  ]
+}
+
+?? assets/generated/spotW08_06/
+
+mcp: codex_apps/github.fetch_commit started
+mcp: codex_apps/github.fetch_commit (completed)
+exec
+/bin/bash -lc 'git rev-parse 04cac8c373aacbeb302feca8402bb23d8d751b05''^{tree}; wc -c assets/generated/spotW08_06/*; cat assets/generated/spotW08_06/result.json' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+fatal: ambiguous argument '04cac8c373aacbeb302feca8402bb23d8d751b05^{tree}': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+04cac8c373aacbeb302feca8402bb23d8d751b05^{tree}
+2549562 assets/generated/spotW08_06/a.png
+2542872 assets/generated/spotW08_06/b.png
+   1031 assets/generated/spotW08_06/differences.json
+    134 assets/generated/spotW08_06/result.json
+5093599 total
+{
+  "id": "spotW08_06",
+  "status": "ok",
+  "via": "codex-cloud",
+  "files": [
+    "a.png",
+    "b.png",
+    "differences.json"
+  ]
+}
+
+mcp: codex_apps/github.create_blob started
+mcp: codex_apps/github.create_blob (failed)
+MCP tool call requires approval, but approval policy is never
+mcp: codex_apps/github.create_blob started
+mcp: codex_apps/github.create_blob (failed)
+MCP tool call requires approval, but approval policy is never
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+a=Image.open('assets/generated/spotW08_06/b.png')
+regions=[(24,0,142,105),(600,49,711,138),(270,420,370,532),(795,511,1009,638),(212,910,338,1005)]
+p=Image.new('RGB',(340,350),'white')
+for box,pos in zip(regions,[(0,0),(125,0),(237,0),(0,125),(215,125)]):
+ p.paste(a.crop(box),pos)
+p.save('/tmp/spotW08_06-preview.png')
+PY
+git fetch origin codex-inbox 2>&1 | sed -E 's#https://["'^ ]+#[remote URL]#g'"'" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+error: cannot open '.git/FETCH_HEAD': Read-only file system
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image, ImageDraw, ImageChops, ImageFilter
+from pathlib import Path
+from itertools import combinations
+from math import hypot
+import json
+p=Path('assets/generated/spotW08_06')
+a=Image.open(p/'a.png')
+b=Image.open(p/'b.png')
+s=Image.open('/home/runner/.codex/generated_images/01a1ee34-c2a5-7e20-9c40-55fe3a07d272/exec-24dee0e2-de4f-4987-b997-2ce619154dd8.png').convert('RGB').resize(a.size,Image.Resampling.LANCZOS)
+b.paste(a.crop((0,0,145,112)),(0,0))
+mask=Image.new('L',a.size)
+ImageDraw.Draw(mask).rounded_rectangle((40,4,129,89),radius=6,fill=255)
+mask=mask.filter(ImageFilter.GaussianBlur(2))
+b.paste(s,(0,0),mask)
+def difference(a,b):
+    red,green,blue=ImageChops.difference(a,b).split()
+    return ImageChops.lighter(ImageChops.lighter(red,green),blue)
+doc=json.loads((p/'differences.json').read_text())
+diff=difference(a,b)
+bound=diff.crop((0,0,145,112)).getbbox()
+x,y,r,d=bound
+doc['differences'][0].update(x=x,y=y,width=r-x,height=d-y)
+b.save(p/'b.png')
+(p/'differences.json').write_text(json.dumps(doc,ensure_ascii=False,indent=2)+'\\n')
+a,b=[Image.open(p/name) for name in ('a.png','b.png')]
+assert a.size==b.size==(1024,1024)
+d=difference(a,b)
+items=doc['differences']
+assert len(items)==5
+for item in items:
+    x,y,w,h=(item[k] for k in ('x','y','width','height'))
+    assert max(w,h)>=50 and d.crop((x,y,x+w,y+h)).getbbox()==(0,0,w,h)
+    ImageDraw.Draw(d).rectangle((x,y,x+w-1,y+h-1), fill=0)
+assert not d.getbbox()
+min_gap=min(hypot(*[max(0,u[k]-v[k]-v[size],v[k]-u[k]-u[size]) for k,size in [('x','width'),('y','height')]]) for u,v in combinations(items,2))
+assert min_gap>=200
+print('Verified 5 differences; minimum gap:',min_gap)
+b.crop((24,0,142,105)).save('/tmp/spotW08_06-bird.png')
+PY
+git status --short --untracked-files=all -- assets/generated/spotW08_06" in /home/runner/work/youtube/youtube
+ succeeded in 250ms:
+Verified 5 differences; minimum gap: 367.1511950137164
+?? assets/generated/spotW08_06/a.png
+?? assets/generated/spotW08_06/b.png
+?? assets/generated/spotW08_06/differences.json
+?? assets/generated/spotW08_06/result.json
+
+codex
+一寸法師の間違い探しを作成し、[spotW08_06](/home/runner/work/youtube/youtube/assets/generated/spotW08_06) に `a.png`、`b.png`、`differences.json`、`result.json` を保存しました。
+
+画像はどちらも 1024×1024 です。差分は5か所で、領域間の最短距離は約367ピクセルです。記録した5領域の外側は画素単位で一致しています。
+
+GitHub の `codex-inbox` には送信できませんでした。`GH_PUSH_TOKEN` は空で、ローカルの `.git` は読み取り専用です。`github.com` の名前解決にも失敗し、GitHub 連携による書き込みは承認ポリシーで拒否されました。
+tokens used
+37,945

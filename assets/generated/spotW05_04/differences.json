@@ -1,0 +1,44 @@
+{
+  "differences": [
+    {
+      "description": "左上のオレンジ色の魚が消えている",
+      "type": "removal",
+      "x": 111,
+      "y": 144,
+      "width": 73,
+      "height": 37
+    },
+    {
+      "description": "右上の岩棚にある貝殻が2つから1つになっている",
+      "type": "count",
+      "x": 790,
+      "y": 150,
+      "width": 86,
+      "height": 46
+    },
+    {
+      "description": "中央の岩にいるピンクのヒトデが大きくなっている",
+      "type": "size",
+      "x": 433,
+      "y": 426,
+      "width": 60,
+      "height": 64
+    },
+    {
+      "description": "ベンチのバッグの太い青い帯が細い2本の帯になっている",
+      "type": "pattern",
+      "x": 160,
+      "y": 792,
+      "width": 116,
+      "height": 54
+    },
+    {
+      "description": "床の青い傘がピンクのイルカのぬいぐるみに替わっている",
+      "type": "replacement",
+      "x": 796,
+      "y": 824,
+      "width": 144,
+      "height": 74
+    }
+  ]
+}

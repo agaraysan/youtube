@@ -1,0 +1,436 @@
+[spotW07_06](/home/runner/work/youtube/youtube/assets/generated/spotW07_06) に修正版を保存しました。手水鉢に増えた梅の花2輪を近づけて1か所の差分にまとめ、`differences.json` の座標を実際に変化した画素に合わせました。リポジトリの検証は「OK 5 か所」で通過し、一覧の範囲外は全画素が一致しています。
+
+GitHub の `codex-inbox` への送信は失敗しました。`GH_PUSH_TOKEN` は空で、`.git` は読み取り専用、`github.com` の名前解決もできませんでした。
+
+--- stderr ---
+change only X; keep Y unchanged`).
+- If any critical detail is missing and blocks success, ask a question; otherwise proceed.
+
+## Examples
+
+### Generation example (hero image)
+```text
+Use case: product-mockup
+Asset type: landing page hero
+Primary request: a minimal hero image of a ceramic coffee mug
+Style/medium: clean product photography
+Composition/framing: wide composition with usable negative space for page copy if needed
+Lighting/mood: soft studio lighting
+Constraints: no logos, no text, no watermark
+```
+
+### Edit example (invariants)
+```text
+Use case: precise-object-edit
+Asset type: product photo background replacement
+Primary request: replace only the background with a warm sunset gradient
+Constraints: change only the background; keep the product and its edges unchanged; no text; no watermark
+```
+
+## Prompting best practices
+- Structure prompt as scene/backdrop -> subject -> details -> constraints.
+- Include intended use (ad, UI mock, infographic) to set the mode and polish level.
+- Use camera/composition language for photorealism.
+- Only use SVG/vector stand-ins when the user explicitly asked for vector output or a non-image placeholder.
+- Quote exact text and specify typography + placement.
+- For tricky words, spell them letter-by-letter and require verbatim rendering.
+- For multi-image inputs, reference images by index and describe how they should be used.
+- For edits, repeat invariants every iteration to reduce drift.
+- Iterate with single-change follow-ups.
+- If the prompt is generic, add only the extra detail that will materially help.
+- If the prompt is already detailed, normalize it instead of expanding it.
+- For CLI fallback only, see `references/cli.md` and `references/image-api.md` for model, `quality`, `input_fidelity`, masks, output format, and output-path guidance.
+- For transparent images, ask built-in `image_gen` for actual transparency and preserve its alpha.
+
+More principles shared by both modes: `references/prompting.md`.
+Copy/paste specs shared by both modes: `references/sample-prompts.md`.
+
+## Guidance by asset type
+Asset-type templates (website assets, game assets, wireframes, logo) are consolidated in `references/sample-prompts.md`.
+
+## gpt-image-2 guidance for CLI fallback
+
+The fallback CLI defaults to `gpt-image-2`.
+
+- Use `gpt-image-2` for new CLI/API workflows unless the user confirms a different model.
+- CLI `gpt-image-2` does not support `background=transparent`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- `gpt-image-2` always uses high fidelity for image inputs; do not set `input_fidelity` with this model.
+- `gpt-image-2` supports `quality` values `low`, `medium`, `high`, and `auto`.
+- Use `quality low` for fast drafts, thumbnails, and quick iterations. Use `medium`, `high`, or `auto` for final assets, dense text, diagrams, identity-sensitive edits, or high-resolution outputs.
+- Square images are typically fastest to generate. Use `1024x1024` for fast square drafts.
+- If the user asks for 4K-style output, use `3840x2160` for landscape or `2160x3840` for portrait.
+- `gpt-image-2` size may be `auto` or `WIDTHxHEIGHT` if all constraints hold: max edge `<= 3840px`, both edges multiples of `16px`, long-to-short ratio `<= 3:1`, total pixels between `655,360` and `8,294,400`.
+
+Popular `gpt-image-2` sizes:
+- `1024x1024` square
+- `1536x1024` landscape
+- `1024x1536` portrait
+- `2048x2048` 2K square
+- `2048x1152` 2K landscape
+- `3840x2160` 4K landscape
+- `2160x3840` 4K portrait
+- `auto`
+
+## Fallback CLI mode only
+
+### Temp and output conventions
+These conventions apply only to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+cat: /home/runner/.codex/plugins/cache/openai-curated-remote/superpowers/7.0.1/using-superpowers/SKILL.md: No such file or directory
+cat: /home/runner/.codex/plugins/cache/openai-curated-remote/superpowers/7.0.1/verification-before-completion/SKILL.md: No such file or directory
+
+exec
+/bin/bash -lc "cat assets/generated/spotW07_06/{differences,result}.json; rg -n '一覧にない変化|connectedComponents' scripts; git status -sb | head -2; git remote; if [[ -n "'$GH_PUSH_TOKEN ]]; then echo token-nonempty; else echo token-empty; fi' in /home/runner/work/youtube/youtube
+ succeeded in 267ms:
+{
+  "differences": [
+    {
+      "description": "店先の花柄の皿が丸い鏡に替わっている",
+      "type": "入れ替わり",
+      "x": 175,
+      "y": 294,
+      "width": 54,
+      "height": 52
+    },
+    {
+      "description": "風鈴の下の短冊がひもごと消えている",
+      "type": "消失",
+      "x": 971,
+      "y": 336,
+      "width": 39,
+      "height": 71
+    },
+    {
+      "description": "舞妓さんの巾着が花柄からひし形の格子模様に変わっている",
+      "type": "模様",
+      "x": 415,
+      "y": 641,
+      "width": 74,
+      "height": 55
+    },
+    {
+      "description": "手前のお茶の器が大きくなっている",
+      "type": "大きさ",
+      "x": 200,
+      "y": 852,
+      "width": 83,
+      "height": 67
+    },
+    {
+      "description": "手水鉢に浮かぶ赤い梅の花が二輪増えている",
+      "type": "数",
+      "x": 814,
+      "y": 877,
+      "width": 124,
+      "height": 25
+    }
+  ]
+}
+{
+  "id": "spotW07_06",
+  "status": "ok",
+  "via": "codex-cloud",
+  "files": [
+    "a.png",
+    "b.png",
+    "differences.json"
+  ]
+}
+scripts/render/spotcheck.py:78:        return False, f"一覧にない変化が {len(extra)} か所ある: {[e[:4] for e in extra]}", found
+## claude/project-thread-3z6x6z...origin/claude/project-thread-3z6x6z
+?? assets/generated/spotW05_01/
+origin
+token-empty
+
+exec
+/bin/bash -lc 'cat scripts/render/spotcheck.py; git rev-parse --absolute-git-dir; git ls-remote origin refs/heads/codex-inbox' in /home/runner/work/youtube/youtube
+ exited 128 in 0ms:
+#!/usr/bin/env python3
+"""間違い探しの2枚を画素で比べ、違いの場所を確かめる。
+
+使い方: spotcheck.py 元の絵.png 違いの絵.png differences.json [出力.json]
+- 2枚の差を取り、変わった場所のかたまりを数える。
+- Codex の一覧（differences.json）と数・位置が合うかを確かめる。
+- 合えば、画素の比較で出た正確な枠を書き出して 0 で終わる。合わなければ 1 で終わる。
+"""
+import json, sys
+from PIL import Image, ImageChops, ImageFilter
+
+
+def clusters(a, b, thr=40, grow=25, min_px=150):
+    d = ImageChops.difference(a.convert("RGB"), b.convert("RGB")).convert("L").point(lambda v: 255 if v > thr else 0)
+    m = d.filter(ImageFilter.MaxFilter(9))
+    W, H = m.size
+    px = m.load()
+    raw = d.load()
+    seen = bytearray(W * H)
+    boxes = []
+    for y in range(0, H, 3):
+        for x in range(0, W, 3):
+            if px[x, y] and not seen[y * W + x]:
+                st = [(x, y)]; seen[y * W + x] = 1
+                x0 = x1 = x; y0 = y1 = y; n = 0
+                while st:
+                    cx, cy = st.pop()
+                    if raw[cx, cy]:
+                        n += 1
+                    x0, x1, y0, y1 = min(x0, cx), max(x1, cx), min(y0, cy), max(y1, cy)
+                    for nx, ny in ((cx + 1, cy), (cx - 1, cy), (cx, cy + 1), (cx, cy - 1)):
+                        if 0 <= nx < W and 0 <= ny < H and px[nx, ny] and not seen[ny * W + nx]:
+                            seen[ny * W + nx] = 1; st.append((nx, ny))
+                if n >= min_px:
+                    boxes.append([x0, y0, x1 - x0 + 1, y1 - y0 + 1, n])
+    # 近いかたまりはまとめる
+    merged = True
+    while merged:
+        merged = False
+        for i in range(len(boxes)):
+            for j in range(i + 1, len(boxes)):
+                a_, b_ = boxes[i], boxes[j]
+                if (a_[0] - grow < b_[0] + b_[2] and b_[0] - grow < a_[0] + a_[2] and
+                        a_[1] - grow < b_[1] + b_[3] and b_[1] - grow < a_[1] + a_[3]):
+                    x0, y0 = min(a_[0], b_[0]), min(a_[1], b_[1])
+                    x1, y1 = max(a_[0] + a_[2], b_[0] + b_[2]), max(a_[1] + a_[3], b_[1] + b_[3])
+                    boxes[i] = [x0, y0, x1 - x0, y1 - y0, a_[4] + b_[4]]
+                    del boxes[j]; merged = True; break
+            if merged:
+                break
+    return boxes
+
+
+def check(a_path, b_path, diff_path):
+    a, b = Image.open(a_path), Image.open(b_path)
+    if a.size != b.size:
+        return False, f"大きさが違う {a.size} {b.size}", []
+    listed = json.load(open(diff_path, encoding="utf-8"))["differences"]
+    found = clusters(a, b)
+    out, used = [], set()
+    for L in listed:
+        lx, ly = L["x"] + L["width"] / 2, L["y"] + L["height"] / 2
+        best = None
+        for k, f in enumerate(found):
+            if k in used:
+                continue
+            fx, fy = f[0] + f[2] / 2, f[1] + f[3] / 2
+            dist = ((fx - lx) ** 2 + (fy - ly) ** 2) ** 0.5
+            if dist < max(150, L["width"], L["height"]) and (best is None or dist < best[0]):
+                best = (dist, k)
+        if best is None:
+            return False, f"一覧の違いが絵に見つからない: {L.get('description')}", found
+        used.add(best[1])
+        f = found[best[1]]
+        out.append({"box": f[:4], "note": L.get("description", "")})
+    extra = [f for k, f in enumerate(found) if k not in used]
+    if extra:
+        return False, f"一覧にない変化が {len(extra)} か所ある: {[e[:4] for e in extra]}", found
+    return True, f"OK {len(out)} か所", out
+
+
+if __name__ == "__main__":
+    ok, msg, res = check(*sys.argv[1:4])
+    print(msg)
+    if ok and len(sys.argv) > 4:
+        json.dump({"differences": res}, open(sys.argv[4], "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    sys.exit(0 if ok else 1)
+/home/runner/work/youtube/youtube/.git
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+
+exec
+/bin/bash -lc "rg -n '814|907|877|composit|ellipse' assets/generated/spotW07_06/codex.log | cut -c1-350 | tail -20
+python - <<'PY'
+from PIL import Image
+p='assets/generated/spotW07_06/'
+o=Image.new('RGB',(440,240))
+for i,n in enumerate('ab'):
+ o.paste(Image.open(p+n+'.png').crop((750,810,970,930)).resize((440,120)),(0,120*i))
+o.save('/tmp/spot-compare.png')
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+18:Composition/framing: wide composition with usable negative space for page copy if needed
+34:- Use camera/composition language for photorealism.
+273:for xy,size in [((814,882),(30,20)),((910,876),(28,18))]:
+291:[{'description': '店先の花柄の皿が丸い鏡に替わっている', 'type': '入れ替わり', 'x': 175, 'y': 294, 'width': 54, 'height': 52}, {'description': '風鈴の下の短冊がひもごと消えている', 'type': '消失', 'x': 971, 'y': 336, 'width': 39, 'height': 71}, {'description': '舞妓さんの巾着が花柄からひし形の格子模様に変わっている', 'type': '模様', 'x': 415, 'y': 641, 'width': 74, 'height': 55}, {'description': '手前のお茶の器が大きくなっている'
+396:      "x": 814,
+397:      "y": 877,
+
+exec
+/bin/bash -lc "sed -n '228,292p' assets/generated/spotW07_06/codex.log; ls -ld .git; git status --porcelain -- assets/generated/spotW07_06" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+    b.paste(patch,xy,mask_for(patch.size,poly,blur))
+def record(before, description, kind):
+    x,y,r,d=ImageChops.difference(before,b).getbbox()
+    entries.append(dict(description=description,type=kind,x=x,y=y,width=r-x,height=d-y))
+    assert max(r-x,d-y)>=50
+    return b.copy()
+
+before=b.copy()
+plate = Image.new('RGB',(69,68))
+for y in range(68):
+    for x in range(69):
+        diagonal=x+.62*y
+        sheen=15 if 40<diagonal<46 or 57<diagonal<66 else 0
+        plate.putpixel((x,y),(min(255,139+y+sheen),min(255,172+int(.9*y)+sheen),min(255,198+int(.65*y)+sheen)))
+paste(plate,(164,287),[(13,34),(14,26),(19,17),(27,12),(36,10),(45,10),(53,14),(60,22),(62,32),(61,39),(57,48),(54,51),(52,48),(49,49),(49,53),(44,55),(35,56),(29,54),(25,51),(24,48),(21,48),(20,51),(16,46),(13,40)])
+before=record(before,'店先の花柄の皿が丸い鏡に替わっている','入れ替わり')
+
+wood=a.crop((1002,336,1024,407)).resize((39,71),Image.Resampling.BICUBIC)
+paste(wood,(971,336),[(11,4),(17,4),(19,13),(23,13),(35,59),(34,65),(15,69),(10,58),(4,24),(5,18),(10,15)],2.0)
+before=record(before,'風鈴の下の短冊がひもごと消えている','消失')
+
+bag_box=(405,632,498,708)
+bag=a.crop(bag_box)
+pattern=Image.new('RGB',bag.size)
+for y in range(bag.height):
+    for x in range(bag.width):
+        red,green,blue=bag.getpixel((x,y))
+        shade=max(0,min(1,(red*.75+green*.25-58)/155))
+        stripe=min((x+.67*y)%12,(-x+.67*y)%12)
+        thread=max(0,1-abs(stripe-1.4)/1.2)
+        pattern.putpixel((x,y),(int(110+shade*68+thread*64),int(30+shade*47+thread*102),int(37+shade*35+thread*65)))
+paste(pattern,bag_box[:2],[(42,11),(55,14),(64,20),(71,30),(77,40),(82,51),(80,55),(74,59),(62,61),(42,61),(29,60),(20,56),(12,52),(13,47),(17,38),(23,29),(30,21),(36,16)],.65)
+before=record(before,'舞妓さんの巾着が花柄からひし形の格子模様に変わっている','模様')
+
+cup_box=(196,856,273,923)
+cup=a.crop(cup_box)
+cup_mask=mask_for(cup.size,[(9,20),(12,16),(20,12),(30,10),(41,9),(53,10),(64,12),(71,16),(73,21),(72,31),(69,40),(65,47),(59,52),(54,54),(54,57),(48,60),(36,60),(29,58),(28,54),(22,50),(16,44),(12,37),(10,30)])
+# Preserve the foot position and enlarge the bowl above it.
+size=(92,79)
+b.paste(cup.resize(size,Image.Resampling.LANCZOS),(193,844),cup_mask.resize(size,Image.Resampling.LANCZOS))
+before=record(before,'手前のお茶の器が大きくなっている','大きさ')
+
+flower_box=(843,872,885,899)
+flower=a.crop(flower_box)
+flower_mask=mask_for(flower.size,[(1,15),(2,12),(5,10),(10,9),(12,6),(15,3),(20,2),(24,4),(27,7),(32,6),(36,8),(39,10),(39,14),(36,17),(32,19),(35,21),(35,25),(31,26),(24,25),(21,23),(17,25),(11,26),(7,25),(5,23),(5,21),(9,18),(4,17)],.4)
+for xy,size in [((814,882),(30,20)),((910,876),(28,18))]:
+    b.paste(flower.resize(size,Image.Resampling.LANCZOS),xy,flower_mask.resize(size,Image.Resampling.LANCZOS))
+record(before,'手水鉢に浮かぶ赤い梅の花が二輪増えている','数')
+
+for p,q in itertools.combinations(entries,2):
+    dx=max(0,p['x']-q['x']-q['width'],q['x']-p['x']-p['width'])
+    dy=max(0,p['y']-q['y']-q['height'],q['y']-p['y']-p['height'])
+    assert math.hypot(dx,dy)>=200,(p,q,dx,dy)
+out=Path('assets/generated/spotW07_06')
+out.mkdir(parents=True,exist_ok=True)
+a.save(out/'a.png')
+b.save(out/'b.png')
+for name,data in [('differences.json',dict(differences=entries)),('result.json',dict(id='spotW07_06',status='ok',via='codex-cloud',files=['a.png','b.png','differences.json']))]:
+    (out/name).write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\\n')
+print(entries)
+PY
+python /tmp/spot-compose.py" in /home/runner/work/youtube/youtube
+ succeeded in 283ms:
+[{'description': '店先の花柄の皿が丸い鏡に替わっている', 'type': '入れ替わり', 'x': 175, 'y': 294, 'width': 54, 'height': 52}, {'description': '風鈴の下の短冊がひもごと消えている', 'type': '消失', 'x': 971, 'y': 336, 'width': 39, 'height': 71}, {'description': '舞妓さんの巾着が花柄からひし形の格子模様に変わっている', 'type': '模様', 'x': 415, 'y': 641, 'width': 74, 'height': 55}, {'description': '手前のお茶の器が大きくなっている', 'type': '大きさ', 'x': 200, 'y': 852, 'width': 83, 'height': 67}, {'description': '手水鉢に浮かぶ赤い梅の花が二輪増えている', 'type': '数', 'x': 814, 'y': 877, 'width': 124, 'height': 25}]
+
+drwxr-xr-x 7 runner runner 4096 Nov 18 08:53 .git
+?? assets/generated/spotW07_06/
+
+exec
+/bin/bash -lc "cat > /tmp/repair-spotW07_06.py <<'PY'
+from PIL import Image, ImageDraw, ImageFilter, ImageChops
+from pathlib import Path
+import json, math, itertools, runpy
+p=Path('assets/generated/spotW07_06')
+a=Image.open(p/'a.png').convert('RGB')
+old=Image.open(p/'b.png').convert('RGB')
+entries=json.loads((p/'differences.json').read_text())['differences']
+def box(e):
+    return e['x'],e['y'],e['x']+e['width'],e['y']+e['height']
+b=a.copy()
+for e in entries[:4]:
+    r=box(e)
+    b.paste(old.crop(r),r[:2])
+before=b.copy()
+flower=a.crop((843,872,885,899))
+mask=Image.new('L',(168,108))
+poly=[(1,15),(2,12),(5,10),(10,9),(12,6),(15,3),(20,2),(24,4),(27,7),(32,6),(36,8),(39,10),(39,14),(36,17),(32,19),(35,21),(35,25),(31,26),(24,25),(21,23),(17,25),(11,26),(7,25),(5,23),(5,21),(9,18),(4,17)]
+ImageDraw.Draw(mask).polygon([(4*x,4*y) for x,y in poly],fill=255)
+resampling=Image.Resampling.LANCZOS
+mask=mask.resize(flower.size,resampling).filter(ImageFilter.GaussianBlur(.4))
+for xy,size in [((893,860),(29,19)),((919,873),(27,18))]:
+    b.paste(flower.resize(size,resampling),xy,mask.resize(size,resampling))
+x,y,r,d=ImageChops.difference(before,b).getbbox()
+entries[-1].update(x=x,y=y,width=r-x,height=d-y)
+diff=ImageChops.difference(a,b)
+for e in entries:
+    roi=box(e)
+    patch=diff.crop(roi)
+    assert patch.getbbox()==(0,0,patch.width,patch.height)
+    assert max(patch.size)>=50
+    diff.paste((0,0,0),roi)
+assert diff.getbbox() is None
+for e,f in itertools.combinations(entries,2):
+    l,t,r,d=box(e)
+    L,T,R,D=box(f)
+    assert math.hypot(max(0,l-R,L-r),max(0,t-D,T-d))>=200
+assert a.size==b.size==(1024,1024)
+b.save('/tmp/spotW07_06-fixed.png')
+Path('/tmp/spotW07_06-differences.json').write_text(json.dumps(dict(differences=entries),ensure_ascii=False,indent=2)+'\\n')
+b.crop((795,845,960,910)).resize((660,260)).save('/tmp/spotW07_06-preview.png')
+PY
+python /tmp/repair-spotW07_06.py && python scripts/render/spotcheck.py assets/generated/spotW07_06/a.png /tmp/spotW07_06-fixed.png /tmp/spotW07_06-differences.json" in /home/runner/work/youtube/youtube
+ succeeded in 391ms:
+OK 5 か所
+
+exec
+/bin/bash -lc "sed -i 's/((893,860)/((894,864)/' /tmp/repair-spotW07_06.py
+python /tmp/repair-spotW07_06.py && python scripts/render/spotcheck.py assets/generated/spotW07_06/a.png /tmp/spotW07_06-fixed.png /tmp/spotW07_06-differences.json && cp /tmp/spotW07_06-fixed.png assets/generated/spotW07_06/b.png && cp /tmp/spotW07_06-differences.json assets/generated/spotW07_06/differences.json && python scripts/render/spotcheck.py assets/generated/spotW07_06/{a.png,b.png,differences.json}
+git fetch origin codex-inbox
+git push origin HEAD:codex-inbox
+git status --short -- assets/generated/spotW07_06" in /home/runner/work/youtube/youtube
+ succeeded in 617ms:
+OK 5 か所
+OK 5 か所
+error: cannot open '.git/FETCH_HEAD': Read-only file system
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+?? assets/generated/spotW07_06/
+
+codex
+[spotW07_06](/home/runner/work/youtube/youtube/assets/generated/spotW07_06) に修正版を保存しました。手水鉢に増えた梅の花2輪を近づけて1か所の差分にまとめ、`differences.json` の座標を実際に変化した画素に合わせました。リポジトリの検証は「OK 5 か所」で通過し、一覧の範囲外は全画素が一致しています。
+
+GitHub の `codex-inbox` への送信は失敗しました。`GH_PUSH_TOKEN` は空で、`.git` は読み取り専用、`github.com` の名前解決もできませんでした。
+tokens used
+22,440

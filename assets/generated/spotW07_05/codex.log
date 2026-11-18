@@ -1,0 +1,398 @@
+`assets/generated/spotW07_05/` に4ファイルを保存しました。
+
+- [a.png](/home/runner/work/youtube/youtube/assets/generated/spotW07_05/a.png) と [b.png](/home/runner/work/youtube/youtube/assets/generated/spotW07_05/b.png)
+- [differences.json](/home/runner/work/youtube/youtube/assets/generated/spotW07_05/differences.json) と [result.json](/home/runner/work/youtube/youtube/assets/generated/spotW07_05/result.json)
+
+両画像は1024×1024です。差分は5か所で、各範囲は幅か高さが50ピクセル以上、範囲同士の最短距離は約220ピクセルです。5か所の範囲外は画素単位で一致しています。
+
+GitHubの `codex-inbox` への push は、`github.com` の名前解決に失敗したため完了していません。`GH_PUSH_TOKEN` は空でした。
+
+--- stderr ---
+gmentation when it will materially improve the result.
+
+Allowed augmentations:
+- composition or framing hints
+- polish level or intended-use hints
+- practical layout guidance
+- reasonable scene concreteness that supports the stated request
+
+Not allowed augmentations:
+- extra characters or objects that are not implied by the request
+- brand names, slogans, palettes, or narrative beats that are not implied
+- arbitrary side-specific placement unless the surrounding layout supports it
+
+## Use-case taxonomy (exact slugs)
+
+Classify each request into one of these buckets and keep the slug consistent across prompts and references.
+
+Generate:
+- photorealistic-natural — candid/editorial lifestyle scenes with real texture and natural lighting.
+- product-mockup — product/packaging shots, catalog imagery, merch concepts.
+- ui-mockup — app/web interface mockups and wireframes; specify the desired fidelity.
+- infographic-diagram — diagrams/infographics with structured layout and text.
+- scientific-educational — classroom explainers, scientific diagrams, and learning visuals with required labels and accuracy constraints.
+- ads-marketing — campaign concepts and ad creatives with audience, brand position, scene, and exact tagline/copy.
+- productivity-visual — slide, chart, workflow, and data-heavy business visuals.
+- logo-brand — logo/mark exploration, vector-friendly.
+- illustration-story — comics, children’s book art, narrative scenes.
+- stylized-concept — style-driven concept art, 3D/stylized renders.
+- historical-scene — period-accurate/world-knowledge scenes.
+
+Edit:
+- text-localization — translate/replace in-image text, preserve layout.
+- identity-preserve — try-on, person-in-scene; lock face/body/pose.
+- precise-object-edit — remove/replace a specific element (including interior swaps).
+- lighting-weather — time-of-day/season/atmosphere changes only.
+- background-extraction — transparent background / clean cutout. Ask built-in `image_gen` for actual transparency.
+- style-transfer — apply reference style while changing subject/scene.
+- compositing — multi-image insert/merge with matched lighting/perspective.
+- sketch-to-render — drawing/line art to photoreal render.
+
+## Shared prompt schema
+
+Use the following labeled spec as shared prompt scaffolding for both top-level modes:
+
+```text
+Use case: <taxonomy slug>
+Asset type: <where the asset will be used>
+Primary request: <user's main prompt>
+Input images: <Image 1: role; Image 2: role> (optional)
+Scene/backdrop: <environment>
+Subject: <main subject>
+Style/medium: <photo/illustration/3D/etc>
+Composition/framing: <wide/close/top-down; placement>
+Lighting/mood: <lighting + mood>
+Color palette: <palette notes>
+Materials/textures: <surface details>
+Text (verbatim): "<exact text>"
+Constraints: <must keep/must avoid>
+Avoid: <negative constraints>
+```
+
+Notes:
+- `Asset type` and `Input images` are prompt scaffolding, not dedicated CLI flags.
+- `Scene/backdrop` refers to the visual setting. It is not the same as the fallback CLI `background` parameter, which controls output transparency behavior.
+- Fallback-only execution notes such as `Quality:`, `Input fidelity:`, masks, output format, and output paths belong in the CLI path only. Do not treat them as built-in `image_gen` tool arguments.
+
+Augmentation rules:
+- Keep it short.
+- Add only the details needed to improve the prompt materially.
+- For edits, explicitly list invariants (`change only X; keep Y unchanged`).
+- If any critical detail is missing and blocks success, ask a question; otherwise proceed.
+
+## Examples
+
+### Generation example (hero image)
+```text
+Use case: product-mockup
+Asset type: landing page hero
+Primary request: a minimal hero image of a ceramic coffee mug
+Style/medium: clean product photography
+Composition/framing: wide composition with usable negative space for page copy if needed
+Lighting/mood: soft studio lighting
+Constraints: no logos, no text, no watermark
+```
+
+### Edit example (invariants)
+```text
+Use case: precise-object-edit
+Asset type: product photo background replacement
+Primary request: replace only the background with a warm sunset gradient
+Constraints: change only the background; keep the product and its edges unchanged; no text; no watermark
+```
+
+## Prompting best practices
+- Structure prompt as scene/backdrop -> subject -> details -> constraints.
+- Include intended use (ad, UI mock, infographic) to set the mode and polish level.
+- Use camera/composition language for photorealism.
+- Only use SVG/vector stand-ins when the user explicitly asked for vector output or a non-image placeholder.
+- Quote exact text and specify typography + placement.
+- For tricky words, spell them letter-by-letter and require verbatim rendering.
+- For multi-image inputs, reference images by index and describe how they should be used.
+- For edits, repeat invariants every iteration to reduce drift.
+- Iterate with single-change follow-ups.
+- If the prompt is generic, add only the extra detail that will materially help.
+- If the prompt is already detailed, normalize it instead of expanding it.
+- For CLI fallback only, see `references/cli.md` and `references/image-api.md` for model, `quality`, `input_fidelity`, masks, output format, and output-path guidance.
+- For transparent images, ask built-in `image_gen` for actual transparency and preserve its alpha.
+
+More principles shared by both modes: `references/prompting.md`.
+Copy/paste specs shared by both modes: `references/sample-prompts.md`.
+
+## Guidance by asset type
+Asset-type templates (website assets, game assets, wireframes, logo) are consolidated in `references/sample-prompts.md`.
+
+## gpt-image-2 guidance for CLI fallback
+
+The fallback CLI defaults to `gpt-image-2`.
+
+- Use `gpt-image-2` for new CLI/API workflows unless the user confirms a different model.
+- CLI `gpt-image-2` does not support `background=transparent`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- `gpt-image-2` always uses high fidelity for image inputs; do not set `input_fidelity` with this model.
+- `gpt-image-2` supports `quality` values `low`, `medium`, `high`, and `auto`.
+- Use `quality low` for fast drafts, thumbnails, and quick iterations. Use `medium`, `high`, or `auto` for final assets, dense text, diagrams, identity-sensitive edits, or high-resolution outputs.
+- Square images are typically fastest to generate. Use `1024x1024` for fast square drafts.
+- If the user asks for 4K-style output, use `3840x2160` for landscape or `2160x3840` for portrait.
+- `gpt-image-2` size may be `auto` or `WIDTHxHEIGHT` if all constraints hold: max edge `<= 3840px`, both edges multiples of `16px`, long-to-short ratio `<= 3:1`, total pixels between `655,360` and `8,294,400`.
+
+Popular `gpt-image-2` sizes:
+- `1024x1024` square
+- `1536x1024` landscape
+- `1024x1536` portrait
+- `2048x2048` 2K square
+- `2048x1152` 2K landscape
+- `3840x2160` 4K landscape
+- `2160x3840` 4K portrait
+- `auto`
+
+## Fallback CLI mode only
+
+### Temp and output conventions
+These conventions apply only to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+?? assets/generated/spotW05_01/
+?? assets/generated/spotW05_02/
+?? assets/generated/spotW05_03/
+?? assets/generated/spotW05_04/
+?? assets/generated/spotW05_05/
+?? assets/generated/spotW05_06/
+?? assets/generated/spotW06_01/
+?? assets/generated/spotW06_02/
+?? assets/generated/spotW06_03/
+?? assets/generated/spotW06_04/
+?? assets/generated/spotW06_05/
+?? assets/generated/spotW06_06/
+?? assets/generated/spotW07_01/
+?? assets/generated/spotW07_02/
+?? assets/generated/spotW07_03/
+?? assets/generated/spotW07_04/
+requests/images/spotW07_05.json
+
+exec
+/bin/bash -lc 'cat requests/images/spotW07_05.json; git ls-remote origin refs/heads/codex-inbox; test -n "$GH_PUSH_TOKEN" && echo token-present || echo token-empty; ls -ld .git; ls assets/generated/spotW07_05' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+{
+ "id": "spotW07_05",
+ "kind": "image",
+ "pair": true,
+ "size": "1024x1024",
+ "count": 1,
+ "prompt": "間違い探し用の絵を2枚作ってください。1枚目 a.png：正方形（1024x1024）。プロのカメラマンが撮ったような、本物の写真にしか見えないフォトリアルな画像（自然な光と影、高精細）。人物の顔・手・指・服のしわが自然で、CGっぽさや作り物っぽさがないこと。実在の人物や商標は使わない。場面：ロンドンの冬の公園。赤い2階建てバス、赤いポスト、ベンチ、リスに餌をやるおじいさん、ベビーカー、犬の散歩、マフラー姿の人々（字なし）。人物や小物をたくさん（30個以上の物が見えるように）入れて、見るところが多いにぎやかな絵にする。絵の中に文字・数字・ロゴ・看板の字は入れない（字がにじんだ看板も入れない）。2枚目 b.png：a.png をコピーして、違いを5か所だけ描き変える。違いの部分だけを描き変えて元の絵に貼り合わせ、違い以外は a.png と画素単位で完全に同じにする（構図・色・人物・位置・明るさ・画質を変えない。全体を描き直さない）。違いの種類は混ぜる：①ある物が消えている ②物の数が変わっている ③物の形が変わっている ④別の物に入れ替わっている ⑤大きさが変わっている ⑥向きや位置が少し変わっている ⑦服や物の模様が変わっている。色だけを変える違いは多くても1か所まで。ちょうちんや照明の形を変えるだけの違いはなるべく使わず、使っても1か所まで。5か所はなるべく違う種類にする。簡単すぎないように、すぐ目に入る大きな物ばかりにはせず、中くらいの物や細かい所も混ぜる。ただしスマホの画面で見て気づける大きさにする（どの違いも幅か高さが50画素以上）。描き変えた部分は周りになじませ、継ぎ目や四角い跡が見えないようにする。5か所は絵の中で離れた場所に散らし（おたがい200画素以上はなす）、絵の端ぎりぎりには置かない。",
+ "notes": "出力は a.png と b.png（どちらも 1024x1024）。あわせて differences.json に {\"differences\": [{\"description\": 日本語の短い説明（例：『女の子の帽子のぽんぽんが消えている』）, \"type\": 種類, \"x\", \"y\", \"width\", \"height\"}]} の形で、5か所の位置（1024x1024の座標）を書いてください。説明は、b.png（右の絵）で何がどう変わったかを書く。",
+ "retry": 1
+}fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+token-empty
+drwxr-xr-x 7 runner runner 4096 Nov 18 08:53 .git
+
+exec
+/bin/bash -lc "git status --porcelain -- assets/generated/spotW07_05; cat assets/generated/spotW07_04/result.json; python -c 'import PIL,numpy; import cv2'" in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+{
+ "id": "spotW07_04",
+ "status": "ok",
+ "via": "codex",
+ "codex_returncode": 0,
+ "files": [
+  "a.png",
+  "b.png"
+ ],
+ "check": "OK 5 か所",
+ "at_utc": "2026-11-18T09:58:13.596489Z"
+}Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import PIL,numpy; import cv2
+    ^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'numpy'
+
+codex
+元画像と編集素材が揃いました。街灯、マフラー、ポスト、傘、果物の5か所を合成し、変更範囲の大きさと間隔を測ります。
+exec
+/bin/bash -lc "python - '/home/runner/.codex/generated_images/01a1ee17-b5b3-7281-90c3-422712e40ec4/exec-5d1f404d-3373-402a-bbeb-3d4e25ea4440.png' '/home/runner/.codex/generated_images/01a1ee17-b5b3-7281-90c3-422712e40ec4/exec-3c1b9421-847c-4055-b7fa-ee4fa0742854.png' <<'PY'
+from PIL import Image, ImageDraw, ImageFilter, ImageChops
+from pathlib import Path
+from itertools import combinations
+from math import hypot
+import sys,json
+
+base, edited = [Image.open(p).convert('RGB') for p in sys.argv[1:]]
+assert base.size == edited.size == (1254,1254), (base.size, edited.size)
+regions = [
+ ('shape','左上の街灯の明かりを覆う部分が丸くなっている', [(312,75),(378,75),(378,155),(363,173),(330,173),(312,150)], 4),
+ ('pattern','中央の男性のえんじ色のマフラーに格子模様が入っている', [(632,342),(656,325),(684,308),(694,326),(680,358),(691,444),(638,447),(636,388)], 3),
+ ('size','右側の赤い郵便ポストが低くなっている', [(1165,305),(1246,300),(1247,380),(1164,380)], 3),
+ ('removed','左下の道に置かれた黒い傘が消えている', [(38,1180),(47,1157),(115,1128),(150,1099),(326,1068),(459,1068),(461,1097),(321,1159),(123,1186),(121,1221),(45,1222)], 6),
+ ('replacement','敷物の上の赤いリンゴが洋ナシに変わっている', [(962,974),(986,966),(1000,982),(1013,1008),(1010,1036),(998,1043),(959,1043),(950,1027),(950,997)], 3),
+]
+out=Path('assets/generated/spotW07_05')
+out.mkdir(parents=True,exist_ok=True)
+size=(1024,1024)
+a=base.resize(size,Image.Resampling.LANCZOS)
+candidate=edited.resize(size,Image.Resampling.LANCZOS)
+b=a.copy()
+diffs=[]
+for kind,description,polygon,blur in regions:
+    mask=Image.new('L',base.size)
+    ImageDraw.Draw(mask).polygon(polygon,fill=255)
+    mask=mask.filter(ImageFilter.GaussianBlur(blur)).resize(size,Image.Resampling.LANCZOS)
+    mask=mask.point(lambda v: 0 if v < 5 else v)
+    patch=Image.composite(candidate,a,mask)
+    bbox=ImageChops.difference(a,patch).getbbox()
+    x,y,r,d=bbox
+    b.paste(patch.crop(bbox),(x,y))
+    diffs.append(dict(description=description,type=kind,x=x,y=y,width=r-x,height=d-y))
+
+coverage=Image.new('L',size)
+draw=ImageDraw.Draw(coverage)
+for item in diffs:
+    x,y,w,h=(item[k] for k in ('x','y','width','height'))
+    assert max(w,h)>=50 and min(x,y,1024-x-w,1024-y-h)>=0
+    draw.rectangle((x,y,x+w-1,y+h-1),fill=255)
+for first,second in combinations(diffs,2):
+    def center(d): return (d['x']+d['width']/2,d['y']+d['height']/2)
+    ax,ay=center(first)
+    bx,by=center(second)
+    assert hypot(ax-bx,ay-by)>=200
+delta=ImageChops.difference(a,b)
+assert all(ImageChops.multiply(c,ImageChops.invert(coverage)).getbbox() is None for c in delta.split())
+for name,pic in [('a.png',a),('b.png',b)]:
+    pic.save(out/name,optimize=True)
+for name,value in [('differences.json',{'differences':diffs}),('result.json',{'id':'spotW07_05','status':'ok','via':'codex-cloud','files':['a.png','b.png','differences.json']})]:
+    (out/name).write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\\n')
+print(diffs)
+PY
+git add -- assets/generated/spotW07_05 && git commit -m 'Create spotW07_05 image pair'" in /home/runner/work/youtube/youtube
+ exited 128 in 455ms:
+[{'description': '左上の街灯の明かりを覆う部分が丸くなっている', 'type': 'shape', 'x': 248, 'y': 55, 'width': 68, 'height': 94}, {'description': '中央の男性のえんじ色のマフラーに格子模様が入っている', 'type': 'pattern', 'x': 512, 'y': 248, 'width': 60, 'height': 120}, {'description': '右側の赤い郵便ポストが低くなっている', 'type': 'size', 'x': 946, 'y': 241, 'width': 78, 'height': 75}, {'description': '左下の道に置かれた黒い傘が消えている', 'type': 'removed', 'x': 22, 'y': 862, 'width': 365, 'height': 146}, {'description': '敷物の上の赤いリンゴが洋ナシに変わっている', 'type': 'replacement', 'x': 771, 'y': 786, 'width': 61, 'height': 71}]
+fatal: Unable to create '/home/runner/work/youtube/youtube/.git/index.lock': Read-only file system
+
+exec
+/bin/bash -lc "set -e
+python - <<'PY'
+from pathlib import Path
+from PIL import Image,ImageChops
+import json
+out=Path('assets/generated/spotW07_05')
+a=Image.open(out/'a.png')
+b=Image.open(out/'b.png')
+metadata=json.loads((out/'differences.json').read_text())
+post=metadata['differences'][2]
+for x in range(1014,1024):
+    area=(x,post['y'],x+1,post['y']+post['height'])
+    b.paste(Image.blend(a.crop(area),b.crop(area),max(0,(1019-x)/5)),area)
+area=(post['x'],post['y'],1024,post['y']+post['height'])
+l,t,r,d=ImageChops.difference(a.crop(area),b.crop(area)).getbbox()
+post.update(x=area[0]+l,y=area[1]+t,width=r-l,height=d-t)
+b.save(out/'b.png',optimize=True)
+(out/'differences.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\\n')
+PY
+spot_repo="'$(mktemp -d /tmp/spotW07_05-git.XXXXXX)
+git clone --quiet --no-local --no-checkout . "$spot_repo"
+git -C "$spot_repo" reset --hard HEAD >/dev/null
+mkdir -p "$spot_repo/assets/generated"
+cp -R assets/generated/spotW07_05 "$spot_repo/assets/generated/"
+git -C "$spot_repo" add -- assets/generated/spotW07_05
+git -C "$spot_repo" -c user.name=Codex -c user.email=codex@openai.com commit -m '"'Create spotW07_05 image pair'
+git -C \""'$spot_repo" remote set-url origin https://github.com/agaraysan/youtube.git
+if git -C "$spot_repo" fetch origin codex-inbox; then
+  git -C "$spot_repo" rebase origin/codex-inbox || git -C "$spot_repo" pull --rebase origin codex-inbox
+else
+  git -C "$spot_repo" pull --rebase origin codex-inbox || git -C "$spot_repo" ls-remote origin refs/heads/codex-inbox
+fi
+git -C "$spot_repo" push origin HEAD:codex-inbox' in /home/runner/work/youtube/youtube
+ exited 128 in 3178ms:
+[claude/project-thread-3z6x6z 1dde149] Create spotW07_05 image pair
+ 4 files changed, 54 insertions(+)
+ create mode 100644 assets/generated/spotW07_05/a.png
+ create mode 100644 assets/generated/spotW07_05/b.png
+ create mode 100644 assets/generated/spotW07_05/differences.json
+ create mode 100644 assets/generated/spotW07_05/result.json
+fatal: unable to access 'https://github.com/agaraysan/youtube.git/': Could not resolve host: github.com
+fatal: unable to access 'https://github.com/agaraysan/youtube.git/': Could not resolve host: github.com
+fatal: unable to access 'https://github.com/agaraysan/youtube.git/': Could not resolve host: github.com
+
+exec
+/bin/bash -lc 'spot_repo=$(find /tmp -maxdepth 1 -name '"'spotW07_05-git.*' -type d | head -n 1)
+git -C \""'$spot_repo" push origin HEAD:codex-inbox
+python - <<'"'PY'
+from PIL import Image,ImageChops,ImageDraw
+from pathlib import Path
+import json,itertools,math
+p=Path('assets/generated/spotW07_05')
+a,b=(Image.open(p/n) for n in ('a.png','b.png'))
+assert a.size==b.size==(1024,1024)
+m=Image.new('L',a.size)
+draw=ImageDraw.Draw(m)
+rects=[]
+for d in json.loads((p/'differences.json').read_text())['differences']:
+ x,y,w,h=(d[k] for k in ('x','y','width','height'))
+ assert max(w,h)>=50 and min(x,y,1024-x-w,1024-y-h)>0
+ assert ImageChops.difference(a.crop((x,y,x+w,y+h)),b.crop((x,y,x+w,y+h))).getbbox()==(0,0,w,h)
+ draw.rectangle((x,y,x+w-1,y+h-1),fill=255)
+ rects.append((x,y,x+w,y+h))
+assert len(rects)==5
+spacing=min(math.hypot(max(0,c[0]-r[2],r[0]-c[2]),max(0,c[1]-r[3],r[1]-c[3])) for r,c in itertools.combinations(rects,2))
+assert spacing>=200
+assert all(ImageChops.multiply(c,ImageChops.invert(m)).getbbox() is None for c in ImageChops.difference(a,b).split())
+print('Verified five regions; minimum box separation:',round(spacing,1))
+PY
+git status --short -- assets/generated/spotW07_05" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+fatal: unable to access 'https://github.com/agaraysan/youtube.git/': Could not resolve host: github.com
+Verified five regions; minimum box separation: 219.6
+?? assets/generated/spotW07_05/
+
+codex
+`assets/generated/spotW07_05/` に4ファイルを保存しました。
+
+- [a.png](/home/runner/work/youtube/youtube/assets/generated/spotW07_05/a.png) と [b.png](/home/runner/work/youtube/youtube/assets/generated/spotW07_05/b.png)
+- [differences.json](/home/runner/work/youtube/youtube/assets/generated/spotW07_05/differences.json) と [result.json](/home/runner/work/youtube/youtube/assets/generated/spotW07_05/result.json)
+
+両画像は1024×1024です。差分は5か所で、各範囲は幅か高さが50ピクセル以上、範囲同士の最短距離は約220ピクセルです。5か所の範囲外は画素単位で一致しています。
+
+GitHubの `codex-inbox` への push は、`github.com` の名前解決に失敗したため完了していません。`GH_PUSH_TOKEN` は空でした。
+tokens used
+29,279

@@ -1,0 +1,44 @@
+{
+  "differences": [
+    {
+      "description": "牛舎の壁に掛かっていたロープがなくなっている",
+      "type": "removal",
+      "x": 119,
+      "y": 56,
+      "width": 75,
+      "height": 166
+    },
+    {
+      "description": "奥の牧草地にある干し草のロールが小さくなっている",
+      "type": "size",
+      "x": 900,
+      "y": 154,
+      "width": 101,
+      "height": 70
+    },
+    {
+      "description": "リンゴのかごの隣のじょうろが植木鉢に変わっている",
+      "type": "replacement",
+      "x": 586,
+      "y": 528,
+      "width": 94,
+      "height": 105
+    },
+    {
+      "description": "手前の茶色いにわとりが左を向いている",
+      "type": "orientation",
+      "x": 96,
+      "y": 826,
+      "width": 168,
+      "height": 175
+    },
+    {
+      "description": "右手前のバケツに黒っぽい斜めの帯が付いている",
+      "type": "pattern",
+      "x": 847,
+      "y": 783,
+      "width": 109,
+      "height": 128
+    }
+  ]
+}

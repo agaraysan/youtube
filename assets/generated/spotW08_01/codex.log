@@ -1,0 +1,493 @@
+竜宮城の間違い探しを内蔵の画像生成機能で作成し、指定フォルダーに保存しました。画像はどちらも1024×1024で、5つの差分領域は互いに200画素以上離れています。領域外の画素が完全に一致することも確認しました。
+
+[a.png](/home/runner/work/youtube/youtube/assets/generated/spotW08_01/a.png) · [b.png](/home/runner/work/youtube/youtube/assets/generated/spotW08_01/b.png) · [differences.json](/home/runner/work/youtube/youtube/assets/generated/spotW08_01/differences.json) · [result.json](/home/runner/work/youtube/youtube/assets/generated/spotW08_01/result.json)
+
+GitHubの `codex-inbox` への送信は未完了です。`GH_PUSH_TOKEN` は空で、ローカルの `.git` は読み取り専用でした。GitHub連携からの書き込みも、承認を許可しない実行環境の設定により拒否されました。
+
+--- stderr ---
+rmat, output paths, and network setup.
+18. Always report the final saved path(s) for any workspace-bound asset(s), plus the final prompt or prompt set and whether the built-in tool or fallback CLI mode was used.
+
+## Transparent image requests
+
+Ask built-in `image_gen` for a genuinely transparent background and preserve its alpha.
+
+## Prompt augmentation
+
+Reformat user prompts into a structured, production-oriented spec. Make the user's goal clearer and more actionable, but do not blindly add detail.
+
+Treat this as prompt-shaping guidance, not a closed schema. Use only the lines that help, and add a short extra labeled line when it materially improves clarity.
+
+### Specificity policy
+
+Use the user's prompt specificity to decide how much augmentation is appropriate:
+
+- If the prompt is already specific and detailed, preserve that specificity and only normalize/structure it.
+- If the prompt is generic, you may add tasteful augmentation when it will materially improve the result.
+
+Allowed augmentations:
+- composition or framing hints
+- polish level or intended-use hints
+- practical layout guidance
+- reasonable scene concreteness that supports the stated request
+
+Not allowed augmentations:
+- extra characters or objects that are not implied by the request
+- brand names, slogans, palettes, or narrative beats that are not implied
+- arbitrary side-specific placement unless the surrounding layout supports it
+
+## Use-case taxonomy (exact slugs)
+
+Classify each request into one of these buckets and keep the slug consistent across prompts and references.
+
+Generate:
+- photorealistic-natural — candid/editorial lifestyle scenes with real texture and natural lighting.
+- product-mockup — product/packaging shots, catalog imagery, merch concepts.
+- ui-mockup — app/web interface mockups and wireframes; specify the desired fidelity.
+- infographic-diagram — diagrams/infographics with structured layout and text.
+- scientific-educational — classroom explainers, scientific diagrams, and learning visuals with required labels and accuracy constraints.
+- ads-marketing — campaign concepts and ad creatives with audience, brand position, scene, and exact tagline/copy.
+- productivity-visual — slide, chart, workflow, and data-heavy business visuals.
+- logo-brand — logo/mark exploration, vector-friendly.
+- illustration-story — comics, children’s book art, narrative scenes.
+- stylized-concept — style-driven concept art, 3D/stylized renders.
+- historical-scene — period-accurate/world-knowledge scenes.
+
+Edit:
+- text-localization — translate/replace in-image text, preserve layout.
+- identity-preserve — try-on, person-in-scene; lock face/body/pose.
+- precise-object-edit — remove/replace a specific element (including interior swaps).
+- lighting-weather — time-of-day/season/atmosphere changes only.
+- background-extraction — transparent background / clean cutout. Ask built-in `image_gen` for actual transparency.
+- style-transfer — apply reference style while changing subject/scene.
+- compositing — multi-image insert/merge with matched lighting/perspective.
+- sketch-to-render — drawing/line art to photoreal render.
+
+## Shared prompt schema
+
+Use the following labeled spec as shared prompt scaffolding for both top-level modes:
+
+```text
+Use case: <taxonomy slug>
+Asset type: <where the asset will be used>
+Primary request: <user's main prompt>
+Input images: <Image 1: role; Image 2: role> (optional)
+Scene/backdrop: <environment>
+Subject: <main subject>
+Style/medium: <photo/illustration/3D/etc>
+Composition/framing: <wide/close/top-down; placement>
+Lighting/mood: <lighting + mood>
+Color palette: <palette notes>
+Materials/textures: <surface details>
+Text (verbatim): "<exact text>"
+Constraints: <must keep/must avoid>
+Avoid: <negative constraints>
+```
+
+Notes:
+- `Asset type` and `Input images` are prompt scaffolding, not dedicated CLI flags.
+- `Scene/backdrop` refers to the visual setting. It is not the same as the fallback CLI `background` parameter, which controls output transparency behavior.
+- Fallback-only execution notes such as `Quality:`, `Input fidelity:`, masks, output format, and output paths belong in the CLI path only. Do not treat them as built-in `image_gen` tool arguments.
+
+Augmentation rules:
+- Keep it short.
+- Add only the details needed to improve the prompt materially.
+- For edits, explicitly list invariants (`change only X; keep Y unchanged`).
+- If any critical detail is missing and blocks success, ask a question; otherwise proceed.
+
+## Examples
+
+### Generation example (hero image)
+```text
+Use case: product-mockup
+Asset type: landing page hero
+Primary request: a minimal hero image of a ceramic coffee mug
+Style/medium: clean product photography
+Composition/framing: wide composition with usable negative space for page copy if needed
+Lighting/mood: soft studio lighting
+Constraints: no logos, no text, no watermark
+```
+
+### Edit example (invariants)
+```text
+Use case: precise-object-edit
+Asset type: product photo background replacement
+Primary request: replace only the background with a warm sunset gradient
+Constraints: change only the background; keep the product and its edges unchanged; no text; no watermark
+```
+
+## Prompting best practices
+- Structure prompt as scene/backdrop -> subject -> details -> constraints.
+- Include intended use (ad, UI mock, infographic) to set the mode and polish level.
+- Use camera/composition language for photorealism.
+- Only use SVG/vector stand-ins when the user explicitly asked for vector output or a non-image placeholder.
+- Quote exact text and specify typography + placement.
+- For tricky words, spell them letter-by-letter and require verbatim rendering.
+- For multi-image inputs, reference images by index and describe how they should be used.
+- For edits, repeat invariants every iteration to reduce drift.
+- Iterate with single-change follow-ups.
+- If the prompt is generic, add only the extra detail that will materially help.
+- If the prompt is already detailed, normalize it instead of expanding it.
+- For CLI fallback only, see `references/cli.md` and `references/image-api.md` for model, `quality`, `input_fidelity`, masks, output format, and output-path guidance.
+- For transparent images, ask built-in `image_gen` for actual transparency and preserve its alpha.
+
+More principles shared by both modes: `references/prompting.md`.
+Copy/paste specs shared by both modes: `references/sample-prompts.md`.
+
+## Guidance by asset type
+Asset-type templates (website assets, game assets, wireframes, logo) are consolidated in `references/sample-prompts.md`.
+
+## gpt-image-2 guidance for CLI fallback
+
+The fallback CLI defaults to `gpt-image-2`.
+
+- Use `gpt-image-2` for new CLI/API workflows unless the user confirms a different model.
+- CLI `gpt-image-2` does not support `background=transparent`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- `gpt-image-2` always uses high fidelity for image inputs; do not set `input_fidelity` with this model.
+- `gpt-image-2` supports `quality` values `low`, `medium`, `high`, and `auto`.
+- Use `quality low` for fast drafts, thumbnails, and quick iterations. Use `medium`, `high`, or `auto` for final assets, dense text, diagrams, identity-sensitive edits, or high-resolution outputs.
+- Square images are typically fastest to generate. Use `1024x1024` for fast square drafts.
+- If the user asks for 4K-style output, use `3840x2160` for landscape or `2160x3840` for portrait.
+- `gpt-image-2` size may be `auto` or `WIDTHxHEIGHT` if all constraints hold: max edge `<= 3840px`, both edges multiples of `16px`, long-to-short ratio `<= 3:1`, total pixels between `655,360` and `8,294,400`.
+
+Popular `gpt-image-2` sizes:
+- `1024x1024` square
+- `1536x1024` landscape
+- `1024x1536` portrait
+- `2048x2048` 2K square
+- `2048x1152` 2K landscape
+- `3840x2160` 4K landscape
+- `2160x3840` 4K portrait
+- `auto`
+
+## Fallback CLI mode only
+
+### Temp and output conventions
+These conventions apply only to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc 'git status --short && ls -la assets/generated/spotW08_01 && ls -ld .git' in /home/runner/work/youtube/youtube
+ succeeded in 259ms:
+?? assets/generated/spotW05_01/
+?? assets/generated/spotW05_02/
+?? assets/generated/spotW05_03/
+?? assets/generated/spotW05_04/
+?? assets/generated/spotW05_05/
+?? assets/generated/spotW05_06/
+?? assets/generated/spotW06_01/
+?? assets/generated/spotW06_02/
+?? assets/generated/spotW06_03/
+?? assets/generated/spotW06_04/
+?? assets/generated/spotW06_05/
+?? assets/generated/spotW06_06/
+?? assets/generated/spotW07_01/
+?? assets/generated/spotW07_02/
+?? assets/generated/spotW07_03/
+?? assets/generated/spotW07_04/
+?? assets/generated/spotW07_05/
+?? assets/generated/spotW07_06/
+total 8
+drwxr-xr-x  2 runner runner 4096 Nov 18 10:07 .
+drwxr-xr-x 69 runner runner 4096 Nov 18 10:07 ..
+drwxr-xr-x 7 runner runner 4096 Nov 18 08:53 .git
+
+codex
+原画と、指定した5か所の編集素材がそろいました。編集部分をなじませて原画に合成し、実際に変わった画素から座標を求めます。
+exec
+/bin/bash -lc "ls /home/runner/.codex/generated_images/01a1ee1f-e870-7f32-900a-764ba69bc6fd && python -c 'import PIL,numpy; print(PIL.__version__)'
+if [ -n \""'$GH_PUSH_TOKEN" ]; then echo '"'GH_PUSH_TOKEN=set'; else echo 'GH_PUSH_TOKEN=empty'; fi
+git remote | head
+git log -1 --oneline
+test "'! -f requests/images/spotW08_01.json || head -c 400 requests/images/spotW08_01.json' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+exec-aacb7eef-3b11-49f4-b84a-c05ced0ba281.png
+exec-f47b90d9-fde7-4939-8386-74d01107deb0.png
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import PIL,numpy; print(PIL.__version__)
+    ^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'numpy'
+GH_PUSH_TOKEN=empty
+origin
+476e8c1 間違い探し：ログインし直しが済んだので、5〜10本目の絵36組を Codex に依頼し直す
+{
+ "id": "spotW08_01",
+ "kind": "image",
+ "pair": true,
+ "size": "1024x1024",
+ "count": 1,
+ "prompt": "間違い探し用の絵を2枚作ってください。1枚目 a.png：正方形（1024x1024）。日本の雑誌やテレビの間違い探しに載るような、プロのイラストレーターが描いた丁寧なアニメ調のイラスト。線はきれいで、色はやわらかく上品�
+exec
+/bin/bash -lc "cat > /tmp/spotW08_01-compose.py <<'PY'
+from PIL import Image, ImageDraw, ImageFilter, ImageChops
+from pathlib import Path
+from itertools import combinations
+from math import hypot
+import json
+
+root = Path('/home/runner/.codex/generated_images/01a1ee1f-e870-7f32-900a-764ba69bc6fd')
+out = Path('assets/generated/spotW08_01')
+original = Image.open(root / 'exec-aacb7eef-3b11-49f4-b84a-c05ced0ba281.png').convert('RGB')
+edited = Image.open(root / 'exec-f47b90d9-fde7-4939-8386-74d01107deb0.png').convert('RGB')
+assert original.size == edited.size == (1254, 1254)
+size = (1024, 1024)
+base = original.resize(size, Image.Resampling.LANCZOS)
+variant = edited.resize(size, Image.Resampling.LANCZOS)
+right = base.copy()
+regions = [
+    ('水中に浮かぶ金色の貝殻が消えている', '消失', (838, 33, 957, 130), 8),
+    ('左上のちょうちんの花模様が波模様に変わっている', '模様', (190, 75, 266, 145), 3),
+    ('玉手箱の貝殻の留め具が丸い翡翠の飾りに変わっている', '入れ替え', (598, 572, 663, 636), 4),
+    ('左下の開いた貝に入っている真珠が大きくなっている', '大きさ', (159, 1031, 257, 1119), 5),
+    ('手前の花瓶の胴が丸くふくらんでいる', '形', (689, 947, 867, 1158), 8),
+]
+differences = []
+for description, kind, coords, blur in regions:
+    mask = Image.new('L', original.size)
+    ImageDraw.Draw(mask).rounded_rectangle(coords, radius=12, fill=255)
+    mask = mask.filter(ImageFilter.GaussianBlur(blur)).resize(size, Image.Resampling.LANCZOS)
+    patch_result = Image.composite(variant, base, mask)
+    box = ImageChops.difference(patch_result, base).getbbox()
+    x, y, x2, y2 = box
+    assert max(x2-x, y2-y) >= 50 and min(x,y,1024-x2,1024-y2) >= 15
+    right.paste(patch_result.crop(box), (x,y))
+    differences.append(dict(description=description, type=kind, x=x, y=y, width=x2-x, height=y2-y))
+
+for a,b in combinations(differences,2):
+    dx = max(a['x']-b['x']-b['width'], b['x']-a['x']-a['width'], 0)
+    dy = max(a['y']-b['y']-b['height'], b['y']-a['y']-a['height'], 0)
+    assert hypot(dx,dy) >= 200, (a,b,dx,dy)
+
+for name, image in [('a.png',base),('b.png',right)]:
+    image.save(out / name, optimize=True)
+for name, data in [
+    ('differences.json', dict(differences=differences)),
+    ('result.json', dict(id='spotW08_01', status='ok', via='codex-cloud', files=['a.png','b.png','differences.json'])),
+]:
+    (out/name).write_text(json.dumps(data, ensure_ascii=False, indent=2)+'\\n')
+
+with Image.open(out/'a.png') as a, Image.open(out/'b.png') as b:
+    assert a.size == b.size == size
+    delta = ImageChops.difference(a,b)
+    for entry in differences:
+        x,y,w,h = (entry[k] for k in ('x','y','width','height'))
+        assert delta.crop((x,y,x+w,y+h)).getbbox() == (0,0,w,h)
+        delta.paste((0,0,0),(x,y,x+w,y+h))
+    assert delta.getbbox() is None
+print((out/'differences.json').read_text())
+PY
+python /tmp/spotW08_01-compose.py" in /home/runner/work/youtube/youtube
+ exited 1 in 122ms:
+Traceback (most recent call last):
+  File "/tmp/spotW08_01-compose.py", line 31, in <module>
+    assert max(x2-x, y2-y) >= 50 and min(x,y,1024-x2,1024-y2) >= 15
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+exec
+/bin/bash -lc "sed -i '/assert max(x2/i\\    print(description, box)' /tmp/spotW08_01-compose.py
+python /tmp/spotW08_01-compose.py
+git ls-remote origin refs/heads/codex-inbox" in /home/runner/work/youtube/youtube
+ exited 128 in 135ms:
+水中に浮かぶ金色の貝殻が消えている (671, 12, 796, 122)
+Traceback (most recent call last):
+  File "/tmp/spotW08_01-compose.py", line 32, in <module>
+    assert max(x2-x, y2-y) >= 50 and min(x,y,1024-x2,1024-y2) >= 15
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+
+exec
+/bin/bash -lc "sed -i 's/(838, 33, 957, 130), 8/(838, 37, 957, 130), 5/' /tmp/spotW08_01-compose.py
+python /tmp/spotW08_01-compose.py" in /home/runner/work/youtube/youtube
+ succeeded in 498ms:
+水中に浮かぶ金色の貝殻が消えている (675, 21, 792, 116)
+左上のちょうちんの花模様が波模様に変わっている (149, 56, 224, 126)
+玉手箱の貝殻の留め具が丸い翡翠の飾りに変わっている (481, 460, 550, 528)
+左下の開いた貝に入っている真珠が大きくなっている (120, 833, 220, 924)
+手前の花瓶の胴が丸くふくらんでいる (548, 758, 724, 961)
+{
+  "differences": [
+    {
+      "description": "水中に浮かぶ金色の貝殻が消えている",
+      "type": "消失",
+      "x": 675,
+      "y": 21,
+      "width": 117,
+      "height": 95
+    },
+    {
+      "description": "左上のちょうちんの花模様が波模様に変わっている",
+      "type": "模様",
+      "x": 149,
+      "y": 56,
+      "width": 75,
+      "height": 70
+    },
+    {
+      "description": "玉手箱の貝殻の留め具が丸い翡翠の飾りに変わっている",
+      "type": "入れ替え",
+      "x": 481,
+      "y": 460,
+      "width": 69,
+      "height": 68
+    },
+    {
+      "description": "左下の開いた貝に入っている真珠が大きくなっている",
+      "type": "大きさ",
+      "x": 120,
+      "y": 833,
+      "width": 100,
+      "height": 91
+    },
+    {
+      "description": "手前の花瓶の胴が丸くふくらんでいる",
+      "type": "形",
+      "x": 548,
+      "y": 758,
+      "width": 176,
+      "height": 203
+    }
+  ]
+}
+
+
+mcp: codex_apps/github.fetch_commit started
+mcp: codex_apps/github.fetch_commit (completed)
+exec
+/bin/bash -lc "git rev-parse '04cac8c373aacbeb302feca8402bb23d8d751b05"'^{tree}'"' && git status --short -- assets/generated/spotW08_01" in /home/runner/work/youtube/youtube
+ exited 128 in 0ms:
+fatal: ambiguous argument '04cac8c373aacbeb302feca8402bb23d8d751b05^{tree}': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+04cac8c373aacbeb302feca8402bb23d8d751b05^{tree}
+
+mcp: codex_apps/github.fetch started
+exec
+/bin/bash -lc 'cat assets/generated/spotW08_01/result.json' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+{
+  "id": "spotW08_01",
+  "status": "ok",
+  "via": "codex-cloud",
+  "files": [
+    "a.png",
+    "b.png",
+    "differences.json"
+  ]
+}
+
+exec
+/bin/bash -lc 'cat assets/generated/spotW08_01/differences.json' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+{
+  "differences": [
+    {
+      "description": "水中に浮かぶ金色の貝殻が消えている",
+      "type": "消失",
+      "x": 675,
+      "y": 21,
+      "width": 117,
+      "height": 95
+    },
+    {
+      "description": "左上のちょうちんの花模様が波模様に変わっている",
+      "type": "模様",
+      "x": 149,
+      "y": 56,
+      "width": 75,
+      "height": 70
+    },
+    {
+      "description": "玉手箱の貝殻の留め具が丸い翡翠の飾りに変わっている",
+      "type": "入れ替え",
+      "x": 481,
+      "y": 460,
+      "width": 69,
+      "height": 68
+    },
+    {
+      "description": "左下の開いた貝に入っている真珠が大きくなっている",
+      "type": "大きさ",
+      "x": 120,
+      "y": 833,
+      "width": 100,
+      "height": 91
+    },
+    {
+      "description": "手前の花瓶の胴が丸くふくらんでいる",
+      "type": "形",
+      "x": 548,
+      "y": 758,
+      "width": 176,
+      "height": 203
+    }
+  ]
+}
+
+mcp: codex_apps/github.fetch (completed)
+mcp: codex_apps/github.create_blob started
+mcp: codex_apps/github.create_blob (failed)
+MCP tool call requires approval, but approval policy is never
+mcp: codex_apps/github.create_blob started
+mcp: codex_apps/github.create_blob (failed)
+MCP tool call requires approval, but approval policy is never
+mcp: codex_apps/github.create_blob started
+mcp: codex_apps/github.create_blob (failed)
+MCP tool call requires approval, but approval policy is never
+mcp: codex_apps/github.create_blob started
+mcp: codex_apps/github.create_blob (failed)
+MCP tool call requires approval, but approval policy is never
+codex
+竜宮城の間違い探しを内蔵の画像生成機能で作成し、指定フォルダーに保存しました。画像はどちらも1024×1024で、5つの差分領域は互いに200画素以上離れています。領域外の画素が完全に一致することも確認しました。
+
+[a.png](/home/runner/work/youtube/youtube/assets/generated/spotW08_01/a.png) · [b.png](/home/runner/work/youtube/youtube/assets/generated/spotW08_01/b.png) · [differences.json](/home/runner/work/youtube/youtube/assets/generated/spotW08_01/differences.json) · [result.json](/home/runner/work/youtube/youtube/assets/generated/spotW08_01/result.json)
+
+GitHubの `codex-inbox` への送信は未完了です。`GH_PUSH_TOKEN` は空で、ローカルの `.git` は読み取り専用でした。GitHub連携からの書き込みも、承認を許可しない実行環境の設定により拒否されました。
+tokens used
+32,954

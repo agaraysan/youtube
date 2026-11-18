@@ -1,0 +1,44 @@
+{
+  "differences": [
+    {
+      "description": "左上の棚から赤いマグカップが消えている",
+      "type": "removal",
+      "x": 244,
+      "y": 65,
+      "width": 70,
+      "height": 53
+    },
+    {
+      "description": "右上の棚の白い水差しがティーポットに替わっている",
+      "type": "replacement",
+      "x": 905,
+      "y": 40,
+      "width": 95,
+      "height": 80
+    },
+    {
+      "description": "右側の白い箱のえんじ色のリボンに白い水玉模様が付いている",
+      "type": "pattern",
+      "x": 885,
+      "y": 511,
+      "width": 122,
+      "height": 97
+    },
+    {
+      "description": "左下のピンクの箱がハート形から丸形に変わっている",
+      "type": "shape",
+      "x": 8,
+      "y": 795,
+      "width": 215,
+      "height": 191
+    },
+    {
+      "description": "手前の紙に並んだトリュフが右下で1粒減っている",
+      "type": "count",
+      "x": 567,
+      "y": 863,
+      "width": 74,
+      "height": 69
+    }
+  ]
+}

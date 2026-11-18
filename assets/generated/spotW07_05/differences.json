@@ -1,0 +1,44 @@
+{
+  "differences": [
+    {
+      "description": "左上の街灯の明かりを覆う部分が丸くなっている",
+      "type": "shape",
+      "x": 248,
+      "y": 55,
+      "width": 68,
+      "height": 94
+    },
+    {
+      "description": "中央の男性のえんじ色のマフラーに格子模様が入っている",
+      "type": "pattern",
+      "x": 512,
+      "y": 248,
+      "width": 60,
+      "height": 120
+    },
+    {
+      "description": "右側の赤い郵便ポストが低くなっている",
+      "type": "size",
+      "x": 946,
+      "y": 241,
+      "width": 73,
+      "height": 75
+    },
+    {
+      "description": "左下の道に置かれた黒い傘が消えている",
+      "type": "removed",
+      "x": 22,
+      "y": 862,
+      "width": 365,
+      "height": 146
+    },
+    {
+      "description": "敷物の上の赤いリンゴが洋ナシに変わっている",
+      "type": "replacement",
+      "x": 771,
+      "y": 786,
+      "width": 61,
+      "height": 71
+    }
+  ]
+}

@@ -1,0 +1,316 @@
+消防署の間違い探しを作成し、指定フォルダーに保存しました。
+
+- [a.png](/home/runner/work/youtube/youtube/assets/generated/spotW10_01/a.png)・[b.png](/home/runner/work/youtube/youtube/assets/generated/spotW10_01/b.png)
+- [differences.json](/home/runner/work/youtube/youtube/assets/generated/spotW10_01/differences.json)・[result.json](/home/runner/work/youtube/youtube/assets/generated/spotW10_01/result.json)
+
+両画像は1024×1024です。差分は5か所で、各差分の幅または高さは50ピクセル以上、差分領域どうしの間隔は最短で約276ピクセルです。差分領域の外は画素単位で一致しています。
+
+`codex-inbox` への送信は未完了です。`.git` が読み取り専用で、`github.com` の名前解決にも失敗しました。GitHub コネクタ経由の書き込みは承認設定で拒否され、`GH_PUSH_TOKEN` は空でした。
+
+--- stderr ---
+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' | base64 -d >> /tmp/spotW10gen.png" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+exec
+/bin/bash -lc "python -c \"from PIL import Image; Image.open('/home/runner/.codex/generated_images/01a1ee4d-7d4e-7e80-a95d-1ae2d5246448/exec-2e19c2c2-e97d-4f89-9d62-26e6ca977b84.png').resize((768,768)).save('/tmp/w10preview.png')\"" in /home/runner/work/youtube/youtube
+ succeeded in 77ms:
+codex
+消防署の原画ができました。右の絵に使う編集を生成し、必要な部分だけを原画のコピーに合成します。Git の接続は名前解決で失敗し、GitHub コネクタの書き込みも承認設定で止まりました。
+exec
+/bin/bash -lc 'git push origin HEAD:codex-inbox
+ls -l assets/generated/spotW09_06
+cat /tmp/spotW09_06_compose.py | head -95
+cat /home/runner/.codex/plugins/cache/openai-curated-remote/superpowers/7.0.1/skills/verification-before-completion/SKILL.md | head -35' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+total 4328
+-rw-r--r-- 1 runner runner 2199678 Nov 18 10:55 a.png
+-rw-r--r-- 1 runner runner 2193516 Nov 18 10:56 b.png
+-rw-r--r-- 1 runner runner   24153 Nov 18 10:56 codex.log
+-rw-r--r-- 1 runner runner    1064 Nov 18 10:56 differences.json
+-rw-r--r-- 1 runner runner     185 Nov 18 10:56 result.json
+from itertools import combinations
+from pathlib import Path
+from math import hypot
+import json
+import sys
+
+from PIL import Image, ImageDraw, ImageChops, ImageFilter
+
+generated = Path('/home/runner/.codex/generated_images/01a1ee4a-b127-7920-beb8-61e7590a6f94')
+dest = Path('assets/generated/spotW09_06')
+a = Image.open(dest / 'a.png').convert('RGB')
+size = a.size
+multi = Image.open(generated / 'exec-0a50db98-3468-4864-8c99-4214b3516c20.png').convert('RGB').resize(size, Image.Resampling.LANCZOS)
+center = Image.open(sys.argv[1]).convert('RGB').resize(size, Image.Resampling.LANCZOS) if len(sys.argv) > 1 else multi
+edits = [
+    ('左上の空を飛んでいた鳥がいなくなっている', '消失',
+     [(175,136),(221,143),(236,162),(263,164),(272,187),(241,214),(190,222),(173,214)], multi),
+    ('右上の青い風船のうち、左側がハート形になっている', '形',
+     [(996,146),(1008,111),(1059,113),(1075,137),(1061,153),(1056,169),(1061,182),(1034,195),(1011,182)], multi),
+    ('左下の銀色のじょうろが緑のバケツに替わっている', '入れ替え',
+     [(169,886),(204,876),(237,888),(252,884),(278,885),(287,914),(260,931),(242,950),(233,969),(190,976),(174,963)], multi),
+    ('右下のかごに掛かった布がチェック柄から水玉模様に変わっている', '模様',
+     [(837,1015),(850,1009),(889,1022),(927,1023),(932,1033),(909,1051),(876,1091),(861,1106),(848,1097),(837,1057)], multi),
+]
+if len(sys.argv) > 1:
+    edits.append(('男の子の胸元の黄色いバラのコサージュが大きくなっている', '大きさ',
+                  [(723,544),(738,525),(762,521),(780,532),(790,558),(788,581),(779,604),(763,620),(738,609),(729,594),(736,571)], center))
+else:
+    edits.append(('手前のピンクのリボンが掛かった封筒の向きが変わっている', '向き',
+                  [(444,1129),(480,1115),(505,1104),(509,1076),(524,1069),(559,1094),(592,1101),(635,1128),(634,1150),(605,1170),(570,1206),(544,1213),(507,1180),(472,1179),(445,1150)], multi))
+
+result = a.copy()
+entries = []
+allowed = Image.new('1', size)
+for desc, kind, polygon, source in edits:
+    stencil = Image.new('L', (1254, 1254))
+    ImageDraw.Draw(stencil).polygon(polygon, fill=255)
+    stencil = stencil.filter(ImageFilter.GaussianBlur(3)).resize(size, Image.Resampling.BILINEAR)
+    result = Image.composite(source, result, stencil)
+    raw = ImageChops.difference(a, result).crop(stencil.getbbox()).getbbox()
+    ox, oy, _, _ = stencil.getbbox()
+    x, y, right, bottom = raw[0] + ox, raw[1] + oy, raw[2] + ox, raw[3] + oy
+    entries.append(dict(description=desc, type=kind, x=x, y=y, width=right-x, height=bottom-y))
+    ImageDraw.Draw(allowed).rectangle((x,y,right-1,bottom-1), fill=1)
+
+diff = ImageChops.difference(a, result)
+assert Image.composite(Image.new('RGB', size), diff, allowed).getbbox() is None
+assert all(max(e['width'],e['height']) >= 50 for e in entries)
+gaps = []
+for p,q in combinations(entries,2):
+    dx = max(0, p['x'] - q['x'] - q['width'], q['x'] - p['x'] - p['width'])
+    dy = max(0, p['y'] - q['y'] - q['height'], q['y'] - p['y'] - p['height'])
+    gaps.append(hypot(dx,dy))
+print('Minimum box edge distance:', min(gaps))
+if len(sys.argv) > 1:
+    assert min(gaps) >= 200
+
+result.save(dest / 'b.png')
+files = ['a.png', 'b.png', 'differences.json']
+for name, obj in [('differences.json',dict(differences=entries)),('result.json',dict(id='spotW09_06',status='ok',via='codex-cloud',files=files))]:
+    (dest / name).write_text(json.dumps(obj, ensure_ascii=False, indent=2)+'\n',encoding='utf-8')
+---
+name: verification-before-completion
+description: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always
+---
+
+# Verification Before Completion
+
+## Overview
+
+**Core principle:** Evidence before claims, always.
+
+**Violating the letter of this rule is violating the spirit of this rule.**
+
+## The Iron Law
+
+```
+NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE
+```
+
+If you haven't run the verification command in this message, you cannot claim it passes.
+
+## The Gate Function
+
+```
+BEFORE claiming any status or expressing satisfaction:
+
+1. IDENTIFY: What command proves this claim?
+2. RUN: Execute the FULL command (fresh, complete)
+3. READ: Full output, check exit code, count failures
+4. VERIFY: Does output confirm the claim?
+   - If NO: State actual status with evidence
+   - If YES: State claim WITH evidence
+5. ONLY THEN: Make the claim
+
+Skip any step = lying, not verifying
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+from pathlib import Path
+p=next(Path('/home/runner/.codex/generated_images/01a1ee4d-7d4e-7e80-a95d-1ae2d5246448').glob('*.png'))
+a=Image.open(p).convert('RGB').resize((1024,1024),Image.Resampling.LANCZOS)
+a.save('assets/generated/spotW10_01/a.png')
+PY
+git fetch origin codex-inbox
+git pull --rebase origin codex-inbox" in /home/runner/work/youtube/youtube
+ exited 1 in 521ms:
+error: cannot open '.git/FETCH_HEAD': Read-only file system
+error: cannot open '.git/FETCH_HEAD': Read-only file system
+
+exec
+/bin/bash -lc 'ls -lt /home/runner/.codex/generated_images/01a1ee4d-7d4e-7e80-a95d-1ae2d5246448
+git status --short -- assets/generated/spotW10_01' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+total 3624
+-rw-r--r-- 1 runner runner 3709794 Nov 18 10:58 exec-2e19c2c2-e97d-4f89-9d62-26e6ca977b84.png
+?? assets/generated/spotW10_01/
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+a=Image.open('assets/generated/spotW10_01/a.png')
+a.crop((130,445,302,525)).resize((516,240)).save('/tmp/w10badge.png')
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image,ImageDraw,ImageFilter
+from pathlib import Path
+p=Path('assets/generated/spotW10_01/a.png')
+a=Image.open(p)
+m=Image.new('L',(26,25))
+ImageDraw.Draw(m).ellipse((3,2,22,22),fill=255)
+m=m.filter(ImageFilter.GaussianBlur(1))
+a.paste(a.crop((172,469,198,494)),(199,469),m)
+a.save(p)
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 111ms:
+exec
+/bin/bash -lc 'date -u; ls -lt /home/runner/.codex/generated_images/01a1ee4d-7d4e-7e80-a95d-1ae2d5246448' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+Wed Nov 18 10:59:26 UTC 2026
+total 3624
+-rw-r--r-- 1 runner runner 3709794 Nov 18 10:58 exec-2e19c2c2-e97d-4f89-9d62-26e6ca977b84.png
+
+exec
+/bin/bash -lc "cat > /tmp/w10compose.py <<'PY'
+from itertools import combinations
+from math import hypot
+from pathlib import Path
+import json, sys
+from PIL import Image, ImageChops, ImageDraw, ImageFilter
+
+dest = Path('assets/generated/spotW10_01')
+a = Image.open(dest / 'a.png').convert('RGB')
+edit = Image.open(sys.argv[1]).convert('RGB').resize(a.size, Image.Resampling.LANCZOS)
+b = a.copy()
+# Polygons are measured against the 768-pixel review image.
+regions = [
+    ('掛け時計の針の向きが変わっている', '向き', [(114,81),(140,76),(160,81),(163,101),(151,127),(117,128),(109,106)], (0,0)),
+    ('右上の真鍮のベルが2個から1個に減っている', '数', [(616,110),(646,105),(659,125),(658,161),(617,163),(610,148)], (0,0)),
+    ('はしご車のステップにあるカラーコーンがランタンに替わっている', '入れ替え', [(407,384),(409,345),(415,320),(448,320),(457,354),(461,386),(450,391),(411,391)], (0,0)),
+    ('左下の黄色いバケツが消えている', '消失', [(105,620),(132,609),(175,613),(185,631),(175,659),(176,682),(159,690),(111,686),(111,654)], (0,0)),
+    ('右下の緑のホースに白っぽい縞が入っている', '模様', [(593,629),(622,616),(667,613),(704,621),(718,646),(711,670),(681,686),(621,685),(590,668),(585,648)], (0,0)),
+]
+entries=[]
+allowed = Image.new('1',a.size)
+for description, kind, points, (dx,dy) in regions:
+    mask = Image.new('L',a.size)
+    ImageDraw.Draw(mask).polygon([(round(x*4/3),round(y*4/3)) for x,y in points],fill=255)
+    mask = mask.filter(ImageFilter.GaussianBlur(2.2))
+    patch = ImageChops.offset(edit, dx, dy)
+    next_image = Image.composite(patch,b,mask)
+    x,y,r,d = ImageChops.difference(b,next_image).getbbox()
+    entries.append(dict(description=description,type=kind,x=x,y=y,width=r-x,height=d-y))
+    ImageDraw.Draw(allowed).rectangle((x,y,r-1,d-1),fill=1)
+    b = next_image
+
+assert len(entries) == 5
+assert all(max(v['width'], v['height']) >= 50 for v in entries)
+gaps=[]
+for p,q in combinations(entries,2):
+    dx=max(0,p['x']-q['x']-q['width'],q['x']-p['x']-p['width'])
+    dy=max(0,p['y']-q['y']-q['height'],q['y']-p['y']-p['height'])
+    gaps.append(hypot(dx,dy))
+print('Minimum gap', min(gaps))
+assert min(gaps) >= 200
+print(entries)
+assert Image.composite(Image.new('RGB',a.size),ImageChops.difference(a,b),allowed).getbbox() is None
+b.resize((768,768),Image.Resampling.LANCZOS).save('/tmp/w10bpreview.png')
+if '--save' in sys.argv:
+    b.save(dest/'b.png')
+    for file,data in [('differences.json',dict(differences=entries)),('result.json',dict(id='spotW10_01',status='ok',via='codex-cloud',files=['a.png','b.png','differences.json']))]:
+        (dest/file).write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+PY
+ls -lt /home/runner/.codex/generated_images/01a1ee4d-7d4e-7e80-a95d-1ae2d5246448" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+total 3624
+-rw-r--r-- 1 runner runner 3709794 Nov 18 10:58 exec-2e19c2c2-e97d-4f89-9d62-26e6ca977b84.png
+
+exec
+/bin/bash -lc 'ls -lt /home/runner/.codex/generated_images/01a1ee4d-7d4e-7e80-a95d-1ae2d5246448; date -u' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+total 3624
+-rw-r--r-- 1 runner runner 3709794 Nov 18 10:58 exec-2e19c2c2-e97d-4f89-9d62-26e6ca977b84.png
+Wed Nov 18 11:00:04 UTC 2026
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+a=Image.open('assets/generated/spotW10_01/a.png')
+a.crop((180,460,235,506)).resize((330,276)).save('/tmp/w10badge2.png')
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+exec
+/bin/bash -lc "python - <<'PY'
+from pathlib import Path
+from PIL import Image,ImageDraw,ImageFilter
+p=Path('assets/generated/spotW10_01/a.png')
+source=next(Path('/home/runner/.codex/generated_images/01a1ee4d-7d4e-7e80-a95d-1ae2d5246448').glob('*.png'))
+a=Image.open(source).convert('RGB').resize((1024,1024),Image.Resampling.LANCZOS)
+m=Image.new('L',(30,29))
+ImageDraw.Draw(m).rounded_rectangle((3,2,27,26),radius=5,fill=255)
+m=m.filter(ImageFilter.GaussianBlur(1.2))
+a.paste(a.crop((178,467,208,496)),(197,467),m)
+a.save(p)
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 150ms:
+exec
+/bin/bash -lc "python /tmp/w10compose.py '/home/runner/.codex/generated_images/01a1ee4d-7d4e-7e80-a95d-1ae2d5246448/exec-fc2f852d-7f42-42cb-b606-9b8ea9e8f82e.png'" in /home/runner/work/youtube/youtube
+ succeeded in 177ms:
+Minimum gap 275.90215657004205
+[{'description': '掛け時計の針の向きが変わっている', 'type': '向き', 'x': 141, 'y': 99, 'width': 80, 'height': 76}, {'description': '右上の真鍮のベルが2個から1個に減っている', 'type': '数', 'x': 809, 'y': 137, 'width': 76, 'height': 85}, {'description': 'はしご車のステップにあるカラーコーンがランタンに替わっている', 'type': '入れ替え', 'x': 539, 'y': 423, 'width': 81, 'height': 104}, {'description': '左下の黄色いバケツが消えている', 'type': '消失', 'x': 136, 'y': 808, 'width': 115, 'height': 117}, {'description': '右下の緑のホースに白っぽい縞が入っている', 'type': '模様', 'x': 776, 'y': 813, 'width': 185, 'height': 106}]
+
+exec
+/bin/bash -lc "python /tmp/w10compose.py '/home/runner/.codex/generated_images/01a1ee4d-7d4e-7e80-a95d-1ae2d5246448/exec-fc2f852d-7f42-42cb-b606-9b8ea9e8f82e.png' --save
+python - <<'PY'
+from pathlib import Path
+from PIL import Image, ImageChops, ImageDraw
+from itertools import combinations
+from math import hypot
+import json
+p = Path('assets/generated/spotW10_01')
+a,b = [Image.open(p/n) for n in ('a.png','b.png')]
+assert all(i.size == (1024,1024) and i.format == 'PNG' for i in (a,b))
+entries = json.loads((p/'differences.json').read_text())['differences']
+assert len(entries) == len({e['type'] for e in entries}) == 5
+delta = ImageChops.difference(a,b)
+mask = Image.new('1', a.size)
+draw = ImageDraw.Draw(mask)
+boxes=[]
+for e in entries:
+    x,y,w,h = (e[k] for k in ('x','y','width','height'))
+    rect=(x,y,x+w,y+h)
+    assert max(w,h) >= 50 and 0<x<x+w<1024 and 0<y<y+h<1024
+    assert delta.crop(rect).getbbox() == (0,0,w,h)
+    draw.rectangle((x,y,x+w-1,y+h-1),fill=1)
+    boxes.append(rect)
+assert ImageChops.multiply(delta,ImageChops.invert(mask.convert('L')).convert('RGB')).getbbox() is None
+assert min(hypot(max(0,r[0]-s[2],s[0]-r[2]),max(0,r[1]-s[3],s[1]-r[3])) for r,s in combinations(boxes,2)) >= 200
+result=json.loads((p/'result.json').read_text())
+assert result==dict(id='spotW10_01',status='ok',via='codex-cloud',files=['a.png','b.png','differences.json'])
+assert {f.name for f in p.iterdir()} == {*result['files'],'result.json'}
+print('Verified two 1024×1024 PNGs, five different types, exact boxes, no pixel change outside boxes, and matching manifest.')
+PY
+git add -- assets/generated/spotW10_01
+git push origin HEAD:codex-inbox" in /home/runner/work/youtube/youtube
+ exited 128 in 462ms:
+Minimum gap 275.90215657004205
+[{'description': '掛け時計の針の向きが変わっている', 'type': '向き', 'x': 141, 'y': 99, 'width': 80, 'height': 76}, {'description': '右上の真鍮のベルが2個から1個に減っている', 'type': '数', 'x': 809, 'y': 137, 'width': 76, 'height': 85}, {'description': 'はしご車のステップにあるカラーコーンがランタンに替わっている', 'type': '入れ替え', 'x': 539, 'y': 423, 'width': 81, 'height': 104}, {'description': '左下の黄色いバケツが消えている', 'type': '消失', 'x': 136, 'y': 808, 'width': 115, 'height': 117}, {'description': '右下の緑のホースに白っぽい縞が入っている', 'type': '模様', 'x': 776, 'y': 813, 'width': 185, 'height': 106}]
+Verified two 1024×1024 PNGs, five different types, exact boxes, no pixel change outside boxes, and matching manifest.
+fatal: Unable to create '/home/runner/work/youtube/youtube/.git/index.lock': Read-only file system
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+
+codex
+消防署の間違い探しを作成し、指定フォルダーに保存しました。
+
+- [a.png](/home/runner/work/youtube/youtube/assets/generated/spotW10_01/a.png)・[b.png](/home/runner/work/youtube/youtube/assets/generated/spotW10_01/b.png)
+- [differences.json](/home/runner/work/youtube/youtube/assets/generated/spotW10_01/differences.json)・[result.json](/home/runner/work/youtube/youtube/assets/generated/spotW10_01/result.json)
+
+両画像は1024×1024です。差分は5か所で、各差分の幅または高さは50ピクセル以上、差分領域どうしの間隔は最短で約276ピクセルです。差分領域の外は画素単位で一致しています。
+
+`codex-inbox` への送信は未完了です。`.git` が読み取り専用で、`github.com` の名前解決にも失敗しました。GitHub コネクタ経由の書き込みは承認設定で拒否され、`GH_PUSH_TOKEN` は空でした。
+tokens used
+57,811

@@ -1,0 +1,44 @@
+{
+  "differences": [
+    {
+      "description": "額の中の星が三日月の形になっている",
+      "type": "shape",
+      "x": 131,
+      "y": 145,
+      "width": 70,
+      "height": 74
+    },
+    {
+      "description": "窓辺のオレンジ色のじょうろが消えている",
+      "type": "missing",
+      "x": 761,
+      "y": 244,
+      "width": 102,
+      "height": 74
+    },
+    {
+      "description": "赤いクッションの白い帯が水玉模様になっている",
+      "type": "pattern",
+      "x": 25,
+      "y": 726,
+      "width": 197,
+      "height": 111
+    },
+    {
+      "description": "じゅうたんの上の紫の絵本が木琴に替わっている",
+      "type": "replacement",
+      "x": 683,
+      "y": 750,
+      "width": 152,
+      "height": 92
+    },
+    {
+      "description": "積み木のお城の手前にオレンジと緑の積み木が増えている",
+      "type": "count",
+      "x": 419,
+      "y": 915,
+      "width": 75,
+      "height": 41
+    }
+  ]
+}

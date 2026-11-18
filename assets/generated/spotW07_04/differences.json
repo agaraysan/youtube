@@ -1,0 +1,44 @@
+{
+  "differences": [
+    {
+      "description": "左上の左から2番目のちょうちんが、花柄からひし形の模様に変わっている",
+      "type": "pattern",
+      "x": 136,
+      "y": 66,
+      "width": 161,
+      "height": 133
+    },
+    {
+      "description": "右上の魚飾りの尾びれが、幅広い扇形になっている",
+      "type": "shape",
+      "x": 810,
+      "y": 206,
+      "width": 85,
+      "height": 93
+    },
+    {
+      "description": "青い上着の男の子が持つ風車の羽根の向きが変わっている",
+      "type": "orientation",
+      "x": 231,
+      "y": 509,
+      "width": 73,
+      "height": 70
+    },
+    {
+      "description": "左手前のテーブルの急須が、ふた付きの陶器の壺に変わっている",
+      "type": "replacement",
+      "x": 98,
+      "y": 872,
+      "width": 146,
+      "height": 120
+    },
+    {
+      "description": "右手前のテーブルの赤いうさぎの置物が消えている",
+      "type": "removal",
+      "x": 866,
+      "y": 866,
+      "width": 142,
+      "height": 127
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "differences": [
+    {
+      "description": "壁に掛かった敷物が花柄からひし形の模様に変わっている",
+      "type": "pattern",
+      "x": 73,
+      "y": 47,
+      "width": 136,
+      "height": 224
+    },
+    {
+      "description": "右上の窓辺の鉢で、右半分の花がなくなり花の数が減っている",
+      "type": "count",
+      "x": 888,
+      "y": 101,
+      "width": 117,
+      "height": 80
+    },
+    {
+      "description": "ゴンドラの赤い背もたれの上辺が、ハート形から一つの丸い弧に変わっている",
+      "type": "shape",
+      "x": 431,
+      "y": 498,
+      "width": 154,
+      "height": 93
+    },
+    {
+      "description": "手前の石畳にいたハトが消えている",
+      "type": "removal",
+      "x": 23,
+      "y": 869,
+      "width": 178,
+      "height": 137
+    },
+    {
+      "description": "カフェのテーブルの陶器の水差しがふた付きのかごに変わっている",
+      "type": "replacement",
+      "x": 853,
+      "y": 701,
+      "width": 118,
+      "height": 130
+    }
+  ]
+}
