@@ -22,7 +22,7 @@ jobs:
           # 仕組み（scripts/art）が変わったときは全部、仕様だけ変わったときはその仕様だけ作る（実行中のものと重ならないように）
           files=art/*.json
           if [ -n "$BEFORE" ] && git cat-file -e "$BEFORE" 2>/dev/null && ! git diff --name-only "$BEFORE" HEAD | grep -q '^scripts/art/'; then
-            files=$(git diff --name-only --diff-filter=AM "$BEFORE" HEAD | grep '^art/.*\.json$' || true)
+            files=$(git diff --name-only --diff-filter=AM "$BEFORE" HEAD | grep '^art/[^/]*\.json$' || true)
           fi
           ids=$(for f in $files; do
             id=$(basename "$f" .json)
