@@ -62,8 +62,9 @@ jobs:
             pip install -q torch --index-url https://download.pytorch.org/whl/cpu && pip install -q transformers
           fi
       - name: Sign in to Codex (ChatGPT login)
-        env: { CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}" }
-        run: mkdir -p ~/.codex && printenv CODEX_AUTH_JSON > ~/.codex/auth.json && chmod 600 ~/.codex/auth.json
+        # 鍵は全ジョブで1つを共有（codex-auth 枝、暗号化）。使い回しで弾かれないように
+        env: { CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}", CODEX_AUTH_KEY: "${{ secrets.OPENAI_API_KEY }}" }
+        run: python3 scripts/codex_auth.py load && python3 scripts/codex_auth.py refresh
       - name: Make
         run: |
           git pull -q --rebase origin "${GITHUB_REF_NAME}" || true   # 先に終わった実行の素材を取り込む
@@ -93,3 +94,7 @@ jobs:
           git add -A && git commit -qm "preview $id"
           git -c http.extraheader="$(git -C $GITHUB_WORKSPACE config --get http.https://github.com/.extraheader)" \
             push -q -f "https://github.com/${{ github.repository }}.git" "p:refs/heads/art-preview/$id"
+      - name: Save Codex login
+        if: always()
+        env: { CODEX_AUTH_KEY: "${{ secrets.OPENAI_API_KEY }}" }
+        run: python3 scripts/codex_auth.py save
