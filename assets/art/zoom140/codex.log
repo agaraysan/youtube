@@ -1,0 +1,529 @@
+内蔵の画像生成機能で作成した縦長の PNG（1024×1536）を [raw_05.png](/home/runner/work/youtube/youtube/tmp_art/zoom140/raw_05.png) に保存しました。
+
+昭和の夜の子ども部屋をグアッシュ調で描き、ふとんの女の子が雨の窓を見つめる傍らに、雨の朝の玄関が見える開いたふすまを正面から配置しました。開口部の中心は画面の中央より少し上です。
+
+GitHub への push は行っていません。この環境では `.git` が読み取り専用で、`GH_PUSH_TOKEN` は空または未設定です。
+
+--- stderr ---
+nai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc 'src=/home/runner/.codex/generated_images/01a1ee60-4d09-70a3-862a-91db7fd35dd0/exec-a3dad62d-7bde-47ee-ad93-94fb67678f0d.png
+file "$src" && mkdir -p tmp_art/zoom140 && cp "$src" tmp_art/zoom140/raw_05.png && file tmp_art/zoom140/raw_05.png && cmp "$src" tmp_art/zoom140/raw_05.png' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+/home/runner/.codex/generated_images/01a1ee60-4d09-70a3-862a-91db7fd35dd0/exec-a3dad62d-7bde-47ee-ad93-94fb67678f0d.png: PNG image data, 1024 x 1536, 8-bit/color RGB, non-interlaced
+tmp_art/zoom140/raw_05.png: PNG image data, 1024 x 1536, 8-bit/color RGB, non-interlaced
+
+exec
+/bin/bash -lc 'git status --short -- tmp_art/zoom140/raw_05.png
+if test -n "$GH_PUSH_TOKEN"; then printf '"'%s\\n' 'GH_PUSH_TOKEN is set'; else printf '%s\\n' 'GH_PUSH_TOKEN is empty or unset'; fi" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+GH_PUSH_TOKEN is empty or unset
+
+codex
+内蔵の画像生成機能で作成した縦長の PNG（1024×1536）を [raw_05.png](/home/runner/work/youtube/youtube/tmp_art/zoom140/raw_05.png) に保存しました。
+
+昭和の夜の子ども部屋をグアッシュ調で描き、ふとんの女の子が雨の窓を見つめる傍らに、雨の朝の玄関が見える開いたふすまを正面から配置しました。開口部の中心は画面の中央より少し上です。
+
+GitHub への push は行っていません。この環境では `.git` が読み取り専用で、`GH_PUSH_TOKEN` は空または未設定です。
+tokens used
+12,836
+
+=====
+縁側の絵を描き足し、[raw_04_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom140/raw_04_0.png) に保存しました。縦長 1024×1536 の PNG で、中央の長方形は元画像とピクセル単位で一致しています。
+
+GitHub の `codex-inbox` への送信は未完了です。この環境では `github.com` の名前解決に失敗し、`GH_PUSH_TOKEN` も空でした。
+
+--- stderr ---
+ld passes"
+❌ "Linter passed" (linter doesn't check compilation)
+```
+
+**Requirements:**
+```
+✅ Re-read plan → Create checklist → Verify each → Report gaps or completion
+❌ "Tests pass, phase complete"
+```
+
+**Agent delegation:**
+```
+✅ Agent reports success → Check VCS diff → Verify changes → Report actual state
+❌ Trust agent report
+```
+
+## When To Apply
+
+**ALWAYS before:**
+- ANY variation of success/completion claims
+- ANY expression of satisfaction
+- ANY positive statement about work state
+- Committing, PR creation, task completion
+- Moving to next task
+- Delegating to agents
+
+**Rule applies to:**
+- Exact phrases
+- Paraphrases and synonyms
+- Implications of success
+- ANY communication suggesting completion/correctness
+
+exec
+/bin/bash -lc 'set -eu
+src=tmp_art/zoom140/canvas_04.png
+out=tmp_art/zoom140/raw_04_0.png
+gen=/home/runner/.codex/generated_images/01a1ee61-1e60-7381-a38d-0cc7697170a0/exec-d1cdf7af-321b-46fa-97a7-077a5d5ee1c1.png
+convert "$gen" '"\\( \""'$src" -crop 341x512+341+512 +repage '"\\) -geometry +341+512 -compose Copy -composite \""'$out"
+identify -format '"'%m %wx%h\\n' \""'$out"
+cmp <(convert "$src" -crop 341x512+341+512 +repage -depth 8 RGB:-) <(convert "$out" -crop 341x512+341+512 +repage -depth 8 RGB:-)
+git status --short' in /home/runner/work/youtube/youtube
+ exited 127 in 0ms:
+/bin/bash: line 5: convert: command not found
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+from pathlib import Path
+folder = Path('tmp_art/zoom140')
+gen = Path('/home/runner/.codex/generated_images/01a1ee61-1e60-7381-a38d-0cc7697170a0/exec-d1cdf7af-321b-46fa-97a7-077a5d5ee1c1.png')
+box = (341, 512, 682, 1024)
+with Image.open(folder / 'canvas_04.png') as source, Image.open(gen) as generated:
+    assert source.size == generated.size == (1024, 1536)
+    original = source.convert('RGB').crop(box)
+    result = generated.convert('RGB')
+    result.paste(original, box)
+    output = folder / 'raw_04_0.png'
+    result.save(output)
+    with Image.open(output) as saved:
+        assert saved.format == 'PNG' and saved.size == (1024, 1536)
+        assert saved.crop(box).tobytes() == original.tobytes()
+    print('PNG 1024x1536, identical center pixels')
+PY
+git status --short
+if [ -n \""'${GH_PUSH_TOKEN:-}" ]; then printf '"'GH_PUSH_TOKEN is set\\n'; else printf 'GH_PUSH_TOKEN is empty\\n'; fi
+git remote" in /home/runner/work/youtube/youtube
+ succeeded in 811ms:
+PNG 1024x1536, identical center pixels
+?? assets/art/zoom140/
+GH_PUSH_TOKEN is empty
+origin
+
+exec
+/bin/bash -lc 'GIT_TERMINAL_PROMPT=0 git ls-remote --exit-code origin refs/heads/codex-inbox' in /home/runner/work/youtube/youtube
+ exited 128 in 0ms:
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+
+codex
+縁側の絵を描き足し、[raw_04_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom140/raw_04_0.png) に保存しました。縦長 1024×1536 の PNG で、中央の長方形は元画像とピクセル単位で一致しています。
+
+GitHub の `codex-inbox` への送信は未完了です。この環境では `github.com` の名前解決に失敗し、`GH_PUSH_TOKEN` も空でした。
+tokens used
+13,684
+
+=====
+内蔵の画像生成機能で、雨の放課後に小学生二人が相合傘で帰る場面を描き足し、[raw_03_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom140/raw_03_0.png) に保存しました。1024×1536 の PNG で、木の門の奥に見える中央の絵は元画像と画素単位で一致しています。
+
+GitHub の `codex-inbox` には送信できませんでした。`.git` が読み取り専用で、コミットの準備に必要な `index.lock` を作成できませんでした。`GH_PUSH_TOKEN` は空でした。
+
+--- stderr ---
+## Rationalization Prevention
+
+| Excuse | Reality |
+|--------|---------|
+| "Should work now" | RUN the verification |
+| "I'm confident" | Confidence ≠ evidence |
+| "Just this once" | No exceptions |
+| "Linter passed" | Linter ≠ compiler |
+| "Agent said success" | Verify independently |
+| "I'm tired" | Exhaustion ≠ excuse |
+| "Partial check is enough" | Partial proves nothing |
+| "Different words so rule doesn't apply" | Spirit over letter |
+
+## Key Patterns
+
+**Tests:**
+```
+✅ [Run test command] [See: 34/34 pass] "All tests pass"
+❌ "Should pass now" / "Looks correct"
+```
+
+**Regression tests (TDD Red-Green):**
+```
+✅ Write → Run (pass) → Revert fix → Run (MUST FAIL) → Restore → Run (pass)
+❌ "I've written a regression test" (without red-green verification)
+```
+
+**Build:**
+```
+✅ [Run build] [See: exit 0] "Build passes"
+❌ "Linter passed" (linter doesn't check compilation)
+```
+
+**Requirements:**
+```
+✅ Re-read plan → Create checklist → Verify each → Report gaps or completion
+❌ "Tests pass, phase complete"
+```
+
+**Agent delegation:**
+```
+✅ Agent reports success → Check VCS diff → Verify changes → Report actual state
+❌ Trust agent report
+```
+
+## When To Apply
+
+**ALWAYS before:**
+- ANY variation of success/completion claims
+- ANY expression of satisfaction
+- ANY positive statement about work state
+- Committing, PR creation, task completion
+- Moving to next task
+- Delegating to agents
+
+**Rule applies to:**
+- Exact phrases
+- Paraphrases and synonyms
+- Implications of success
+- ANY communication suggesting completion/correctness
+
+exec
+/bin/bash -lc 'git status --short --ignored tmp_art/zoom140; git remote get-url origin >/dev/null 2>&1 && echo origin-present; if test -n "$GH_PUSH_TOKEN"; then echo GH_PUSH_TOKEN=set; else echo GH_PUSH_TOKEN=empty; fi; command -v magick || command -v convert' in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+!! tmp_art/
+origin-present
+GH_PUSH_TOKEN=empty
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+source = Image.open(\"tmp_art/zoom140/canvas_03.png\").convert(\"RGB\")
+out = Image.open(\"/home/runner/.codex/generated_images/01a1ee62-3472-7090-a9b3-5da2560b41b9/exec-0968454e-178f-48f7-8db8-ca6db980a277.png\").convert(\"RGB\")
+box = (341, 512, 682, 1024)
+assert source.size == out.size == (1024, 1536)
+original = source.crop(box)
+out.paste(original, box)
+dest = \"tmp_art/zoom140/raw_03_0.png\"
+out.save(dest)
+with Image.open(dest) as saved:
+    assert saved.format == \"PNG\" and saved.size == (1024, 1536)
+    assert saved.crop(box).tobytes() == original.tobytes()
+print(\"PNG 1024x1536; center pixel-identical\")
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 647ms:
+PNG 1024x1536; center pixel-identical
+
+codex
+内蔵の画像生成機能で、雨の放課後に小学生二人が相合傘で帰る場面を描き足し、[raw_03_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom140/raw_03_0.png) に保存しました。1024×1536 の PNG で、木の門の奥に見える中央の絵は元画像と画素単位で一致しています。
+
+GitHub の `codex-inbox` には送信できませんでした。`.git` が読み取り専用で、コミットの準備に必要な `index.lock` を作成できませんでした。`GH_PUSH_TOKEN` は空でした。
+tokens used
+16,399
+
+=====
+[raw_02_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom140/raw_02_0.png) に、昭和の教室を描き足した 1024×1536 の PNG を保存しました。窓枠を指定位置に合わせ、中央の雨の校門の絵は元画像と全ピクセルが一致することを確認しました。
+
+GitHub への送信は未完了です。`GH_PUSH_TOKEN` は空で、この環境から `github.com` の名前解決ができず、`.git` も読み取り専用でした。
+
+--- stderr ---
+State claim WITH evidence
+5. ONLY THEN: Make the claim
+
+Skip any step = lying, not verifying
+```
+
+## Common Failures
+
+| Claim | Requires | Not Sufficient |
+|-------|----------|----------------|
+| Tests pass | Test command output: 0 failures | Previous run, "should pass" |
+| Linter clean | Linter output: 0 errors | Partial check, extrapolation |
+| Build succeeds | Build command: exit 0 | Linter passing, logs look good |
+| Bug fixed | Test original symptom: passes | Code changed, assumed fixed |
+?? assets/art/zoom140/
+GH_PUSH_TOKEN=empty
+drwxr-xr-x 7 runner runner 4096 Nov 18 11:17 .git
+ls: cannot access 'tmp_art/zoom140/raw_02_0.png': No such file or directory
+
+codex
+生成画像では窓枠が指定座標から数ピクセルずれていました。枠の位置を合わせ、元画像の窓の内側を重ねてから、ピクセルが完全に一致することを確認します。
+exec
+/bin/bash -lc 'git remote get-url origin >/dev/null 2>&1 && git ls-remote origin refs/heads/codex-inbox
+git check-ignore tmp_art/zoom140/raw_02_0.png
+if test -w .git; then echo git_metadata_writable; else echo git_metadata_read_only; fi' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+tmp_art/zoom140/raw_02_0.png
+git_metadata_read_only
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image, ImageChops
+from pathlib import Path
+
+folder = Path('tmp_art/zoom140')
+source = Image.open(folder / 'canvas_02.png').convert('RGB')
+generated = Image.open('/home/runner/.codex/generated_images/01a1ee63-73a6-77a1-bbf2-df77610522b0/exec-9add4bd2-3b43-4804-8a03-e6a4c2dac542.png').convert('RGB')
+assert source.size == generated.size == (1024, 1536)
+source_x, source_y = (0, 345, 679, 1024), (0, 510, 1022, 1536)
+target_x, target_y = (0, 341, 682, 1024), (0, 512, 1024, 1536)
+opening = (341, 512, 682, 1024)
+result = Image.new('RGB', source.size)
+for row in range(3):
+    for col in range(3):
+        if (row, col) == (1, 1):
+            continue
+        tile = generated.crop((source_x[col], source_y[row], source_x[col+1], source_y[row+1]))
+        size = (target_x[col+1] - target_x[col], target_y[row+1] - target_y[row])
+        result.paste(tile.resize(size, Image.Resampling.LANCZOS), (target_x[col], target_y[row]))
+
+result.paste(source.crop(opening), opening[:2])
+path = folder / 'raw_02_0.png'
+with path.open('xb') as output:
+    result.save(output, format='PNG')
+with Image.open(path) as saved:
+    assert saved.format == 'PNG' and saved.size == (1024, 1536)
+    assert ImageChops.difference(saved.crop(opening), source.crop(opening)).getbbox() is None
+    print('Verified 1024x1536 PNG and all central pixels:', path)
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 862ms:
+Verified 1024x1536 PNG and all central pixels: tmp_art/zoom140/raw_02_0.png
+
+codex
+[raw_02_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom140/raw_02_0.png) に、昭和の教室を描き足した 1024×1536 の PNG を保存しました。窓枠を指定位置に合わせ、中央の雨の校門の絵は元画像と全ピクセルが一致することを確認しました。
+
+GitHub への送信は未完了です。`GH_PUSH_TOKEN` は空で、この環境から `github.com` の名前解決ができず、`.git` も読み取り専用でした。
+tokens used
+29,734
+
+=====
+内蔵の画像生成機能で、色とりどりの傘を差した子どもたち、水たまり、紫陽花のある雨の通学路を描き足し、[raw_01_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom140/raw_01_0.png) に保存しました。1024×1536のPNGで、戸枠を中央の長方形に合わせ、教室部分が同じ位置・大きさで元画像と画素単位で一致することを確認しました。
+
+GitHubの `codex-inbox` への送信は未完了です。`GH_PUSH_TOKEN` は空で、作業環境では `.git` が読み取り専用であり、`github.com` の名前解決にも失敗しました。
+
+--- stderr ---
+           PNG image data, 1024 x 1536, 8-bit/color RGB, non-interlaced
+/home/runner/.codex/generated_images/01a1ee64-87aa-7132-a2e6-e16b95899421/exec-af71808d-7657-47d8-8ab4-bc79831da666.png: PNG image data, 1024 x 1536, 8-bit/color RGB, non-interlaced
+tmp_art/zoom140/raw_01_0.png
+
+exec
+/bin/bash -lc "command -v ffmpeg; command -v gcc; pkg-config --libs libpng; git status --short --branch; git remote | sed -n '1,5p'; if test -n \""'$GH_PUSH_TOKEN"; then echo GH_PUSH_TOKEN=set; else echo GH_PUSH_TOKEN=empty; fi' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+/usr/bin/ffmpeg
+/usr/bin/gcc
+Package libpng was not found in the pkg-config search path.
+Perhaps you should add the directory containing `libpng.pc'
+to the PKG_CONFIG_PATH environment variable
+Package 'libpng' not found
+## claude/project-thread-ud8psd...origin/claude/project-thread-ud8psd
+?? assets/art/zoom140/
+origin
+GH_PUSH_TOKEN=empty
+
+codex
+雨の通学路と昇降口を生成しました。戸枠の内側を元画像の境界に合わせ、教室の画素が完全に一致することを確認します。
+exec
+/bin/bash -lc 'set -e
+generated=/home/runner/.codex/generated_images/01a1ee64-87aa-7132-a2e6-e16b95899421/exec-af71808d-7657-47d8-8ab4-bc79831da666.png
+source_image=tmp_art/zoom140/canvas_01.png
+output_image=tmp_art/zoom140/raw_01_0.png
+ffmpeg -v error -y -filter_complex_threads 1 -i "$generated" -i "$source_image" -filter_complex '"'[0:v]split=4[t][l][r][b];[t]crop=1024:508:0:0,scale=1024:512,setsar=1[top];[l]crop=338:518:0:508,scale=341:512,setsar=1[left];[r]crop=343:518:681:508,scale=342:512,setsar=1[right];[b]crop=1024:510:0:1026,scale=1024:512,setsar=1[bottom];[1:v]crop=341:512:341:512,setsar=1[center];[left][center][right]hstack=3[middle];[top][middle][bottom]vstack=3[out]' -map '[out]' -frames:v 1 -threads 1 -update 1 \""'$output_image"
+file "$output_image"
+for img in "$source_image" "$output_image"; do
+  ffmpeg -v error -i "$img" -vf crop=341:512:341:512 -pix_fmt rgb24 -f hash -hash sha256 -
+done
+test -w .git && echo git-writable || echo git-read-only
+git add -f -- "$output_image"' in /home/runner/work/youtube/youtube
+ exited 128 in 856ms:
+tmp_art/zoom140/raw_01_0.png: PNG image data, 1024 x 1536, 8-bit/color RGB, non-interlaced
+SHA256=741797dd1dfcb39d301a88cf4351d698123df6cba6cea68c94c0308511253032
+SHA256=741797dd1dfcb39d301a88cf4351d698123df6cba6cea68c94c0308511253032
+git-read-only
+fatal: Unable to create '/home/runner/work/youtube/youtube/.git/index.lock': Read-only file system
+
+exec
+/bin/bash -lc 'GIT_TERMINAL_PROMPT=0 timeout 10 git ls-remote --exit-code origin refs/heads/codex-inbox' in /home/runner/work/youtube/youtube
+ exited 128 in 0ms:
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+
+codex
+内蔵の画像生成機能で、色とりどりの傘を差した子どもたち、水たまり、紫陽花のある雨の通学路を描き足し、[raw_01_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom140/raw_01_0.png) に保存しました。1024×1536のPNGで、戸枠を中央の長方形に合わせ、教室部分が同じ位置・大きさで元画像と画素単位で一致することを確認しました。
+
+GitHubの `codex-inbox` への送信は未完了です。`GH_PUSH_TOKEN` は空で、作業環境では `.git` が読み取り専用であり、`github.com` の名前解決にも失敗しました。
+tokens used
+20,416
+
+=====
+雨の朝の玄関を内蔵の画像生成機能で描き足し、[raw_00_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom140/raw_00_0.png) に保存しました。1024×1536のPNGです。引き戸の枠を中央の長方形に合わせ、内側の通学路は元画像と全ピクセルが一致することを確認しました。
+
+GitHubへの送信は、`.git` が読み取り専用でコミットの準備ができなかったため未完了です。`GH_PUSH_TOKEN` は空でした。
+
+--- stderr ---
+s here, read its reference file for special instructions:
+
+- Claude Code: `references/claude-code-tools.md`
+- Codex: `references/codex-tools.md`
+- Pi: `references/pi-tools.md`
+- Antigravity: `references/antigravity-tools.md`
+- Hermes Agent: `references/hermes-tools.md`
+- Muse: `references/muse-tools.md`
+
+## User Instructions
+
+User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+
+exec
+/bin/bash -lc 'command -v magick; command -v convert; git status --short --untracked-files=no; git check-ignore tmp_art/zoom140/raw_00_0.png; if test -n "$GH_PUSH_TOKEN"; then printf '"'GH_PUSH_TOKEN is set\\n'; else printf 'GH_PUSH_TOKEN is empty\\n'; fi; git remote | rg '"'^origin$'"'" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+tmp_art/zoom140/raw_00_0.png
+GH_PUSH_TOKEN is empty
+origin
+
+codex
+玄関の絵が生成できました。中央の通学路は元画像のピクセルを使い、引き戸の枠の内側にぴったり合うように仕上げます。
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image, ImageChops
+from pathlib import Path
+
+folder = Path('tmp_art/zoom140')
+source = Image.open(folder / 'canvas_00.png').convert('RGB')
+generated = Image.open('/home/runner/.codex/generated_images/01a1ee66-1cb3-7eb3-be64-bdda88836288/exec-6c1e7c45-b46e-4517-aeed-a91249071bfa.png').convert('RGB')
+assert source.size == generated.size == (1024, 1536)
+opening = (341, 512, 682, 1024)
+# Align the inside of the generated wood trim with the source rectangle.
+x_edges = [(0, 0), (341, 341), (686, 682), (1024, 1024)]
+y_edges = [(0, 0), (512, 512), (1026, 1024), (1536, 1536)]
+output = Image.new('RGB', source.size)
+for (sy0, dy0), (sy1, dy1) in zip(y_edges, y_edges[1:]):
+    for (sx0, dx0), (sx1, dx1) in zip(x_edges, x_edges[1:]):
+        if (dx0, dy0, dx1, dy1) == opening:
+            continue
+        section = generated.crop((sx0, sy0, sx1, sy1))
+        section = section.resize((dx1 - dx0, dy1 - dy0), Image.Resampling.LANCZOS)
+        output.paste(section, (dx0, dy0))
+output.paste(source.crop(opening), opening[:2])
+destination = folder / 'raw_00_0.png'
+output.save(destination)
+with Image.open(destination) as saved:
+    assert saved.format == 'PNG' and saved.size == (1024, 1536)
+    assert ImageChops.difference(source.crop(opening), saved.crop(opening)).getbbox() is None
+print('Verified 1024×1536 PNG and all 174592 original pixels in the opening')
+PY
+git add -f -- tmp_art/zoom140/raw_00_0.png" in /home/runner/work/youtube/youtube
+ exited 128 in 599ms:
+Verified 1024×1536 PNG and all 174592 original pixels in the opening
+fatal: Unable to create '/home/runner/work/youtube/youtube/.git/index.lock': Read-only file system
+
+codex
+雨の朝の玄関を内蔵の画像生成機能で描き足し、[raw_00_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom140/raw_00_0.png) に保存しました。1024×1536のPNGです。引き戸の枠を中央の長方形に合わせ、内側の通学路は元画像と全ピクセルが一致することを確認しました。
+
+GitHubへの送信は、`.git` が読み取り専用でコミットの準備ができなかったため未完了です。`GH_PUSH_TOKEN` は空でした。
+tokens used
+15,022
+
+=====
+内蔵の画像生成機能で灰色の帯だけを描き足し、木枠の内縁を中央の長方形に合わせました。[loop_raw_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom140/loop_raw_0.png) に 1024×1536 の PNG として保存しました。
+
+中央と帯の外側は、元画像とピクセル単位で一致しています。帯の左下では、畳とふすまの継ぎ目がわずかに見えます。
+
+--- stderr ---
+/home/runner/work/youtube/youtube/tmp_art/zoom140/loop_raw_0.png に保存してください。ほかのファイルは変更しないでください。
+codex
+Superpowers と imagegen の手順を使い、元画像を確認してから灰色の帯を描き足します。
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+from collections import Counter
+im=Image.open('tmp_art/zoom140/loop_canvas.png')
+print(im.mode,im.size,Counter(im.crop((205,307,818,512)).getdata()).most_common(2))
+print(Image.open('/home/runner/.codex/generated_images/01a1ee67-6cb7-7cb0-b6e1-d8264d849c78/exec-207fc061-1754-4850-b7d6-18e45fa8d276.png').size)
+PY
+git status --short -- tmp_art/zoom140" in /home/runner/work/youtube/youtube
+ succeeded in 20ms:
+<stdin>:4: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+RGB (1024, 1536) [((128, 128, 128), 125665)]
+(1024, 1536)
+
+codex
+灰色の帯を内蔵機能で描き足しました。生成された木枠を元の長方形に合わせ、帯の内側と外側の元絵がピクセル単位で一致することを確認します。
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image, ImageChops, ImageDraw
+import math
+source=Image.open('tmp_art/zoom140/loop_canvas.png')
+generated=Image.open('/home/runner/.codex/generated_images/01a1ee67-6cb7-7cb0-b6e1-d8264d849c78/exec-207fc061-1754-4850-b7d6-18e45fa8d276.png').convert('RGB')
+def smooth(value):
+    value=max(0,min(1,value))
+    return value*value*(3-2*value)
+def warp(x,y):
+    frame_height=smooth((y-460)/34)*smooth((1085-y)/43)
+    dx=frame_height*(5*smooth(1-abs(x-341)/46)-10*smooth(1-abs(x-682)/50))
+    dy=81*smooth((310-x)/105)*smooth((y-795)/191)*smooth((1190-y)/204)
+    return x+dx,y+dy
+mesh=[]
+for y in range(307,1228,4):
+    for x in range(205,818,4):
+        r,b=min(x+4,818),min(y+4,1228)
+        quad=tuple(v for point in [(x,y),(x,b),(r,b),(r,y)] for v in warp(*point))
+        mesh.append(((x,y,r,b),quad))
+replacement=generated.transform(source.size,Image.Transform.MESH,mesh,Image.Resampling.BICUBIC)
+mask=Image.new('L',source.size)
+draw=ImageDraw.Draw(mask)
+draw.rectangle((205,307,817,1227),fill=255)
+draw.rectangle((341,512,681,1023),fill=0)
+output=Image.composite(replacement,source,mask)
+path='tmp_art/zoom140/loop_raw_0.png'
+output.save(path)
+with Image.open(path) as saved:
+    assert saved.size==(1024,1536) and saved.format=='PNG'
+    assert Image.composite(ImageChops.difference(saved,source),Image.new('RGB',source.size),ImageChops.invert(mask)).getbbox() is None
+    assert all(src==(128,128,128) for src,m in zip(source.get_flattened_data(),mask.get_flattened_data()) if m)
+    assert not any(pixel==(128,128,128) for pixel,m in zip(saved.get_flattened_data(),mask.get_flattened_data()) if m)
+print('Verified PNG, 1024x1536, exact source pixels outside the filled band')
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 1502ms:
+Verified PNG, 1024x1536, exact source pixels outside the filled band
+
+codex
+内蔵の画像生成機能で灰色の帯だけを描き足し、木枠の内縁を中央の長方形に合わせました。[loop_raw_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom140/loop_raw_0.png) に 1024×1536 の PNG として保存しました。
+
+中央と帯の外側は、元画像とピクセル単位で一致しています。帯の左下では、畳とふすまの継ぎ目がわずかに見えます。
+tokens used
+24,226
+
+=====
