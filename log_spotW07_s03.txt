@@ -1,0 +1,2 @@
+spotcheck spotW07_03 OK 5 か所
+pv/out/shorts/spotW07_s03.mp4 20.0s

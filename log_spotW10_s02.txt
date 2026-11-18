@@ -1,0 +1,2 @@
+spotcheck spotW10_02 OK 5 か所
+pv/out/shorts/spotW10_s02.mp4 20.0s

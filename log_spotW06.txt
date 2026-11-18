@@ -1,0 +1,9 @@
+spotcheck spotW06_01 OK 5 か所
+spotcheck spotW06_02 OK 5 か所
+spotcheck spotW06_03 OK 5 か所
+spotcheck spotW06_04 OK 5 か所
+spotcheck spotW06_05 OK 5 か所
+spotcheck spotW06_06 OK 5 か所
+size 94.3MB crf 21
+size 73.6MB crf 24
+pv/out/spotW06.mp4 410.3s 6問
