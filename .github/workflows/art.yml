@@ -60,9 +60,13 @@ jobs:
           if [ "$(jq -r .type art/${{ matrix.id }}.json)" = parallax ]; then
             pip install -q torch --index-url https://download.pytorch.org/whl/cpu && pip install -q transformers
           fi
-      - name: Sign in to Codex (ChatGPT login)
-        env: { CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}" }
-        run: mkdir -p ~/.codex && printenv CODEX_AUTH_JSON > ~/.codex/auth.json && chmod 600 ~/.codex/auth.json
+      - name: Sign in to Codex (ChatGPT login, shared key)
+        # 鍵は codex-auth ブランチに暗号化して共有する（scripts/codex_auth.py の説明を参照）。Secret の写しをそのまま使うと、どれかが更新した時点でほかが全部はじかれる。
+        env: { CODEX_AUTH_JSON: "${{ secrets.CODEX_AUTH_JSON }}", CODEX_AUTH_KEY: "${{ secrets.OPENAI_API_KEY }}" }
+        run: |
+          if [ -z "$CODEX_AUTH_JSON" ]; then echo "CODEX_AUTH_JSON がまだありません"; echo "SKIP=1" >> $GITHUB_ENV; exit 0; fi
+          python3 scripts/codex_auth.py load
+          python3 scripts/codex_auth.py refresh
       - name: Make
         run: |
           git pull -q --rebase origin "${GITHUB_REF_NAME}" || true   # 先に終わった実行の素材を取り込む
@@ -86,3 +90,7 @@ jobs:
           git add -A && git commit -qm "preview $id"
           git -c http.extraheader="$(git -C $GITHUB_WORKSPACE config --get http.https://github.com/.extraheader)" \
             push -q -f "https://github.com/${{ github.repository }}.git" "p:refs/heads/art-preview/$id"
+      - name: Save the Codex key back
+        if: always() && env.SKIP != '1'
+        env: { CODEX_AUTH_KEY: "${{ secrets.OPENAI_API_KEY }}" }
+        run: python3 scripts/codex_auth.py save
