@@ -32,3 +32,660 @@ ERROR: Your access token could not be refreshed because your refresh token was a
 ERROR: Your access token could not be refreshed because your refresh token was already used. Please log out and sign in again.
 
 =====
+内蔵の画像生成機能で、縦長 1024 × 1536 の PNG を1枚作成し、[raw_05.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/raw_05.png) に保存しました。
+
+昭和の雪国で、家族とおばあちゃんがいろりを囲んで年越しそばを食べる場面です。中央の開いた障子越しに都会のアパートの朝が見え、脇の窓の遠景に除夜の鐘を描きました。
+
+`codex-inbox` への送信はできませんでした。`.git` が読み取り専用で、`github.com` の名前解決にも失敗しました。`GH_PUSH_TOKEN` は空でした。
+
+--- stderr ---
+ptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc 'mkdir -p tmp_art/zoom131 && cp /home/runner/.codex/generated_images/01a1eddd-a048-7ab3-8d8e-5a4cbcbfb8d6/exec-c377ea3a-8785-4d70-a668-5b2308aa0e97.png tmp_art/zoom131/raw_05.png && file tmp_art/zoom131/raw_05.png && git status --short && if test -n "$GH_PUSH_TOKEN"; then echo '"'GH_PUSH_TOKEN: nonempty'; else echo 'GH_PUSH_TOKEN: empty'; fi" in /home/runner/work/youtube/youtube
+ succeeded in 19ms:
+tmp_art/zoom131/raw_05.png: PNG image data, 1024 x 1536, 8-bit/color RGB, non-interlaced
+GH_PUSH_TOKEN: empty
+
+exec
+/bin/bash -lc 'GIT_TERMINAL_PROMPT=0 git ls-remote origin refs/heads/codex-inbox' in /home/runner/work/youtube/youtube
+ exited 128 in 0ms:
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+
+codex
+内蔵の画像生成機能で、縦長 1024 × 1536 の PNG を1枚作成し、[raw_05.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/raw_05.png) に保存しました。
+
+昭和の雪国で、家族とおばあちゃんがいろりを囲んで年越しそばを食べる場面です。中央の開いた障子越しに都会のアパートの朝が見え、脇の窓の遠景に除夜の鐘を描きました。
+
+`codex-inbox` への送信はできませんでした。`.git` が読み取り専用で、`github.com` の名前解決にも失敗しました。`GH_PUSH_TOKEN` は空でした。
+tokens used
+12,890
+
+=====
+[raw_04_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/raw_04_0.png) に、1024×1536 の PNG を保存しました。内蔵の画像生成機能で、雪の積もったかやぶき屋根の家と、雪道を歩いて帰りつくおばあちゃんと家族を描き足しました。戸口の枠を指定座標に合わせ、中央の絵が元画像と画素単位で一致することを確認しました。
+
+GitHub の `codex-inbox` への送信は、`github.com` の名前解決に失敗したため完了していません。`GH_PUSH_TOKEN` は空でした。
+
+--- stderr ---
+md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc "git status --short -- tmp_art/zoom131
+git ls-files -- tmp_art/zoom131
+git check-ignore tmp_art/zoom131/raw_04_0.png
+git remote | rg '"'^origin$'"'
+if [[ -n \""'${GH_PUSH_TOKEN:-}" ]]; then printf '"'GH_PUSH_TOKEN is set\\n'; else printf 'GH_PUSH_TOKEN is empty\\n'; fi
+command -v magick || command -v convert
+ls -l /home/runner/.codex/generated_images/01a1edde-d67f-7ca3-a973-05b44a1fc807/exec-b13a219b-023a-4c01-b724-e58427d83e6e.png" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+tmp_art/zoom131/raw_04_0.png
+origin
+GH_PUSH_TOKEN is empty
+-rw-r--r-- 1 runner runner 3145809 Nov 18 09:05 /home/runner/.codex/generated_images/01a1edde-d67f-7ca3-a973-05b44a1fc807/exec-b13a219b-023a-4c01-b724-e58427d83e6e.png
+
+codex
+雪景色が生成できました。戸口の縁を指定座標に合わせ、中央には元画像の画素をそのまま使います。
+exec
+/bin/bash -lc 'GIT_TERMINAL_PROMPT=0 git ls-remote --exit-code origin refs/heads/codex-inbox' in /home/runner/work/youtube/youtube
+ exited 128 in 0ms:
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+
+exec
+/bin/bash -lc "python - <<'PY'
+from pathlib import Path
+from PIL import Image, ImageChops
+
+folder = Path('tmp_art/zoom131')
+original = Image.open(folder / 'canvas_04.png').convert('RGB')
+generated = Image.open('/home/runner/.codex/generated_images/01a1edde-d67f-7ca3-a973-05b44a1fc807/exec-b13a219b-023a-4c01-b724-e58427d83e6e.png').convert('RGB')
+assert original.size == generated.size == (1024, 1536)
+
+target_x, source_x = (0, 341, 682, 1024), (0, 339, 684, 1024)
+target_y, source_y = (0, 512, 1024, 1536), (0, 535, 1024, 1536)
+mesh = []
+for row in range(3):
+    for col in range(3):
+        if row == col == 1:
+            continue
+        left, right = source_x[col:col+2]
+        top, bottom = source_y[row:row+2]
+        box = (target_x[col], target_y[row], target_x[col+1], target_y[row+1])
+        mesh.append((box, (left, top, left, bottom, right, bottom, right, top)))
+result = generated.transform(original.size, Image.Transform.MESH, mesh, Image.Resampling.BICUBIC)
+aperture = (341, 512, 682, 1024)
+result.paste(original.crop(aperture), aperture)
+path = folder / 'raw_04_0.png'
+result.save(path)
+with Image.open(path) as saved:
+    assert saved.size == original.size and saved.format == 'PNG'
+    assert ImageChops.difference(saved.crop(aperture), original.crop(aperture)).getbbox() is None
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 499ms:
+codex
+[raw_04_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/raw_04_0.png) に、1024×1536 の PNG を保存しました。内蔵の画像生成機能で、雪の積もったかやぶき屋根の家と、雪道を歩いて帰りつくおばあちゃんと家族を描き足しました。戸口の枠を指定座標に合わせ、中央の絵が元画像と画素単位で一致することを確認しました。
+
+GitHub の `codex-inbox` への送信は、`github.com` の名前解決に失敗したため完了していません。`GH_PUSH_TOKEN` は空でした。
+tokens used
+32,991
+
+=====
+[raw_03_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/raw_03_0.png) に 1024×1536 の PNG を保存しました。内蔵の画像生成機能で、昭和の雪国の駅と手を振るおばあちゃんをグアッシュ調で描き足しました。戸口の枠を中央の長方形に合わせ、内側の絵が元画像とピクセル単位で一致することを確認しました。
+
+GitHub への push はできませんでした。`GH_PUSH_TOKEN` は空で、`.git` は読み取り専用でした。また、この環境では `github.com` の名前解決ができませんでした。
+
+--- stderr ---
+mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc 'command -v magick; command -v convert; git status --short -- tmp_art/zoom131; git check-ignore tmp_art/zoom131/raw_03_0.png; if [ -n "$GH_PUSH_TOKEN" ]; then echo GH_PUSH_TOKEN=set; else echo GH_PUSH_TOKEN=empty; fi; git remote' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+tmp_art/zoom131/raw_03_0.png
+GH_PUSH_TOKEN=empty
+origin
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image, ImageChops
+from pathlib import Path
+folder = Path('tmp_art/zoom131')
+source = Image.open(folder / 'canvas_03.png').convert('RGB')
+generated = Image.open('/home/runner/.codex/generated_images/01a1ede7-b9d6-7020-a3ce-2fa28c2038b2/exec-33426299-0657-4f77-8229-cd668819c5ed.png').convert('RGB')
+assert source.size == generated.size == (1024, 1536)
+result = Image.new('RGB', source.size)
+gx, gy = [0, 333, 691, 1024], [0, 494, 1024, 1536]
+sx, sy = [0, 341, 682, 1024], [0, 512, 1024, 1536]
+opening = (341, 512, 682, 1024)
+for row in range(3):
+    for column in range(3):
+        if row == column == 1:
+            continue
+        tile = generated.crop((gx[column], gy[row], gx[column + 1], gy[row + 1]))
+        size = (sx[column + 1] - sx[column], sy[row + 1] - sy[row])
+        result.paste(tile.resize(size, Image.Resampling.LANCZOS), (sx[column], sy[row]))
+result.paste(source.crop(opening), opening[:2])
+destination = folder / 'raw_03_0.png'
+result.save(destination)
+with Image.open(destination) as saved:
+    assert saved.size == (1024, 1536)
+    assert ImageChops.difference(saved.crop(opening), source.crop(opening)).getbbox() is None
+PY
+git fetch origin codex-inbox" in /home/runner/work/youtube/youtube
+ exited 255 in 518ms:
+error: cannot open '.git/FETCH_HEAD': Read-only file system
+
+exec
+/bin/bash -lc 'git ls-remote origin refs/heads/codex-inbox' in /home/runner/work/youtube/youtube
+ exited 128 in 0ms:
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+
+codex
+[raw_03_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/raw_03_0.png) に 1024×1536 の PNG を保存しました。内蔵の画像生成機能で、昭和の雪国の駅と手を振るおばあちゃんをグアッシュ調で描き足しました。戸口の枠を中央の長方形に合わせ、内側の絵が元画像とピクセル単位で一致することを確認しました。
+
+GitHub への push はできませんでした。`GH_PUSH_TOKEN` は空で、`.git` は読み取り専用でした。また、この環境では `github.com` の名前解決ができませんでした。
+tokens used
+31,316
+
+=====
+[raw_02_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/raw_02_0.png) に、向かい合わせの座席で家族が冷凍みかんを食べる汽車の車内を描き足しました。1024×1536のPNGで、中央の窓の絵は元画像とピクセル単位で一致しています。
+
+GitHubへの送信は未完了です。`.git` が読み取り専用で `git fetch` が失敗し、`GH_PUSH_TOKEN` は空でした。
+
+--- stderr ---
+ns:
+
+- Claude Code: `references/claude-code-tools.md`
+- Codex: `references/codex-tools.md`
+- Pi: `references/pi-tools.md`
+- Antigravity: `references/antigravity-tools.md`
+- Hermes Agent: `references/hermes-tools.md`
+- Muse: `references/muse-tools.md`
+
+## User Instructions
+
+User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+
+exec
+/bin/bash -lc 'git status --short
+git ls-files tmp_art/zoom131
+git remote
+if [ -n "$GH_PUSH_TOKEN" ]; then echo '"'GH_PUSH_TOKEN=set'; else echo 'GH_PUSH_TOKEN=empty'; fi
+command -v magick
+command -v convert
+ls -l /home/runner/.codex/generated_images/01a1edf0-7a72-7b93-9c36-1731cea0fb1e/" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+ M assets/art/zoom131/codex.log
+?? assets/art/zoom131/layer_03.jpg
+?? assets/art/zoom131/layer_04.jpg
+?? assets/art/zoom131/layer_05.jpg
+origin
+GH_PUSH_TOKEN=empty
+total 3020
+-rw-r--r-- 1 runner runner 3090385 Nov 18 09:25 exec-32f944d4-2d4f-4733-a659-cc1fc199b59a.png
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image,ImageStat
+im=Image.open('/home/runner/.codex/generated_images/01a1edf0-7a72-7b93-9c36-1731cea0fb1e/exec-32f944d4-2d4f-4733-a659-cc1fc199b59a.png').convert('RGB')
+for y in range(1022,1030): print(y,tuple(map(round,ImageStat.Stat(im.crop((360,y,660,y+1))).mean)))
+for x in range(677,685): print(x,tuple(map(round,ImageStat.Stat(im.crop((x,520,x+1,615))).mean)))
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+1022 (128, 141, 190)
+1023 (132, 140, 186)
+1024 (135, 116, 125)
+1025 (167, 119, 95)
+1026 (177, 125, 96)
+1027 (169, 119, 91)
+1028 (164, 114, 87)
+1029 (166, 113, 83)
+677 (92, 106, 150)
+678 (94, 109, 152)
+679 (96, 102, 136)
+680 (86, 68, 68)
+681 (96, 65, 47)
+682 (102, 67, 49)
+683 (102, 65, 45)
+684 (149, 93, 53)
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+
+source = Image.open('tmp_art/zoom131/canvas_02.png')
+generated = Image.open('/home/runner/.codex/generated_images/01a1edf0-7a72-7b93-9c36-1731cea0fb1e/exec-32f944d4-2d4f-4733-a659-cc1fc199b59a.png').convert('RGB')
+window = (341, 512, 682, 1024)
+output = 'tmp_art/zoom131/raw_02_0.png'
+assert source.size == generated.size == (1024, 1536)
+generated.paste(source.crop(window), window)
+generated.save(output, 'PNG')
+with Image.open(output) as result:
+    assert result.format == 'PNG' and result.size == (1024, 1536)
+    assert result.crop(window).tobytes() == source.crop(window).tobytes()
+    print('1024 × 1536 PNG; original window pixels verified')
+PY" in /home/runner/work/youtube/youtube
+ succeeded in 422ms:
+1024 × 1536 PNG; original window pixels verified
+
+codex
+[raw_02_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/raw_02_0.png) に、向かい合わせの座席で家族が冷凍みかんを食べる汽車の車内を描き足しました。1024×1536のPNGで、中央の窓の絵は元画像とピクセル単位で一致しています。
+
+GitHubへの送信は未完了です。`.git` が読み取り専用で `git fetch` が失敗し、`GH_PUSH_TOKEN` は空でした。
+tokens used
+39,579
+
+=====
+昭和の駅のホームに、帰省客と蒸気機関車を描き足し、[raw_01_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/raw_01_0.png) に保存しました。1024×1536のPNGで、中央の絵は元画像とピクセル単位で一致しています。
+
+GitHubへの送信はできませんでした。`.git` が読み取り専用で、`git fetch` が失敗しました。`GH_PUSH_TOKEN` は空です。
+
+--- stderr ---
+emember this skill" | Skills evolve. Read current version. |
+| "This doesn't count as a task" | Action = task. Check for skills. |
+| "The skill is overkill" | Simple things become complex. Use it. |
+| "I'll just do this one thing first" | Check BEFORE doing anything. |
+| "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
+| "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
+
+## Platform Adaptation
+
+If your harness appears here, read its reference file for special instructions:
+
+- Claude Code: `references/claude-code-tools.md`
+- Codex: `references/codex-tools.md`
+- Pi: `references/pi-tools.md`
+- Antigravity: `references/antigravity-tools.md`
+- Hermes Agent: `references/hermes-tools.md`
+- Muse: `references/muse-tools.md`
+
+## User Instructions
+
+User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+
+exec
+/bin/bash -lc 'command -v magick || command -v convert
+git status --short --untracked-files=normal
+git check-ignore tmp_art/zoom131/raw_01_0.png
+if [ -n "$GH_PUSH_TOKEN" ]; then echo '"'GH_PUSH_TOKEN=set'; else echo 'GH_PUSH_TOKEN=empty'; fi
+ls -ld .git" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+ M assets/art/zoom131/codex.log
+?? assets/art/zoom131/layer_02.jpg
+?? assets/art/zoom131/layer_03.jpg
+?? assets/art/zoom131/layer_04.jpg
+?? assets/art/zoom131/layer_05.jpg
+tmp_art/zoom131/raw_01_0.png
+GH_PUSH_TOKEN=empty
+drwxr-xr-x 7 runner runner 4096 Nov 18 08:54 .git
+
+exec
+/bin/bash -lc "python - <<'PY'
+from pathlib import Path
+from PIL import Image, ImageChops
+folder = Path('tmp_art/zoom131')
+source = Image.open(folder / 'canvas_01.png').convert('RGB')
+gray = Image.new('RGB', source.size, source.getpixel((0, 0)))
+box = ImageChops.difference(source, gray).getbbox()
+assert box == (341, 512, 682, 1024), box
+art = Image.open('/home/runner/.codex/generated_images/01a1edfa-0ab6-7800-8a9e-4a05af80f3cc/exec-339f9dfe-029f-4cc0-a096-ea2703a0c01b.png').convert('RGB')
+assert art.size == (1024, 1536), art.size
+art.paste(source.crop(box), box)
+target = folder / 'raw_01_0.png'
+art.save(target)
+with Image.open(target) as saved:
+    assert saved.format == 'PNG' and saved.size == (1024, 1536)
+    assert saved.crop(box).tobytes() == source.crop(box).tobytes()
+    print('PNG 1024x1536, exact original pixels within', box)
+PY
+if git remote get-url origin >/dev/null 2>&1; then echo 'origin=configured'; else echo 'origin=missing'; fi" in /home/runner/work/youtube/youtube
+ succeeded in 414ms:
+PNG 1024x1536, exact original pixels within (341, 512, 682, 1024)
+origin=configured
+
+codex
+昭和の駅のホームに、帰省客と蒸気機関車を描き足し、[raw_01_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/raw_01_0.png) に保存しました。1024×1536のPNGで、中央の絵は元画像とピクセル単位で一致しています。
+
+GitHubへの送信はできませんでした。`.git` が読み取り専用で、`git fetch` が失敗しました。`GH_PUSH_TOKEN` は空です。
+tokens used
+22,631
+
+=====
+内蔵の画像生成機能で、年の瀬の朝に家族が大きなかばんとおみやげを持って出かける、昭和のアパートの玄関を描き足しました。[raw_00_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/raw_00_0.png) に 1024×1536 の PNG として保存しました。
+
+玄関枠を指定座標に合わせ、中央の駅の絵が元画像とピクセル単位で一致することを確認しました。
+
+GitHub の `codex-inbox` への送信は、`github.com` の名前解決に失敗したため未完了です。`GH_PUSH_TOKEN` は空でした。
+
+--- stderr ---
+nscratch=$(mktemp -d)\\ntrap '\\\"'rm -rf \\\\\\\"\\\"'$scratch\\\"'\\\"' EXIT\\nsrc=tmp_art/zoom131/canvas_00.png\\nart=/home/runner/.codex/generated_images/01a1ee02-f634-7253-b8c9-c8d722525fac/exec-ab8c12e0-3ce7-4418-9269-cf6c671d123d.png\\ndst=tmp_art/zoom131/raw_00_0.png\\nfor file in \\\\\\\"\\\"'$src\\\" \\\"$art\\\"; do\\n  test \\\"$(ffprobe -v error -select…1469 chars truncated…mat rgb24 -video_size 1024x1536 -i \\\\\\\"\\\"'$scratch/out.rgb\\\" -frames:v 1 -threads 1 -update 1 \\\"$dst\\\"\\nffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height -of csv=p=0 \\\"$dst\\\"\\nfor file in \\\"$src\\\" \\\"$dst\\\"; do\\n  ffmpeg -v error -i \\\"$file\\\" -vf crop=341:512:341:512 -pix_fmt rgb24 -threads 1 -f md5 -\\ndone'` rejected: rm -f style commands are not permitted. Use a safer approach\")" }
+exec
+/bin/bash -lc 'set -e
+scratch=$(mktemp -d)
+src=tmp_art/zoom131/canvas_00.png
+art=/home/runner/.codex/generated_images/01a1ee02-f634-7253-b8c9-c8d722525fac/exec-ab8c12e0-3ce7-4418-9269-cf6c671d123d.png
+dst=tmp_art/zoom131/raw_00_0.png
+ffmpeg -v error -i "$src" -f rawvideo -pix_fmt rgb24 -threads 1 "$scratch/src.rgb"
+ffmpeg -v error -i "$art" -f rawvideo -pix_fmt rgb24 -threads 1 "$scratch/art.rgb"
+node - "$scratch" <<'"'JS'
+const fs = require('node:fs');
+const dir = process.argv[2];
+const out = fs.readFileSync(dir + '/src.rgb');
+const art = fs.readFileSync(dir + '/art.rgb');
+function map(i, n, a, b, c, d) {
+  if (i < a) return Math.floor(i*c/a);
+  if (i < b) return c + Math.floor((i-a)*(d-c)/(b-a));
+  return d + Math.floor((i-b)*(n-d)/(n-b));
+}
+const xs = Array.from({length:1024},(_,x)=>map(x,1024,341,682,340,683));
+for(let y=0;y<1536;y++){
+  const row=map(y,1536,512,1024,477,996)*1024;
+  for(let x=0;x<1024;x++){
+    if(x>=341 && x<682 && y>=512 && y<1024) continue;
+    const s=(row+xs[x])*3, d=(y*1024+x)*3;
+    art.copy(out,d,s,s+3);
+  }
+}
+fs.writeFileSync(dir + '/out.rgb',out);
+JS
+ffmpeg -v error -y -f rawvideo -pixel_format rgb24 -video_size 1024x1536 -i \""'$scratch/out.rgb" -frames:v 1 -threads 1 -update 1 "$dst"
+ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height -of csv=p=0 "$dst"
+for file in "$src" "$dst"; do
+  ffmpeg -v error -i "$file" -vf crop=341:512:341:512 -pix_fmt rgb24 -threads 1 -f md5 -
+done
+rm "$scratch/src.rgb" "$scratch/art.rgb" "$scratch/out.rgb"
+rmdir "$scratch"
+git push origin HEAD:codex-inbox --dry-run' in /home/runner/work/youtube/youtube
+ exited 128 in 686ms:
+png,1024,1536
+MD5=b20bcaa19dde20390c0ae55ea493a4df
+MD5=b20bcaa19dde20390c0ae55ea493a4df
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+
+codex
+内蔵の画像生成機能で、年の瀬の朝に家族が大きなかばんとおみやげを持って出かける、昭和のアパートの玄関を描き足しました。[raw_00_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/raw_00_0.png) に 1024×1536 の PNG として保存しました。
+
+玄関枠を指定座標に合わせ、中央の駅の絵が元画像とピクセル単位で一致することを確認しました。
+
+GitHub の `codex-inbox` への送信は、`github.com` の名前解決に失敗したため未完了です。`GH_PUSH_TOKEN` は空でした。
+tokens used
+26,549
+
+=====
+内蔵の画像生成機能で灰色の帯を描き足し、[loop_raw_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/loop_raw_0.png) に 1024×1536 の PNG として保存しました。中央の長方形と帯の外側は、元画像とピクセル単位で一致しています。
+
+生成時は、中央の絵に接する正面向きの障子枠を描き、昭和の大みそかの囲炉裏端へ自然につなぐよう指定しました。帯の上端と下端には、一部に継ぎ目が見えます。
+
+GitHub への送信は未完了です。`.git` が読み取り専用で、コミットの準備ができませんでした。`GH_PUSH_TOKEN` は空でした。
+
+--- stderr ---
+rences/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc 'command -v magick || command -v convert
+git status --short
+test -n "$GH_PUSH_TOKEN" && printf '"'GH_PUSH_TOKEN=set\\n' || printf 'GH_PUSH_TOKEN=empty\\n'
+ls -l tmp_art/zoom131/loop*.png
+git remote | rg '"'^origin$'"'" in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+ M assets/art/zoom131/codex.log
+?? assets/art/zoom131/align.json
+?? assets/art/zoom131/layer_00.jpg
+?? assets/art/zoom131/layer_01.jpg
+?? assets/art/zoom131/layer_02.jpg
+?? assets/art/zoom131/layer_03.jpg
+?? assets/art/zoom131/layer_04.jpg
+?? assets/art/zoom131/layer_05.jpg
+GH_PUSH_TOKEN=empty
+-rw-r--r-- 1 runner runner 1923426 Nov 18 09:41 tmp_art/zoom131/loop_canvas.png
+origin
+
+codex
+帯の絵が生成できました。元画像の中央の絵をそのまま使うため、生成結果から灰色の帯に当たる画素だけを合成します。
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image, ImageChops
+from pathlib import Path
+root = Path('tmp_art/zoom131')
+original = Image.open(root / 'loop_canvas.png').convert('RGB')
+generated = Image.open('/home/runner/.codex/generated_images/01a1ee08-7526-7a03-b27f-1c79142de7f1/exec-41b13df2-2666-4379-92af-99891f87e217.png').convert('RGB')
+assert original.size == generated.size == (1024, 1536)
+gray = Image.new('RGB', original.size, original.getpixel((205, 307)))
+mask = ImageChops.difference(original, gray).convert('L').point(lambda value: 255 if value == 0 else 0)
+from PIL import ImageDraw
+expected = Image.new('L', original.size)
+draw = ImageDraw.Draw(expected)
+draw.rectangle((205, 307, 817, 1227), fill=255)
+draw.rectangle((341, 512, 681, 1023), fill=0)
+assert not ImageChops.difference(mask, expected).getbbox()
+output = Image.composite(generated, original, mask)
+path = root / 'loop_raw_0.png'
+output.save(path)
+with Image.open(path) as saved:
+    assert saved.size == (1024, 1536)
+    assert not ImageChops.difference(Image.composite(original, saved, mask), original).getbbox()
+    assert not ImageChops.difference(Image.composite(saved, generated, mask), generated).getbbox()
+PY
+git add -f -- tmp_art/zoom131/loop_raw_0.png" in /home/runner/work/youtube/youtube
+ exited 128 in 588ms:
+fatal: Unable to create '/home/runner/work/youtube/youtube/.git/index.lock': Read-only file system
+
+codex
+内蔵の画像生成機能で灰色の帯を描き足し、[loop_raw_0.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/loop_raw_0.png) に 1024×1536 の PNG として保存しました。中央の長方形と帯の外側は、元画像とピクセル単位で一致しています。
+
+生成時は、中央の絵に接する正面向きの障子枠を描き、昭和の大みそかの囲炉裏端へ自然につなぐよう指定しました。帯の上端と下端には、一部に継ぎ目が見えます。
+
+GitHub への送信は未完了です。`.git` が読み取り専用で、コミットの準備ができませんでした。`GH_PUSH_TOKEN` は空でした。
+tokens used
+34,215
+
+=====
+内蔵の画像生成機能で灰色の帯を描き足し、1024×1536 の PNG を保存しました。中央の絵と帯の外側は、元画像とピクセル単位で一致しています。[loop_raw_1.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/loop_raw_1.png)
+
+`codex-inbox` への送信はできませんでした。`.git` が読み取り専用で、この環境では `github.com` の名前解決にも失敗しました。`GH_PUSH_TOKEN` は空でした。
+
+--- stderr ---
+ '/"'^origin$/p'"'; if test -n \""'$GH_PUSH_TOKEN"; then echo token-present; else echo token-empty; fi; test -w .git && echo git-writable' in /home/runner/work/youtube/youtube
+ exited 1 in 0ms:
+ M assets/art/zoom131/codex.log
+?? assets/art/zoom131/align.json
+?? assets/art/zoom131/layer_00.jpg
+?? assets/art/zoom131/layer_01.jpg
+?? assets/art/zoom131/layer_02.jpg
+?? assets/art/zoom131/layer_03.jpg
+?? assets/art/zoom131/layer_04.jpg
+?? assets/art/zoom131/layer_05.jpg
+origin
+token-empty
+
+codex
+帯の絵が生成できました。右の戸枠を中央の絵のふちに合わせてから、帯の部分だけを元画像に合成します。
+exec
+/bin/bash -lc "python - '/home/runner/.codex/generated_images/01a1ee0a-bb1b-7eb1-8096-8964bc0f37b9/exec-caa86357-1fa4-4511-88c9-ea982b8122f9.png' <<'PY'
+from PIL import Image, ImageChops
+from pathlib import Path
+import sys
+
+folder = Path(\"tmp_art/zoom131\")
+original = Image.open(folder / \"loop_canvas.png\").convert(\"RGB\")
+generated = Image.open(sys.argv[1]).convert(\"RGB\")
+assert original.size == generated.size == (1024, 1536)
+outer = (205, 307, 818, 1228)
+opening = (341, 512, 682, 1024)
+
+# Align the generated right jamb while keeping the left jamb and outer seam fixed.
+aligned = generated.copy()
+for y in range(outer[1], outer[3]):
+    amount = max(0, min(1, (y - 445) / 57, (1070 - y) / 46))
+    if amount:
+        source_edge = 682 - 13 * amount
+        for start, end, source_start, source_end in (
+            (341, 682, 341, source_edge),
+            (682, 818, source_edge, 818),
+        ):
+            strip = generated.resize((end - start, 1), Image.Resampling.BICUBIC,
+                                     box=(source_start, y, source_end, y + 1))
+            aligned.paste(strip, (start, y))
+
+mask = Image.new(\"L\", original.size)
+mask.paste(255, outer)
+mask.paste(0, opening)
+gray = Image.new(\"RGB\", original.size, (128, 128, 128))
+assert Image.composite(original, gray, mask).tobytes() == gray.tobytes()
+destination = folder / \"loop_raw_1.png\"
+Image.composite(aligned, original, mask).save(destination)
+with Image.open(destination) as output:
+    assert output.format == \"PNG\" and output.size == (1024, 1536)
+    difference = ImageChops.difference(output, original)
+    assert Image.composite(Image.new(\"RGB\", original.size), difference, mask).getbbox() is None
+print(destination)
+PY
+GIT_TERMINAL_PROMPT=0 git fetch origin codex-inbox" in /home/runner/work/youtube/youtube
+ exited 255 in 621ms:
+tmp_art/zoom131/loop_raw_1.png
+error: cannot open '.git/FETCH_HEAD': Read-only file system
+
+exec
+/bin/bash -lc 'GIT_TERMINAL_PROMPT=0 git ls-remote origin refs/heads/codex-inbox' in /home/runner/work/youtube/youtube
+ exited 128 in 0ms:
+fatal: unable to access 'https://github.com/agaraysan/youtube/': Could not resolve host: github.com
+
+codex
+内蔵の画像生成機能で灰色の帯を描き足し、1024×1536 の PNG を保存しました。中央の絵と帯の外側は、元画像とピクセル単位で一致しています。[loop_raw_1.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/loop_raw_1.png)
+
+`codex-inbox` への送信はできませんでした。`.git` が読み取り専用で、この環境では `github.com` の名前解決にも失敗しました。`GH_PUSH_TOKEN` は空でした。
+tokens used
+18,323
+
+=====
+内蔵の画像生成機能で灰色の帯を描き足し、障子の木枠を中央の絵の四辺に合わせました。[loop_raw_2.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/loop_raw_2.png) に 1024×1536 で保存しました。中央と帯の外側は、元画像と画素単位で一致することを確認しました。
+
+保存先は Git の追跡対象外で、この環境では `.git` が読み取り専用のため、GitHub への push はできませんでした。`GH_PUSH_TOKEN` は空です。
+
+--- stderr ---
+.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+/bin/bash -lc "python - '/home/runner/.codex/generated_images/01a1ee0c-a950-7782-a099-152cdedb4721/exec-0c27dc6a-9aba-4367-9089-5925b267886b.png' <<'PY'
+from PIL import Image, ImageChops
+from pathlib import Path
+import sys
+
+folder = Path('tmp_art/zoom131')
+source = Image.open(folder / 'loop_canvas.png')
+generated = Image.open(sys.argv[1]).convert(source.mode)
+assert source.size == generated.size == (1024, 1536)
+outer = (205, 307, 818, 1228)
+inner = (341, 512, 682, 1024)
+band = Image.new('L', source.size)
+band.paste(255, outer)
+band.paste(0, inner)
+assert set(source.getdata()) and all(pixel == source.getpixel((205, 307)) for pixel, keep in zip(source.getdata(), band.getdata()) if keep)
+
+# Align the generated door jambs while holding the outer band's edges fixed.
+mesh = [
+    ((205, 307, 341, 1228), (205, 307, 205, 1228, 346, 1228, 346, 307)),
+    ((341, 307, 682, 1228), (346, 307, 346, 1228, 678, 1228, 678, 307)),
+    ((682, 307, 818, 1228), (678, 307, 678, 1228, 818, 1228, 818, 307)),
+]
+aligned = generated.transform(source.size, Image.Transform.MESH, mesh, Image.Resampling.BICUBIC)
+output = folder / 'loop_raw_2.png'
+Image.composite(aligned, source, band).save(output)
+with Image.open(output) as saved:
+    assert saved.size == (1024, 1536)
+    assert Image.composite(source, saved, band).tobytes() == source.tobytes()
+print(output)
+PY
+git status --short
+git remote | head
+if test -n \""'$GH_PUSH_TOKEN"; then printf '"'GH_PUSH_TOKEN is set\\n'; else printf 'GH_PUSH_TOKEN is empty\\n'; fi" in /home/runner/work/youtube/youtube
+ succeeded in 954ms:
+<stdin>:14: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+tmp_art/zoom131/loop_raw_2.png
+ M assets/art/zoom131/codex.log
+?? assets/art/zoom131/align.json
+?? assets/art/zoom131/layer_00.jpg
+?? assets/art/zoom131/layer_01.jpg
+?? assets/art/zoom131/layer_02.jpg
+?? assets/art/zoom131/layer_03.jpg
+?? assets/art/zoom131/layer_04.jpg
+?? assets/art/zoom131/layer_05.jpg
+origin
+GH_PUSH_TOKEN is empty
+
+exec
+/bin/bash -lc 'git check-ignore tmp_art/zoom131/loop_raw_2.png' in /home/runner/work/youtube/youtube
+ succeeded in 0ms:
+tmp_art/zoom131/loop_raw_2.png
+
+codex
+内蔵の画像生成機能で灰色の帯を描き足し、障子の木枠を中央の絵の四辺に合わせました。[loop_raw_2.png](/home/runner/work/youtube/youtube/tmp_art/zoom131/loop_raw_2.png) に 1024×1536 で保存しました。中央と帯の外側は、元画像と画素単位で一致することを確認しました。
+
+保存先は Git の追跡対象外で、この環境では `.git` が読み取り専用のため、GitHub への push はできませんでした。`GH_PUSH_TOKEN` は空です。
+tokens used
+25,066
+
+=====
