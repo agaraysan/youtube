@@ -1,0 +1,61 @@
+{
+ "id": "ex041_study_short",
+ "title": "AIを勉強の相手にする",
+ "bgm_track": "wager_with_angels",
+ "size": [
+  1080,
+  1920
+ ],
+ "chapters": {
+  "1": "英会話",
+  "2": "クイズを出してもらう",
+  "3": "わかるまで聞く"
+ },
+ "meta": {
+  "title": "何歳からでも学べる！AIを勉強の相手にする3つの方法 #Shorts",
+  "tags": [
+   "AI",
+   "ChatGPT",
+   "勉強",
+   "学び直し",
+   "英会話",
+   "やさしいAI便利帳"
+  ]
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex041_00_hook",
+   "telop": "AIを\n勉強の相手に",
+   "voice": "何か新しいことを学びたい。そんなとき、AIは、いつでも付き合ってくれる勉強の相手になります。"
+  },
+  {
+   "image": "assets/generated/ex041_01_english",
+   "telop": "英会話の\n練習相手",
+   "voice": "1つ目は、英会話の練習。「旅行で使う英語を、やさしい言葉で練習したい」と頼むと、会話の相手をしてくれます。",
+   "chapter": "1"
+  },
+  {
+   "image": "assets/generated/ex041_02_quiz",
+   "telop": "クイズを\n出してもらう",
+   "voice": "2つ目は、クイズを出してもらうこと。「戦国時代のクイズを5問、3択で」と頼むと、楽しく覚えられます。",
+   "chapter": "2"
+  },
+  {
+   "image": "assets/generated/ex041_03_why",
+   "telop": "わかるまで\n何度でも聞ける",
+   "voice": "3つ目は、わかるまで聞けること。「もっとかんたんに」「たとえ話で」と、何度聞いても、ていねいに答えてくれます。",
+   "chapter": "3"
+  },
+  {
+   "image": "assets/generated/ex041_04_book",
+   "telop": "気になったら\n本でも確認",
+   "voice": "気になったことは、本や辞書でも確かめると、より正確に身につきます。",
+   "chapter": "3"
+  },
+  {
+   "image": "assets/generated/ex041_05_outro",
+   "telop": "今日から\n試してみよう",
+   "voice": "ご紹介した使い方、今日から試してみてください。役に立ったら、チャンネル登録をお願いします。"
+  }
+ ]
+}

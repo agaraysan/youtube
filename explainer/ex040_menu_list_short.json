@@ -1,0 +1,61 @@
+{
+ "id": "ex040_menu_list_short",
+ "title": "AIで献立と買い物リスト",
+ "bgm_track": "cruise",
+ "size": [
+  1080,
+  1920
+ ],
+ "chapters": {
+  "1": "残り物で1品",
+  "2": "1週間の献立",
+  "3": "買い物リスト"
+ },
+ "meta": {
+  "title": "毎日のごはんが楽になる！AIで献立と買い物リストを作る方法 #Shorts",
+  "tags": [
+   "献立",
+   "AI",
+   "ChatGPT",
+   "時短",
+   "料理",
+   "やさしいAI便利帳"
+  ]
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex040_00_hook",
+   "telop": "AIで献立と\n買い物リスト",
+   "voice": "今日のごはん、何にしよう。毎日考えるのは大変ですよね。AIに手伝ってもらう方法を、3つ紹介します。"
+  },
+  {
+   "image": "assets/generated/ex040_01_leftover",
+   "telop": "冷蔵庫の残り物で\n1品",
+   "voice": "1つ目は、残り物で1品。「キャベツと卵とベーコンがある。20分で作れるおかずは？」と聞くと、作り方まで教えてくれます。",
+   "chapter": "1"
+  },
+  {
+   "image": "assets/generated/ex040_02_week",
+   "telop": "1週間の献立を\nまとめて",
+   "voice": "2つ目は、1週間の献立。「2人分、魚を多めに、塩分ひかえめで」と伝えると、1週間分をまとめて考えてくれます。",
+   "chapter": "2"
+  },
+  {
+   "image": "assets/generated/ex040_03_shopping",
+   "telop": "買い物リストも\n作ってもらう",
+   "voice": "3つ目は、買い物リスト。献立に続けて「買い物リストにして」と頼むと、売り場ごとにまとめてくれて、買い忘れが減ります。",
+   "chapter": "3"
+  },
+  {
+   "image": "assets/generated/ex040_04_allergy",
+   "telop": "アレルギーは\n自分で確認",
+   "voice": "ただし、アレルギーや持病の食事制限は、自分でも必ず確かめてくださいね。",
+   "chapter": "3"
+  },
+  {
+   "image": "assets/generated/ex040_05_outro",
+   "telop": "今日から\n試してみよう",
+   "voice": "ご紹介した使い方、今日から試してみてください。役に立ったら、チャンネル登録をお願いします。"
+  }
+ ]
+}

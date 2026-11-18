@@ -1,0 +1,61 @@
+{
+ "id": "ex039_ai_caution_short",
+ "title": "AIを使うときに気をつけたい3つのこと",
+ "bgm_track": "valley_drive",
+ "size": [
+  1080,
+  1920
+ ],
+ "chapters": {
+  "1": "個人情報",
+  "2": "答えの確認",
+  "3": "大事な判断"
+ },
+ "meta": {
+  "title": "安心して使うために！AIを使うときに気をつけたい3つのこと #Shorts",
+  "tags": [
+   "AI",
+   "ChatGPT",
+   "注意点",
+   "安全",
+   "初心者",
+   "やさしいAI便利帳"
+  ]
+ },
+ "scenes": [
+  {
+   "image": "assets/generated/ex039_00_hook",
+   "telop": "AIを使うとき\n気をつけたい3つ",
+   "voice": "AIは便利ですが、安心して使うために、気をつけたいことが3つあります。"
+  },
+  {
+   "image": "assets/generated/ex039_01_privacy",
+   "telop": "個人情報は\n入れない",
+   "voice": "1つ目は、個人情報を入れないこと。住所や電話番号、カードの番号、パスワードは、書きこまないようにしましょう。",
+   "chapter": "1"
+  },
+  {
+   "image": "assets/generated/ex039_02_wrong",
+   "telop": "答えが\nまちがうこともある",
+   "voice": "2つ目は、答えを確かめること。AIは、もっともらしく、まちがえることがあります。大事なことは、ほかの情報でも確かめましょう。",
+   "chapter": "2"
+  },
+  {
+   "image": "assets/generated/ex039_03_doctor",
+   "telop": "健康やお金は\n専門家に相談",
+   "voice": "3つ目は、大事な判断は、人に相談すること。健康やお金、契約のことは、AIの答えだけで決めずに、専門の人に聞きましょう。",
+   "chapter": "3"
+  },
+  {
+   "image": "assets/generated/ex039_04_safe",
+   "telop": "上手に使えば\n心強い味方",
+   "voice": "この3つを守れば、AIは、とても心強い味方になります。",
+   "chapter": "3"
+  },
+  {
+   "image": "assets/generated/ex039_05_outro",
+   "telop": "今日から\n気をつけよう",
+   "voice": "個人情報、答えの確認、大事な判断。覚えておいてくださいね。役に立ったら、チャンネル登録をお願いします。"
+  }
+ ]
+}
