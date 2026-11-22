@@ -1,0 +1,406 @@
+{
+ "id": "brain_kanji_odd_003",
+ "series": "頭の体操",
+ "style": "kanji",
+ "bg": "assets/generated/br_bg_washi",
+ "scenes": [
+  {
+   "type": "title",
+   "text": "漢字の仲間はずれ探し",
+   "size": 110,
+   "sub": "1つだけちがう漢字をさがそう　その3",
+   "voice": "頭の体操、漢字の仲間はずれ探し、その3です。同じ漢字がならぶ中に、1つだけちがう漢字がまじっています。全部で12問。後半ほど、むずかしくなります。"
+  },
+  {
+   "type": "grid",
+   "base": "木",
+   "odd": "本",
+   "rows": 5,
+   "cols": 9,
+   "text": "第1問",
+   "voice": "第1問。この中に、1つだけちがう漢字があります。さがしてみてください。"
+  },
+  {
+   "type": "grid",
+   "base": "木",
+   "odd": "本",
+   "rows": 5,
+   "cols": 9,
+   "text": "第1問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "grid",
+   "base": "木",
+   "odd": "本",
+   "rows": 5,
+   "cols": 9,
+   "text": "第1問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「本」は、下に短い横線があります",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "田",
+   "odd": "由",
+   "rows": 5,
+   "cols": 10,
+   "text": "第2問",
+   "voice": "第2問。どこにちがう漢字があるでしょう。"
+  },
+  {
+   "type": "grid",
+   "base": "田",
+   "odd": "由",
+   "rows": 5,
+   "cols": 10,
+   "text": "第2問",
+   "think": true,
+   "seconds": 15
+  },
+  {
+   "type": "grid",
+   "base": "田",
+   "odd": "由",
+   "rows": 5,
+   "cols": 10,
+   "text": "第2問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「由」は、たての線が上につきぬけます",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "日",
+   "odd": "目",
+   "rows": 6,
+   "cols": 10,
+   "text": "第3問",
+   "voice": "第3問。1つだけ、ちがう漢字がまじっています。"
+  },
+  {
+   "type": "grid",
+   "base": "日",
+   "odd": "目",
+   "rows": 6,
+   "cols": 10,
+   "text": "第3問",
+   "think": true,
+   "seconds": 18
+  },
+  {
+   "type": "grid",
+   "base": "日",
+   "odd": "目",
+   "rows": 6,
+   "cols": 10,
+   "text": "第3問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「目」は、中の横線が2本です",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "刀",
+   "odd": "力",
+   "rows": 6,
+   "cols": 11,
+   "text": "第4問",
+   "voice": "第4問。さあ、見つけられるかな。"
+  },
+  {
+   "type": "grid",
+   "base": "刀",
+   "odd": "力",
+   "rows": 6,
+   "cols": 11,
+   "text": "第4問",
+   "think": true,
+   "seconds": 18
+  },
+  {
+   "type": "grid",
+   "base": "刀",
+   "odd": "力",
+   "rows": 6,
+   "cols": 11,
+   "text": "第4問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「力」は、たての線が上に出ます",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "石",
+   "odd": "右",
+   "rows": 6,
+   "cols": 12,
+   "text": "第5問",
+   "voice": "第5問。この中に、1つだけちがう漢字があります。さがしてみてください。"
+  },
+  {
+   "type": "grid",
+   "base": "石",
+   "odd": "右",
+   "rows": 6,
+   "cols": 12,
+   "text": "第5問",
+   "think": true,
+   "seconds": 20
+  },
+  {
+   "type": "grid",
+   "base": "石",
+   "odd": "右",
+   "rows": 6,
+   "cols": 12,
+   "text": "第5問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「右」は、ななめの線が横線の上に出ます",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "甲",
+   "odd": "申",
+   "rows": 7,
+   "cols": 12,
+   "text": "第6問",
+   "voice": "第6問。どこにちがう漢字があるでしょう。"
+  },
+  {
+   "type": "grid",
+   "base": "甲",
+   "odd": "申",
+   "rows": 7,
+   "cols": 12,
+   "text": "第6問",
+   "think": true,
+   "seconds": 20
+  },
+  {
+   "type": "grid",
+   "base": "甲",
+   "odd": "申",
+   "rows": 7,
+   "cols": 12,
+   "text": "第6問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「申」は、たての線が上にも出ます",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "租",
+   "odd": "祖",
+   "rows": 7,
+   "cols": 13,
+   "text": "第7問",
+   "voice": "第7問。1つだけ、ちがう漢字がまじっています。"
+  },
+  {
+   "type": "grid",
+   "base": "租",
+   "odd": "祖",
+   "rows": 7,
+   "cols": 13,
+   "text": "第7問",
+   "think": true,
+   "seconds": 22
+  },
+  {
+   "type": "grid",
+   "base": "租",
+   "odd": "祖",
+   "rows": 7,
+   "cols": 13,
+   "text": "第7問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「祖」はしめすへん、「租」はのぎへん",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "検",
+   "odd": "険",
+   "rows": 7,
+   "cols": 13,
+   "text": "第8問",
+   "voice": "第8問。さあ、見つけられるかな。"
+  },
+  {
+   "type": "grid",
+   "base": "検",
+   "odd": "険",
+   "rows": 7,
+   "cols": 13,
+   "text": "第8問",
+   "think": true,
+   "seconds": 22
+  },
+  {
+   "type": "grid",
+   "base": "検",
+   "odd": "険",
+   "rows": 7,
+   "cols": 13,
+   "text": "第8問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「険」はこざとへん、「検」はきへん",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "倍",
+   "odd": "陪",
+   "rows": 7,
+   "cols": 14,
+   "text": "第9問",
+   "voice": "第9問。この中に、1つだけちがう漢字があります。さがしてみてください。"
+  },
+  {
+   "type": "grid",
+   "base": "倍",
+   "odd": "陪",
+   "rows": 7,
+   "cols": 14,
+   "text": "第9問",
+   "think": true,
+   "seconds": 25
+  },
+  {
+   "type": "grid",
+   "base": "倍",
+   "odd": "陪",
+   "rows": 7,
+   "cols": 14,
+   "text": "第9問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「陪」はこざとへん、「倍」はにんべん",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "綱",
+   "odd": "網",
+   "rows": 8,
+   "cols": 14,
+   "text": "第10問",
+   "voice": "第10問。どこにちがう漢字があるでしょう。"
+  },
+  {
+   "type": "grid",
+   "base": "綱",
+   "odd": "網",
+   "rows": 8,
+   "cols": 14,
+   "text": "第10問",
+   "think": true,
+   "seconds": 25
+  },
+  {
+   "type": "grid",
+   "base": "綱",
+   "odd": "網",
+   "rows": 8,
+   "cols": 14,
+   "text": "第10問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「網」は、中に「亡」が入ります",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "戊",
+   "odd": "戌",
+   "rows": 8,
+   "cols": 15,
+   "text": "第11問",
+   "voice": "第11問。1つだけ、ちがう漢字がまじっています。"
+  },
+  {
+   "type": "grid",
+   "base": "戊",
+   "odd": "戌",
+   "rows": 8,
+   "cols": 15,
+   "text": "第11問",
+   "think": true,
+   "seconds": 30
+  },
+  {
+   "type": "grid",
+   "base": "戊",
+   "odd": "戌",
+   "rows": 8,
+   "cols": 15,
+   "text": "第11問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「戌（いぬ）」は、中に短い横線があります",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "grid",
+   "base": "卯",
+   "odd": "卵",
+   "rows": 8,
+   "cols": 15,
+   "text": "第12問",
+   "voice": "第12問。さあ、見つけられるかな。"
+  },
+  {
+   "type": "grid",
+   "base": "卯",
+   "odd": "卵",
+   "rows": 8,
+   "cols": 15,
+   "text": "第12問",
+   "think": true,
+   "seconds": 30
+  },
+  {
+   "type": "grid",
+   "base": "卯",
+   "odd": "卵",
+   "rows": 8,
+   "cols": 15,
+   "text": "第12問 答え",
+   "reveal": true,
+   "chime": true,
+   "caption": "「卵」は、中に点が2つあります",
+   "voice": "ここでした。",
+   "pad": 2.4
+  },
+  {
+   "type": "title",
+   "text": "何問わかりましたか？",
+   "size": 100,
+   "sub": "コメントで教えてください",
+   "voice": "何問わかりましたか？よかったらコメントで教えてください。毎日の頭の体操に、チャンネル登録もしていただけるとうれしいです。"
+  }
+ ]
+}
