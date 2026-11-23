@@ -65,6 +65,15 @@ THEMES = {
     ],
 }
 
+# かんたん編（本人の希望 11/23：かんたんは4×4）：言葉は3つ、3文字まで、1問20秒
+THEMES_EASY = {
+    1: [("冬のもの", "ふゆの、もの", ["ゆき", "こたつ", "みかん"]), ("台所の道具", "だいどころの、どうぐ", ["なべ", "ざる", "おたま"]),
+        ("動物", "どうぶつ", ["いぬ", "ねこ", "うさぎ"]), ("野菜", "やさい", ["なす", "ねぎ", "かぶ"]),
+        ("くだもの", "くだもの", ["なし", "もも", "ぶどう"]), ("体", "からだ", ["あし", "くび", "ひざ"]),
+        ("天気", "てんき", ["あめ", "くも", "かぜ"]), ("色", "いろ", ["あか", "しろ", "みどり"]),
+        ("文房具", "ぶんぼうぐ", ["のり", "ふで", "はさみ"]), ("海", "うみ", ["なみ", "かい", "かに"])],
+}
+
 
 def paths_of(rows, w):
     """表の中で、たて・よこにとなり合うマスをたどって w が読める道すじの数（曲がってもよい、同じマスは2回使わない）。"""
@@ -163,28 +172,39 @@ def build_bent(words, size, seed):
     raise SystemExit(f"置けませんでした: {words}")
 
 
-# 隠れた言葉あて：一覧を見せず、テーマと文字数だけをヒントに1つの言葉を当てる（5×5、1問20秒）
-HIDDEN = {  # (テーマ, 声で読むテーマ, 言葉)。短い順に並べる。前半は2つ（4×4）、後半は3つ（5×5）
-    1: [("冬の食べもの", "ふゆの、たべもの", ["みかん", "やきいも"]), ("春の花", "はるの、はな", ["うめ", "たんぽぽ"]),
-        ("台所の道具", "だいどころの、どうぐ", ["なべ", "やかん"]), ("野菜", "やさい", ["ねぎ", "だいこん"]),
-        ("山の動物", "やまの、どうぶつ", ["くま", "たぬき"]), ("お正月", "おしょうがつ", ["こま", "おせち", "かどまつ"]),
-        ("くだもの", "くだもの", ["かき", "りんご", "さくらんぼ"]), ("魚", "さかな", ["さけ", "さんま", "かつお"]),
-        ("乗りもの", "のりもの", ["ふね", "でんしゃ", "ひこうき"]), ("昭和の茶の間", "しょうわの、ちゃのま", ["こたつ", "てれび", "ちゃぶだい"])],
+# 隠れた言葉あて：一覧を見せず、テーマと文字数だけをヒントに言葉を当てる。
+# 本人の希望（11/23）：かんたん編は4×4（言葉2つ、1問20秒）、むずかしい編は5×5（言葉3つ、1問30秒）。1本の中では大きさをそろえる。
+HIDDEN = {  # (テーマ, 声で読むテーマ, 言葉)。短い順に並べる
+    "easy": {
+        1: [("冬の食べもの", "ふゆの、たべもの", ["みかん", "やきいも"]), ("春の花", "はるの、はな", ["うめ", "たんぽぽ"]),
+            ("台所の道具", "だいどころの、どうぐ", ["なべ", "やかん"]), ("野菜", "やさい", ["ねぎ", "だいこん"]),
+            ("山の動物", "やまの、どうぶつ", ["くま", "たぬき"]), ("秋の味覚", "あきの、みかく", ["くり", "まつたけ"]),
+            ("文房具", "ぶんぼうぐ", ["のり", "えんぴつ"]), ("海の生きもの", "うみの、いきもの", ["たこ", "くじら"]),
+            ("空と天気", "そらと、てんき", ["くも", "かみなり"]), ("和菓子", "わがし", ["だんご", "もなか"])],
+    },
+    "hard": {
+        1: [("お正月", "おしょうがつ", ["こま", "おせち", "かどまつ"]), ("くだもの", "くだもの", ["かき", "りんご", "さくらんぼ"]),
+            ("魚", "さかな", ["さけ", "さんま", "かつお"]), ("乗りもの", "のりもの", ["ふね", "でんしゃ", "ひこうき"]),
+            ("昭和の茶の間", "しょうわの、ちゃのま", ["こたつ", "てれび", "ちゃぶだい"]), ("鳥", "とり", ["はと", "すずめ", "うぐいす"]),
+            ("夏の花", "なつの、はな", ["ゆり", "あさがお", "ひまわり"]), ("和楽器", "わがっき", ["こと", "たいこ", "しゃみせん"]),
+            ("虫", "むし", ["せみ", "とんぼ", "かぶとむし"]), ("お祭り", "おまつり", ["みこし", "わたあめ", "ちょうちん"])],
+    },
 }
+LEVEL = {"easy": ("かんたん編", 4, 20, 10), "hard": ("むずかしい編", 5, 30, 15)}  # 名前, 表の大きさ, 考える秒数, ショートの秒数
 
 
-def hidden(epid, n):
-    items = HIDDEN[n]
-    sc = [{"type": "title", "text": "かくれた言葉あて", "size": 120, "sub": "ヒントをたよりに、表の中の言葉をさがそう",
-           "voice": f"頭の体操、かくれた言葉あてです。ひらがなの表の中に、テーマの言葉が、かくれています。ひだりから右、上から下へ、となりのマスをたどって読みます。とちゅうで、まがります。見つけた言葉の、文字の数が、そのまま点数。長い言葉ほど、高い点です。全部で{len(items)}問。後半は、表が大きくなります。"}]
+def hidden(epid, level, n):
+    items = HIDDEN[level][n]
+    name, size, sec, _ = LEVEL[level]
+    sc = [{"type": "title", "text": "かくれた言葉あて", "size": 120, "sub": f"{name}　ヒントをたよりに、表の中の言葉をさがそう",
+           "voice": f"頭の体操、かくれた言葉あて、{name}です。ひらがなの表の中に、テーマの言葉が、かくれています。ひだりから右、上から下へ、となりのマスをたどって読みます。とちゅうで、まがります。見つけた言葉の、文字の数が、そのまま点数。長い言葉ほど、高い点です。全部で{len(items)}問です。"}]
     for i, (theme, theme_kana, ws) in enumerate(items, 1):
-        size = 4 if len(ws) <= 2 else 5
         assert max(map(len, ws)) <= size + 1, ws
         rows, place = build_bent(ws, size, f"{epid}:{i}")
         base = {"type": "words", "hide": True, "cells": rows, "words": place, "theme": theme, "text": f"第{i}問"}
         lens = "と、".join(f"{len(w)}文字" for w in ws)
         sc.append({**base, "voice": f"第{i}問。テーマは、{theme_kana}。{lens}の、{len(ws)}つの言葉が、かくれています。"})
-        sc.append({**base, "think": True, "seconds": 20 if len(ws) <= 2 else 30})
+        sc.append({**base, "think": True, "seconds": sec})
         sc.append({**base, "text": f"第{i}問 答え", "reveal": True, "chime": True,
                    "voice": "答えは、" + "、".join(ws) + "。", "pad": 1.0})
     total = sum(len(w) for _, _, ws in items for w in ws)
@@ -195,33 +215,37 @@ def hidden(epid, n):
 
 def main():
     epid, n = sys.argv[1], int(sys.argv[2])
-    if "--short" in sys.argv:  # make_wordsearch.py <id> <型> --short <問題番号>：1問だけの縦ショート
+    level = sys.argv[sys.argv.index("--hidden") + 1] if "--hidden" in sys.argv else None
+    if "--short" in sys.argv:  # make_wordsearch.py <id> <型> --hidden easy|hard --short <問題番号>：1問だけの縦ショート
         k = int(sys.argv[sys.argv.index("--short") + 1])
-        theme, theme_kana, ws = HIDDEN[n][k - 1]
-        rows, place = build_bent(ws, 4 if len(ws) <= 2 else 5, f"{epid}:short")
+        theme, theme_kana, ws = HIDDEN[level][n][k - 1]
+        _, size, _, think = LEVEL[level]
+        rows, place = build_bent(ws, size, f"{epid}:short")
         ep = {"id": epid, "series": "頭の体操", "style": "kotoba_ate", "kind": "words", "cells": rows, "words": place,
-              "theme": theme, "think": 10 if len(ws) <= 2 else 15, "q": "かくれている言葉は？",
+              "theme": theme, "think": think, "q": "かくれている言葉は？",
               "voice_q": f"かくれている言葉は、なんでしょう？テーマは、{theme_kana}。",
               "voice_a": "正解は、" + "、".join(ws) + "！", "answer_note": "正解は「" + "」「".join(ws) + "」"}
         out = pathlib.Path("brain/shorts") / f"{epid}.json"
         out.write_text(json.dumps(ep, ensure_ascii=False, indent=1), encoding="utf-8")
         print(out)
         return
-    if "--hidden" in sys.argv:
-        ep = hidden(epid, n)
+    if level:
+        ep = hidden(epid, level, n)
         out = pathlib.Path("brain/episodes") / f"{epid}.json"
         out.write_text(json.dumps(ep, ensure_ascii=False, indent=1), encoding="utf-8")
         print(out)
         return
-    themes = THEMES[n]
-    sc = [{"type": "title", "text": "ことば探し", "size": 130, "sub": "ひらがなの中にかくれた言葉をさがそう",
+    easy = "--easy" in sys.argv
+    themes = [t + ("",) for t in THEMES_EASY[n]] if easy else THEMES[n]
+    sc = [{"type": "title", "text": "ことば探し", "size": 130, "sub": ("かんたん編　" if easy else "") + "ひらがなの中にかくれた言葉をさがそう",
            "voice": f"頭の体操、ことば探しです。ひらがなの表の中に、テーマにそった言葉が、たてか、よこに、かくれています。右に書いてある言葉を、全部さがしてみてください。全部で{len(themes)}問です。"}]
     for i, (theme, theme_kana, words, note) in enumerate(themes, 1):
         # 表は全部の問題で同じ大きさ（5×5）。言葉は4文字まで（本人の希望で小さい表にそろえる）
-        assert max(map(len, words)) <= 4, words
-        rows, place = build(words, 5, f"{epid}:{i}")
+        size = 4 if easy else 5
+        assert max(map(len, words)) <= size - 1, words
+        rows, place = build(words, size, f"{epid}:{i}")
         base = {"type": "words", "cells": rows, "words": place, "theme": theme, "text": f"第{i}問"}
-        sec = 30 + 5 * (len(words) - 5)
+        sec = 20 if easy else 30 + 5 * (len(words) - 5)
         sc.append({**base, "voice": f"第{i}問。テーマは、{theme_kana}。{len(words)}つの言葉が、かくれています。"})
         sc.append({**base, "think": True, "seconds": sec})
         sc.append({**base, "text": f"第{i}問 答え", "reveal": True, "chime": True,
