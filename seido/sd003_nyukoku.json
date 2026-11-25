@@ -1,0 +1,118 @@
+{
+ "id": "sd003_nyukoku",
+ "size": [1920, 1080],
+ "topic": "海外旅行の入国手数料",
+ "bgm_track": "valley_drive",
+ "bgm_volume": 0.17,
+ "voice": "nova",
+ "sources": {
+  "esta": {"label": "ITmedia「ESTAの手数料が21ドルから40ドルに」（2025年9月）", "url": "https://www.itmedia.co.jp/mobile/articles/2509/01/news132.html"},
+  "eta": {"label": "英国内務省「ETAファクトシート」", "url": "https://homeofficemedia.blog.gov.uk/electronic-travel-authorisation-eta-factsheet-november-2025/"},
+  "etias": {"label": "欧州委員会「ETIASは20ユーロに」", "url": "https://home-affairs.ec.europa.eu/news/european-travel-authorisation-etias-will-cost-eur-20-2025-07-17_en"},
+  "etias_nl": {"label": "オランダ政府「ETIAS」", "url": "https://www.government.nl/topics/holidays-and-travels/etias"},
+  "eta_ca": {"label": "カナダ政府「eTA」", "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta.html"},
+  "keta": {"label": "VisasNews「K-ETAの免除を2027年末まで延長」", "url": "https://visasnews.com/en/south-korea-extends-k-eta-exemption-through-the-end-of-2027/"},
+  "ryokaku": {"label": "観光庁「国際観光旅客税」", "url": "https://www.mlit.go.jp/kankocho/seisaku_seido/kihonkeikaku/inbound_kaifuku/ryokakuzei.html"},
+  "jesta": {"label": "Impress Watch「日本版ESTA 2028年度導入へ」", "url": "https://watch.impress.co.jp/docs/news/2092336.html"}
+ },
+ "meta": {
+  "title": "【おかしくない？】日本人は海外に入るのにお金を払うのに…日本は外国人観光客から取らない【日本と世界 制度くらべ】",
+  "tags": ["ESTA", "ETA", "出国税", "海外旅行", "インバウンド", "おかしい", "日本と世界", "制度くらべ"]
+ },
+ "thumb": {"lines": ["日本人は{払う}", "日本は{取らない}？"], "flags": ["jp", "us", "gb", "ca"]},
+ "scenes": [
+  {"type": "title", "kicker": "海外旅行の入国手数料", "title": "日本人は海外で{お金を払う}\n日本は{取らない}？", "flags": ["jp", "us", "gb", "ca", "eu"],
+   "say": [
+    "アメリカに旅行するだけで、40ドル。",
+    "イギリスに入るだけで、20ポンド。",
+    "日本人は、海外に行くたびに、入国のための審査とお金を求められます。",
+    "では、日本に来る外国人観光客は、どうでしょうか。今日は、この不公平を、公的な資料で確かめます。"
+   ]},
+  {"type": "chapter", "num": 1, "title": "日本人が海外で払うお金", "say": ["まずは、日本人が海外に行くときに、払うお金です。"]},
+  {"type": "compare", "heading": "アメリカの「ESTA」は2倍近くに値上げ", "source": "esta",
+   "items": [
+    {"flag": "us", "name": "値上げ前", "value": 21, "prefix": "$", "unit": "", "color": [150, 156, 166], "note": "2025年9月まで"},
+    {"flag": "us", "name": "値上げ後", "value": 40, "prefix": "$", "unit": "", "color": [196, 22, 48], "note": "2025年9月30日から"}
+   ],
+   "say": [
+    "アメリカに観光で行くには、ESTAという電子渡航認証が必要です。",
+    "その手数料は、2025年9月30日から、21ドルから40ドルへ。",
+    "一気に、2倍近くに値上がりしました。"
+   ]},
+  {"type": "table", "heading": "日本人が入国前に必要な手続きと手数料", "source": ["esta", "eta", "eta_ca", "etias"], "cols": ["行き先", "手続き", "手数料"], "widths": [1.1, 1, 1], "highlight": "none",
+   "rows": [
+    ["us", "アメリカ", "ESTA", "40ドル"],
+    ["gb", "イギリス", "ETA", "20ポンド"],
+    ["ca", "カナダ", "eTA", "7カナダドル"],
+    ["eu", "ヨーロッパ", "ETIAS", "20ユーロ（予定）"]
+   ],
+   "say": [
+    "ほかの国も見てみましょう。",
+    "イギリスは、ETAという手続きが必要で、2026年4月から20ポンドになりました。",
+    "カナダは、飛行機で入るならeTAが必要で、7カナダドル。",
+    "ヨーロッパでも、ETIASという同じような仕組みが、20ユーロで始まる予定です。|ヨーロッパでも、エティアスという同じような仕組みが、20ユーロで始まる予定です。"
+   ]},
+  {"type": "chapter", "num": 2, "title": "日本に来る観光客は？", "say": ["では逆に、日本に来る観光客は、どうでしょうか。"]},
+  {"type": "compare", "heading": "観光で入国するときの事前審査と手数料", "source": ["esta", "jesta"],
+   "items": [
+    {"flag": "us", "name": "日本人がアメリカへ", "text": "審査＋40ドル", "color": [44, 92, 140]},
+    {"flag": "jp", "name": "外国人観光客が日本へ", "text": "審査なし・0円", "note": "日本版ESTAは2028年度の予定", "color": [196, 22, 48]}
+   ],
+   "say": [
+    "ビザがいらない国から、観光で日本に来る人には、今のところ、入国前の審査も、そのための手数料もありません。",
+    "日本版ESTAと呼ばれる仕組みは、2028年度に始める予定で、手数料の額は、まだ決まっていません。"
+   ]},
+  {"type": "point", "label": "ツッコミどころ①", "text": "日本人は{払う}のに\n日本は{取らない}", "stamp": "おかしくない？", "stamp_at": 2, "source": ["esta", "jesta"],
+   "pair": [
+    {"flag": "us", "name": "アメリカなど", "text": "日本人から審査料をとる"},
+    {"flag": "jp", "name": "日本", "text": "観光客の審査も手数料もなし"}
+   ],
+   "say": [
+    "日本人は、行く先々で審査を受け、お金を払っています。",
+    "なのに日本は、来る人を事前に確かめる仕組みも、手数料も、まだありません。",
+    "安全のためにも、お金の面でも、これ、おかしくないですか？"
+   ]},
+  {"type": "chapter", "num": 3, "title": "出国税は日本人も払う", "say": ["さらに、もうひとつあります。"]},
+  {"type": "compare", "heading": "国際観光旅客税（出国税）", "source": "ryokaku",
+   "items": [
+    {"flag": "jp", "name": "2026年6月まで", "value": 1000, "unit": "円", "color": [150, 156, 166]},
+    {"flag": "jp", "name": "2026年7月から", "value": 3000, "unit": "円", "color": [196, 22, 48]}
+   ],
+   "say": [
+    "日本から出国するときにかかる、国際観光旅客税。いわゆる出国税です。",
+    "これが2026年7月から、1,000円から3,000円に、3倍に引き上げられました。",
+    "この税金は、外国人観光客だけでなく、海外に行く日本人も払います。"
+   ]},
+  {"type": "point", "label": "ツッコミどころ②", "text": "日本人は{行き先の手数料}と\n{出国税}の両方を払う", "stamp": "おかしくない？", "stamp_at": 2, "source": ["ryokaku", "esta"],
+   "say": [
+    "つまり日本人は、アメリカに行けば、ESTAの40ドルと、出国税の3,000円。両方を払うことになります。",
+    "そして出国税の使い道は、主に、観光客を受け入れるための環境づくりです。",
+    "外国人観光客のための費用を、海外に行く日本人も、同じように負担している。これ、おかしくないですか？"
+   ]},
+  {"type": "list", "heading": "一方で、こんな事情も", "numbered": false, "source": ["keta", "jesta"],
+   "items": [
+    {"text": "韓国は日本人の電子渡航認証を2027年末まで免除", "at": 1},
+    {"text": "日本も2028年度に日本版ESTAを始める予定", "at": 2},
+    {"text": "観光客がお金を使うことで、日本の経済にもプラス", "at": 3}
+   ],
+   "say": [
+    "もちろん、別の見方もあります。",
+    "たとえば韓国は、日本人の電子渡航認証を、2027年の末まで免除しています。",
+    "日本も、2028年度には、日本版ESTAを始める予定です。",
+    "そして、観光客がたくさん来てお金を使うことは、日本の経済にとってプラスでもあります。"
+   ]},
+  {"type": "outro", "heading": "まとめ", "cta": "あなたはどう思いますか？ コメントで教えてください",
+   "items": [
+    {"text": "アメリカのESTAは{40ドル}、イギリスのETAは{20ポンド}"},
+    {"text": "日本に来る観光客には、事前審査も手数料もまだない"},
+    {"text": "出国税3,000円は、海外に行く日本人も払う"}
+   ],
+   "say": [
+    "まとめです。日本人がアメリカに行くには40ドル、イギリスなら20ポンドがかかります。",
+    "一方、日本に来る観光客には、事前の審査も、手数料も、まだありません。",
+    "そして3,000円になった出国税は、海外に行く日本人も払っています。",
+    "あなたは、この差、おかしいと思いますか？ ぜひ、コメントで教えてください。",
+    "このチャンネルでは、日本の制度のおかしなところを、世界とくらべながら指摘していきます。チャンネル登録も、よろしくお願いします。"
+   ]}
+ ]
+}

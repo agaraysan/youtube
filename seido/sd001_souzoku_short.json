@@ -1,0 +1,53 @@
+{
+ "id": "sd001_souzoku_short",
+ "size": [1080, 1920],
+ "short_title": "相続税\n日本は{最高55%}",
+ "bgm_track": "cruise",
+ "bgm_volume": 0.16,
+ "voice": "nova",
+ "sources": {
+  "nta": {"label": "国税庁「令和6年分 相続税の申告事績の概要」", "url": "https://www.nta.go.jp/information/release/kokuzeicho/2025/sozoku_shinkoku/pdf/sozoku_shinkoku.pdf"},
+  "mofp": {"label": "財務省 税制調査会資料（2022年）", "url": "https://www.cao.go.jp/zei-cho/content/4sozoku-zoyo1.pdf"},
+  "tmr": {"label": "税理士法人トゥモローズ「世界の相続税」", "url": "https://tomorrowstax.com/knowledge/2026030916665/"},
+  "nta_rate": {"label": "国税庁「相続税の税率」", "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4155.htm"}
+ },
+ "meta": {
+  "title": "相続税、日本は最高55%…世界には相続税ゼロの国も #相続税 #shorts",
+  "tags": ["相続税", "税金", "海外との比較", "日本と世界", "shorts"]
+ },
+ "scenes": [
+  {"type": "bars", "heading": "子どもが相続するときの最高税率", "source": "mofp", "max": 60, "lead": 0.25, "instant": true,
+   "items": [
+    {"flag": "jp", "name": "日本", "value": 55, "unit": "%"},
+    {"flag": "fr", "name": "フランス", "value": 45, "unit": "%"},
+    {"flag": "us", "name": "アメリカ", "value": 40, "unit": "%"},
+    {"flag": "gb", "name": "イギリス", "value": 40, "unit": "%"},
+    {"flag": "de", "name": "ドイツ", "value": 30, "unit": "%"}
+   ],
+   "say": [
+    "日本の相続税は、最高55%。",
+    "フランスは45%、アメリカとイギリスは40%、ドイツは30%。",
+    "最高税率は、主な国の中で、いちばん高い水準です。"
+   ]},
+  {"type": "compare", "heading": "相続税がない国も", "source": "tmr",
+   "items": [
+    {"flag": "ca", "name": "カナダ", "text": "なし", "note": "1972年に廃止", "color": [44, 92, 140]},
+    {"flag": "au", "name": "オーストラリア", "text": "なし", "note": "1979年に廃止", "color": [44, 92, 140]},
+    {"flag": "sg", "name": "シンガポール", "text": "なし", "note": "2008年に廃止", "color": [44, 92, 140]}
+   ],
+   "say": [
+    "一方で、カナダやオーストラリア、シンガポールには、相続税がありません。",
+    "ただし、財産の値上がり分に、別の税金がかかる国もあります。"
+   ]},
+  {"type": "big", "pre": "でも日本で相続税がかかったのは", "value": 10.4, "dec": 1, "unit": "%", "at": 0, "sub": "約10人に1人（2024年）", "source": "nta",
+   "say": [
+    "でも、日本で実際に相続税がかかった人は、10.4%。",
+    "およそ10人に1人です。"
+   ]},
+  {"type": "big", "pre": "最高55%がかかるのは", "text": "1人あたり\n{6億円}をこえる部分だけ", "size": 80, "red": false, "source": "nta_rate",
+   "say": [
+    "しかも、55%がかかるのは、1人あたり6億円をこえる部分だけです。",
+    "あなたは、日本の相続税、高いと思いますか？"
+   ]}
+ ]
+}

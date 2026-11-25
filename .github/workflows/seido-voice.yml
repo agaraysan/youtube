@@ -1,0 +1,26 @@
+name: seido-voice
+# 「日本と世界 制度くらべ」用。seido/*.json を push すると、1文ごとの声を作って同じ枝にコミットする（作り済みの文は作らない）。
+on:
+  push:
+    paths: ["seido/*.json", "scripts/seido/voices.py", ".github/workflows/seido-voice.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: seido-voice-${{ github.ref }}
+jobs:
+  voice:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: Narrate
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python3 scripts/seido/voices.py
+      - name: Save voices
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add seido/voice
+          git diff --cached --quiet || { git commit -m "seido: 読み上げの声を追加"; for i in 1 2 3 4 5 6; do git pull --rebase -q && git push && break; sleep $((i*5)); done; }

@@ -1,0 +1,120 @@
+{
+ "id": "sd003_nyukoku_short",
+ "size": [
+  1080,
+  1920
+ ],
+ "short_title": "日本人は海外で{払う}\n日本は{取らない}？",
+ "bgm_track": "valley_drive",
+ "bgm_volume": 0.15,
+ "voice": "nova",
+ "sources": {
+  "esta": {
+   "label": "ITmedia「ESTAの手数料が21ドルから40ドルに」（2025年9月）",
+   "url": "https://www.itmedia.co.jp/mobile/articles/2509/01/news132.html"
+  },
+  "eta": {
+   "label": "英国内務省「ETAファクトシート」",
+   "url": "https://homeofficemedia.blog.gov.uk/electronic-travel-authorisation-eta-factsheet-november-2025/"
+  },
+  "eta_ca": {
+   "label": "カナダ政府「eTA」",
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta.html"
+  },
+  "jesta": {
+   "label": "Impress Watch「日本版ESTA 2028年度導入へ」",
+   "url": "https://watch.impress.co.jp/docs/news/2092336.html"
+  },
+  "ryokaku": {
+   "label": "観光庁「国際観光旅客税」",
+   "url": "https://www.mlit.go.jp/kankocho/seisaku_seido/kihonkeikaku/inbound_kaifuku/ryokakuzei.html"
+  }
+ },
+ "meta": {
+  "title": "日本人はアメリカに入るだけで40ドル…日本は外国人観光客から取らない？ #ESTA #shorts",
+  "tags": [
+   "ESTA",
+   "海外旅行",
+   "出国税",
+   "おかしい",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "type": "bars",
+   "heading": "日本人が入国前に払う手数料",
+   "source": [
+    "esta",
+    "eta",
+    "eta_ca"
+   ],
+   "instant": true,
+   "lead": 0.25,
+   "max": 48,
+   "highlight": "none",
+   "items": [
+    {
+     "flag": "us",
+     "name": "アメリカ",
+     "value": 40,
+     "label": "40ドル",
+     "color": [
+      196,
+      22,
+      48
+     ]
+    },
+    {
+     "flag": "gb",
+     "name": "イギリス",
+     "value": 20,
+     "label": "20ポンド"
+    },
+    {
+     "flag": "ca",
+     "name": "カナダ",
+     "value": 7,
+     "label": "7カナダドル"
+    }
+   ],
+   "say": [
+    "アメリカに旅行するだけで、40ドル。",
+    "イギリスは20ポンド、カナダは7カナダドル。日本人は、入国前の審査とお金を求められます。"
+   ]
+  },
+  {
+   "type": "compare",
+   "heading": "では日本に来る観光客は？",
+   "source": "jesta",
+   "items": [
+    {
+     "flag": "jp",
+     "name": "外国人観光客が日本へ",
+     "text": "審査なし・0円",
+     "note": "日本版ESTAは2028年度の予定",
+     "color": [
+      196,
+      22,
+      48
+     ]
+    }
+   ],
+   "say": [
+    "ところが、日本に観光で来る人には、今のところ、入国前の審査も手数料もありません。"
+   ]
+  },
+  {
+   "type": "point",
+   "label": "ツッコミどころ",
+   "text": "出国税{3,000円}は\n日本人も払う",
+   "stamp": "おかしくない？",
+   "stamp_at": 1,
+   "source": "ryokaku",
+   "say": [
+    "しかも、3,000円に上がった出国税は、海外に行く日本人も払います。",
+    "これ、おかしくないですか？"
+   ]
+  }
+ ]
+}
