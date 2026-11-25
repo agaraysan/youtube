@@ -378,7 +378,7 @@ def draw_compare(ctx, look, sc, T, times):
         for i, it in enumerate(items):
             p = ctx.ap(ts[i], 0.45)
             y = top + i * (ch + 30) + 30 * (1 - p)
-            hl = it.get("flag") == sc.get("highlight", "jp")
+            hl = it.get("hl", it.get("flag") == sc.get("highlight", "jp"))
             ctx.rrect(look.left, y, look.right - look.left, ch, 22, fill=WHITE, outline=RED if hl else None, width=5 if hl else 0, shadow=8, a=p)
             ctx.flag(it["flag"], look.left + 36, y + ch / 2 - 30, 66, "lm", p)
             ctx.text(look.left + 36, y + ch / 2 + 44, it["name"], 38, INK, "bold", "lm", a=p)
@@ -392,12 +392,12 @@ def draw_compare(ctx, look, sc, T, times):
     gap = 40
     top = look.top + 110
     cw = (look.right - look.left - gap * (n - 1)) / n
-    chh = look.bottom - top - 10
+    chh = min(520, look.bottom - top - 40)
     for i, it in enumerate(items):
         p = ctx.ap(ts[i], 0.45)
         x = look.left + i * (cw + gap)
         y = top + 30 * (1 - p)
-        hl = it.get("flag") == sc.get("highlight", "jp")
+        hl = it.get("hl", it.get("flag") == sc.get("highlight", "jp"))
         ctx.rrect(x, y, cw, chh, 24, fill=WHITE, outline=RED if hl else None, width=5 if hl else 0, shadow=10, a=p)
         cx = x + cw / 2
         ctx.flag(it["flag"], cx, y + 60, 100, "mt", p)
