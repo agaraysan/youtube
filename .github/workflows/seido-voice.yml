@@ -22,5 +22,13 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add seido/voice
-          git diff --cached --quiet || { git commit -m "seido: 読み上げの声を追加"; for i in 1 2 3 4 5 6; do git pull --rebase -q && git push && break; sleep $((i*5)); done; }
+          # ほかの回の声が先に入っていたら、それを受け取ってから足りない分だけを足す（同じ文の作り直しで衝突しないように）
+          for i in 1 2 3 4 5 6; do
+            git fetch -q origin "$GITHUB_REF_NAME"
+            git reset -q --mixed FETCH_HEAD
+            git checkout FETCH_HEAD -- seido/voice 2>/dev/null || true
+            git add seido/voice
+            git diff --cached --quiet && break
+            git commit -q -m "seido: 読み上げの声を追加" && git push -q origin HEAD:"$GITHUB_REF_NAME" && break
+            sleep $((i*5))
+          done
