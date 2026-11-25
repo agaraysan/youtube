@@ -93,7 +93,9 @@ def wrap(s, size, w, maxw):
         f = font(size, w)
         for ch in para:
             trial = cur + ch
-            if ch not in "{}" and cur and f.getlength(plain(trial)) > maxw and ch not in NO_HEAD:
+            prev = plain(cur)[-1:] if cur else ""
+            glued = prev and (prev in "0123456789,.$" or (prev in "ドポユカ" and ch in "ルンーナ"))
+            if ch not in "{}" and cur and f.getlength(plain(trial)) > maxw and ch not in NO_HEAD and not glued:
                 lines.append(cur + ("}" if acc_open else ""))
                 cur = ("{" if acc_open else "") + ch
             else:
@@ -740,12 +742,34 @@ def plan(ep):
     return out, frame
 
 
-def caption_at(clips, t):
+def caption_at(clips, t, look=None):
+    """t の時に出す字幕。3行以上になる長い文は、2行ずつに分けて、読む速さに合わせて切り替える。"""
     for i, (a, b, s) in enumerate(clips):
         nxt = clips[i + 1][0] if i + 1 < len(clips) else b + 0.25
         if a - 0.05 <= t < max(b + 0.2, nxt - 0.02 if nxt - b < 0.6 else b + 0.2):
-            return i, plain(V.shown(s))
-    return -1, ""
+            text = plain(V.shown(s))
+            if look is None:
+                return (i, 0), text
+            ls = wrap_bal(text, look.cap_size, "bold", look.cap_maxw)
+            if len(ls) <= 2:
+                return (i, 0), text
+            pages, cur = [], ""
+            for seg in [x for x in re.split(r"(?<=[、。？！])", text) if x]:
+                if cur and len(wrap_bal(cur + seg, look.cap_size, "bold", look.cap_maxw)) > 2:
+                    pages.append(cur)
+                    cur = seg
+                else:
+                    cur += seg
+            pages.append(cur)
+            sizes = [len(pg) for pg in pages]
+            frac = min(0.999, max(0.0, (t - a) / max(0.1, b - a)))
+            acc, k = 0, 0
+            for k, sz in enumerate(sizes):
+                acc += sz
+                if frac < acc / sum(sizes):
+                    break
+            return (i, k), pages[k]
+    return (-1, 0), ""
 
 
 def render_scene(args):
@@ -770,7 +794,7 @@ def render_scene(args):
     for f in range(pl["frames"]):
         t = f / FPS
         fade = 1 - ease((t - (T - FADE_OUT)) / FADE_OUT) if not sc.get("hold") else 1.0
-        ci, cap = caption_at(pl["clips"], t)
+        ci, cap = caption_at(pl["clips"], t, look)
         key = (ci, round(fade, 3)) + tuple(round(min(1, max(0, (t - a) / d)), 3) if not (instant and a <= 1.5) else 1 for a, d in windows)
         if key != last_key:
             im = bg.copy()
@@ -797,7 +821,7 @@ def still(ep, look, t_global, plans):
             ctx = Ctx(im, t, instant=bool(sc.get("instant")))
             DRAW[sc["type"]](ctx, look, sc, pl["frames"] / FPS, [c[0] for c in pl["clips"]])
             draw_source(ctx, look, ep, sc)
-            draw_caption(ctx, look, caption_at(pl["clips"], t)[1])
+            draw_caption(ctx, look, caption_at(pl["clips"], t, look)[1])
             return im.convert("RGB")
 
 
